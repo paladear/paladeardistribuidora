@@ -1349,9 +1349,9 @@ body.cart-open #cart-fab,body.cart-open #chat-fab{display:none!important}
 /* ── LISTA MAYORISTA ── */
 .mayorista-section{display:none;padding:18px 0}
 .mayorista-section.active{display:block}
-.mayorista-badge{background:#1a3740;color:#fff;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:14px;font-weight:600;border:2px solid #4d7d8a;display:flex;flex-direction:column;gap:8px}
-.mayorista-badge .may-warn{font-size:15px;font-weight:700;color:#ffd700;letter-spacing:.3px}
-.mayorista-badge .may-info{font-size:13px;color:rgba(255,255,255,.85)}
+.mayorista-badge{background:linear-gradient(135deg,#7a4f2a 0%,#b87040 100%);color:#fff;border-radius:16px;padding:16px 20px;margin-bottom:16px;font-size:14px;font-weight:600;display:flex;flex-direction:column;gap:8px;box-shadow:0 4px 18px rgba(120,80,40,.35)}
+.mayorista-badge .may-warn{font-size:15px;font-weight:700;color:#ffe1ab;letter-spacing:.3px}
+.mayorista-badge .may-info{font-size:13px;color:rgba(255,255,255,.9)}
 .mayorista-banner-promo{background:linear-gradient(135deg,var(--azul-dark),var(--azul));color:#fff;border-radius:14px;padding:18px 20px;margin-bottom:20px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:0 4px 16px rgba(58,99,112,.35);transition:all .2s}
 .mayorista-banner-promo:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(58,99,112,.45)}
 .mayorista-banner-promo .may-promo-icon{font-size:32px;flex-shrink:0}
@@ -1364,14 +1364,14 @@ body.cart-open #cart-fab,body.cart-open #chat-fab{display:none!important}
 .tabs-zone .may-tab::-moz-focus-inner{border:0!important;outline:none!important;padding:0!important}
 @media(max-width:767px){.tabs-zone .may-tab,.tabs-zone .may-tab:active,.tabs-zone .may-tab:focus{background-image:none!important;background-color:transparent!important}}
 .tabs-pill{box-shadow:none!important;border:none!important}
-.may-tabs-wrap{display:flex;gap:0;margin:0 auto;max-width:1100px;position:relative;padding:0 16px}
-.tabs-pill{position:absolute;top:0;bottom:0;left:var(--pill-x,0);width:var(--pill-w,0);background:var(--bg);border-radius:24px 24px 0 0;z-index:1;pointer-events:none;transform:translateZ(0);-webkit-transform:translateZ(0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.may-tabs-wrap{display:flex;justify-content:center;gap:0;margin:0 auto;max-width:1100px;position:relative;padding:12px 16px 2px}
+.tabs-pill{display:none}
 .tabs-pill::before,.tabs-pill::after{content:'';position:absolute;bottom:0;width:28px;height:28px;pointer-events:none;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .tabs-pill::before{left:-28px;background:radial-gradient(circle at 0% 0%,transparent 28px,var(--bg) 29px)}
 .tabs-pill::after{right:-28px;background:radial-gradient(circle at 100% 0%,transparent 28px,var(--bg) 29px)}
 .tabs-pill.sliding{animation:pillSlide .45s forwards}
 @keyframes pillSlide{0%{transform:translateX(var(--pill-dx,0));animation-timing-function:cubic-bezier(.2,.6,.35,1)}60%{transform:translateX(calc(var(--pill-dx,0) * -0.05));animation-timing-function:ease-in-out}80%{transform:translateX(calc(var(--pill-dx,0) * 0.02));animation-timing-function:ease-out}100%{transform:translateX(0)}}
-.may-tab{cursor:pointer;padding:8px 12px 18px;border-radius:0;font-weight:700;font-size:15px;transition:color .2s;border:none;background:transparent;color:rgba(255,255,255,.78);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;z-index:2;font-family:inherit;line-height:1.1}
+.may-tab{cursor:default;padding:11px 28px;border-radius:28px 10px 26px 12px;font-weight:800;font-size:16px;border:none;background:var(--bg);color:var(--azul-dark);flex:0 0 auto;display:flex;flex-direction:row;align-items:center;gap:10px;position:relative;z-index:2;font-family:inherit;line-height:1.1;box-shadow:0 5px 18px rgba(26,48,80,.22)}
 .may-tab-icon{width:36px;height:36px;object-fit:contain;display:block;flex-shrink:0;transform-origin:center center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .may-tab.active{color:var(--azul-dark);position:relative;z-index:3}
 .may-tab.active .may-tab-icon{animation:iconBounce .35s ease-out forwards}
@@ -1534,7 +1534,7 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
     </div>
     <span class="envios-msg">Hacemos envíos a todo el país</span>
   </div>
-  <div class="envios-discount">📦 Mínimo $250.000 · venta por bulto cerrado</div>
+  <div class="envios-discount">🤝 Atendemos revendedores de todo el país</div>
 </div>
 <!-- Tabs de navegación -->
 <div class="tabs-zone">
@@ -1551,7 +1551,7 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
   <div class="banner-may-inner">
     <div class="banner-may-text">
       <span class="banner-may-label"><img class="inline-icon" src="icon-mayorista.png" alt="">Lista Mayorista</span>
-      <span class="banner-may-sub">Compra mínima $250.000 · Solo por bulto cerrado</span>
+      <span class="banner-may-sub">Precios especiales para revendedores</span>
     </div>
     <div class="banner-may-actions">
       <a class="banner-may-wa" href="https://wa.me/5492615983065?text=Hola%20Paladear!%20Quisiera%20obtener%20información%20sobre%20la%20lista%20mayorista%20y%20condiciones%20de%20compra." target="_blank" rel="noopener noreferrer">
