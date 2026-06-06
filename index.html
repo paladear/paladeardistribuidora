@@ -924,6 +924,9 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 .prices{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin-bottom:10px}
 .price-label{font-size:11px;color:var(--muted-fg);text-transform:uppercase;letter-spacing:.5px;font-weight:700;display:block;text-align:center}
 .prices>div{text-align:center}
+.dist-cat-title{display:block;text-align:center;font-family:'Montserrat',sans-serif;font-size:26px;color:var(--azul-dark);font-weight:800;margin:8px 0 18px;letter-spacing:.3px;position:relative;padding-bottom:12px}
+.dist-cat-title::after{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:64px;height:3px;background:var(--azul);border-radius:2px}
+@media(max-width:480px){.dist-cat-title{font-size:22px}}
 .cats-mobile-heading{display:none}
 @media(max-width:767px){
   .cats-mobile-heading{display:block;text-align:center;font-size:26px;color:var(--azul-dark);font-weight:800;margin:22px 0 18px;letter-spacing:.3px;position:relative;padding-bottom:12px}
@@ -1349,9 +1352,9 @@ body.cart-open #cart-fab,body.cart-open #chat-fab{display:none!important}
 /* ── LISTA MAYORISTA ── */
 .mayorista-section{display:none;padding:18px 0}
 .mayorista-section.active{display:block}
-.mayorista-badge{background:linear-gradient(135deg,#7a4f2a 0%,#b87040 100%);color:#fff;border-radius:16px;padding:16px 20px;margin-bottom:16px;font-size:14px;font-weight:600;display:flex;flex-direction:column;gap:8px;box-shadow:0 4px 18px rgba(120,80,40,.35)}
-.mayorista-badge .may-warn{font-size:15px;font-weight:700;color:#ffe1ab;letter-spacing:.3px}
-.mayorista-badge .may-info{font-size:13px;color:rgba(255,255,255,.9)}
+.mayorista-badge{background:linear-gradient(135deg,#7a4f2a 0%,#b87040 100%);color:#fff;border-radius:16px;padding:18px 24px;margin:20px auto 16px;max-width:680px;font-size:15px;font-weight:600;display:flex;flex-direction:column;gap:9px;box-shadow:0 4px 18px rgba(120,80,40,.35)}
+.mayorista-badge .may-warn{font-size:16.5px;font-weight:700;color:#fff;letter-spacing:.3px}
+.mayorista-badge .may-info{font-size:14px;color:#fff}
 .mayorista-banner-promo{background:linear-gradient(135deg,var(--azul-dark),var(--azul));color:#fff;border-radius:14px;padding:18px 20px;margin-bottom:20px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:0 4px 16px rgba(58,99,112,.35);transition:all .2s}
 .mayorista-banner-promo:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(58,99,112,.45)}
 .mayorista-banner-promo .may-promo-icon{font-size:32px;flex-shrink:0}
@@ -1652,10 +1655,10 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
   <!-- Avisos de condiciones -->
   <div class="mayorista-badge">
     <div class="may-warn">⚠️ Compra mínima: $250.000</div>
-    <div class="may-warn">📦 Venta únicamente por bulto cerrado</div>
+    <div class="may-warn">📦 Venta por bulto cerrado</div>
     <div class="may-info">Seleccioná los productos y el sistema validará automáticamente que cumplas con los requisitos de compra mayorista.</div>
   </div>
-  <h2 style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:var(--azul-dark);margin:24px 0 6px">Explorá por categoría</h2>
+  <h2 class="dist-cat-title">Explorá por categoría</h2>
   <!-- Búsqueda y categorías ahora viven en el compact-header (al scrollear) -->
   <input type="hidden" id="searchInputMay">
   <div id="maySearchResults" class="hidden"></div>
@@ -1678,7 +1681,7 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
   <!-- Repetir aviso cerca del carrito -->
   <div class="mayorista-badge" style="margin-top:24px">
     <div class="may-warn">⚠️ Compra mínima: $250.000</div>
-    <div class="may-warn">📦 Venta únicamente por bulto cerrado</div>
+    <div class="may-warn">📦 Venta por bulto cerrado</div>
   </div>
   <div style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
     <button class="wa-btn" onclick="pedirWAMayorista()" style="background:#25d366;max-width:320px">💬 Pedir por WhatsApp</button>
@@ -6898,7 +6901,7 @@ window.copiarLinkParaNavegador = function() {
         <span class="tutb-name">Venta por mayor</span>
         <span class="tutb-go">Revendedores →</span>
       </div>
-      <div class="tutb-note">Venta únicamente por bulto cerrado. Al llegar al mínimo, ya podés comprar:</div>
+      <div class="tutb-note">Venta por bulto cerrado. Al llegar al mínimo, ya podés comprar:</div>
       <div class="tutb-mlabel"><span class="tutb-cnt" id="tutbCntMay">$0</span><span class="tutb-goal">Mínimo: $250.000</span></div>
       <div class="tutb-track"><div class="tutb-fill" id="tutbFillMay"></div></div>
       <div class="tutb-reward tutb-rmay" id="tutbRwMay"><span class="tutb-pill">✓ LISTO</span> Mínimo alcanzado, ya podés comprar</div>
