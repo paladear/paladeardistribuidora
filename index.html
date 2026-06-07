@@ -3132,9 +3132,8 @@ function sincronizarDesdeSheets(){
     _cargarScript();
   });
 }
-sincronizarDesdeSheets();
-// Distribuidora: arrancar siempre mostrando el catálogo (mayorista)
-setTimeout(function(){try{switchTab('mayorista');}catch(e){}},200);
+// Distribuidora: cargar SOLO el catálogo mayorista (no se baja el minorista)
+setTimeout(function(){try{switchTab('mayorista');if(typeof hideLoader==='function')hideLoader();}catch(e){}},100);
 
 // ── MANEJO DEL BOTÓN "ATRÁS" ──
 // Seed: estado inicial = home. Cada modal/vista que se abre agrega su propia
