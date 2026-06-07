@@ -1093,7 +1093,7 @@ body.cart-open #cart-fab,body.cart-open #chat-fab{display:none!important}
 #chat-header img{width:34px;height:34px;border-radius:50%;background:#fff;padding:2px;object-fit:contain}
 #chat-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-left:auto}
 #chat-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;max-height:360px;min-height:200px}
-.cmsg{max-width:88%;padding:9px 14px;border-radius:14px;font-size:14px;line-height:1.5}
+.cmsg{max-width:88%;padding:9px 14px;border-radius:14px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
 .cmsg.bot{background:var(--muted);color:var(--fg);align-self:flex-start;border-bottom-left-radius:4px}
 .cmsg.user{background:var(--azul);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
 .cmsg.typing{opacity:.6}
@@ -2818,7 +2818,7 @@ function addBotMsg(txt){
   const m=document.createElement('div');
   m.className='cmsg bot';
   m.style.whiteSpace='pre-wrap';
-  m.textContent=txt;
+  m.innerHTML=txt;
   d.appendChild(m);
   d.scrollTop=9999;
   return m;
@@ -2834,25 +2834,25 @@ function addUserMsg(txt){
 function responderChat(msg){
   const t=msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   if(/minorista.*horario|horario.*minorista|contacto.*minorista|minorista.*contacto|venta minorista/.test(t))
-    return '🛒 Ventas Minoristas\n\n📞 Contacto: +549 261 651 2823\n🕙 Horario: Lunes a Sábados · 10:00 a 20:00 hs\n📍 Pueyrredón 588, esq. Paso de los Andes, Quinta Sección, Mendoza\n\n🏷️ Sin mínimos de compra. Descuentos en compras mayores a $80.000.\n\n🚚 Para envíos, consultá por nuestros canales de venta al por menor.';
+    return '🛒 Venta minorista\n\nSi comprás para uso personal (sin mínimo de compra), visitá nuestra tienda minorista:\n<a href="https://paladear.github.io/paladeartienda" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;background:var(--azul);color:#fff;padding:9px 16px;border-radius:9px;text-decoration:none;font-weight:700;font-size:13px">🛒 Ir a la Tienda →</a>';
   if(/envio|enviar|delivery|despacho|mando|mandar|entrega|reparto/.test(t))
-    return '🚚 Envíos a domicilio\n\nHacemos envíos en Mendoza Capital y Gran Mendoza.\n\n✅ ENVÍO GRATIS en compras mayores a $40.000 dentro de:\nCiudad, Godoy Cruz, Guaymallén, Las Heras, Luján de Cuyo o Maipú.\n\nSi tu compra es menor a ese monto, el envío se abona aparte.\n\nTambién podés retirar en el local sin costo:\nPueyrredón 588, Mendoza.\n\nPara envíos mayoristas, consultá directamente por el canal mayorista.';
+    return '🚚 Envíos\n\nCoordinamos envíos de pedidos mayoristas a todo el país.\n\nTambién podés retirar sin costo en nuestro depósito:\nRuta Provincial 50 Nº 13080, KM 8 — Guaymallén.\n\nConsultanos por WhatsApp para coordinar el envío de tu pedido.';
   if(/metodo.*pago|medio.*pago|como.*pagar|abonar|pagar|transferencia|efectivo|tarjeta|mercado.*pago|mp|qr/.test(t)||t==='¿qué métodos de pago aceptan?')
     return '💳 Métodos de pago\n\n📍 En el local:\n• Efectivo (5% de descuento)\n• Tarjetas de crédito y débito\n• Mercado Pago o MODO\n\n🚚 Envíos a domicilio:\n• Transferencia bancaria (pedinos el ALIAS)\n• Tarjeta de crédito/débito via link de Mercado Pago\n\nEl descuento en efectivo se aplica sobre el total del pedido.';
   if(/horario|hora|abren|abrir|cuando|dias|abre|cierra/.test(t))
-    return 'Nuestros horarios son:\n\n🛒 Venta Minorista:\nLunes a Sábados · 10:00 a 20:00 hs\nPueyrredón 588, Mendoza\n\n📦 Venta Mayorista:\nLunes a Viernes · 08:00 a 16:00 hs\nSábados · 08:00 a 13:00 hs\nDepósito: Ruta Provincial 50 Nº 13080, KM 8 — Guaymallén\n\nTambién podés hacer tu pedido online las 24hs por este catálogo.';
+    return '🕗 Horarios de atención mayorista:\n\nLunes a Viernes · 08:00 a 16:00 hs\nSábados · 08:00 a 13:00 hs\n\n📍 Depósito: Ruta Provincial 50 Nº 13080, KM 8 — Guaymallén\n\nTambién podés hacer tu pedido online las 24hs por este catálogo.';
   if(/direccion|ubicacion|donde|local|tienda|lugar|mapa/.test(t))
-    return '📍 Tenemos dos direcciones:\n\n🛒 Local minorista:\nPueyrredón 588, esq. Paso de los Andes — Quinta Sección, Ciudad de Mendoza.\nLunes a Sábados de 10:00 a 20:00 hs.\n(En Google Maps: "Paladear Mercado de Sabores")\n\n📦 Depósito mayorista:\nRuta Provincial 50 Nº 13080, KM 8 — Guaymallén, Mendoza.\nLunes a Viernes de 08:00 a 16:00 hs · Sábados de 08:00 a 13:00 hs.\nMapa: https://maps.app.goo.gl/MXySPy9mbBFm8oVaA';
+    return '📍 Depósito mayorista:\n\nRuta Provincial 50 Nº 13080, KM 8 — Guaymallén, Mendoza.\nLunes a Viernes de 08:00 a 16:00 hs · Sábados de 08:00 a 13:00 hs.\n<a href="https://maps.app.goo.gl/MXySPy9mbBFm8oVaA" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;background:var(--azul);color:#fff;padding:9px 16px;border-radius:9px;text-decoration:none;font-weight:700;font-size:13px">📍 Ver en mapa</a>';
   if(/mayorista|mayor|precio mayor|lista mayor|lista 2|250000|250\.000/.test(t))
-    return '📦 Lista Mayorista\n\nContamos con una lista mayorista con precios especiales para compras en volumen.\n\nCondición: Ventas mayores a $250.000 por bulto cerrado.\n\n🕗 Horario de atención mayorista:\nLunes a Viernes · 08:00 a 16:00 hs\nSábados · 08:00 a 13:00 hs\n\n📍 Depósito mayorista:\nRuta Provincial 50 Nº 13080, KM 8 — Guaymallén, Mendoza.\nMapa: https://maps.app.goo.gl/MXySPy9mbBFm8oVaA\n\n📞 Contacto mayorista: +549 261 598 3065\n\nPodés acceder desde la pestaña "Lista Mayorista" en el catálogo.';
+    return '📦 Lista Mayorista\n\nPrecios especiales para compras en volumen.\nCondición: ventas mayores a $250.000 por bulto cerrado.\n\n🕗 Horario: Lunes a Viernes · 08:00 a 16:00 hs · Sábados · 08:00 a 13:00 hs\n\n📍 Depósito: Ruta Provincial 50 Nº 13080, KM 8 — Guaymallén.\n\n📞 Contacto: +549 261 598 3065';
   if(/precio|cuanto.*cuesta|valor|kilo|kg|como.*se.*expresa|descuento|80000|80\.000/.test(t))
-    return '💰 Precios\n\nLos precios están publicados por kilogramo en la Lista Minorista.\n\n🏷️ Descuento por cantidad: En compras minoristas que superen los $80.000 se aplica automáticamente un descuento. El precio en azul en cada producto es el precio con descuento.\n\n📦 Lista Mayorista: Para compras mayores a $250.000 por bulto cerrado. Accedé desde la pestaña correspondiente en el catálogo.';
+    return '💰 Precios mayoristas\n\nLos precios son por bulto cerrado, con valores especiales para revendedores.\n\n📦 Compra mínima: $250.000.\n\nSeleccioná los productos y el sistema valida automáticamente que cumplas con el mínimo.';
   if(/pedido|como comprar|como pedir|comprar|hacer pedido|proceso|paso a paso/.test(t))
     return '📦 Cómo hacer tu pedido\n\n1. Navegá el catálogo y elegí tus productos\n2. Seleccioná la cantidad y tocá "Agregar al pedido"\n3. Abrí el carrito y revisá tu selección\n4. Tocá "Pedir por WhatsApp" para enviarnos tu pedido\n5. Confirmá el pedido con el equipo Paladear\n6. Informanos el método de pago\n7. ¡Lo recibís en casa o lo retirás en el local! 🎉';
   if(/whatsapp.*mayorista|mayorista.*whatsapp|contacto.*mayorista|mayorista.*contacto|numero.*mayorista/.test(t))
     return 'Contacto Mayorista 📦\n\nWhatsApp: +549 261 598 3065\nHorario: Lunes a Viernes · 08:00 a 16:00 hs\nSábados · 08:00 a 13:00 hs\n\nRecordá que la venta mayorista requiere un mínimo de $250.000 por bulto cerrado.';
   if(/whatsapp|telefono|contacto|llamar|numero|comunicar/.test(t))
-    return 'Podés contactarnos:\n\n🛒 Venta Minorista:\nWhatsApp: +549 261 651 2823\nLunes a Sábados · 10:00 a 20:00 hs\n\n📦 Venta Mayorista:\nWhatsApp: +549 261 598 3065\nLunes a Viernes · 08:00 a 16:00 hs\nSábados · 08:00 a 13:00 hs';
+    return '📦 Contacto mayorista:\n\nWhatsApp: +549 261 598 3065\nLunes a Viernes · 08:00 a 16:00 hs\nSábados · 08:00 a 13:00 hs';
   if(/mix tradicional/.test(t))
     return 'Mix Tradicional 🥜\nUn clásico que nunca falla.\nContenido: nueces, almendras, pasas rubias, pasas morochas y maní.';
   if(/mix tropical/.test(t))
@@ -2894,12 +2894,12 @@ function responderChat(msg){
   if(/vegano|vegana|plant based/.test(t))
     return 'Muchos de nuestros productos son aptos para veganos 🌱\nFrutos secos, semillas, harinas, legumbres, especias y más. Si querés saber sobre un producto específico, consultanos.';
   if(/retiro|retirar|buscar|paso a buscar/.test(t))
-    return 'Podés retirar tu pedido sin problema 🏠\n\n🛒 Pedidos minoristas:\nPueyrredón 588, Mendoza · Lunes a Sábados de 10:00 a 20:00 hs.\n\n📦 Pedidos mayoristas:\nDepósito en Ruta Provincial 50 Nº 13080, KM 8 — Guaymallén.\nLunes a Viernes de 08:00 a 16:00 hs · Sábados de 08:00 a 13:00 hs.\nMapa: https://maps.app.goo.gl/MXySPy9mbBFm8oVaA';
+    return 'Podés retirar tu pedido sin problema 🏠\n\nDepósito mayorista: Ruta Provincial 50 Nº 13080, KM 8 — Guaymallén.\nLunes a Viernes de 08:00 a 16:00 hs · Sábados de 08:00 a 13:00 hs.';
   if(/^(hola|buen|buenas|saludos|hey|hi|buenos dias|buenas tardes|buenas noches)/.test(t))
     return '¡Hola! 👋 Bienvenido a Paladear Mercado de Sabores.\n¿En qué te puedo ayudar?';
   if(/gracias|muchas gracias|genial|perfecto|excelente|ok gracias/.test(t))
-    return '¡De nada! 😊 Si tenés más preguntas estoy acá. También podés contactarnos:\n• Minorista: +549 261 651 2823\n• Mayorista: +549 261 598 3065';
-  return 'No estoy seguro de poder responder eso con exactitud 🤔\n\nPodés contactarnos:\n• Minorista: WhatsApp +549 261 651 2823\n• Mayorista: WhatsApp +549 261 598 3065\n\nTambién puedo contarte sobre:\n• Mixes de frutos secos y granolas\n• Envíos y métodos de pago\n• Cómo hacer un pedido\n• Horarios y ubicación\n• Precios y lista mayorista';
+    return '¡De nada! 😊 Si tenés más preguntas estoy acá. También podés escribirnos por WhatsApp: +549 261 598 3065';
+  return 'No estoy seguro de poder responder eso con exactitud 🤔\n\nEscribinos por WhatsApp: +549 261 598 3065\n\nTambién puedo contarte sobre:\n• Mixes de frutos secos y granolas\n• Envíos y métodos de pago\n• Cómo hacer un pedido\n• Horarios y ubicación\n• Precios y compra mayorista';
 }
 function sendChat(){
   const input=document.getElementById('chat-input');
