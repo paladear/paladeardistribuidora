@@ -4652,7 +4652,7 @@ function renderCardMay(p, suffix) {
   const id        = 'may_' + p[0] + (suffix ? '_' + suffix : '');
   const cartItem  = cartMay.find(i => i.pid === p[0]);
   const acumQty   = cartItem ? cartItem.c : 0;
-  const acumInfo  = acumQty > 0 ? `<span class="acum-badge">🛒 ${acumQty} ${acumQty === 1 ? 'bulto' : 'bultos'}</span>` : '';
+  const acumInfo  = acumQty > 0 ? `<span class="acum-badge">🛒 ${acumQty} ${acumQty === 1 ? 'bulto' : 'bultos'} · $${fmt(precio * acumQty)}</span>` : '';
   const cat       = CATS_MAY.find(c => c.id === p[1]);
 
   let h = `<div class="pcard" id="${id}">`;
