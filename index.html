@@ -40,9 +40,9 @@ layout: null
 <meta name="author" content="Paladear Mercado de Sabores">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="googlebot" content="index, follow">
-<meta name="theme-color" content="#547692">
-<meta name="application-name" content="Paladear">
-<meta name="apple-mobile-web-app-title" content="Paladear">
+<meta name="theme-color" content="#7a4f2a">
+<meta name="application-name" content="Paladear Distribuidora">
+<meta name="apple-mobile-web-app-title" content="Distribuidora">
 <meta name="geo.region" content="AR-M">
 <meta name="geo.placename" content="Mendoza, Argentina">
 <meta name="geo.position" content="-32.8908;-68.8272">
@@ -6341,8 +6341,8 @@ window.addEventListener('online', function() {
   if (!('serviceWorker' in navigator)) return;
 
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/paladeartienda/sw.js', {
-      scope: '/paladeartienda/'
+    navigator.serviceWorker.register('/paladeardistribuidora/sw.js', {
+      scope: '/paladeardistribuidora/'
     })
     .then(function(reg) {
       console.log('[PWA] Service Worker registrado. Scope:', reg.scope);

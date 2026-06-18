@@ -22,16 +22,16 @@
 //      en segundo plano. Casi nunca cambian.
 // ════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'paladear-v6';
+const CACHE_VERSION = 'paladear-distri-v1';
 
 const SHELL_FILES = [
-  '/paladeartienda/',
-  '/paladeartienda/index.html',
-  '/paladeartienda/android-chrome-192x192.png',
-  '/paladeartienda/android-chrome-512x512.png',
-  '/paladeartienda/apple-touch-icon.png',
-  '/paladeartienda/favicon-32x32.png',
-  '/paladeartienda/og-image.jpg',
+  '/paladeardistribuidora/',
+  '/paladeardistribuidora/index.html',
+  '/paladeardistribuidora/android-chrome-192x192.png',
+  '/paladeardistribuidora/android-chrome-512x512.png',
+  '/paladeardistribuidora/apple-touch-icon.png',
+  '/paladeardistribuidora/favicon-32x32.png',
+  '/paladeardistribuidora/og-image.jpg',
 ];
 
 // ── INSTALL ─────────────────────────────────────────────
@@ -73,8 +73,8 @@ self.addEventListener('fetch', event => {
   // primera visita (sin tener que borrar el historial). Si no hay red,
   // caemos al cache para que la página siga abriendo offline.
   const _path = url.pathname;
-  const _esPagina = _path === '/paladeartienda/' ||
-                    _path === '/paladeartienda/index.html';
+  const _esPagina = _path === '/paladeardistribuidora/' ||
+                    _path === '/paladeardistribuidora/index.html';
 
   if (_esPagina) {
     event.respondWith(
@@ -89,7 +89,7 @@ self.addEventListener('fetch', event => {
         })
         .catch(() =>
           caches.match(event.request)
-            .then(cached => cached || caches.match('/paladeartienda/index.html'))
+            .then(cached => cached || caches.match('/paladeardistribuidora/index.html'))
         )
     );
     return;
@@ -108,7 +108,7 @@ self.addEventListener('fetch', event => {
             }
             return response;
           })
-          .catch(() => cached || caches.match('/paladeartienda/index.html'));
+          .catch(() => cached || caches.match('/paladeardistribuidora/index.html'));
         // Servimos el cache al instante si existe; si no, esperamos la red.
         return cached || network;
       })
@@ -123,5 +123,5 @@ self.addEventListener('push', event => {
 
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-  event.waitUntil(clients.openWindow('/paladeartienda/'));
+  event.waitUntil(clients.openWindow('/paladeardistribuidora/'));
 });

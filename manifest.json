@@ -1,16 +1,17 @@
 {
-  "name": "Paladear Mercado de Sabores",
-  "short_name": "Paladear",
-  "description": "Dietética, frutos secos y más en Mendoza. Venta minorista y mayorista.",
-  "start_url": "/paladeartienda/?utm_source=pwa",
-  "scope": "/paladeartienda/",
+  "name": "Paladear Distribuidora",
+  "short_name": "Distribuidora",
+  "description": "Lista de precios mayorista de Paladear — venta por bulto en Mendoza.",
+  "id": "/paladeardistribuidora/",
+  "start_url": "/paladeardistribuidora/?utm_source=pwa",
+  "scope": "/paladeardistribuidora/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#547692",
+  "theme_color": "#7a4f2a",
   "orientation": "portrait-primary",
   "lang": "es-AR",
   "dir": "ltr",
-  "categories": ["shopping", "food"],
+  "categories": ["shopping", "food", "business"],
   "icons": [
     {
       "src": "favicon-96x96.png",
@@ -30,21 +31,5 @@
       "purpose": "any"
     }
   ],
-  "screenshots": [],
-  "shortcuts": [
-    {
-      "name": "Minorista",
-      "short_name": "Tienda",
-      "description": "Ver catálogo minorista",
-      "url": "/paladeartienda/?seccion=minorista&utm_source=pwa_shortcut",
-      "icons": [{ "src": "android-chrome-192x192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "Mayorista",
-      "short_name": "Mayorista",
-      "description": "Ver catálogo mayorista",
-      "url": "/paladeartienda/?seccion=mayorista&utm_source=pwa_shortcut",
-      "icons": [{ "src": "android-chrome-192x192.png", "sizes": "192x192" }]
-    }
-  ]
+  "screenshots": []
 }
