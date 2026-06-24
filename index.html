@@ -1652,12 +1652,63 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
 </div>
 
 <div style="max-width:1100px;margin:0 auto;padding:0 20px 30px" id="mayoristaSection" class="mayorista-section">
-  <!-- Avisos de condiciones -->
-  <div class="mayorista-badge">
-    <div class="may-warn">⚠️ Compra mínima: $250.000</div>
-    <div class="may-warn">📦 Venta por bulto cerrado</div>
-    <div class="may-info">Seleccioná los productos y el sistema validará automáticamente que cumplas con los requisitos de compra mayorista.</div>
+  <!-- Avisos de condiciones — banner visual con medidor (estilo pop-up, terracota) -->
+  <style>
+    .distb-wrap{margin:18px 0 18px}
+    .distb-banner{background:linear-gradient(135deg,#faf2ec,#f3e3d4);border:1.5px solid #e3c0a8;border-radius:16px;padding:15px 17px;font-family:'Montserrat',sans-serif;box-shadow:0 3px 14px rgba(192,118,74,.16)}
+    .distb-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;row-gap:4px}
+    .distb-ic{width:27px;height:27px;object-fit:contain;flex-shrink:0}
+    .distb-name{font-size:16.5px;font-weight:800;color:#7a4f2a}
+    .distb-go{font-size:12px;font-weight:700;color:#c0764a;margin-left:auto;background:#fff;border:1px solid #e3c0a8;padding:3px 11px;border-radius:20px;white-space:nowrap}
+    .distb-note{font-size:13.5px;color:#8a6a52;font-weight:600;margin-bottom:10px;line-height:1.4}
+    .distb-note b{color:#7a4f2a}
+    .distb-mlabel{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+    .distb-cnt{font-size:20px;font-weight:800;color:#7a4f2a;font-variant-numeric:tabular-nums}
+    .distb-goal{font-size:12px;font-weight:600;color:#b69b85}
+    .distb-track{height:13px;background:#ecdfd4;border-radius:7px;overflow:hidden}
+    .distb-fill{height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,#c0764a,#d99a6f)}
+    .distb-reward{margin-top:9px;display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:#c0764a;opacity:0;transform:translateY(5px);transition:all .4s;min-height:20px}
+    .distb-reward.on{opacity:1;transform:none}
+    .distb-pill{font-size:11.5px;padding:3px 10px;border-radius:20px;color:#fff;background:#c0764a;white-space:nowrap}
+  </style>
+  <div class="distb-wrap">
+    <div class="distb-banner" id="distBanner">
+      <div class="distb-top">
+        <img class="distb-ic" src="icon-mayorista.png" alt="">
+        <span class="distb-name">Venta mayorista</span>
+        <span class="distb-go">Por bulto cerrado</span>
+      </div>
+      <div class="distb-note">Sumá productos al carrito: al llegar a <b>$250.000</b> se habilita tu pedido mayorista (<b>venta por bulto cerrado</b>).</div>
+      <div class="distb-mlabel"><span class="distb-cnt" id="distbCnt">$0</span><span class="distb-goal">Mínimo: $250.000</span></div>
+      <div class="distb-track"><div class="distb-fill" id="distbFill"></div></div>
+      <div class="distb-reward" id="distbRw"><span class="distb-pill">✓</span> Alcanzá el mínimo para enviar tu pedido</div>
+    </div>
   </div>
+  <script>
+  (function(){
+    var done=false;
+    function anim(){
+      if(done)return;done=true;
+      var cnt=document.getElementById('distbCnt'),fill=document.getElementById('distbFill'),rw=document.getElementById('distbRw');
+      if(!cnt||!fill||!rw)return;
+      var target=250000,dur=1800,start=null;
+      function step(ts){if(!start)start=ts;var t=Math.min((ts-start)/dur,1),e=1-Math.pow(1-t,3);
+        cnt.textContent='$'+Math.round(e*target).toLocaleString('es-AR');fill.style.width=(e*100)+'%';
+        if(t>=1)rw.classList.add('on');if(t<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);
+    }
+    function init(){
+      var el=document.getElementById('distBanner');
+      if(!el)return;
+      if('IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){anim();io.disconnect();}});},{threshold:.4});
+        io.observe(el);
+      } else { anim(); }
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+    else init();
+  })();
+  </script>
   <h2 class="dist-cat-title">Explorá por categoría</h2>
   <!-- Búsqueda y categorías ahora viven en el compact-header (al scrollear) -->
   <input type="hidden" id="searchInputMay">
