@@ -1508,6 +1508,12 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
         <button class="hdrop-cta min-cta" onclick="closeAllHdrops();window.open('https://wa.me/5492615652251','_blank')">💬 Contactar por WhatsApp</button>
       </div>
     </div>
+    <style>
+      .cats-burger-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;border:none;cursor:pointer;background:var(--azul-dark);color:#fff;transition:background .2s,transform .2s,box-shadow .2s;flex-shrink:0}
+      .cats-burger-btn:hover{background:#1a3050;transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.22)}
+      @media(max-width:600px){.cats-burger-btn{width:36px;height:36px}}
+    </style>
+    <button class="cats-burger-btn" onclick="toggleMayCatsDropdown()" title="Categorías" aria-label="Ver categorías"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
 
   </div>
 </div>
@@ -1654,7 +1660,7 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
 <div style="max-width:1100px;margin:0 auto;padding:0 20px 30px" id="mayoristaSection" class="mayorista-section">
   <!-- Avisos de condiciones — banner visual con medidor (estilo pop-up, terracota) -->
   <style>
-    .distb-wrap{margin:18px 0 18px}
+    .distb-wrap{margin:18px auto 18px;max-width:560px}
     .distb-banner{background:linear-gradient(135deg,#7a4f2a,#b87040);border-radius:16px;padding:15px 17px;font-family:'Montserrat',sans-serif;box-shadow:0 5px 18px rgba(122,79,42,.30)}
     .distb-top{display:flex;align-items:center;gap:9px;margin-bottom:8px}
     .distb-ic{width:30px;height:30px;object-fit:contain;flex-shrink:0;background:rgba(255,255,255,.2);border-radius:7px;padding:3px;box-sizing:border-box}
