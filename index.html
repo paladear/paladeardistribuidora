@@ -987,22 +987,39 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 
 @media(max-width:767px){#mainContainer{padding:12px 12px}}
 @media(max-width:767px){
-  /* Grilla: 2 columnas en mobile, igual que la minorista */
-  .prod-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  /* Dos cards por fila en mobile */
+  .prod-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 
-  /* Card: sin overflow visible */
+  /* Cards y controles compactos para conservar legibilidad */
   .pcard{border-radius:12px;overflow:hidden}
-
-  /* Imagen un poco más grande en mobile */
-  .pcard-img{height:185px;font-size:44px}
-
-  /* Body levemente más compacto */
-  .pcard-body{padding:12px 14px}
-
-  /* Precios en fila normal — hay ancho suficiente */
-  .prices{flex-direction:row;gap:10px;margin-bottom:10px;align-items:flex-end}
-  .price-min{font-size:17px}
-  .price-may{font-size:14px}
+  .pcard-img{height:128px;font-size:36px}
+  .pcard-img img{padding:6px}
+  .pcard-body{padding:9px 8px 10px}
+  .pcard-head{gap:4px}
+  .pcard-name{font-size:12.5px;line-height:1.25}
+  .pcard-brand{font-size:10.5px;margin-bottom:6px}
+  .info-btn{width:24px;height:24px;font-size:12px}
+  .opt-btns{gap:4px;margin-bottom:7px}
+  .opt-btn{padding:4px 6px;font-size:10.5px;border-width:1.5px}
+  .sabor-row{display:block;margin-bottom:7px}
+  .sabor-label{display:block;font-size:10px;margin-bottom:3px}
+  .sabor-select{width:100%;min-width:0;padding:5px 6px;font-size:10.5px}
+  .prices{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px;margin-bottom:8px;align-items:end}
+  .price-label{font-size:8px;line-height:1.15;letter-spacing:0;white-space:normal}
+  .price-min{font-size:14px}
+  .price-min .precio-oferta{font-size:14px}
+  .precio-tachado-sm{font-size:10px}
+  .price-may{font-size:11px;padding:3px 4px;border-radius:6px}
+  .qty-row{justify-content:center;gap:5px;margin-bottom:8px}
+  .qty-btn{width:31px;height:31px;font-size:17px}
+  .qty-val{font-size:15px;min-width:18px}
+  .acum-badge{flex-basis:100%;margin-left:0;padding:3px 5px;font-size:9px;text-align:center;white-space:normal}
+  .add-btn{padding:9px 3px;font-size:10.5px;line-height:1.2;gap:3px;border-radius:8px}
+  .card-cart-actions{gap:4px}
+  .card-del-btn{width:31px;height:31px}
+  .card-edit-btn{height:31px;font-size:10px;gap:3px}
+  .receta-badge-prod{font-size:9.5px;line-height:1.25}
+  .oferta-badge-lg{top:7px;left:7px;font-size:10px;padding:4px 7px}
 }
 
 /* ── BOTÓN VOLVER ── */
@@ -1564,10 +1581,6 @@ html.android-ui .tutb-may .tutb-go,html.android-ui .tutb-rmay{color:#8f5145}
 html.android-ui .tutb-may .tutb-fill{background:linear-gradient(90deg,#b86f61,#d09a8d)}
 html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
 @media(max-width:767px){
-  html.android-ui .pcard-img{height:172px}
-  html.android-ui .pcard-body{padding:11px 12px}
-  html.android-ui .pcard-name{font-size:14px;line-height:1.3}
-  html.android-ui .pcard-brand{font-size:12px;margin-bottom:6px}
   html.android-ui .catalog-intro h1{font-size:19px}
   html.android-ui .allcat-name{font-size:16px}
   html.android-ui .allcat-img{font-size:30px!important}
