@@ -2477,7 +2477,7 @@ function chgQty(id,d){const el=document.getElementById(id+'_q');let v=parseInt(e
 function _track(ev){try{if(window.clarity)clarity('event',ev);}catch(e){}}
 
 function showInfo(pid){
-  const p=PRODS.find(x=>x[0]===pid);if(!p||!p[8])return;
+  const p=PRODS.find(x=>x[0]===pid)||PRODS_MAY.find(x=>x[0]===pid);if(!p||!p[8])return;
   _track('producto_abierto');
   const old=document.getElementById('infoModal');if(old)old.remove();
   const m=document.createElement('div');
@@ -4699,7 +4699,7 @@ function cargarMayorista() {
     }
   } catch(e) {}
 
-  _cargarInfoMay().then(infoMay => {
+  Promise.all([_cargarInfoMay(), _cargarInfo()]).then(([infoMay, INFO]) => {
     function _procesarCSVMayorista(csv) {
       const filas = _parseCSV(csv);
       const prodsTemp = [];
@@ -4720,13 +4720,18 @@ function cargarMayorista() {
         const imgUrl       = inf.imagen  || '';
         const nombreFinal  = inf.nombre  || nombre;
         const precioTotal  = precio * bulto;
+        // Texto de info: viene de la MISMA hoja "Info" que lee la minorista (INFO_CSV_URL),
+        // cruzado por Artículo(ID) — así ambas páginas muestran la misma descripción.
+        const artIdKey     = artId.replace(/\./g, '').replace(/,.*$/, '');
+        const infoBase     = INFO[artIdKey] || INFO[_norm(nombreFinal)] || {};
+        const infoText     = infoBase.info || '';
 
         const opts = {};
         opts[_bultoLabel(bulto, inf.bultoUnidad || 'unidad')] = [precioTotal, precioTotal];
 
         prodsTemp.push([
           pid++, cat.id, nombreFinal, rubro, 'und', false, imgUrl,
-          opts, '', sabores, false, false,
+          opts, infoText, sabores, false, false,
           { bulto, bultoUnidad: inf.bultoUnidad || 'unidad', artId }
         ]);
 
@@ -5002,6 +5007,7 @@ function renderCardMay(p, suffix) {
   const opts      = Object.keys(p[7]);
   const precio    = opts.length ? p[7][opts[0]][0] : 0;
   const hasSrc    = p[6] && p[6].startsWith('http');
+  const infoText  = p[8] || '';
   const sabores   = p[9];
   const bulto     = p[12] ? p[12].bulto : 1;
   const bultoLabel = opts[0] || ('Bulto x' + bulto);
@@ -5021,7 +5027,9 @@ function renderCardMay(p, suffix) {
   h += `<div class="pcard-body">`;
 
   // Nombre
-  h += `<div class="pcard-head"><div class="pcard-name">${_tc(p[2])}</div></div>`;
+  h += `<div class="pcard-head"><div class="pcard-name">${_tc(p[2])}</div>`;
+  if(infoText) h += `<button class="info-btn" onclick="showInfo(${p[0]})" title="Ver información">ℹ️</button>`;
+  h += `</div>`;
 
   // Rubro
   const _mayBrand = cat ? cat.n : p[3];
