@@ -4882,37 +4882,17 @@ function renderMayCarrusel() {
   }
   
   if (!activeCatIdMay) {
-    // Mostrar todos los rubros en orden alfabético
-    let h = '';
+    // Mostrar todos los rubros en orden alfabético, con su grid completo (igual a la
+    // minorista) tanto en desktop (con el sidebar de rubros ya existente para filtrar)
+    // como en mobile (con el botón "Rubros" que abre el dropdown).
     const catIdsAll = [...new Set(PRODS_MAY.map(p => p[1]))];
     const catsSorted = catIdsAll
       .map(id => CATS_MAY.find(c => c.id === id))
       .filter(Boolean)
       .sort((a, b) => a.n.localeCompare(b.n, 'es'));
-    // Limpiar estado de rotación anterior
-    if (_carStateMay) {
-      for (const k in _carStateMay) delete _carStateMay[k];
-    } else {
-      _carStateMay = {};
-    }
-    catsSorted.forEach((cat, i) => {
-      const prods = PRODS_MAY.filter(p => p[1] === cat.id);
-      if (!prods.length) return;
-      const cid = 'carMay' + i;
-      // DESKTOP: carrusel con 4 productos visibles y auto-rotación (sin cambios)
-      const shuffled = [...prods].sort(() => Math.random() - .5);
-      _carStateMay[cid] = { prods: shuffled, cursor: 0 };
-      const visibles = shuffled.slice(0, 4);
-      h += `<div class="carousel-section">
-        <button class="carousel-title carousel-title-btn" onclick="selectMayCat('${cat.id}')">${cat.n} <span style="font-size:16px;opacity:.7">›</span></button>
-        <div class="carousel-wrap"><div class="carousel-track" id="${cid}">${visibles.map(_cardHTMLMay).join('')}</div></div>
-      </div>`;
-    });
-    if (desktop) desktop.innerHTML = h;
-    // MOBILE: todos los rubros con su grid completo de 2 columnas (igual a la minorista)
-    // en vez del carrusel horizontal — se ve todo de entrada y se filtra por rubro después.
-    if (mobile) {
-      let hMobile = `<div class="catalog-intro">
+
+    function buildAllMay(suffix) {
+      let h = `<div class="catalog-intro">
         <div>
           <h1>Todos los productos</h1>
           <p>Explorá el catálogo completo o elegí un rubro para filtrar.</p>
@@ -4922,21 +4902,20 @@ function renderMayCarrusel() {
       catsSorted.forEach(cat => {
         const prods = PRODS_MAY.filter(p => p[1] === cat.id).sort((a, b) => a[2].localeCompare(b[2], 'es', { sensitivity: 'base' }));
         if (!prods.length) return;
-        hMobile += `<section class="allcat-sec">
+        h += `<section class="allcat-sec">
           <div class="allcat-head">
             <span class="allcat-img" style="font-size:34px;display:flex;align-items:center;justify-content:center">${cat.ic || '🌿'}</span>
             <span class="allcat-name">${cat.n}</span>
             <span class="allcat-count">${prods.length}</span>
           </div>
-          <div class="prod-grid">${prods.map(p => renderCardMay(p, 'm')).join('')}</div>
+          <div class="prod-grid">${prods.map(p => renderCardMay(p, suffix)).join('')}</div>
         </section>`;
       });
-      mobile.innerHTML = hMobile;
-      mobile.classList.remove('hidden');
+      return h;
     }
-    // Auto-rotación desktop cada 12s
-    if (_carRotationIntervalMay) clearInterval(_carRotationIntervalMay);
-    if (!isMobile) _carRotationIntervalMay = setInterval(rotarCarruselesMay, 12000);
+
+    if (desktop) desktop.innerHTML = buildAllMay('');
+    if (mobile) { mobile.innerHTML = buildAllMay('m'); mobile.classList.remove('hidden'); }
   } else {
     selectMayCat(activeCatIdMay);
   }
