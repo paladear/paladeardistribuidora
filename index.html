@@ -871,6 +871,27 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 @media(min-width:640px){.prod-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:960px){.prod-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(min-width:1200px){.prod-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Catálogo completo por rubro (igual a la minorista) */
+.allcat-sec{margin-bottom:34px}
+.catalog-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:4px 0 24px;padding:18px 20px;background:var(--azul-light);border:1.5px solid rgba(84,118,146,.24);border-radius:16px}
+.catalog-intro h1{font-size:25px;line-height:1.15;color:var(--azul-dark);font-weight:800;margin:0 0 5px}
+.catalog-intro p{font-size:13px;line-height:1.45;color:var(--muted-fg);font-weight:550;margin:0}
+.catalog-filter-btn{display:none;align-items:center;gap:7px;flex-shrink:0;border:1.5px solid var(--azul);background:#fff;color:var(--azul-dark);border-radius:999px;padding:9px 13px;font-family:inherit;font-size:12px;font-weight:750;white-space:nowrap}
+.allcat-head{display:flex;align-items:center;gap:12px;width:100%;font-family:inherit;padding:0 0 12px;text-align:left}
+.allcat-img{width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.15));flex-shrink:0}
+.allcat-name{font-size:20px;font-weight:800;color:var(--azul-dark)}
+.allcat-count{font-size:12px;font-weight:700;color:var(--azul);background:var(--azul-light);border-radius:999px;padding:2px 10px}
+@media(max-width:767px){
+  .catalog-intro{align-items:flex-start;margin:2px 0 20px;padding:14px;gap:10px;border-radius:14px}
+  .catalog-intro h1{font-size:20px;margin-bottom:4px}
+  .catalog-intro p{font-size:11.5px;max-width:190px}
+  .catalog-filter-btn{display:inline-flex;padding:8px 10px;font-size:11px}
+  .allcat-sec{margin-bottom:26px}
+  .allcat-head{gap:8px;padding:0 2px 9px}
+  .allcat-img{width:42px;height:42px}
+  .allcat-name{font-size:17px;line-height:1.15}
+  .allcat-count{font-size:10px;padding:2px 7px}
+}
 .pcard{background:var(--card);border-radius:14px;overflow:visible;box-shadow:0 2px 10px rgba(0,0,0,.09);border:2px solid transparent;transition:all .2s;display:flex;flex-direction:column}
 .pcard.highlight-card{border-color:var(--azul);box-shadow:0 0 0 3px rgba(77,110,144,.25),0 6px 20px rgba(77,110,144,.35);animation:pulseHighlight 2.2s ease-out}
 @keyframes pulseHighlight{0%{box-shadow:0 0 0 0 rgba(77,125,138,.55),0 6px 20px rgba(77,125,138,.4)}50%{box-shadow:0 0 0 10px rgba(77,125,138,0),0 6px 20px rgba(77,110,144,.35)}100%{box-shadow:0 0 0 3px rgba(77,110,144,.25),0 6px 20px rgba(77,110,144,.35)}}
@@ -954,8 +975,8 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 
 @media(max-width:767px){#mainContainer{padding:12px 12px}}
 @media(max-width:767px){
-  /* Grilla: 1 columna en mobile */
-  .prod-grid{grid-template-columns:1fr;gap:10px}
+  /* Grilla: 2 columnas en mobile, igual que la minorista */
+  .prod-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 
   /* Card: sin overflow visible */
   .pcard{border-radius:12px;overflow:hidden}
@@ -4856,8 +4877,8 @@ function renderMayCarrusel() {
   }
   
   if (!activeCatIdMay) {
-    // Mostrar carrusel inicial con todos los rubros en orden alfabético
-    let h = '', hMobile = '';
+    // Mostrar todos los rubros en orden alfabético
+    let h = '';
     const catIdsAll = [...new Set(PRODS_MAY.map(p => p[1]))];
     const catsSorted = catIdsAll
       .map(id => CATS_MAY.find(c => c.id === id))
@@ -4873,8 +4894,7 @@ function renderMayCarrusel() {
       const prods = PRODS_MAY.filter(p => p[1] === cat.id);
       if (!prods.length) return;
       const cid = 'carMay' + i;
-      const cidM = 'carMayM' + i;
-      // DESKTOP: 4 productos visibles con auto-rotación
+      // DESKTOP: carrusel con 4 productos visibles y auto-rotación (sin cambios)
       const shuffled = [...prods].sort(() => Math.random() - .5);
       _carStateMay[cid] = { prods: shuffled, cursor: 0 };
       const visibles = shuffled.slice(0, 4);
@@ -4882,15 +4902,33 @@ function renderMayCarrusel() {
         <button class="carousel-title carousel-title-btn" onclick="selectMayCat('${cat.id}')">${cat.n} <span style="font-size:16px;opacity:.7">›</span></button>
         <div class="carousel-wrap"><div class="carousel-track" id="${cid}">${visibles.map(_cardHTMLMay).join('')}</div></div>
       </div>`;
-      // MOBILE: TODOS los productos en el track scrolleable
-      const prodsSorted = [...prods].sort((a, b) => a[2].localeCompare(b[2], 'es', { sensitivity: 'base' }));
-      hMobile += `<div class="carousel-section">
-        <button class="carousel-title carousel-title-btn" onclick="selectMayCat('${cat.id}')">${cat.n} <span style="font-size:16px;opacity:.7">›</span></button>
-        <div class="carousel-wrap"><div class="carousel-track" id="${cidM}">${prodsSorted.map(_cardHTMLMay).join('')}</div></div>
-      </div>`;
     });
     if (desktop) desktop.innerHTML = h;
-    if (mobile) { mobile.innerHTML = hMobile; mobile.classList.remove('hidden'); }
+    // MOBILE: todos los rubros con su grid completo de 2 columnas (igual a la minorista)
+    // en vez del carrusel horizontal — se ve todo de entrada y se filtra por rubro después.
+    if (mobile) {
+      let hMobile = `<div class="catalog-intro">
+        <div>
+          <h1>Todos los productos</h1>
+          <p>Explorá el catálogo completo o elegí un rubro para filtrar.</p>
+        </div>
+        <button class="catalog-filter-btn" onclick="toggleMayCatsDropdown()"><span aria-hidden="true">☰</span> Rubros</button>
+      </div>`;
+      catsSorted.forEach(cat => {
+        const prods = PRODS_MAY.filter(p => p[1] === cat.id).sort((a, b) => a[2].localeCompare(b[2], 'es', { sensitivity: 'base' }));
+        if (!prods.length) return;
+        hMobile += `<section class="allcat-sec">
+          <div class="allcat-head">
+            <span class="allcat-img" style="font-size:34px;display:flex;align-items:center;justify-content:center">${cat.ic || '🌿'}</span>
+            <span class="allcat-name">${cat.n}</span>
+            <span class="allcat-count">${prods.length}</span>
+          </div>
+          <div class="prod-grid">${prods.map(p => renderCardMay(p, 'm')).join('')}</div>
+        </section>`;
+      });
+      mobile.innerHTML = hMobile;
+      mobile.classList.remove('hidden');
+    }
     // Auto-rotación desktop cada 12s
     if (_carRotationIntervalMay) clearInterval(_carRotationIntervalMay);
     if (!isMobile) _carRotationIntervalMay = setInterval(rotarCarruselesMay, 12000);
