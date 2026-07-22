@@ -343,6 +343,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 .head-icon{width:26px;height:26px;object-fit:contain;display:inline-block;vertical-align:middle;margin-right:6px;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.18))}
 .inline-icon{width:18px;height:18px;object-fit:contain;display:inline-block;vertical-align:middle;margin-right:6px;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.18))}
 .btn-ico-img{width:20px;height:20px;object-fit:contain;display:inline-block;vertical-align:middle;flex-shrink:0;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.18))}
+.btn-info-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-family:Georgia,'Times New Roman',serif;font-size:22px;font-style:italic;font-weight:400;line-height:1;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.18))}
 .may-tab-icon{filter:drop-shadow(0 2px 2.5px rgba(0,0,0,.22))}
 @media(max-width:767px){#cart-fab{bottom:88px;right:18px;width:52px;height:52px;font-size:24px}#chat-fab{right:18px}}
 .cart-count{background:var(--destructive);color:#fff;border-radius:50%;width:24px;height:24px;font-size:12px;display:flex;align-items:center;justify-content:center;font-weight:700}
@@ -1005,10 +1006,10 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 .back-btn:hover{background:var(--azul);color:#fff}
 
 /* ── RESULTADOS BÚSQUEDA MOBILE ── */
-#searchResultsMobile{display:none;margin-top:0;margin-bottom:16px}
-#searchResultsMobile.active{display:block}
+#searchResultsMobile,#maySearchResults{display:none;margin-top:0;margin-bottom:16px}
+#searchResultsMobile.active,#maySearchResults.active{display:block}
 @media(max-width:767px){
-  #searchResultsMobile.active{
+  #searchResultsMobile.active,#maySearchResults.active{
     position:fixed;
     top:0;left:0;right:0;bottom:0;
     z-index:290;
@@ -1021,10 +1022,10 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 }
 
 /* ── BOTÓN VOLVER ARRIBA ── */
-#backToTop{position:fixed;bottom:162px;right:24px;z-index:999;width:42px;height:42px;border-radius:50%;background:rgba(77,125,138,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s,transform .2s;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+#backToTop{position:fixed;bottom:176px;right:24px;z-index:999;width:42px;height:42px;border-radius:50%;background:rgba(77,125,138,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s,transform .2s;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 #backToTop.visible{opacity:1;pointer-events:auto}
 #backToTop:hover{transform:scale(1.1);background:rgba(77,125,138,.8)}
-@media(max-width:767px){#backToTop{bottom:152px;right:18px;width:38px;height:38px;font-size:17px}}
+@media(max-width:767px){#backToTop{bottom:calc(176px + env(safe-area-inset-bottom));right:18px;width:38px;height:38px;font-size:17px}}
 
 /* ── MINI CART POPUP ── */
 .mini-cart-popup{position:fixed;top:100px;right:18px;z-index:600;width:320px;max-width:calc(100vw - 32px);background:var(--card);border-radius:16px;box-shadow:0 8px 36px rgba(0,0,0,.22);border:1px solid var(--border);padding:16px;animation:slideDown .25s ease-out}
@@ -1511,7 +1512,13 @@ button:focus,a:focus{outline:none}
 body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
 .compact-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 16px;min-height:56px;position:relative;z-index:2}
 .compact-logo{width:48px;height:48px;border-radius:50%;background:#fff;padding:2px;object-fit:contain;flex-shrink:0;box-shadow:0 4px 9px rgba(12,30,48,.4)}
-.compact-search{flex:1;background:rgba(255,255,255,.95);border:none;border-radius:22px;padding:9px 16px;font-size:14px;color:var(--fg);outline:none;font-family:inherit;min-width:0;transition:background .2s,box-shadow .2s}
+.search-wrap-compact{flex:1;position:relative;min-width:0}
+.compact-search{width:100%;background:rgba(255,255,255,.95);border:none;border-radius:22px;padding:9px 16px;font-size:14px;color:var(--fg);outline:none;font-family:inherit;min-width:0;transition:background .2s,box-shadow .2s;box-sizing:border-box}
+.search-suggestions{display:none;position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border-radius:14px;box-shadow:0 10px 28px rgba(15,28,42,.25);z-index:5;max-height:260px;overflow-y:auto;padding:6px}
+.search-suggestions.active{display:block}
+.search-suggestion-item{padding:9px 12px;font-size:14px;color:var(--muted-fg);cursor:pointer;border-radius:9px;display:flex;align-items:center;gap:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.search-suggestion-item:hover{background:var(--muted);color:var(--fg)}
+.search-suggestion-item .sug-icon{flex-shrink:0;opacity:.55;font-size:13px}
 .compact-search::placeholder{color:#90a0b0}
 .compact-search:focus{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.32)}
 .compact-hamb{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.55);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .2s,transform .15s;padding:0}
@@ -1611,7 +1618,7 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
     <!-- MAYORISTA -->
     <div class="hdrop" id="hdropMay">
       <button class="hdrop-btn may-btn" onclick="toggleHdrop('May')">
-        <img class="btn-ico-img" src="icon-mayorista.png" alt=""><span class="btn-txt">Info</span> <span class="arrow">▼</span>
+        <span class="btn-info-icon" aria-hidden="true">i</span><span class="btn-txt">Info</span> <span class="arrow">▼</span>
       </button>
       <div class="hdrop-panel">
         <div class="hdrop-title">ℹ️ Información</div>
@@ -1626,7 +1633,7 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
     <style>
       .cats-burger-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;border:none;cursor:pointer;background:var(--azul-dark);color:#fff;transition:background .2s,transform .2s,box-shadow .2s;flex-shrink:0}
       .cats-burger-btn:hover{background:#1a3050;transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.22)}
-      @media(max-width:600px){.cats-burger-btn{width:36px;height:36px}}
+      @media(max-width:600px){.cats-burger-btn{width:36px;height:36px}.btn-info-icon{font-size:21px}}
     </style>
     <button class="cats-burger-btn cuenta-btn" onclick="openCuenta()" title="Mi cuenta" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.2-5.6 7-5.6s7 2 7 5.6"/></svg></button>
     <button class="cats-burger-btn" onclick="toggleMayCatsDropdown()" title="Categorías" aria-label="Ver categorías"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
@@ -1639,7 +1646,10 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
 <div class="compact-header" id="compactHeader">
   <div class="compact-inner">
     <img class="compact-logo" src="android-chrome-192x192.png" alt="Paladear" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer">
-    <input class="compact-search" id="compactSearchInput" type="text" placeholder="Buscar productos..." oninput="compactOnSearch(this.value)" aria-label="Buscar productos">
+    <div class="search-wrap-compact">
+      <input class="compact-search" id="compactSearchInput" type="search" placeholder="Buscar productos..." oninput="compactOnSearch(this.value);_updateSuggestions(this.value)" onblur="_hideSuggestionsDelayed()" aria-label="Buscar productos">
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
     <button class="compact-hamb" onclick="openCuenta()" aria-label="Mi cuenta">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.2-5.6 7-5.6s7 2 7 5.6"/></svg>
     </button>
@@ -1779,33 +1789,34 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
 </div>
 
 <div style="max-width:1100px;margin:0 auto;padding:0 20px 30px" id="mayoristaSection" class="mayorista-section">
-  <!-- Avisos de condiciones — banner visual con medidor (estilo pop-up, terracota) -->
+  <!-- Condiciones de compra — jerarquía minorista con paleta de Ofertas -->
   <style>
-    .distb-wrap{margin:18px auto 18px;max-width:680px}
-    .distb-banner{background:linear-gradient(135deg,#7a4f2a,#b87040);border-radius:16px;padding:15px 17px;font-family:'Montserrat',sans-serif;box-shadow:0 5px 18px rgba(122,79,42,.30)}
-    .distb-top{display:flex;align-items:center;gap:9px;margin-bottom:8px}
-    .distb-ic{width:30px;height:30px;object-fit:contain;flex-shrink:0;background:rgba(255,255,255,.2);border-radius:7px;padding:3px;box-sizing:border-box}
-    .distb-name{font-size:17px;font-weight:800;color:#fff}
-    .distb-note{font-size:14px;color:rgba(255,255,255,.92);font-weight:600;margin-bottom:4px;line-height:1.4}
-    .distb-note b{color:#fff}
-    .distb-bulto{font-size:13.5px;font-weight:800;color:#fff;margin-bottom:11px}
-    .distb-mlabel{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
-    .distb-cnt{font-size:21px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
-    .distb-goal{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.72)}
-    .distb-track{height:8px;background:rgba(255,255,255,.28);border-radius:5px;overflow:hidden}
-    .distb-fill{height:100%;width:0;border-radius:5px;background:#fff}
-    .distb-reward{margin-top:10px;display:flex;align-items:center;gap:7px;font-size:14.5px;font-weight:800;color:#fff;opacity:0;transform:translateY(5px);transition:all .4s;min-height:20px}
+    .distb-wrap{margin:18px auto 30px;max-width:680px}
+    .distb-banner{position:relative;overflow:hidden;background:radial-gradient(circle at 6% 16%,rgba(212,84,60,.08) 0 46px,transparent 47px),radial-gradient(circle at 95% 88%,rgba(212,84,60,.08) 0 72px,transparent 73px),linear-gradient(135deg,#fdefd8 0%,#fbe2bd 100%);border:2px solid #d4543c;border-radius:20px;padding:26px 28px;font-family:'Montserrat',sans-serif;box-shadow:0 5px 18px rgba(158,66,37,.13)}
+    .distb-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;row-gap:7px}
+    .distb-ic{width:28px;height:28px;object-fit:contain;flex-shrink:0}
+    .distb-name{font-size:18px;font-weight:800;color:#b04020}
+    .distb-go{font-size:12.5px;font-weight:700;color:#b04020;margin-left:auto;background:rgba(255,255,255,.72);border:1px solid rgba(212,84,60,.28);padding:4px 13px;border-radius:20px;white-space:nowrap}
+    .distb-note{font-size:14px;color:#745b4f;font-weight:600;margin-bottom:18px;line-height:1.5}
+    .distb-note b{color:#b04020}
+    .distb-mlabel{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+    .distb-cnt{font-size:20px;font-weight:800;color:#1a3050;font-variant-numeric:tabular-nums}
+    .distb-goal{font-size:12px;font-weight:600;color:#8a6a5d}
+    .distb-track{height:14px;background:#efd7cb;border-radius:8px;overflow:hidden}
+    .distb-fill{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,#d4543c,#e58a72)}
+    .distb-reward{margin-top:14px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:#b04020;opacity:0;transform:translateY(5px);transition:all .4s;min-height:20px}
     .distb-reward.on{opacity:1;transform:none}
-    .distb-pill{font-size:12px;padding:3px 10px;border-radius:20px;color:#7a4f2a;background:#fff;white-space:nowrap}
+    .distb-pill{font-size:11px;padding:3px 9px;border-radius:20px;color:#fff;background:#d4543c;white-space:nowrap}
+    @media(max-width:600px){.distb-banner{padding:20px 18px}.distb-go{margin-left:0}.distb-note{margin-bottom:15px}}
   </style>
   <div class="distb-wrap">
     <div class="distb-banner" id="distBanner">
       <div class="distb-top">
         <img class="distb-ic" src="icon-mayorista.png" alt="">
         <span class="distb-name">Venta Mayorista</span>
+        <span class="distb-go">Por bulto cerrado</span>
       </div>
       <div class="distb-note">Sumá productos al carrito: al llegar a <b>$250.000</b> se habilita tu pedido mayorista.</div>
-      <div class="distb-bulto">Venta por bulto cerrado</div>
       <div class="distb-mlabel"><span class="distb-cnt" id="distbCnt">$0</span><span class="distb-goal">Mínimo: $250.000</span></div>
       <div class="distb-track"><div class="distb-fill" id="distbFill"></div></div>
       <div class="distb-reward" id="distbRw"><span class="distb-pill">✓</span> Alcanzá el mínimo para enviar tu pedido</div>
@@ -2992,6 +3003,47 @@ function onSearch(val){
   _searchTimer=setTimeout(()=>_doSearch(val),300);
 }
 
+// Sugerencias inmediatas, con prioridad para nombres que empiezan por lo escrito.
+function _updateSuggestions(value){
+  const box=document.getElementById('searchSuggestions');
+  if(!box)return;
+  const term=(value||'').trim();
+  if(term.length<2){box.classList.remove('active');box.innerHTML='';return;}
+  const list=(typeof currentTab!=='undefined'&&currentTab==='mayorista'&&typeof PRODS_MAY!=='undefined')?PRODS_MAY:PRODS;
+  const qn=_norm(term);
+  const scored=(list||[]).map(p=>{
+    const tn=_norm(p[2]);
+    let score=0;
+    if(tn.startsWith(qn))score=3;
+    else if(tn.split(' ').some(w=>w.startsWith(qn)))score=2;
+    else if(tn.includes(qn))score=1;
+    return{p,score};
+  }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+  const seen=new Set(),top=[];
+  for(const{p}of scored){
+    const nombre=_tc(p[2]);
+    if(seen.has(nombre))continue;
+    seen.add(nombre);top.push(nombre);
+    if(top.length>=6)break;
+  }
+  if(!top.length){box.classList.remove('active');box.innerHTML='';return;}
+  box.innerHTML=top.map(n=>`<div class="search-suggestion-item" onmousedown="_pickSuggestion('${n.replace(/'/g,"\\'")}')"><span class="sug-icon">🔍</span>${n}</div>`).join('');
+  box.classList.add('active');
+}
+window._updateSuggestions=_updateSuggestions;
+function _pickSuggestion(nombre){
+  const box=document.getElementById('searchSuggestions');
+  if(box){box.classList.remove('active');box.innerHTML='';}
+  const inp=document.getElementById('compactSearchInput');
+  if(inp)inp.value=nombre;
+  if(typeof window.compactOnSearch==='function')window.compactOnSearch(nombre);
+}
+window._pickSuggestion=_pickSuggestion;
+function _hideSuggestionsDelayed(){
+  setTimeout(()=>{const box=document.getElementById('searchSuggestions');if(box)box.classList.remove('active');},150);
+}
+window._hideSuggestionsDelayed=_hideSuggestionsDelayed;
+
 function _onSearchFocus(){
   if(window.innerWidth>=768)return;
   // Colapsar header, banner y tabs en mobile para ganar espacio
@@ -3514,6 +3566,12 @@ history.replaceState({view:'home'},'');
 
 window.addEventListener('popstate',function(e){
   const st=e.state||{view:'home'};
+
+  // 0. Si la búsqueda mayorista mobile está abierta → cerrarla y restaurar la vista.
+  if(typeof _searchMayOverlayOpen!=='undefined'&&_searchMayOverlayOpen){
+    _closeMaySearchNow();
+    return;
+  }
 
   // 0. Si el overlay de búsqueda mobile está abierto → cerrarlo
   if(_searchOverlayOpen){
@@ -4572,6 +4630,8 @@ if(cartMay.length)updateCartMayCount();
 let activeCatIdMay = null;
 let searchTermMay = '';
 let _searchTimerMay = null;
+let _searchMayPreScrollY = 0;
+let _searchMayOverlayOpen = false;
 // Mapa de bultos por artículo: {articuloId: {bulto, nombre, sabores, imagen}}
 let MAY_BULTO_MAP = {};
 
@@ -5279,20 +5339,13 @@ window.delFromCartMay = delFromCartMay;
 function _reRenderCardMay(pid) {
   const p = PRODS_MAY.find(x => x[0] === pid);
   if (!p) return;
-  // Desktop card (no suffix)
-  const cardEl = document.getElementById('may_' + pid);
-  if (cardEl) {
+  const base = 'may_' + pid;
+  document.querySelectorAll('.pcard[id="' + base + '"],.pcard[id^="' + base + '_"]').forEach(cardEl => {
+    const suffix = cardEl.id === base ? '' : cardEl.id.slice(base.length + 1);
     const tmp = document.createElement('div');
-    tmp.innerHTML = renderCardMay(p);
+    tmp.innerHTML = renderCardMay(p, suffix);
     cardEl.parentNode.replaceChild(tmp.firstChild, cardEl);
-  }
-  // Mobile card (suffix 'm')
-  const cardElM = document.getElementById('may_' + pid + '_m');
-  if (cardElM) {
-    const tmp = document.createElement('div');
-    tmp.innerHTML = renderCardMay(p, 'm');
-    cardElM.parentNode.replaceChild(tmp.firstChild, cardElM);
-  }
+  });
 }
 
 function updateCartMayCount() {
@@ -5499,13 +5552,44 @@ function onSearchMay(val) {
 }
 window.onSearchMay = onSearchMay;
 
+function _closeMaySearchNow() {
+  const inp = document.getElementById('compactSearchInput');
+  const box = document.getElementById('searchSuggestions');
+  const sr = document.getElementById('maySearchResults');
+  if (inp) inp.value = '';
+  if (box) { box.classList.remove('active'); box.innerHTML = ''; }
+  searchTermMay = '';
+  clearTimeout(_searchTimerMay);
+  if (sr) { sr.classList.remove('active'); sr.classList.add('hidden'); sr.innerHTML = ''; }
+  document.body.style.overflow = '';
+  const saved = _searchMayPreScrollY;
+  _searchMayOverlayOpen = false;
+  _searchMayPreScrollY = 0;
+  renderMayCarrusel();
+  if (saved > 0) requestAnimationFrame(() => window.scrollTo(0, saved));
+  window.dispatchEvent(new Event('scroll'));
+}
+function cerrarBusquedaMay() {
+  if (_searchMayOverlayOpen && history.state && history.state.view === 'searchMay') {
+    history.back();
+    return;
+  }
+  _closeMaySearchNow();
+}
+window.cerrarBusquedaMay = cerrarBusquedaMay;
+
 function _doSearchMay(val) {
   searchTermMay = val.trim();
   const sr = document.getElementById('maySearchResults');
   if (!searchTermMay) {
-    if (sr) { sr.classList.remove('active'); sr.classList.add('hidden'); sr.innerHTML = ''; }
-    renderMayCarrusel();
+    _closeMaySearchNow();
     return;
+  }
+  const isMobile = window.innerWidth < 768;
+  if (isMobile && !_searchMayOverlayOpen) {
+    _searchMayPreScrollY = window.scrollY || window.pageYOffset || 0;
+    _searchMayOverlayOpen = true;
+    history.pushState({view:'searchMay',scrollY:_searchMayPreScrollY}, '');
   }
   const scored = PRODS_MAY.map(p => ({ p, score: _matchScore(searchTermMay, p[2]) * 2 + _matchScore(searchTermMay, p[3]) }))
     .filter(x => x.score > 0).sort((a, b) => b.score - a.score);
@@ -5515,33 +5599,33 @@ function _doSearchMay(val) {
   if (!results.length) {
     h += '<div style="text-align:center;padding:44px 0;color:var(--muted-fg);font-size:17px">No se encontraron productos 🔍</div>';
   } else {
-    h += '<div class="search-results">';
-    results.forEach(p => {
-      const opts = Object.keys(p[7]);
-      const precio = opts.length ? p[7][opts[0]][0] : 0;
-      const hasSrc = p[6] && p[6].startsWith('http');
-      const cat = CATS_MAY.find(c => c.id === p[1]);
-      const bulto = p[12] ? p[12].bulto : 1;
-    h += `<div class="search-item" onclick="selectMayCat('${p[1]}', ${p[0]})">
-        <div class="search-item-img">${hasSrc ? `<img src="${p[6]}" alt="${p[2]}" onerror="this.parentNode.innerHTML='🌿'" loading="lazy">` : (cat ? cat.ic : '🌿')}</div>
-        <div class="search-item-body">
-          <div class="search-item-name">${_tc(p[2])}</div>
-          <div class="search-item-cat">${cat ? cat.n : ''}</div>
-          <span class="bulto-badge" style="font-size:11px">📦 ${opts[0] || 'Bulto x' + bulto}</span>
-          <div class="search-item-price">$${fmt(precio)}</div>
-        </div>
-        <div class="search-item-arrow">›</div>
-      </div>`;
-    });
+    const suffix = isMobile ? 'searchm' : 'searchd';
+    h += '<div class="prod-grid">';
+    results.forEach(p => { h += renderCardMay(p, suffix); });
     h += '</div>';
   }
-  
-  const isMobile = window.innerWidth < 768;
+
   const desktop = document.getElementById('mayDesktopProdsArea');
   const mobile  = document.getElementById('mayMobileProdsArea');
-  if (desktop) desktop.innerHTML = h;
-  if (mobile)  { mobile.innerHTML = h; mobile.classList.remove('hidden'); }
-  if (sr) sr.innerHTML = '';
+  if (isMobile && sr) {
+    sr.innerHTML = '<button class="back-btn" style="margin-bottom:12px" onclick="cerrarBusquedaMay()">← Volver</button>' + h;
+    sr.classList.remove('hidden');
+    sr.classList.add('active');
+    sr.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  } else if (desktop) {
+    desktop.innerHTML = h;
+    if (mobile) mobile.innerHTML = '';
+    if (sr) { sr.classList.remove('active'); sr.classList.add('hidden'); sr.innerHTML = ''; }
+    requestAnimationFrame(() => {
+      const compact = document.getElementById('compactHeader');
+      const offset = compact ? compact.offsetHeight : 80;
+      const rect = desktop.getBoundingClientRect();
+      if (Math.abs(rect.top - offset) > 40) {
+        window.scrollTo({top:Math.max(0,rect.top + window.pageYOffset - offset - 12),behavior:'smooth'});
+      }
+    });
+  }
 }
 
 // Inicializar mayorista al estar en esa tab
@@ -7313,7 +7397,7 @@ window.copiarLinkParaNavegador = function() {
 
 <!-- checkout script moved into main script -->
 
-<!-- ═══ MODAL BIENVENIDA / TUTORIAL (1 vez por dispositivo) ═══ -->
+<!-- ═══ MODAL BIENVENIDA / TUTORIAL (cada 30 minutos) ═══ -->
 <style>
   #tutbOverlay{position:fixed;inset:0;background:rgba(26,48,80,.58);display:none;align-items:center;justify-content:center;padding:12px;z-index:10300}
   #tutbOverlay.tutb-show{display:flex}
@@ -7328,27 +7412,27 @@ window.copiarLinkParaNavegador = function() {
   .tutb-opt:active{transform:scale(.99)}
   .tutb-min{background:#eef4f9;border-color:#547692}
   .tutb-min:hover{box-shadow:0 4px 14px rgba(84,118,146,.25)}
-  .tutb-may{background:#faf2ec;border-color:#e3c0a8}
-  .tutb-may:hover{box-shadow:0 4px 14px rgba(192,118,74,.22)}
+  .tutb-may{position:relative;overflow:hidden;background:radial-gradient(circle at 5% 12%,rgba(212,84,60,.07) 0 34px,transparent 35px),radial-gradient(circle at 96% 92%,rgba(212,84,60,.07) 0 48px,transparent 49px),linear-gradient(135deg,#fdefd8,#fbe2bd);border-color:#d4543c}
+  .tutb-may:hover{box-shadow:0 4px 14px rgba(158,66,37,.18)}
   .tutb-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
   .tutb-ic{width:23px;height:23px;object-fit:contain}
   .tutb-name{font-size:15px;font-weight:800;color:#1a3050}
   .tutb-go{font-size:12px;font-weight:800;margin-left:auto;display:flex;align-items:center;gap:4px}
   .tutb-min .tutb-go{color:#547692}
-  .tutb-may .tutb-go{color:#c0764a}
+  .tutb-may .tutb-go{color:#b04020}
   .tutb-note{font-size:12px;color:#54677d;font-weight:600;margin-bottom:9px}
   .tutb-mlabel{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
   .tutb-cnt{font-size:16px;font-weight:800;color:#1a3050;font-variant-numeric:tabular-nums}
   .tutb-goal{font-size:11px;font-weight:600;color:#8a9bad}
   .tutb-track{height:11px;background:#dde6ee;border-radius:7px;overflow:hidden}
-  .tutb-may .tutb-track{background:#ecdfd4}
+  .tutb-may .tutb-track{background:#efd7cb}
   .tutb-fill{height:100%;width:0;border-radius:7px;background:linear-gradient(90deg,#547692,#6fa3c4)}
-  .tutb-may .tutb-fill{background:linear-gradient(90deg,#c0764a,#d99a6f)}
+  .tutb-may .tutb-fill{background:linear-gradient(90deg,#d4543c,#e58a72)}
   .tutb-reward{margin-top:8px;display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:800;opacity:0;transform:translateY(5px);transition:all .4s;min-height:19px}
   .tutb-reward.tutb-on{opacity:1;transform:none}
-  .tutb-rmin{color:#1c9d63}.tutb-rmay{color:#c0764a}
+  .tutb-rmin{color:#1c9d63}.tutb-rmay{color:#b04020}
   .tutb-pill{font-size:10.5px;padding:2px 8px;border-radius:20px;color:#fff;white-space:nowrap}
-  .tutb-rmin .tutb-pill{background:#1c9d63}.tutb-rmay .tutb-pill{background:#c0764a}
+  .tutb-rmin .tutb-pill{background:#1c9d63}.tutb-rmay .tutb-pill{background:#d4543c}
   .tutb-steps{background:#f5f8fb;border-radius:12px;padding:10px 12px;margin-top:12px}
   .tutb-steps-title{font-size:11px;font-weight:800;color:#547692;text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px;text-align:center}
   .tutb-steps-row{display:flex;justify-content:space-between;gap:4px}
@@ -7391,7 +7475,8 @@ window.copiarLinkParaNavegador = function() {
 </div>
 <script>
 (function(){
-  var FLAG='pld_tutorial_v1';
+  var FLAG='pld_may_tutorial_last';
+  var INTERVALO_MIN=30;
   function animMeter(cntId,fillId,rwId,target,dur){
     var cnt=document.getElementById(cntId),fill=document.getElementById(fillId),rw=document.getElementById(rwId),start=null,crossed=false;
     function step(ts){if(!start)start=ts;var t=Math.min((ts-start)/dur,1),e=1-Math.pow(1-t,3);
@@ -7401,20 +7486,24 @@ window.copiarLinkParaNavegador = function() {
   }
   window.cerrarTutorial=function(){
     document.getElementById('tutbOverlay').classList.remove('tutb-show');
-    try{localStorage.setItem(FLAG,'1');}catch(e){}
+    try{localStorage.setItem(FLAG,String(Date.now()));}catch(e){}
   };
   window.tutorialIr=function(tab){
     try{if(typeof switchTab==='function')switchTab(tab);}catch(e){}
     cerrarTutorial();
   };
   function mostrar(){
-    try{if(localStorage.getItem(FLAG))return;}catch(e){}
+    try{
+      var last=parseInt(localStorage.getItem(FLAG)||'0',10);
+      if(last&&(Date.now()-last)<INTERVALO_MIN*60*1000)return;
+    }catch(e){}
     var ov=document.getElementById('tutbOverlay');
     if(!ov)return;
+    try{localStorage.setItem(FLAG,String(Date.now()));}catch(e){}
     ov.classList.add('tutb-show');
     setTimeout(function(){animMeter('tutbCntMay','tutbFillMay','tutbRwMay',250000,1700);},350);
   }
-  // Mostrar apenas carga la página (1 vez por dispositivo)
+  // Mostrar al entrar; una recarga inmediata respeta el enfriamiento de 30 minutos.
   if(document.readyState==='complete') setTimeout(mostrar,500);
   else window.addEventListener('load',function(){setTimeout(mostrar,500);});
 })();
