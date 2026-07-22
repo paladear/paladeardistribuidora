@@ -8,6 +8,7 @@ layout: null
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light">
+<script>if(/Android/i.test(navigator.userAgent||''))document.documentElement.classList.add('android-ui');</script>
 <meta name="google-site-verification" content="jZAof6C7e-min-6NmCVtqpdcvkP1vfr2s_rP7np4HEs" />
 <!-- Microsoft Clarity (métricas: grabaciones, mapas de calor y embudo) -->
 <script type="text/javascript">
@@ -230,7 +231,7 @@ layout: null
 :root{color-scheme:light;--azul:#547692;--azul-dark:#3d5a72;--azul-light:#cfdce8;--azul-mid:#6d90aa;--bg:#dce8f2;--fg:#1a3050;--card:#fff;--border:#d6e2eb;--muted:#e3e8ed;--muted-fg:#444;--destructive:#e8633a;--whatsapp:#25d366}
 /* Bloquear forzado de modo oscuro de Chrome Android sobre la pill y elementos críticos */
 .tabs-pill,.tabs-zone,.may-tab,.banner-mayorista,.checkout-sheet{forced-color-adjust:none;-webkit-forced-color-adjust:none}
-html,body{overflow-x:clip;max-width:100%}
+html,body{overflow-x:clip;max-width:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;font-size:16px}
 
 /* ── SPINNER DE CARGA ── */
@@ -413,7 +414,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 .app-install-modal{max-width:420px;width:calc(100% - 32px);border-radius:20px;padding:24px 20px;position:relative;max-height:92vh;overflow-y:auto;background:var(--card);box-shadow:0 20px 60px rgba(0,0,0,.35)}
 .modal-close-btn{position:absolute;top:14px;right:14px;background:var(--muted);border:none;border-radius:50%;width:30px;height:30px;font-size:15px;cursor:pointer;color:var(--fg);display:flex;align-items:center;justify-content:center;font-family:inherit}
 /* ── CHECKOUT MODAL ── */
-.checkout-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:10002;display:flex;align-items:flex-end;justify-content:center}
+.checkout-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:10120;display:flex;align-items:flex-end;justify-content:center}
 @media(min-width:600px){.checkout-overlay{align-items:center}}
 .checkout-sheet{background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:520px;max-height:94vh;overflow-y:auto;box-shadow:0 -8px 40px rgba(0,0,0,.22);display:flex;flex-direction:column}
 @media(min-width:600px){.checkout-sheet{border-radius:20px;max-height:88vh}}
@@ -427,7 +428,10 @@ button{cursor:pointer;border:none;font-family:inherit}
 .checkout-delivery-opts{display:flex;flex-direction:column;gap:10px}
 .checkout-delivery-btn{background:var(--card);border:2px solid var(--muted);border-radius:14px;padding:15px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;font-family:inherit;text-align:left;width:100%}
 .checkout-delivery-btn:hover,.checkout-delivery-btn:active{border-color:var(--azul);background:rgba(84,118,146,.05)}
-.checkout-delivery-ic{font-size:30px;flex-shrink:0;line-height:1}
+.checkout-delivery-ic{width:48px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.checkout-delivery-ic img{display:block;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(36,65,91,.20))}
+.checkout-delivery-ic.retiro img{width:38px}
+.checkout-delivery-ic.domicilio img{width:48px}
 .checkout-delivery-txt{flex:1}
 .checkout-delivery-txt b{display:block;font-size:15px;color:var(--fg);margin-bottom:2px;font-family:inherit}
 .checkout-delivery-txt small{font-size:12px;color:var(--muted-fg)}
@@ -1539,6 +1543,40 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
 @media(max-width:480px){
   .mix-banner-text h3,.granola-banner-text h3{font-size:17px!important}
   .mix-banner-text p,.granola-banner-text p{font-size:13px!important}
+}
+
+/* Android: algunos paneles AMOLED intensifican los acentos y Chrome puede
+   agrandar el texto. iPhone conserva exactamente su composición y paleta. */
+html.android-ui{--destructive:#bd7562;--whatsapp:#4b9a6b}
+html.android-ui .banner-may-wa,
+html.android-ui #mayoristaSection .wa-btn[style*="#25d366"]{background:#4b9a6b!important}
+html.android-ui .card-del-btn{color:#8f5145;background:rgba(166,98,83,.09);border-color:rgba(166,98,83,.24)}
+html.android-ui .card-del-btn:hover{color:#8f5145;border-color:#b86f61;background:rgba(166,98,83,.15)}
+html.android-ui .acum-badge{color:#557064;background:#edf3ef;border-color:rgba(104,137,117,.30)}
+html.android-ui .add-btn.added{background:#629176}
+html.android-ui .distb-banner{background:radial-gradient(circle at 6% 16%,rgba(166,98,83,.07) 0 46px,transparent 47px),radial-gradient(circle at 95% 88%,rgba(166,98,83,.07) 0 72px,transparent 73px),linear-gradient(135deg,#f5ebe4,#efdfd5);border-color:#b86f61}
+html.android-ui .distb-name,html.android-ui .distb-go,html.android-ui .distb-note b,html.android-ui .distb-reward{color:#8f5145}
+html.android-ui .distb-go{border-color:rgba(166,98,83,.24)}
+html.android-ui .distb-fill{background:linear-gradient(90deg,#b86f61,#d09a8d)}
+html.android-ui .distb-pill{background:#b86f61}
+html.android-ui .tutb-may{background:radial-gradient(circle at 5% 12%,rgba(166,98,83,.06) 0 34px,transparent 35px),radial-gradient(circle at 96% 92%,rgba(166,98,83,.06) 0 48px,transparent 49px),linear-gradient(135deg,#f5ebe4,#efdfd5);border-color:#b86f61}
+html.android-ui .tutb-may .tutb-go,html.android-ui .tutb-rmay{color:#8f5145}
+html.android-ui .tutb-may .tutb-fill{background:linear-gradient(90deg,#b86f61,#d09a8d)}
+html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
+@media(max-width:767px){
+  html.android-ui .pcard-img{height:172px}
+  html.android-ui .pcard-body{padding:11px 12px}
+  html.android-ui .pcard-name{font-size:14px;line-height:1.3}
+  html.android-ui .pcard-brand{font-size:12px;margin-bottom:6px}
+  html.android-ui .catalog-intro h1{font-size:19px}
+  html.android-ui .allcat-name{font-size:16px}
+  html.android-ui .allcat-img{font-size:30px!important}
+  html.android-ui .dist-cat-title{font-size:20px}
+  html.android-ui .distb-banner{padding:18px 16px}
+  html.android-ui .distb-top{margin-bottom:11px}
+  html.android-ui .distb-note{font-size:13px;margin-bottom:14px}
+  html.android-ui .distb-cnt{font-size:18px}
+  html.android-ui .distb-track{height:12px}
 }
 </style>
 
@@ -7296,12 +7334,12 @@ window.copiarLinkParaNavegador = function() {
         <p class="checkout-step-lbl">¿Cómo querés recibir tu pedido?</p>
         <div class="checkout-delivery-opts">
           <button class="checkout-delivery-btn" onclick="coElegirEntrega('retiro')">
-            <span class="checkout-delivery-ic">🏬</span>
+            <span class="checkout-delivery-ic retiro"><img src="nav-inicio.png" alt="" aria-hidden="true"></span>
             <div class="checkout-delivery-txt"><b>Retiro en el local</b><small id="coRetiroSub">Pueyrredón 588, Mendoza · Lun–Sáb 10 a 20hs</small></div>
             <span class="checkout-delivery-arr">›</span>
           </button>
           <button class="checkout-delivery-btn" onclick="coElegirEntrega('domicilio')">
-            <span class="checkout-delivery-ic">🚚</span>
+            <span class="checkout-delivery-ic domicilio"><img src="camion-envio.png" alt="" aria-hidden="true"></span>
             <div class="checkout-delivery-txt"><b>Envío a domicilio</b><small>Hacemos envíos a todo el país</small></div>
             <span class="checkout-delivery-arr">›</span>
           </button>
