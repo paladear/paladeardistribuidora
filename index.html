@@ -1656,7 +1656,7 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
 
     <!-- MAYORISTA -->
     <div class="hdrop" id="hdropMay">
-      <button class="hdrop-btn may-btn" onclick="toggleHdrop('May')">
+      <button class="hdrop-btn may-btn header-info-btn" onclick="toggleHdrop('May')" title="Información" aria-label="Información">
         <span class="btn-info-icon" aria-hidden="true">i</span><span class="btn-txt">Info</span> <span class="arrow">▼</span>
       </button>
       <div class="hdrop-panel">
@@ -1672,8 +1672,11 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
     <style>
       .cats-burger-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;border:none;cursor:pointer;background:var(--azul-dark);color:#fff;transition:background .2s,transform .2s,box-shadow .2s;flex-shrink:0}
       .cats-burger-btn:hover{background:#1a3050;transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.22)}
-      @media(max-width:600px){.cats-burger-btn{width:36px;height:36px}.btn-info-icon{font-size:21px}}
+      .header-info-btn{width:40px;height:40px;padding:0;justify-content:center}
+      .header-info-btn .btn-txt,.header-info-btn .arrow{display:none}
+      @media(max-width:600px){.cats-burger-btn,.header-info-btn{width:36px;height:36px}.btn-info-icon{font-size:21px}}
     </style>
+    <button class="cats-burger-btn header-search-btn" onclick="openHeaderSearch()" title="Buscar productos" aria-label="Buscar productos"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.6 15.6 4.5 4.5"/></svg></button>
     <button class="cats-burger-btn cuenta-btn" onclick="openCuenta()" title="Mi cuenta" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.2-5.6 7-5.6s7 2 7 5.6"/></svg></button>
     <button class="cats-burger-btn" onclick="toggleMayCatsDropdown()" title="Categorías" aria-label="Ver categorías"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
 
@@ -1686,7 +1689,7 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
   <div class="compact-inner">
     <img class="compact-logo" src="android-chrome-192x192.png" alt="Paladear" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer">
     <div class="search-wrap-compact">
-      <input class="compact-search" id="compactSearchInput" type="search" placeholder="Buscar productos..." oninput="compactOnSearch(this.value);_updateSuggestions(this.value)" onblur="_hideSuggestionsDelayed()" aria-label="Buscar productos">
+      <input class="compact-search" id="compactSearchInput" type="search" placeholder="Buscar productos..." oninput="compactOnSearch(this.value);_updateSuggestions(this.value)" onblur="_hideSuggestionsDelayed();compactSearchBlur()" aria-label="Buscar productos">
       <div class="search-suggestions" id="searchSuggestions"></div>
     </div>
     <button class="compact-hamb" onclick="openCuenta()" aria-label="Mi cuenta">
@@ -2143,11 +2146,23 @@ document.addEventListener('pointerdown',function(e){
   function _updateCompact(){
     const y=window.scrollY||window.pageYOffset||0;
     const tab=(typeof currentTab!=='undefined')?currentTab:'minorista';
-    const searchActive=!!((document.getElementById('compactSearchInput')||{}).value);
+    const searchInput=document.getElementById('compactSearchInput');
+    const searchActive=!!((searchInput||{}).value)||document.activeElement===searchInput;
     const show=(y>THRESHOLD||searchActive)&&(tab==='minorista'||tab==='mayorista');
     document.body.classList.toggle('compact-on',show);
     ticking=false;
   }
+  window.openHeaderSearch=function(){
+    if(typeof closeAllHdrops==='function')closeAllHdrops();
+    const input=document.getElementById('compactSearchInput');
+    if(!input)return;
+    document.body.classList.add('compact-on');
+    try{input.focus({preventScroll:true});}catch(e){input.focus();}
+    if(input.value)input.select();
+  };
+  window.compactSearchBlur=function(){
+    setTimeout(_updateCompact,180);
+  };
   window.addEventListener('scroll',function(){
     if(!ticking){requestAnimationFrame(_updateCompact);ticking=true;}
   },{passive:true});
