@@ -1871,6 +1871,33 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
       <div class="distb-bulto">📦 La venta es <b>únicamente por bulto cerrado</b>.<br><span class="distb-iva">🧾 Los precios expresados en este catálogo<br><b>NO INCLUYEN IVA</b>.</span></div>
     </div>
   </div>
+  <style>
+    /* ── Acceso a la lista sábana, con el mismo aire que el banner de arriba ── */
+    .listamay-wrap{margin:-14px auto 30px;max-width:680px}
+    .listamay{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,#4a6b85 0%,#6f96b5 100%);border-radius:18px;padding:20px 22px;box-shadow:0 4px 18px rgba(60,95,125,.28);text-decoration:none;transition:transform .2s,box-shadow .2s}
+    .listamay:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(60,95,125,.42)}
+    .lista-banner-ic{flex-shrink:0;width:56px;height:68px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.2))}
+    .listamay-txt{flex:1;min-width:0}
+    .listamay-txt h3{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:#fff;margin:0 0 3px}
+    .listamay-txt p{font-size:13.5px;color:rgba(255,255,255,.85);line-height:1.45;margin:0}
+    .listamay-btn{background:#fff;color:#3d5a72;border:none;border-radius:10px;padding:11px 18px;font-size:14px;font-weight:800;white-space:nowrap;cursor:pointer;font-family:inherit;flex-shrink:0}
+    @media(max-width:600px){
+      .listamay{flex-direction:column;text-align:center;gap:12px;padding:20px 18px}
+      .lista-banner-ic{width:48px;height:58px}
+      .listamay-btn{width:100%}
+    }
+  </style>
+  <div class="listamay-wrap">
+    <a class="listamay" href="catalogo.html">
+      <svg class="lista-banner-ic" viewBox="0 0 64 78" fill="none" aria-hidden="true"><rect x="8" y="4" width="48" height="70" rx="6" fill="#fff" fill-opacity=".96"/><rect x="16" y="15" width="15" height="4" rx="2" fill="#b04020"/><rect x="36" y="15" width="12" height="4" rx="2" fill="#e0a08c"/><rect x="16" y="27" width="15" height="4" rx="2" fill="#b04020"/><rect x="36" y="27" width="12" height="4" rx="2" fill="#e0a08c"/><rect x="16" y="39" width="15" height="4" rx="2" fill="#b04020"/><rect x="36" y="39" width="12" height="4" rx="2" fill="#e0a08c"/><rect x="16" y="51" width="15" height="4" rx="2" fill="#b04020"/><rect x="36" y="51" width="12" height="4" rx="2" fill="#e0a08c"/><rect x="16" y="63" width="32" height="4" rx="2" fill="#f0cec2"/></svg>
+      <div class="listamay-txt">
+        <h3>Lista mayorista completa</h3>
+        <p>Todos los productos con su precio por unidad y por bulto, en una sola hoja para ver o imprimir</p>
+      </div>
+      <span class="listamay-btn">Ver la lista →</span>
+    </a>
+  </div>
+
   <script>
   (function(){
     var done=false;
