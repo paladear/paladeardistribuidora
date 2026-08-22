@@ -441,10 +441,13 @@ async function cargar(){
       const artId=(c[0]||'').trim(); if(!artId)return;
       const nombre=(c[1]||'').trim();
       const bultoRaw=(c[2]||'').trim();
+      const bulto = parseFloat(bultoRaw.replace(',','.'))||1;   // misma lectura que la web
       const e={
         nombre,
-        bulto: parseFloat(bultoRaw.replace(',','.'))||1,          // misma lectura que la web
-        bultoUnidad: /kg|kgr|kilo/i.test(bultoRaw)?'kg':'unidad'
+        bulto,
+        // Un bulto con decimales (ej. 11,34) nunca son unidades sueltas: es peso.
+        // Así, si en la planilla falta la palabra "kg", igual se muestra bien.
+        bultoUnidad: (/kg|kgr|kilo/i.test(bultoRaw) || bulto%1!==0) ? 'kg' : 'unidad'
       };
       INFO[artId]=e;
       if(nombre&&_norm(nombre)!==artId)INFO[_norm(nombre)]=e;
