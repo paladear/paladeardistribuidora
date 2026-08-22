@@ -4981,7 +4981,9 @@ function _cargarInfoMay() {
         const bultoRaw = (cols[2] || '').replace(/^"|"$/g, '').trim();
         // Parsear como float, soportando coma decimal argentina (2,5 → 2.5)
         const bulto = parseFloat(bultoRaw.replace(',', '.')) || 1;
-        const bultoUnidad = /kg|kgr|kilo/i.test(bultoRaw) ? 'kg' : 'unidad';
+        // Un bulto con decimales (ej. 11,34) nunca son unidades sueltas: es peso.
+        // Así, si en la planilla falta la palabra "kg", igual se muestra bien.
+        const bultoUnidad = (/kg|kgr|kilo/i.test(bultoRaw) || (bulto % 1 !== 0)) ? 'kg' : 'unidad';
         const saboresStr = (cols[3] || '').replace(/^"|"$/g, '').trim();
         const imgRaw = (cols[4] || '').replace(/^"|"$/g, '').trim();
         if (!artId) return;
