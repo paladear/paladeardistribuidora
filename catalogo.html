@@ -8,7 +8,7 @@ layout: null
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
 <title>Lista Mayorista | Paladear Distribuidora</title>
-<meta name="description" content="Lista mayorista completa de Paladear Distribuidora. Venta únicamente por bulto cerrado, precios sin IVA. Mínimo de $250.000 solo en el primer pedido. Mendoza.">
+<meta name="description" content="Lista mayorista completa de Paladear Distribuidora, Mendoza. Venta únicamente por bulto cerrado. Mínimo de $250.000 solo en el primer pedido.">
 <link rel="icon" href="favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -353,7 +353,7 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 </aside>
 
 <main class="wrap">
-  <div class="ayuda">📦 La venta es <b>únicamente por bulto cerrado</b>. Escribí <b>cuántos bultos</b> querés de cada producto en el casillero de la derecha — abajo del nombre dice cuánto trae cada bulto. Los precios <b>NO incluyen IVA</b>.</div>
+  <div class="ayuda">📦 La venta es <b>únicamente por bulto cerrado</b>. Escribí <b>cuántos bultos</b> querés de cada producto en el casillero de la derecha — abajo del nombre dice cuánto trae cada bulto.</div>
   <div class="descb-wrap">
     <div class="descb-banner" id="descBanner">
       <div class="descb-top">
@@ -652,9 +652,9 @@ function pintarPanel(){
     : '<div class="vacio">Todavía no cargaste nada.</div>';
   document.getElementById('panelT').textContent='$'+fmt(t.final);
   document.getElementById('panelMay').innerHTML = t.minimo===0
-    ? `<div class="aviso-may">✓ Comprás sin mínimo · Los precios NO incluyen IVA</div>`
+    ? `<div class="aviso-may">✓ Comprás sin mínimo · Venta por bulto cerrado</div>`
     : (t.alcanza
-        ? `<div class="aviso-may">✓ Alcanzaste el mínimo de tu primer pedido · Los precios NO incluyen IVA</div>`
+        ? `<div class="aviso-may">✓ Alcanzaste el mínimo de tu primer pedido</div>`
         : (t.n?`<div class="aviso-may" style="background:#fff8e6;border-color:#f0d68a;color:#8a6d1f">Tu primer pedido tiene un mínimo de $${fmt(t.minimo)}<br>Faltan $${fmt(t.minimo-t.total)}</div>`:''));
 }
 function abrirPanel(){
@@ -700,9 +700,9 @@ function refrescarPanel(){
   });
   document.getElementById('panelT').textContent='$'+fmt(t.final);
   document.getElementById('panelMay').innerHTML = t.minimo===0
-    ? `<div class="aviso-may">✓ Comprás sin mínimo · Los precios NO incluyen IVA</div>`
+    ? `<div class="aviso-may">✓ Comprás sin mínimo · Venta por bulto cerrado</div>`
     : (t.alcanza
-        ? `<div class="aviso-may">✓ Alcanzaste el mínimo de tu primer pedido · Los precios NO incluyen IVA</div>`
+        ? `<div class="aviso-may">✓ Alcanzaste el mínimo de tu primer pedido</div>`
         : (t.n?`<div class="aviso-may" style="background:#fff8e6;border-color:#f0d68a;color:#8a6d1f">Tu primer pedido tiene un mínimo de $${fmt(t.minimo)}<br>Faltan $${fmt(t.minimo-t.total)}</div>`:''));
 }
 
@@ -713,8 +713,8 @@ function actualizarBarra(){
   document.getElementById('barraC').textContent=t.n+(t.n===1?' producto':' productos')+' · '+t.bultos+(t.bultos===1?' bulto':' bultos');
   document.getElementById('barraT').firstChild.nodeValue='$'+fmt(t.final);
   document.getElementById('barraMay').textContent = t.minimo===0
-    ? 'Sin mínimo de compra · + IVA'
-    : (t.alcanza?'✓ Alcanzaste el mínimo del primer pedido · + IVA'
+    ? 'Sin mínimo de compra · Venta por bulto cerrado'
+    : (t.alcanza?'✓ Alcanzaste el mínimo de tu primer pedido'
                :'Faltan $'+fmt(t.minimo-t.total)+' para el mínimo del primer pedido');
   // recién ahora, con el texto ya puesto, se reserva la altura real de la barra
   document.body.style.paddingBottom=t.n>0?(b.offsetHeight+14)+'px':'24px';
@@ -1174,7 +1174,7 @@ function coEnviar() {
     var p = PRODS.find(function(x){return x.id===id;}), it = pedido[id];
     msg += '*' + it.cant + '* - ' + p.nombre + ' (' + p.bultoLabel + ' por bulto)\n   $' + fmt(subtotalDe(p,it)) + '\n';
   });
-  msg += '\n*TOTAL: $' + fmt(t.total) + '*\n_(Lista Mayorista · los precios NO incluyen IVA)_';
+  msg += '\n*TOTAL: $' + fmt(t.total) + '*\n_(Lista Mayorista)_';
   msg += deliveryMsg + '\n\n_Pedido armado desde la lista mayorista_';
   var url = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
 
@@ -1239,7 +1239,7 @@ function pintarBanner(){
     // Ya hizo al menos un pedido: sin mínimo
     note.innerHTML='✨ Ya hiciste tu primer pedido: a partir de ahora comprás <b>SIN MÍNIMO</b>.';
     lbl.style.display='none'; track.style.display='none';
-    if(t.n>0){ rw.textContent='Tu pedido: $'+fmt(t.total)+' (+ IVA)'; rw.style.color=''; rw.classList.add('on'); }
+    if(t.n>0){ rw.textContent='Tu pedido: $'+fmt(t.total); rw.style.color=''; rw.classList.add('on'); }
     else rw.classList.remove('on');
     return;
   }
@@ -1265,7 +1265,7 @@ function pintarBanner(){
   }
 }
 
-document.getElementById('printFecha').textContent='Precios actualizados al '+new Date().toLocaleDateString('es-AR')+' · Venta por bulto cerrado · Los precios NO incluyen IVA';
+document.getElementById('printFecha').textContent='Precios actualizados al '+new Date().toLocaleDateString('es-AR')+' · Venta únicamente por bulto cerrado';
 recuperar();
 cargar();
 </script>
