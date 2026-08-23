@@ -2247,6 +2247,8 @@ function _matchScore(q,t){
   return score;
 }
 function _imgZoomGoBack(){if(history.state&&history.state.modal==='imgZoom')history.back();else{const z=document.getElementById('imgZoom');if(z)z.remove();}}
+// El botón × del zoom usa un onclick inline y necesita acceso desde el scope global.
+window._imgZoomGoBack=_imgZoomGoBack;
 function zoomImg(el){let src=el.dataset.src||'';if(!src)return;src=src.replace(/=w\d+/,'=w1200').replace(/\/w_\d+\//,'/w_1200/');const old=document.getElementById('imgZoom');if(old)old.remove();const z=document.createElement('div');z.id='imgZoom';z.onclick=e=>{if(e.target===z||e.target.tagName==='IMG')_imgZoomGoBack();};z.innerHTML=`<button class="zoom-close" onclick="_imgZoomGoBack()">×</button><img src="${src}" alt="">`;document.body.appendChild(z);history.pushState({modal:'imgZoom'},'');}
 window.addEventListener('popstate',function(e){const z=document.getElementById('imgZoom');if(z){z.remove();e.stopImmediatePropagation();}});
 
@@ -5940,6 +5942,7 @@ window.coCambiarNombre=function(which){
 function abrirCheckout(venta) {
   _coVenta = venta || 'minorista';
   _coEntrega = null;
+  _track(_coVenta === 'mayorista' ? 'checkout_abierto_may' : 'checkout_abierto');
   // Textos de retiro según minorista (Pueyrredón) o mayorista (depósito Guaymallén)
   var _ret = _RETIRO[_coVenta] || _RETIRO.minorista;
   var _subEl = document.getElementById('coRetiroSub');
@@ -6007,6 +6010,7 @@ function _coRenderSummary() {
 
 function coElegirEntrega(tipo) {
   _coEntrega = tipo;
+  _track(_coVenta === 'mayorista' ? 'checkout_entrega_' + tipo + '_may' : 'checkout_entrega_' + tipo);
   document.getElementById('coStep1').classList.add('hidden');
   document.getElementById('coStep2Retiro').classList.toggle('hidden', tipo !== 'retiro');
   document.getElementById('coStep2Dom').classList.toggle('hidden', tipo !== 'domicilio');
@@ -6177,6 +6181,7 @@ function coEnviar() {
   }
 
   var isMin = _coVenta === 'minorista';
+  _track(isMin ? 'checkout_completo' : 'checkout_completo_may');
   var msg, url;
 
   if (isMin) {

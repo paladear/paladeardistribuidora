@@ -1,6 +1,6 @@
 // ════════════════════════════════════════════════════════
 // sw.js — Service Worker de Paladear Mercado de Sabores
-// Versión: 1.5
+// Versión: 1.6
 //
 // CAMBIO CLAVE (arregla "no carga si no borrás el historial" y
 // "tarda muchísimo en cargar"):
@@ -23,10 +23,9 @@
 // ════════════════════════════════════════════════════════
 
 const CACHE_VERSION = 'paladear-distri-v1';
+const CACHE_PREFIX = 'paladear-distri-';
 
 const SHELL_FILES = [
-  '/paladeardistribuidora/',
-  '/paladeardistribuidora/index.html',
   '/paladeardistribuidora/android-chrome-192x192.png',
   '/paladeardistribuidora/android-chrome-512x512.png',
   '/paladeardistribuidora/apple-touch-icon.png',
@@ -38,18 +37,30 @@ const SHELL_FILES = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
-      .then(cache => cache.addAll(SHELL_FILES))
-      .catch(err => console.warn('[SW] Error cacheando shell:', err))
+      .then(async cache => {
+        const page = await fetch('/paladeardistribuidora/index.html', { cache: 'reload' });
+        if (!page || !page.ok) throw new Error('No se pudo actualizar index.html');
+        await Promise.all([
+          cache.put('/paladeardistribuidora/', page.clone()),
+          cache.put('/paladeardistribuidora/index.html', page.clone()),
+          cache.addAll(SHELL_FILES)
+        ]);
+      })
+      .catch(err => {
+        console.warn('[SW] Error cacheando shell:', err);
+        throw err;
+      })
   );
   self.skipWaiting();
 });
 
-// ── ACTIVATE: borrar caches viejos (incluye el v4 inflado) ──
+// ── ACTIVATE: borrar solo caches viejos de ESTA tienda ──────
+// Cache Storage se comparte por dominio: no borrar el cache de la minorista.
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
-        keys.filter(k => k !== CACHE_VERSION).map(k => caches.delete(k))
+        keys.filter(k => k.startsWith(CACHE_PREFIX) && k !== CACHE_VERSION).map(k => caches.delete(k))
       ))
       .then(() => self.clients.claim())
   );
@@ -78,7 +89,7 @@ self.addEventListener('fetch', event => {
 
   if (_esPagina) {
     event.respondWith(
-      fetch(event.request)
+      fetch(event.request, { cache: 'no-store' })
         .then(response => {
           if (response && response.status === 200) {
             caches.open(CACHE_VERSION)
