@@ -1850,7 +1850,7 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
     .distb-cnt{font-size:20px;font-weight:800;color:#1a3050;font-variant-numeric:tabular-nums}
     .distb-goal{font-size:12px;font-weight:600;color:#8a6a5d}
     .distb-track{height:14px;background:#efd7cb;border-radius:8px;overflow:hidden}
-    .distb-fill{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,#d4543c,#e58a72)}
+    .distb-fill{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,#d4543c,#e58a72);transition:width .5s ease}
     .distb-reward{margin-top:14px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:#b04020;opacity:0;transform:translateY(5px);transition:all .4s;min-height:20px}
     .distb-reward.on{opacity:1;transform:none}
     .distb-pill{font-size:11px;padding:3px 9px;border-radius:20px;color:#fff;background:#d4543c;white-space:nowrap}
@@ -1863,10 +1863,10 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
         <span class="distb-name">Venta Mayorista</span>
         <span class="distb-go">Solo bulto cerrado</span>
       </div>
-      <div class="distb-title">Condición especial para tu primer pedido</div>
-      <div class="distb-note">🛒 Realizá tu primer pedido alcanzando el mínimo de compra: <b>$250.000</b>.<br>✨ A partir de tu segundo pedido, comprás <b>SIN MÍNIMO</b>.</div>
-      <div class="distb-mlabel"><span class="distb-cnt" id="distbCnt">$0</span><span class="distb-goal">Mínimo 1er pedido: $250.000</span></div>
-      <div class="distb-track"><div class="distb-fill" id="distbFill"></div></div>
+      <div class="distb-title" id="distbTitle">Condición especial para tu primer pedido</div>
+      <div class="distb-note" id="distbNote">🛒 Realizá tu primer pedido alcanzando el mínimo de compra: <b>$250.000</b>.<br>✨ A partir de tu segundo pedido, comprás <b>SIN MÍNIMO</b>.</div>
+      <div class="distb-mlabel" id="distbLabel"><span class="distb-cnt" id="distbCnt">$0</span><span class="distb-goal" id="distbGoal">Mínimo 1er pedido: $250.000</span></div>
+      <div class="distb-track" id="distbTrack"><div class="distb-fill" id="distbFill"></div></div>
       <div class="distb-reward" id="distbRw"><span class="distb-pill">✓</span> Alcanzá el mínimo para enviar tu primer pedido</div>
       <div class="distb-bulto">📦 La venta es <b>únicamente por bulto cerrado</b>.<br><span class="distb-iva">🧾 Los precios expresados en este catálogo<br><b>NO INCLUYEN IVA</b>.</span></div>
     </div>
@@ -1898,31 +1898,7 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
     </a>
   </div>
 
-  <script>
-  (function(){
-    var done=false;
-    function anim(){
-      if(done)return;done=true;
-      var cnt=document.getElementById('distbCnt'),fill=document.getElementById('distbFill'),rw=document.getElementById('distbRw');
-      if(!cnt||!fill||!rw)return;
-      var target=250000,dur=1800,start=null;
-      function step(ts){if(!start)start=ts;var t=Math.min((ts-start)/dur,1),e=1-Math.pow(1-t,3);
-        cnt.textContent='$'+Math.round(e*target).toLocaleString('es-AR');fill.style.width=(e*100)+'%';
-        if(t>=1)rw.classList.add('on');if(t<1)requestAnimationFrame(step);}
-      requestAnimationFrame(step);
-    }
-    function init(){
-      var el=document.getElementById('distBanner');
-      if(!el)return;
-      if('IntersectionObserver' in window){
-        var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){anim();io.disconnect();}});},{threshold:.4});
-        io.observe(el);
-      } else { anim(); }
-    }
-    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
-    else init();
-  })();
-  </script>
+  <!-- La barra ya no anima sola: refleja el carrito real (ver _pintarDistBanner) -->
   <h2 class="dist-cat-title">Explorá por categoría</h2>
   <!-- Búsqueda y categorías ahora viven en el compact-header (al scrollear) -->
   <input type="hidden" id="searchInputMay">
@@ -5465,7 +5441,58 @@ function updateCartMayCount() {
   const fab = document.getElementById('cart-fab-may');
   if (fab) { fab.style.transform = 'scale(1.15)'; setTimeout(() => { fab.style.transform = ''; }, 250); }
   _saveCartMay();
+  _pintarDistBanner();
 }
+
+/* Banner "Venta Mayorista": arranca en $0 y sube con el carrito real.
+   Antes animaba solo de 0 a $250.000 al aparecer en pantalla.
+   Ojo: el mínimo rige SOLO en el primer pedido; después no hay barra que mostrar. */
+function _pintarDistBanner(){
+  const cnt=document.getElementById('distbCnt'), fill=document.getElementById('distbFill'),
+        rw=document.getElementById('distbRw'), goal=document.getElementById('distbGoal'),
+        note=document.getElementById('distbNote'), lbl=document.getElementById('distbLabel'),
+        track=document.getElementById('distbTrack'), title=document.getElementById('distbTitle');
+  if(!cnt||!fill||!rw||!goal||!note||!lbl||!track||!title)return;
+  const total = cartMay.reduce((a,i)=>a+i.l1*i.c, 0);
+  const minimo = _minimoMayVigente();
+
+  if(minimo===0){
+    // Ya hizo su primer pedido: no hay mínimo, así que la barra no tiene sentido
+    title.textContent='Comprás sin mínimo';
+    note.innerHTML='✨ Ya hiciste tu primer pedido: a partir de ahora comprás <b>SIN MÍNIMO</b>.';
+    lbl.style.display='none'; track.style.display='none';
+    if(total>0){ rw.innerHTML='<span class="distb-pill">✓</span> Tu pedido: $'+fmt(total); rw.classList.add('on'); }
+    else rw.classList.remove('on');
+    return;
+  }
+
+  title.textContent='Condición especial para tu primer pedido';
+  note.innerHTML='🛒 Realizá tu primer pedido alcanzando el mínimo de compra: <b>$'+fmt(MIN_COMPRA_MAYORISTA)+'</b>.<br>✨ A partir de tu segundo pedido, comprás <b>SIN MÍNIMO</b>.';
+  lbl.style.display=''; track.style.display='';
+  fill.style.width=Math.min(100,(total/MIN_COMPRA_MAYORISTA)*100)+'%';
+  cnt.textContent='$'+fmt(total);
+  if(total>=MIN_COMPRA_MAYORISTA){
+    goal.textContent='✓ Mínimo alcanzado';
+    goal.style.color='#1c9d63';
+    rw.innerHTML='<span class="distb-pill">✓</span> ¡Ya podés enviar tu primer pedido!';
+    rw.classList.add('on');
+  }else{
+    goal.textContent='Mínimo 1er pedido: $'+fmt(MIN_COMPRA_MAYORISTA);
+    goal.style.color='';
+    if(total>0){
+      rw.innerHTML='<span class="distb-pill">✓</span> Faltan $'+fmt(MIN_COMPRA_MAYORISTA-total)+' para alcanzar el mínimo';
+      rw.classList.add('on');
+    }else rw.classList.remove('on');   // carrito vacío: sin mensaje
+  }
+}
+window._pintarDistBanner=_pintarDistBanner;
+/* Al abrir la página hay que pintarlo aparte (updateCartMayCount no corre al cargar).
+   Con try/catch para que nunca frene el resto del script. */
+(function(){
+  function _ini(){ try{ _pintarDistBanner(); }catch(e){} }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',_ini);
+  else _ini();
+})();
 
 function openCartMay() {
   _track('abrio_carrito_may');
