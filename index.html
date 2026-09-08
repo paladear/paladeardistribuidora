@@ -1813,10 +1813,9 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
     </div>
     <div class="cats-dropdown-list" id="mayCatsDropdownGrid"></div>
   </div>
+  <!-- Rubros en una fila arriba: los productos quedan a todo el ancho -->
+  <div class="cat-chips" id="mayCatsChips" role="group" aria-label="Rubros"></div>
   <div class="main-layout">
-    <div class="cats-sidebar">
-      <div id="mayCatsSidebarList"></div>
-    </div>
     <div id="mayDesktopProdsArea"></div>
   </div>
   <div class="mobile-prods-area hidden" id="mayMobileProdsArea"></div>
@@ -4885,10 +4884,18 @@ function renderMayCatsUI() {
 
   const sortedCats = [...CATS_MAY].sort((a, b) => a.n.localeCompare(b.n, 'es'));
   
-  if (sidebarList) {
-    sidebarList.innerHTML = sortedCats.map((cat, i) =>
-      `<button class="cat-list-btn${cat.id === activeCatIdMay ? ' active' : ''}" style="background:var(--cat${i%4})" onclick="selectMayCat('${cat.id}')"><div class="nm">${cat.n}</div></button>`
-    ).join('');
+  // Los rubros van en una fila arriba de los productos (antes: columna lateral
+  // de 260px que se comía el ancho de las tarjetas).
+  const chips = document.getElementById('mayCatsChips');
+  if (chips) {
+    chips.innerHTML =
+      `<button class="cat-chip${!activeCatIdMay ? ' active' : ''}" style="background:var(--azul-dark)" onclick="volverMayInicio()">Todos los productos</button>` +
+      sortedCats.map((cat, i) =>
+        `<button class="cat-chip${cat.id === activeCatIdMay ? ' active' : ''}" style="background:var(--cat${i%4})" onclick="selectMayCat('${cat.id}')">${cat.n}</button>`
+      ).join('');
+    // el rubro elegido queda a la vista, sin mover la página
+    const act = chips.querySelector('.cat-chip.active');
+    if (act) chips.scrollLeft = Math.max(0, act.offsetLeft - (chips.clientWidth - act.offsetWidth) / 2);
   }
   
   if (dropdownGrid) {
@@ -7070,6 +7077,47 @@ window.addEventListener('online', function() {
   .tutb-step .tutb-em{font-size:15px;display:block;margin-bottom:1px}
   .tutb-step .tutb-t{font-size:10.5px;color:#3a4d63;font-weight:600;line-height:1.25}
   .tutb-step-arrow{color:#b8c6d4;font-size:14px;align-self:center;margin-top:-10px}
+
+/* ══════ Mejoras traídas de la minorista ══════ */
+
+/* Los rubros, en una fila arriba (antes: columna lateral de 260px) */
+.cat-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 14px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:smooth}
+.cat-chips::-webkit-scrollbar{display:none}
+.cat-chip{flex:0 0 auto;border-radius:10px;padding:9px 15px;border:2px solid transparent;
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#fff;
+  letter-spacing:.2px;white-space:nowrap;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  transition:filter .18s ease,border-color .18s ease,box-shadow .18s ease}
+.cat-chip:hover{filter:brightness(1.1)}
+.cat-chip.active{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.4),0 3px 12px rgba(0,0,0,.2)}
+@media(max-width:767px){
+  .cat-chips{gap:6px;padding:2px 0 12px}
+  .cat-chip{padding:8px 12px;font-size:12px;border-radius:9px}
+}
+
+/* Los productos usan todo el ancho */
+@media(min-width:768px){
+  .main-layout{display:block}
+}
+
+/* El panel de rubros: en la compu baja desde el botón y no ocupa toda la pantalla */
+@media(min-width:768px){
+  #mayCatsDropdownOverlay{background:rgba(0,0,0,.18)}
+  #mayCatsDropdownPanel{
+    top:96px;right:24px;bottom:auto;left:auto;
+    width:340px;max-height:min(72vh,620px);
+    border-radius:16px;padding:16px 14px 18px;
+    box-shadow:0 18px 48px rgba(20,45,70,.28);
+    animation:catsDropIn .18s ease;transform-origin:top right}
+  #mayCatsDropdownPanel .cat-list-btn{min-height:44px;padding:8px 14px;margin-bottom:5px}
+  #mayCatsDropdownPanel .cat-list-btn .nm{font-size:13.5px}
+}
+@keyframes catsDropIn{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
+
+/* Tocar dos veces no agranda la página, y los botones responden más rápido */
+html,body{touch-action:manipulation}
+button,.btn,input,select,label,.cat-chip,.cat-list-btn,.may-pcard{touch-action:manipulation}
 </style>
 <div id="tutbOverlay">
   <div class="tutb-modal">
