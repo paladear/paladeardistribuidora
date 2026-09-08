@@ -1568,7 +1568,9 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
       <span class="hd-pedido-n" id="cartCountMay">0</span>
       <span><b>Mi pedido</b></span>
     </button>
-    <div class="header-dropdowns">
+  </div>
+
+  <div class="header-dropdowns">
 
     <!-- MAYORISTA -->
     <div class="hdrop" id="hdropMay">
@@ -7158,6 +7160,12 @@ window.addEventListener('online', function() {
   .hd-cats{font-size:13.5px}
   .hd-nav-link{margin-left:16px;font-size:13.5px}
 }
+
+/* El botón suelto de info ya no hace falta: lo abre el acceso "Envíos".
+   El panel sigue existiendo, sólo se esconde el botón que lo disparaba. */
+.header-dropdowns{position:static}
+.header-dropdowns .header-info-btn{display:none}
+.header-dropdowns .hdrop-panel{right:26px;left:auto}
 </style>
 <div id="tutbOverlay">
   <div class="tutb-modal">
