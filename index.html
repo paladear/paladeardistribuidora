@@ -1541,35 +1541,20 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
 
 <header class="header">
 <div class="header-inner">
-  <a class="logo-wrap" href="./" aria-label="Paladear Distribuidora">
-    <img class="logo" src="logo-mayorista.webp" width="160" height="160" alt="Paladear Distribuidora">
-  </a>
-
-  <div class="hd-buscador">
-    <svg class="hd-lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-    <input class="compact-search" id="compactSearchInput" type="search"
-           placeholder="Buscar productos por nombre, categoría o código..."
-           oninput="compactOnSearch(this.value);_updateSuggestions(this.value)"
-           onblur="_hideSuggestionsDelayed();compactSearchBlur()" aria-label="Buscar productos">
-    <div class="search-suggestions" id="searchSuggestions"></div>
+  <div class="logo-wrap">
+    <img class="logo" src="logo-mayorista.webp" width="160" height="160" alt="Paladear Distribuidora" alt="Paladear">
   </div>
-
-  <div class="hd-accesos">
-    <button type="button" class="hd-acceso" onclick="toggleHdrop('May')" title="Envíos e información">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h13v10H1z"/><path d="M14 7h4l3 3v3h-7z"/><circle cx="5.5" cy="17" r="2"/><circle cx="17.5" cy="17" r="2"/></svg>
-      <span><b>Envíos</b>a todo el país</span>
-    </button>
-    <button type="button" class="hd-acceso" onclick="openCuenta()" title="Mi cuenta">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
-      <span><b>Ingresar</b>mi cuenta</span>
-    </button>
-    <button type="button" class="hd-acceso hd-pedido" onclick="openCartMay()" title="Mi pedido">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.4 11.4a2 2 0 0 0 2 1.6h7.5a2 2 0 0 0 2-1.5L21 7H6"/></svg>
-      <span class="hd-pedido-n" id="cartCountMay">0</span>
-      <span><b>Mi pedido</b></span>
-    </button>
+  <div class="social-btns">
+    <a class="social-btn" href="https://wa.me/5492616512823" target="_blank" rel="noopener noreferrer" title="WhatsApp Minorista">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.006 22l4.984-1.307A9.961 9.961 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.25a8.24 8.24 0 01-4.258-1.178l-.306-.181-3.157.828.844-3.07-.2-.319A8.25 8.25 0 1112 20.25z"/></svg>
+    </a>
+    <a class="social-btn" href="https://www.instagram.com/palade.ar?igsh=ZTJweDNkMDhsY3Vj" target="_blank" rel="noopener noreferrer" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a class="social-btn" id="headerMapBtn" href="https://maps.app.goo.gl/5TtZMgtvq5XfycqG8" target="_blank" rel="noopener noreferrer" title="Cómo llegar (local minorista)">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+    </a>
   </div>
-
   <div class="header-dropdowns">
 
     <!-- MAYORISTA -->
@@ -1594,21 +1579,12 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
       .header-info-btn .btn-txt,.header-info-btn .arrow{display:none}
       @media(max-width:600px){.cats-burger-btn,.header-info-btn{width:36px;height:36px}.btn-info-icon{font-size:21px}}
     </style>
-    
+    <button class="cats-burger-btn header-search-btn" onclick="openHeaderSearch()" title="Buscar productos" aria-label="Buscar productos"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.6 15.6 4.5 4.5"/></svg></button>
+    <button class="cats-burger-btn cuenta-btn" onclick="openCuenta()" title="Mi cuenta" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.2-5.6 7-5.6s7 2 7 5.6"/></svg></button>
+    <button class="cats-burger-btn" onclick="toggleMayCatsDropdown()" title="Categorías" aria-label="Ver categorías"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+
   </div>
 </div>
-
-<!-- Barra de categorías, pegada al encabezado -->
-<nav class="hd-nav">
-  <div class="hd-nav-inner">
-    <button type="button" class="hd-cats" onclick="toggleMayCatsDropdown()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      <span>Todas las categorías</span>
-      <svg class="hd-cats-flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-    </button>
-    <a class="hd-nav-link" href="#contacto" onclick="toggleHdrop('May');return false;">Contacto</a>
-  </div>
-</nav>
 </header>
 
 <!-- ── HEADER COMPACTO (aparece al scrollear en minorista/mayorista) ── -->
@@ -7094,78 +7070,6 @@ window.addEventListener('online', function() {
   .tutb-step .tutb-em{font-size:15px;display:block;margin-bottom:1px}
   .tutb-step .tutb-t{font-size:10.5px;color:#3a4d63;font-weight:600;line-height:1.25}
   .tutb-step-arrow{color:#b8c6d4;font-size:14px;align-self:center;margin-top:-10px}
-
-/* ══════════════ ENCABEZADO NUEVO (según la maqueta) ══════════════
-   Una sola pieza: la barra azul con el buscador arriba, la barra de
-   categorías pegada abajo, y el hero que sigue sin corte. */
-.header{background:#3f5e7a;animation:none;box-shadow:none}
-.header-inner{max-width:1280px;gap:22px;min-height:88px;padding:8px 26px}
-.header .logo-wrap{flex:0 0 auto;display:block;line-height:0}
-.header .logo{height:70px;width:70px;background:transparent;padding:0;
-  box-shadow:0 3px 12px rgba(0,0,0,.25)}
-
-/* Buscador: el protagonista */
-.hd-buscador{position:relative;flex:1 1 auto;min-width:0;max-width:560px}
-.hd-buscador .hd-lupa{position:absolute;left:16px;top:50%;transform:translateY(-50%);
-  width:19px;height:19px;color:#7b8c9c;pointer-events:none}
-.hd-buscador .compact-search{width:100%;height:46px;border:0;border-radius:999px;
-  padding:0 18px 0 45px;font-family:inherit;font-size:14.5px;color:#25384a;
-  background:#fff;box-shadow:0 2px 10px rgba(10,25,40,.18)}
-.hd-buscador .compact-search::placeholder{color:#93a3b2}
-.hd-buscador .compact-search:focus{outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.35)}
-.hd-buscador .search-suggestions{top:calc(100% + 8px)}
-
-/* Accesos de la derecha: ícono + dos renglones */
-.hd-accesos{display:flex;align-items:center;gap:26px;margin-left:auto;flex:0 0 auto}
-.hd-acceso{position:relative;display:flex;align-items:center;gap:9px;background:none;
-  border:0;padding:4px 2px;cursor:pointer;color:#fff;font-family:inherit;
-  transition:opacity .18s ease}
-.hd-acceso:hover{opacity:.82}
-.hd-acceso svg{width:25px;height:25px;flex:0 0 auto}
-.hd-acceso span{display:flex;flex-direction:column;align-items:flex-start;
-  font-size:12px;line-height:1.28;white-space:nowrap;color:rgba(255,255,255,.86)}
-.hd-acceso span b{font-size:13px;font-weight:700;color:#fff}
-.hd-pedido-n{position:absolute;left:16px;top:-5px;min-width:18px;height:18px;
-  border-radius:999px;background:#e2703a;color:#fff;font-size:11px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;padding:0 5px;
-  border:2px solid #3f5e7a}
-
-/* Barra de categorías, pegada al encabezado */
-.hd-nav{background:#fff;border-bottom:1px solid rgba(20,45,70,.10)}
-.hd-nav-inner{max-width:1280px;margin:0 auto;padding:0 26px;display:flex;
-  align-items:center;gap:8px;min-height:48px}
-.hd-cats{display:flex;align-items:center;gap:10px;background:none;border:0;
-  padding:12px 4px 12px 0;cursor:pointer;font-family:inherit;font-size:14.5px;
-  font-weight:700;color:#2b3f52}
-.hd-cats svg{width:19px;height:19px}
-.hd-cats-flecha{width:15px!important;height:15px!important;opacity:.6}
-.hd-cats:hover{color:#3f5e7a}
-.hd-nav-link{margin-left:26px;padding:12px 2px;font-size:14.5px;color:#48596b;
-  text-decoration:none;font-weight:600}
-.hd-nav-link:hover{color:#3f5e7a}
-
-/* El hero arranca donde termina el nav, sin corte */
-.header + *,.hd-nav + *{margin-top:0}
-
-@media(max-width:900px){
-  .header-inner{gap:12px;padding:6px 12px;min-height:64px}
-  .header .logo{height:48px;width:48px}
-  .hd-buscador .compact-search{height:40px;font-size:14px;padding-left:40px}
-  .hd-buscador .hd-lupa{left:13px;width:17px;height:17px}
-  .hd-accesos{gap:14px}
-  .hd-acceso span{display:none}            /* en el celular, sólo los íconos */
-  .hd-acceso svg{width:23px;height:23px}
-  .hd-pedido-n{left:14px}
-  .hd-nav-inner{padding:0 12px;min-height:44px}
-  .hd-cats{font-size:13.5px}
-  .hd-nav-link{margin-left:16px;font-size:13.5px}
-}
-
-/* El botón suelto de info ya no hace falta: lo abre el acceso "Envíos".
-   El panel sigue existiendo, sólo se esconde el botón que lo disparaba. */
-.header-dropdowns{position:static}
-.header-dropdowns .header-info-btn{display:none}
-.header-dropdowns .hdrop-panel{right:26px;left:auto}
 </style>
 <div id="tutbOverlay">
   <div class="tutb-modal">
