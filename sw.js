@@ -22,7 +22,7 @@
 //      en segundo plano. Casi nunca cambian.
 // ════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'paladear-distri-v1';
+const CACHE_VERSION = 'paladear-distri-v14';
 const CACHE_PREFIX = 'paladear-distri-';
 
 const SHELL_FILES = [
@@ -85,7 +85,8 @@ self.addEventListener('fetch', event => {
   // caemos al cache para que la página siga abriendo offline.
   const _path = url.pathname;
   const _esPagina = _path === '/paladeardistribuidora/' ||
-                    _path === '/paladeardistribuidora/index.html';
+                    _path === '/paladeardistribuidora/index.html' ||
+                    _path === '/paladeardistribuidora/catalogo.html';
 
   if (_esPagina) {
     event.respondWith(

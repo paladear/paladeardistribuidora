@@ -9,6 +9,8 @@ layout: null
 <meta name="color-scheme" content="light only">
 <title>Lista Mayorista | Paladear Distribuidora</title>
 <meta name="description" content="Lista mayorista completa de Paladear Distribuidora, Mendoza. Venta únicamente por bulto cerrado. Mínimo de $250.000 solo en el primer pedido.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://paladear.github.io/paladeardistribuidora/catalogo.html">
 <link rel="icon" href="favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -317,7 +319,69 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 .co-ubic-hint{font-size:11px;color:var(--muted-fg);text-align:center;margin-top:8px;line-height:1.4}
 .co-ubic-close{display:block;background:transparent;border:none;color:var(--muted-fg);font-size:12px;cursor:pointer;font-family:inherit;text-decoration:underline;margin:8px auto 0;padding:4px}
 .co-ubic-close:hover{color:#e53935}
-.co-ubic-confirm{display:flex;align-items:center;gap:8px;background:#e8f5e9;border-radius:8px;padding:10px 12px;font-size:12px;color:#2e7d32;margin-top:10px;line-height:1.4;font-weight:600}
+  .co-ubic-confirm{display:flex;align-items:center;gap:8px;background:#e8f5e9;border-radius:8px;padding:10px 12px;font-size:12px;color:#2e7d32;margin-top:10px;line-height:1.4;font-weight:600}
+
+/* Rediseño visual de la lista: misma identidad azul/crema del home mayorista. */
+body{--catalog-safe-start:calc(clamp(25px,4.7vw,72px) + 110px + 64px);background:#f6f0e7}
+.top{overflow:visible;background:#456b89;box-shadow:0 5px 18px rgba(19,49,72,.16)}
+.top-in{position:relative;width:100%;max-width:none;height:88px;padding:0 clamp(24px,3.5vw,52px) 0 var(--catalog-safe-start);gap:18px}
+.top-logo-link{
+  position:absolute;left:clamp(25px,4.7vw,72px);top:34px;z-index:3;display:block;width:110px;height:110px;
+  overflow:hidden;border:2px solid rgba(255,255,255,.92);border-radius:50%;background:#456b89;
+  box-shadow:0 8px 20px rgba(17,44,66,.28);line-height:0
+}
+.top-logo-link .logo{position:absolute;inset:0;display:block;width:100%;height:100%;padding:0;border-radius:0;background:transparent;object-fit:cover;transform:scale(1.55)}
+.btn-volver,.btn-print{height:42px;padding:0 14px;border:1px solid rgba(255,255,255,.28);border-radius:12px;background:rgba(255,255,255,.08)}
+.btn-print{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-volver:hover,.btn-print:hover{background:rgba(255,255,255,.16)}
+.top-t{font-size:17px;letter-spacing:-.01em}
+.top-t small{margin-top:3px;color:rgba(255,255,255,.78)}
+.fila-busq{
+  width:calc(100% - var(--catalog-safe-start));max-width:none;min-height:56px;margin:0 0 0 var(--catalog-safe-start);
+  padding:7px 42px 7px 28px;gap:16px;border-radius:0 0 0 44px;background:#fff;
+  box-shadow:0 7px 18px rgba(22,50,73,.08)
+}
+.btn-cat{height:40px;padding:0 18px 0 0;border-right:1px solid #d8e3ec;border-radius:0;background:transparent;color:#173b5e}
+.btn-cat:hover{background:transparent;color:#4f7897}
+.ham i{height:2px;background:#173b5e}
+.busq-wrap input{height:42px;padding:0 44px 0 16px;border:1px solid #dce8f0;border-radius:999px;background:#eef5fa;color:#173b5e;box-shadow:none}
+.busq-wrap input:focus{outline:2px solid #9fbcd0;outline-offset:1px;background:#fff}
+.wrap{width:min(1376px,calc(100% - 64px));max-width:none;padding:34px 0 48px}
+.ayuda{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px;border:1px solid #c4dce9;border-radius:15px;background:#e5f1f7;color:#315b78}
+.ayuda svg,.ayuda img{flex:0 0 auto;margin-top:1px}
+.ayuda img{width:21px;height:21px;object-fit:contain}
+.ayuda b{color:#123f63}
+.descb-banner{border:1px solid #c5dce9;background:#dcebf5;box-shadow:0 10px 28px rgba(35,72,98,.09)}
+.descb-name,.descb-go,.descb-note b,.descb-bulto b,.descb-cnt{color:#17486c}
+.descb-go,.descb-bulto{border-color:#bdd5e4;background:rgba(255,255,255,.72);color:#46677d}
+.descb-fill{background:#456b89}
+.descb-track{background:#c8dce8}
+.descb-reward{color:#315f80}
+.descb-banner{padding:18px 22px}
+.descb-note{margin-bottom:10px}
+.descb-mlabel,.descb-track,.descb-reward{display:none!important}
+.descb-bulto{margin-top:0}
+.rubro-h{background:#456b89}
+.tabla{border-color:#d5e2ea;box-shadow:0 5px 16px rgba(31,65,89,.055)}
+.cat-h{background:#456b89}
+
+@media(max-width:640px){
+  body{--catalog-safe-start:0px}
+  .top-in{height:68px;padding:6px 8px 6px 100px;gap:6px}
+  .top-logo-link{left:10px;top:24px;width:82px;height:82px;border-width:2px}
+  .top-logo-link .logo{display:block!important}
+  .btn-volver{width:38px;padding:0;justify-content:center}
+  .btn-volver-txt{display:none}
+  .top-t{font-size:13px;white-space:nowrap}
+  .top-t small{display:none}
+  .btn-print{width:42px;padding:0;font-size:0;gap:0}
+  .btn-print svg{width:20px;height:20px}
+  .fila-busq{width:100%;min-height:56px;margin:0;padding:7px 9px 7px 100px;gap:7px;border-radius:0}
+  .btn-cat{width:40px;height:40px;justify-content:center;padding:0;border-right:0;font-size:0}
+  .busq-wrap input{height:42px;font-size:16px}
+  .wrap{width:calc(100% - 18px);padding:20px 0 30px}
+  .ayuda{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -330,9 +394,9 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 <header class="top" id="top">
   <div class="top-in">
     <a class="btn-volver" href="index.html" title="Volver a la distribuidora"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg><span class="btn-volver-txt">Inicio</span></a>
-    <img class="logo" src="android-chrome-192x192.png" alt="Paladear">
+    <a class="top-logo-link" href="index.html" aria-label="Volver a Paladear Distribuidora"><img class="logo" src="logo-mayorista-hd.webp" alt="Paladear Distribuidora"></a>
     <div class="top-t">Lista Mayorista<small>Paladear Distribuidora</small></div>
-    <button class="btn-print" onclick="window.print()">🖨️ Imprimir</button>
+    <button class="btn-print" onclick="window.print()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="6" y="14" width="12" height="7" rx="1"/><path d="M6 17H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/></svg> Imprimir</button>
   </div>
   <div class="fila-busq">
     <button class="btn-cat" onclick="abrirCats()"><span class="ham"><i></i><i></i><i></i></span>Categorías</button>
@@ -353,11 +417,11 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 </aside>
 
 <main class="wrap">
-  <div class="ayuda">📦 La venta es <b>únicamente por bulto cerrado</b>. Escribí <b>cuántos bultos</b> querés de cada producto en el casillero de la derecha — abajo del nombre dice cuánto trae cada bulto.</div>
+  <div class="ayuda"><img src="may-icon-box-outline.png" alt="" aria-hidden="true"><span>La venta es <b>únicamente por bulto cerrado</b>. Escribí <b>cuántos bultos</b> querés de cada producto en el casillero de la derecha — abajo del nombre dice cuánto trae cada bulto.</span></div>
   <div class="descb-wrap">
     <div class="descb-banner" id="descBanner">
       <div class="descb-top">
-        <img class="descb-ic" src="icon-mayorista.png" alt="">
+        <img class="descb-ic" src="logo-mayorista-hd-circular.webp" alt="">
         <span class="descb-name">Venta Mayorista</span>
         <span class="descb-go">Solo bulto cerrado</span>
       </div>
@@ -365,7 +429,7 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
       <div class="descb-mlabel" id="descbLabel"><span class="descb-cnt" id="descbCnt">$0</span><span class="descb-goal" id="descbGoal">Mínimo 1er pedido: $250.000</span></div>
       <div class="descb-track" id="descbTrack"><div class="descb-fill" id="descbFill"></div></div>
       <div class="descb-reward" id="descbRw"></div>
-      <div class="descb-bulto">📦 La venta es <b>únicamente por bulto cerrado</b>.<br>🧾 Los precios expresados en este catálogo <b>NO INCLUYEN IVA</b>.</div>
+      <div class="descb-bulto">Los precios expresados en este catálogo <b>NO INCLUYEN IVA</b>.</div>
     </div>
   </div>
   <div class="volver" id="volver"><span class="txt" id="volverTxt"></span><button onclick="limpiar()">← Ver toda la lista</button></div>
@@ -736,7 +800,7 @@ function enviar(){
   const t=totales();
   // El mínimo rige SOLO en el primer pedido (igual que la web)
   if(!t.alcanza){
-    alert('⚠️ Tu PRIMER pedido tiene un mínimo de compra de $'+fmt(t.minimo)+'.\n\nTotal actual: $'+fmt(t.total)+'\nFaltan: $'+fmt(t.minimo-t.total)+'\n\n✨ A partir de tu segundo pedido comprás sin mínimo.');
+    alert('Tu primer pedido tiene un mínimo de compra de $'+fmt(t.minimo)+'.\n\nTotal actual: $'+fmt(t.total)+'\nFaltan: $'+fmt(t.minimo-t.total)+'\n\nA partir de tu segundo pedido comprás sin mínimo.');
     return;
   }
   abrirCheckout();   // primero los datos del cliente, después WhatsApp
@@ -1168,7 +1232,7 @@ function coEnviar() {
   if (!ids.length) { alert('Todavía no cargaste cantidades.'); return; }
   var t = totales();
   if (!t.alcanza) {   // red de seguridad: no se envía un primer pedido por debajo del mínimo
-    alert('⚠️ Tu PRIMER pedido tiene un mínimo de compra de $'+fmt(t.minimo)+'.\n\nFaltan: $'+fmt(t.minimo-t.total));
+    alert('Tu primer pedido tiene un mínimo de compra de $'+fmt(t.minimo)+'.\n\nFaltan: $'+fmt(t.minimo-t.total));
     return;
   }
   // Mismo formato que el pedido mayorista de la web
@@ -1240,14 +1304,14 @@ function pintarBanner(){
 
   if(t.minimo===0){
     // Ya hizo al menos un pedido: sin mínimo
-    note.innerHTML='✨ Ya hiciste tu primer pedido: a partir de ahora comprás <b>SIN MÍNIMO</b>.';
+    note.innerHTML='Ya hiciste tu primer pedido: a partir de ahora comprás <b>SIN MÍNIMO</b>.';
     lbl.style.display='none'; track.style.display='none';
     if(t.n>0){ rw.textContent='Tu pedido: $'+fmt(t.total); rw.style.color=''; rw.classList.add('on'); }
     else rw.classList.remove('on');
     return;
   }
 
-  note.innerHTML='🛒 Realizá tu primer pedido alcanzando el mínimo de compra: <b>$'+fmt(MIN_PRIMER_PEDIDO)+'</b>.<br>✨ A partir de tu segundo pedido, comprás <b>SIN MÍNIMO</b>.';
+  note.innerHTML='Realizá tu primer pedido alcanzando el mínimo de compra: <b>$'+fmt(MIN_PRIMER_PEDIDO)+'</b>.<br>A partir de tu segundo pedido, comprás <b>SIN MÍNIMO</b>.';
   lbl.style.display=''; track.style.display='';
   fill.style.width=Math.min(100,(t.total/MIN_PRIMER_PEDIDO)*100)+'%';
   cnt.textContent='$'+fmt(t.total);
@@ -1314,7 +1378,6 @@ cargar();
           <input type="text" id="coHorarioRetiro" placeholder="Ej: entre 10 y 12hs" class="co-input">
           <span class="co-hint" id="coRetiroHint">Horarios del depósito: Lunes a Viernes 08:00 a 16:00hs · Sábados 08:00 a 13:00hs</span>
         </div>
-        <div class="co-pago-nota">💳 En el depósito podés pagar con <b>efectivo o transferencia</b>.</div>
         <button class="wa-btn" style="margin-top:8px" onclick="coEnviar()"><svg viewBox="0 0 24 24" width="19" height="19" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.006 22l4.984-1.307A9.961 9.961 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.25a8.24 8.24 0 01-4.258-1.178l-.306-.181-3.157.828.844-3.07-.2-.319A8.25 8.25 0 1112 20.25z"/></svg> Enviar pedido por WhatsApp</button>
         <div class="co-saved-hint">💾 Guardamos tus datos en este dispositivo para tu próximo pedido. <a href="#" onclick="coBorrarPerfil();return false">Borrar mis datos</a></div>
       </div>
@@ -1362,7 +1425,7 @@ cargar();
           <div class="co-field" style="flex:1.4">
             <label>Tipo <span class="opt-lbl">(opcional)</span></label>
             <div class="co-tipo-opts">
-              <label class="co-tipo-radio"><input type="radio" name="coTipo" value="casa"><span>🏠 Casa</span></label>
+              <label class="co-tipo-radio"><input type="radio" name="coTipo" value="casa"><span>Casa</span></label>
               <label class="co-tipo-radio"><input type="radio" name="coTipo" value="depto"><span>🏢 Depto</span></label>
             </div>
           </div>
@@ -1376,7 +1439,6 @@ cargar();
           <textarea id="coIndicaciones" placeholder="Ej: casa rosada, tocar timbre 2 veces" class="co-input" rows="2"></textarea>
         </div>
         </div><!-- /coDirDetalles -->
-        <div class="co-pago-nota">💳 El pedido se abona por <b>transferencia bancaria</b> — te pasamos el alias por WhatsApp.<br>🚚 <b>Envío gratis</b> en compras desde <b>$40.000</b> en Gran Mendoza (si es menor, el envío se abona aparte).</div>
         <button class="wa-btn" style="margin-top:8px" onclick="coEnviar()"><svg viewBox="0 0 24 24" width="19" height="19" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.006 22l4.984-1.307A9.961 9.961 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.25a8.24 8.24 0 01-4.258-1.178l-.306-.181-3.157.828.844-3.07-.2-.319A8.25 8.25 0 1112 20.25z"/></svg> Enviar pedido por WhatsApp</button>
         <div class="co-saved-hint">💾 Guardamos tus datos en este dispositivo para tu próximo pedido. <a href="#" onclick="coBorrarPerfil();return false">Borrar mis datos</a></div>
       </div>
