@@ -22,7 +22,7 @@
 //      en segundo plano. Casi nunca cambian.
 // ════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'paladear-distri-v14';
+const CACHE_VERSION = 'paladear-distri-v15';
 const CACHE_PREFIX = 'paladear-distri-';
 
 const SHELL_FILES = [
