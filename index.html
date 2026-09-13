@@ -1637,10 +1637,34 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
 <!-- Home mayorista: primera etapa del rediseño. El resto del home se suma después. -->
 <section class="may-home-hero may-home-hero-image" id="mayHomeHero" aria-label="Venta mayorista Paladear: más sabores, más oportunidades">
   <picture class="may-home-hero-media">
-    <source media="(max-width:760px)" srcset="HEROMAYORISTA1-MOBILE.PNG">
+    <source media="(max-width:760px)" srcset="hero-may-mobile.webp">
     <img class="may-home-hero-bg" src="HEROMAYORISTA1.PNG" width="1774" height="887" alt="Venta mayorista Paladear. Más sabores, más oportunidades. Productos saludables y de calidad por bulto cerrado para tu negocio.">
   </picture>
+  <!-- En mobile el titulo va como texto de verdad (antes venia quemado en la
+       imagen y quedaba ilegible). En desktop sigue la imagen con su texto. -->
+  <div class="may-hero-mob" aria-hidden="false">
+    <span class="may-hero-mob-kicker">Venta mayorista</span>
+    <h1 class="may-hero-mob-title">Más sabores,<br>más oportunidades</h1>
+    <p class="may-hero-mob-sub">Productos saludables y de calidad, por bulto cerrado, para tu negocio.</p>
+    <button type="button" class="may-hero-mob-cta" onclick="mayShowProducts()">Ver productos <span aria-hidden="true">&rarr;</span></button>
+  </div>
   <button type="button" class="may-home-hero-hotspot" onclick="mayShowProducts()" aria-label="Ver productos mayoristas"></button>
+</section>
+
+<!-- Franja de condiciones de compra, como la de la minorista pero con la info
+     mayorista. Va entre el hero y las categorias. -->
+<section class="may-info-band" aria-label="Cómo comprar en Paladear Distribuidora">
+  <div class="may-info-inner">
+    <span class="may-info-kicker">Cómo comprar</span>
+    <h2 class="may-info-title">Venta por bulto cerrado</h2>
+    <p class="may-info-sub">Tu primer pedido tiene un mínimo de <b>$250.000</b>. A partir del segundo, sin mínimo.</p>
+    <ul class="may-info-list">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7 12 12l8.7-5M12 22V12"/></svg><span>Comprás por bulto cerrado</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m19 5-14 14M6.5 8a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM17.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg><span>Precios mayoristas</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17h4V5H2v12h3M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg><span>Envíos a todo el país</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>Pagos 100% seguros</span></li>
+    </ul>
+  </div>
 </section>
 
 <!-- Continuación del Home: categorías, destacados e información comercial. -->
@@ -8719,5 +8743,67 @@ body.may-redesign.checkout-open #cart-fab-may,body.may-redesign.checkout-open #b
   }, {passive:false});
 })();
 </script>
+<style>
+/* ── HERO MOBILE ────────────────────────────────────────────────────
+   La imagen traia el titulo quemado y en 375px quedaba ilegible. En mobile
+   el texto pasa a ser HTML sobre una foto sin texto, y el hero ocupa casi
+   toda la primera pantalla. En desktop sigue igual que antes. */
+.may-hero-mob{display:none}
+@media(max-width:760px){
+  /* El alto se fija con aspect-ratio y no con height: en este elemento el
+     height no toma (queda en 0), que es como esta armado el hero de origen. */
+  html body section.may-home-hero.may-home-hero-image{
+    aspect-ratio:375/640!important;
+    background:#dceefa!important
+  }
+  .may-home-hero-image .may-home-hero-bg{object-fit:cover!important;object-position:center bottom!important}
+  .may-home-hero-hotspot{display:none!important}
+  .may-hero-mob{
+    display:block;position:absolute;z-index:3;left:22px;right:22px;top:74px;
+    color:#0b3a65;text-align:left
+  }
+  /* velo suave arriba: la foto ahi es clara, pero asegura la lectura */
+  .may-home-hero.may-home-hero-image::before{
+    content:"";position:absolute;z-index:2;inset:0 0 auto 0;height:58%;
+    background:linear-gradient(180deg,rgba(219,237,250,.94) 0%,rgba(219,237,250,.80) 46%,rgba(219,237,250,0) 100%);
+    pointer-events:none
+  }
+  .may-hero-mob-kicker{
+    display:block;margin-bottom:9px;color:#2d6087;
+    font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase
+  }
+  .may-hero-mob-title{
+    margin:0;color:#0b3a65;font-size:clamp(31px,8.6vw,38px);font-weight:900;
+    line-height:1.04;letter-spacing:-.035em;text-transform:uppercase
+  }
+  .may-hero-mob-sub{
+    max-width:19ch;margin:14px 0 0;color:#1f5178;
+    font-size:clamp(15px,4.1vw,17px);font-weight:500;line-height:1.42
+  }
+  .may-hero-mob-cta{
+    display:inline-flex;align-items:center;gap:10px;margin-top:20px;
+    min-height:50px;padding:0 26px;border:0;border-radius:999px;
+    background:#2f6d99;color:#fff;font:800 15px/1 'Montserrat',sans-serif;
+    box-shadow:0 8px 20px rgba(20,60,92,.26);cursor:pointer
+  }
+}
+
+/* ── FRANJA DE CONDICIONES DE COMPRA ────────────────────────────── */
+.may-info-band{width:100%;padding:44px max(4vw,26px) 46px;background:#f4efe6;color:#123f67}
+.may-info-inner{width:min(1180px,100%);margin:0 auto;text-align:center}
+.may-info-kicker{display:block;margin-bottom:10px;color:#5a7f9c;font-size:13px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.may-info-title{margin:0;font-size:clamp(27px,4.6vw,42px);font-weight:900;letter-spacing:-.03em;line-height:1.06;color:#0b3a65}
+.may-info-sub{max-width:46ch;margin:14px auto 0;font-size:clamp(15px,1.5vw,19px);line-height:1.5;color:#2b5c80}
+.may-info-sub b{font-weight:850;color:#0b3a65}
+.may-info-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;width:min(980px,100%);margin:30px auto 0;padding:0;list-style:none}
+.may-info-list li{display:flex;flex-direction:column;align-items:center;gap:9px;font-size:clamp(13px,1.15vw,15px);font-weight:700;line-height:1.3;color:#1f5178;text-align:center}
+.may-info-list svg{width:34px;height:34px;color:#3d7ba6;flex-shrink:0}
+@media(max-width:760px){
+  .may-info-band{padding:34px 20px 38px}
+  .may-info-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px;margin-top:26px}
+  .may-info-list li{font-size:14px}
+  .may-info-list svg{width:32px;height:32px}
+}
+</style>
 </body>
 </html>
