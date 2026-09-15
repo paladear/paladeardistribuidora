@@ -1388,8 +1388,8 @@ body.cart-open #cart-fab,body.cart-open #chat-fab{display:none!important}
 .tabs-pill::after{right:-28px;background:radial-gradient(circle at 100% 0%,transparent 28px,var(--bg) 29px)}
 .tabs-pill.sliding{animation:pillSlide .45s forwards}
 @keyframes pillSlide{0%{transform:translateX(var(--pill-dx,0));animation-timing-function:cubic-bezier(.2,.6,.35,1)}60%{transform:translateX(calc(var(--pill-dx,0) * -0.05));animation-timing-function:ease-in-out}80%{transform:translateX(calc(var(--pill-dx,0) * 0.02));animation-timing-function:ease-out}100%{transform:translateX(0)}}
-.may-tab{cursor:pointer;padding:8px 12px 18px;border-radius:0;font-weight:700;font-size:15px;transition:color .2s;border:none;background:transparent;color:rgba(255,255,255,.78);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;z-index:2;font-family:inherit;line-height:1.1}
-.may-tab-icon{width:36px;height:36px;object-fit:contain;display:block;flex-shrink:0;transform-origin:center center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.may-tab{cursor:pointer;padding:11px 14px 20px;border-radius:0;font-weight:700;font-size:15.5px;transition:color .2s;border:none;background:transparent;color:rgba(255,255,255,.78);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;z-index:2;font-family:inherit;line-height:1.1}
+.may-tab-icon{width:40px;height:40px;object-fit:contain;display:block;flex-shrink:0;transform-origin:center center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .may-tab.active{color:var(--azul-dark);position:relative;z-index:3}
 .may-tab.active .may-tab-icon{animation:iconBounce .35s ease-out forwards}
 @keyframes iconBounce{0%{transform:scale(.92)}60%{transform:scale(1.08)}100%{transform:scale(1.04)}}
@@ -1682,7 +1682,9 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
         <span class="may-home-section-kicker" id="mayHomeCatsTitle">Explorá por categoría</span>
       </div>
       <div class="may-home-cats-carousel">
+        <button type="button" class="may-cats-flecha izq" id="mayCatsIzq" aria-label="Ver categorías anteriores">&#8249;</button>
         <div class="may-home-cats-grid" id="mayHomeCatsTrack" aria-label="Todas las categorías"></div>
+        <button type="button" class="may-cats-flecha der" id="mayCatsDer" aria-label="Ver más categorías">&#8250;</button>
         <div class="may-home-cat-pagination" id="mayHomeCatsPagination" role="group" aria-label="Páginas de categorías"></div>
       </div>
     </div>
@@ -5243,29 +5245,65 @@ function _updateMayHomeCatControls(){
     if(index===current)dot.setAttribute('aria-current','true');
     else dot.removeAttribute('aria-current');
   });
+  // Las flechas se apagan en los extremos, para que se vea que no hay más.
+  const izq=document.getElementById('mayCatsIzq'), der=document.getElementById('mayCatsDer');
+  if(izq)izq.disabled=current<=0;
+  if(der)der.disabled=current>=pages.length-1;
+  if(izq)izq.dataset.p=current;
+  if(der)der.dataset.p=current;
 }
 
-function _mayFeaturedProducts(){
-  const preferred=[
-    {art:'1716',rx:/NUEZ MARIPOSA EXTRA LIGHT/i},
-    {art:'1135',rx:/AVENA ARROLLADA GRUESA/i},
-    {art:'1583',rx:/SEMILLA DE CHIA/i},
-    {art:'1359',rx:/^LENTEJAS\b/i}
-  ];
-  const selected=[];
-  preferred.forEach(pref=>{
-    const p=PRODS_MAY.find(item=>String(item[12]&&item[12].artId||'')===pref.art)||PRODS_MAY.find(item=>pref.rx.test(item[2]||''));
-    if(p&&!selected.includes(p))selected.push(p);
+/* Las flechas corren una página entera, igual que los puntitos de abajo. */
+(function(){
+  function paso(d){
+    const track=document.getElementById('mayHomeCatsTrack');
+    if(!track)return;
+    const pages=Array.from(track.querySelectorAll('.may-home-cat-page'));
+    if(!pages.length)return;
+    let current=0;
+    pages.forEach((page,index)=>{
+      if(Math.abs(page.offsetLeft-track.scrollLeft)<Math.abs(pages[current].offsetLeft-track.scrollLeft))current=index;
+    });
+    goMayHomeCatPage(current+d);
+  }
+  document.addEventListener('click',function(ev){
+    const b=ev.target.closest&&ev.target.closest('.may-cats-flecha');
+    if(!b||b.disabled)return;
+    ev.preventDefault();
+    paso(b.classList.contains('izq')?-1:1);
   });
-  if(selected.length<4){
-    const dietCats=['frutos','semillas','cereales','granos','deshidratados','harinas','infusiones'];
-    dietCats.forEach(catId=>{
-      if(selected.length>=4)return;
-      const p=PRODS_MAY.find(item=>item[1]===catId&&Object.values(item[7]||{})[0]&&Object.values(item[7]||{})[0][0]>0&&!selected.includes(item));
-      if(p)selected.push(p);
+})();
+
+function _mayFeaturedProducts(){
+  // Uno por rubro y renovados cada día: el orden de rubros y el producto de cada
+  // uno se corren con el día corrido, así la portada no se ve siempre igual.
+  const cuantos = window.innerWidth < 768 ? 6 : 8;
+  const dia = Math.floor(Date.now() / 86400000);
+  const porCat = {};
+  PRODS_MAY.forEach(p => {
+    const precio = Object.values(p[7] || {})[0];
+    if (!p[6] || !precio || !precio[0]) return;      // sin foto o sin precio, no va
+    (porCat[p[1]] = porCat[p[1]] || []).push(p);
+  });
+  const cats = Object.keys(porCat).sort();
+  if (!cats.length) return [];
+  const desde = dia % cats.length;
+  const orden = cats.slice(desde).concat(cats.slice(0, desde));
+  const elegidos = [];
+  orden.forEach(cid => {
+    if (elegidos.length >= cuantos) return;
+    const lista = porCat[cid];
+    elegidos.push(lista[dia % lista.length]);
+  });
+  // Si hay menos rubros que lugares, se completa sin repetir producto.
+  if (elegidos.length < cuantos) {
+    PRODS_MAY.some(p => {
+      const precio = Object.values(p[7] || {})[0];
+      if (p[6] && precio && precio[0] && elegidos.indexOf(p) < 0) elegidos.push(p);
+      return elegidos.length >= cuantos;
     });
   }
-  return selected.slice(0,4);
+  return elegidos.slice(0, cuantos);
 }
 
 function renderMayHomeFeatured(){
@@ -7941,11 +7979,24 @@ window.addEventListener('online', function() {
 .may-home-cats-grid::-webkit-scrollbar{display:none}
 .may-home-cat{
   position:relative;display:flex;flex:0 0 158px;min-width:0;aspect-ratio:auto;min-height:190px;padding:11px 11px 14px;
-  flex-direction:column;align-items:center;justify-content:flex-start;gap:11px;overflow:hidden;border:1px solid rgba(255,255,255,.48);
+  flex-direction:column;align-items:center;justify-content:flex-start;gap:5px;overflow:hidden;border:1px solid rgba(255,255,255,.48);
   border-radius:20px;background:#fbf7ef;color:#173e60;box-shadow:0 9px 24px rgba(37,52,34,.15);
   scroll-snap-align:start;isolation:auto;transition:transform .2s ease,box-shadow .2s ease
 }
 .may-home-cat::after{display:none}
+/* Flechas para correr las categorías. Solo en desktop: en el teléfono se arrastra. */
+.may-home-cats-carousel{position:relative}
+.may-cats-flecha{display:none}
+@media(min-width:900px){
+  .may-cats-flecha{display:grid;place-items:center;position:absolute;top:calc(50% - 18px);transform:translateY(-50%);
+    z-index:4;width:44px;height:44px;border-radius:50%;border:1px solid #d8e3ec;background:#fff;color:#1d4f75;
+    font-size:26px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(23,62,96,.16);
+    transition:background .15s,box-shadow .15s,opacity .15s}
+  .may-cats-flecha:hover{background:#eef5fa;box-shadow:0 6px 18px rgba(23,62,96,.22)}
+  .may-cats-flecha.izq{left:-6px}
+  .may-cats-flecha.der{right:-6px}
+  .may-cats-flecha[disabled]{opacity:.32;cursor:default;box-shadow:none}
+}
 .may-home-cat img{width:134px;height:134px;display:block;flex:0 0 auto;border-radius:50%;object-fit:cover;transition:transform .3s ease}
 .may-home-cat span{position:static;color:#173e60;font-size:12px;font-weight:800;line-height:1.18;text-align:center;text-shadow:none}
 .may-home-cat:hover{transform:translateY(-4px);box-shadow:0 15px 30px rgba(37,52,34,.2)}
@@ -7958,6 +8009,7 @@ window.addEventListener('online', function() {
 }
 .may-home-text-link:hover{color:#173e60}
 .may-home-featured-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.may-home-featured-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 .may-feature-card{
   min-width:0;overflow:hidden;border:1px solid rgba(49,77,89,.10);border-radius:20px;background:#fff;
   box-shadow:0 10px 28px rgba(62,57,45,.09);transition:transform .2s ease,box-shadow .2s ease
