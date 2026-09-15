@@ -22,15 +22,15 @@
 //      en segundo plano. Casi nunca cambian.
 // ════════════════════════════════════════════════════════
 
-const CACHE_VERSION = 'paladear-distri-v17';
-const CACHE_PREFIX = 'paladear-distri-';
+const CACHE_VERSION = 'paladear-distri-test-v17';
+const CACHE_PREFIX = 'paladear-distri-test-';
 
 const SHELL_FILES = [
-  '/paladeardistribuidora/android-chrome-may-p-192.png',
-  '/paladeardistribuidora/android-chrome-may-p-512.png',
-  '/paladeardistribuidora/apple-touch-icon-may-p.png',
-  '/paladeardistribuidora/favicon-may-p-32.png',
-  '/paladeardistribuidora/og-image-may-blue.jpg',
+  '/paladeardistribuidora-test/android-chrome-may-p-192.png',
+  '/paladeardistribuidora-test/android-chrome-may-p-512.png',
+  '/paladeardistribuidora-test/apple-touch-icon-may-p.png',
+  '/paladeardistribuidora-test/favicon-may-p-32.png',
+  '/paladeardistribuidora-test/og-image-may-blue.jpg',
 ];
 
 // ── INSTALL ─────────────────────────────────────────────
@@ -38,11 +38,11 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
       .then(async cache => {
-        const page = await fetch('/paladeardistribuidora/index.html', { cache: 'reload' });
+        const page = await fetch('/paladeardistribuidora-test/index.html', { cache: 'reload' });
         if (!page || !page.ok) throw new Error('No se pudo actualizar index.html');
         await Promise.all([
-          cache.put('/paladeardistribuidora/', page.clone()),
-          cache.put('/paladeardistribuidora/index.html', page.clone()),
+          cache.put('/paladeardistribuidora-test/', page.clone()),
+          cache.put('/paladeardistribuidora-test/index.html', page.clone()),
           cache.addAll(SHELL_FILES)
         ]);
       })
@@ -84,9 +84,9 @@ self.addEventListener('fetch', event => {
   // primera visita (sin tener que borrar el historial). Si no hay red,
   // caemos al cache para que la página siga abriendo offline.
   const _path = url.pathname;
-  const _esPagina = _path === '/paladeardistribuidora/' ||
-                    _path === '/paladeardistribuidora/index.html' ||
-                    _path === '/paladeardistribuidora/catalogo.html';
+  const _esPagina = _path === '/paladeardistribuidora-test/' ||
+                    _path === '/paladeardistribuidora-test/index.html' ||
+                    _path === '/paladeardistribuidora-test/catalogo.html';
 
   if (_esPagina) {
     event.respondWith(
@@ -101,7 +101,7 @@ self.addEventListener('fetch', event => {
         })
         .catch(() =>
           caches.match(event.request)
-            .then(cached => cached || caches.match('/paladeardistribuidora/index.html'))
+            .then(cached => cached || caches.match('/paladeardistribuidora-test/index.html'))
         )
     );
     return;
@@ -120,7 +120,7 @@ self.addEventListener('fetch', event => {
             }
             return response;
           })
-          .catch(() => cached || caches.match('/paladeardistribuidora/index.html'));
+          .catch(() => cached || caches.match('/paladeardistribuidora-test/index.html'));
         // Servimos el cache al instante si existe; si no, esperamos la red.
         return cached || network;
       })
@@ -135,5 +135,5 @@ self.addEventListener('push', event => {
 
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-  event.waitUntil(clients.openWindow('/paladeardistribuidora/'));
+  event.waitUntil(clients.openWindow('/paladeardistribuidora-test/'));
 });

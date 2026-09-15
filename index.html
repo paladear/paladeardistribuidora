@@ -1645,7 +1645,7 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
 <section class="may-home-hero may-home-hero-image" id="mayHomeHero" aria-label="Venta mayorista Paladear: más sabores, más oportunidades">
   <picture class="may-home-hero-media">
     <source media="(max-width:760px)" srcset="hero-may-mobile-v2.jpg">
-    <img class="may-home-hero-bg" src="HEROMAYORISTA1.PNG" width="1774" height="887" alt="Venta mayorista Paladear. Más sabores, más oportunidades. Productos saludables y de calidad por bulto cerrado para tu negocio.">
+    <img class="may-home-hero-bg" src="HEROMAYORISTA1.webp" width="1600" height="800" alt="Venta mayorista Paladear. Más sabores, más oportunidades. Productos saludables y de calidad por bulto cerrado para tu negocio.">
   </picture>
   <!-- En mobile el titulo va como texto de verdad (antes venia quemado en la
        imagen y quedaba ilegible). En desktop sigue la imagen con su texto. -->
@@ -1704,10 +1704,10 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
   <section class="may-home-band may-home-band-banners" aria-label="Información mayorista">
     <div class="may-home-shell may-home-banners-grid">
       <figure class="may-home-reference-banner may-home-reference-banner-info">
-        <img src="banner-compra-mayorista.png" width="877" height="516" loading="lazy" decoding="async" alt="Compra mayorista simple y rápida: primer pedido mínimo de $250.000 y compras siguientes sin mínimo, siempre por bulto cerrado.">
+        <img src="banner-compra-mayorista.webp" width="877" height="516" loading="lazy" decoding="async" alt="Compra mayorista simple y rápida: primer pedido mínimo de $250.000 y compras siguientes sin mínimo, siempre por bulto cerrado.">
       </figure>
       <a class="may-home-reference-banner may-home-reference-banner-list" href="catalogo.html" aria-label="Abrir la lista mayorista completa">
-        <img src="banner-lista-mayorista.png" width="877" height="484" loading="lazy" decoding="async" alt="Lista mayorista con todos los precios por unidad y por bulto.">
+        <img src="banner-lista-mayorista.webp" width="877" height="484" loading="lazy" decoding="async" alt="Lista mayorista con todos los precios por unidad y por bulto.">
       </a>
     </div>
   </section>
@@ -3489,7 +3489,22 @@ function _driveToImg(raw){
 // Fotos de productos servidas desde Cloudinary (public_id = ID del artículo).
 // El Apps Script del dueño sube cada foto acá con ese mismo ID.
 const _CLOUD='hswu4zpv';
-function _prodImg(id,w){ return id?('https://res.cloudinary.com/'+_CLOUD+'/image/upload/f_auto,q_auto,w_'+(w||500)+'/'+id):''; }
+// Las fotos que compartiste desde el panel viven en este mismo repo y mandan
+// sobre las de Cloudinary. Si el archivo no está, sigue todo como antes.
+var _FOTOS_PROPIAS = {};   // {articulo: extension}
+var _FOTOS_LISTAS = fetch('fotos-propias.json?t=' + Date.now(), {cache:'no-store'})
+  .then(function(r){ return r.ok ? r.json() : {}; })
+  .then(function(j){ _FOTOS_PROPIAS = j || {}; })
+  .catch(function(){});
+function _tieneFotoPropia(id){ return !!(id && _FOTOS_PROPIAS[String(id).trim()]); }
+function _prodImg(id,w){
+  if (!id) return '';
+  var clave = String(id).trim(), ext = _FOTOS_PROPIAS[clave];
+  // Absoluta a propósito: las tarjetas validan con startsWith('http') y una ruta
+  // relativa las haría mostrar el placeholder.
+  if (ext) return new URL('fotos/' + clave + '.' + ext, document.baseURI).href;
+  return 'https://res.cloudinary.com/'+_CLOUD+'/image/upload/f_auto,q_auto,w_'+(w||500)+'/'+id;
+}
 
 // Parsea "250g/500g/1kg" o "1 unidad" y devuelve array de claves de opciones válidas
 function _parseCantidades(str){
@@ -3590,7 +3605,7 @@ function sincronizarDesdeSheets(){
         const esKgNombre=/x kg|xkg|x 1 kg| kg/i.test(nombre);
         const esKg=_infCants.length?esKgInfo:esKgNombre;
         const esEspecia=['especias','infusiones'].includes(cat.id);
-        const imgUrl=(inf.imagen||imgPrecios)?_prodImg(productId,500):'';
+        const imgUrl=(inf.imagen||imgPrecios||_tieneFotoPropia(productId))?_prodImg(productId,500):'';
         const infoText=inf.info||'';
         const sabores=inf.sabores||null;
         let opts;
@@ -4603,7 +4618,7 @@ function _triggerMayoristaConfetti(){
     toast=document.createElement('div');
     toast.id='mayToast';
     toast.className='may-toast may-toast-img';
-    toast.innerHTML='<img src="discount-unlocked.png" alt="\u00a1Desbloqueaste tu descuento!" class="may-toast-imgsrc">';
+    toast.innerHTML='<img src="discount-unlocked.webp" alt="\u00a1Desbloqueaste tu descuento!" class="may-toast-imgsrc">';
     document.body.appendChild(toast);
   }
   toast.classList.remove('hide');
@@ -4879,7 +4894,7 @@ function cargarMayorista() {
     }
   } catch(e) {}
 
-  Promise.all([_cargarInfoMay(), _cargarInfo()]).then(([infoMay, INFO]) => {
+  Promise.all([_cargarInfoMay(), _cargarInfo(), _FOTOS_LISTAS]).then(([infoMay, INFO]) => {
     function _procesarCSVMayorista(csv) {
       const filas = _parseCSV(csv);
       const prodsTemp = [];
@@ -4897,7 +4912,7 @@ function cargarMayorista() {
         const inf          = infoMay[artId] || infoMay[_norm(nombre)] || {};
         const bulto        = inf.bulto  || 1;
         const sabores      = inf.sabores || null;
-        const imgUrl       = inf.imagen ? _prodImg(artId,500) : '';
+        const imgUrl       = (inf.imagen || _tieneFotoPropia(artId)) ? _prodImg(artId,500) : '';
         const nombreFinal  = inf.nombre  || nombre;
         const precioTotal  = precio * bulto;
         // Texto de info: viene de la MISMA hoja "Info" que lee la minorista (INFO_CSV_URL),
@@ -7275,8 +7290,8 @@ window.addEventListener('online', function() {
   if (!('serviceWorker' in navigator)) return;
 
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/paladeardistribuidora/sw.js', {
-      scope: '/paladeardistribuidora/'
+    navigator.serviceWorker.register('/paladeardistribuidora-test/sw.js', {
+      scope: '/paladeardistribuidora-test/'
     })
     .then(function(reg) {
       console.log('[PWA] Service Worker registrado. Scope:', reg.scope);
@@ -8783,11 +8798,28 @@ body.may-redesign.checkout-open #cart-fab-may,body.may-redesign.checkout-open #b
 
   var originalSearch=window.compactOnSearch;
   if(typeof originalSearch==='function'){
+    function keepCompactSearchFocus(){
+      var input=document.querySelector('.header .hd-buscador .compact-search')||document.getElementById('compactSearchInput');
+      if(!input)return;
+      document.body.classList.add('compact-on');
+      requestAnimationFrame(function(){
+        try{input.focus({preventScroll:true});}catch(e){input.focus();}
+        var len=(input.value||'').length;
+        try{input.setSelectionRange(len,len);}catch(e){}
+      });
+      setTimeout(function(){
+        if(document.activeElement!==input){
+          try{input.focus({preventScroll:true});}catch(e){input.focus();}
+        }
+      },80);
+    }
     window.compactOnSearch=function(value){
+      var shouldKeepFocus=String(value||'').trim()&&(document.body.classList.contains('may-home-view')||document.body.classList.contains('may-offers-view'));
       if(String(value||'').trim()&&(document.body.classList.contains('may-home-view')||document.body.classList.contains('may-offers-view'))){
         window.mayShowProducts({scroll:false,keepSearch:true});
       }
       originalSearch(value);
+      if(shouldKeepFocus)keepCompactSearchFocus();
       if(document.body.classList.contains('may-mobile-search-open')){
         requestAnimationFrame(function(){
           var input=document.querySelector('.header .hd-buscador .compact-search');
