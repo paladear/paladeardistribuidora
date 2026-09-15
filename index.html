@@ -1427,6 +1427,14 @@ body.compact-on .compact-header{transform:translateY(0);pointer-events:auto}
 .compact-wave path{fill:#547692}
 @media(min-width:768px){.compact-inner{padding:10px 24px;min-height:64px;gap:14px}.compact-logo{width:48px;height:48px}.compact-hamb{width:44px;height:44px}.compact-search{font-size:15px;padding:10px 18px}}
 .may-pcard .pcard-name-may{font-weight:700;font-size:15px;line-height:1.35;margin-bottom:4px}
+/* ── Nombre, contenido y marca ── */
+.info-modal-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0 10px}
+.info-modal-meta .nom-c{margin-left:0;font-size:15px}
+.info-modal-meta .nom-m,.search-suggestion-item .nom-m{display:inline;margin:0 0 0 7px;font-size:10.5px}
+.nom-p{font-weight:800}
+.nom-c{font-weight:500;color:var(--muted-fg,#5b6f80);margin-left:5px}
+.nom-m{display:block;margin-top:2px;font-style:normal;font-weight:700;font-size:10.5px;
+  letter-spacing:.09em;text-transform:uppercase;color:#6d90aa}
 .may-qty-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 
 /* ── UNIFICACIÓN BANNERS MIX & GRANOLA (al final para ganar la cascada) ── */
@@ -2655,6 +2663,7 @@ function showInfo(pid){
     <button class="info-modal-close" onclick="document.getElementById('infoModal').remove()">×</button>
     ${hasSrc?`<div class="info-modal-img"><img src="${p[6]}" alt="${p[2]}"></div>`:''}
     <h3 class="info-modal-title">${_tc(p[2])}</h3>
+    ${(_envaseDeMay(p)||_marcaDeMay(p))?`<div class="info-modal-meta">${_envaseDeMay(p)?`<span class="nom-c">${_envaseDeMay(p)}</span>`:''}${_marcaDeMay(p)?`<em class="nom-m">${_marcaDeMay(p)}</em>`:''}</div>`:''}
     <div class="info-modal-text">${p[8].replace(/\n/g,'<br>')}</div>
   </div>`;
   document.body.appendChild(m);
@@ -3153,11 +3162,13 @@ function _updateSuggestions(value){
   for(const{p}of scored){
     const nombre=_tc(p[2]);
     if(seen.has(nombre))continue;
-    seen.add(nombre);top.push(nombre);
+    // El envase y la marca van en la sugerencia para poder distinguir dos parecidos;
+    // al elegirla, en el buscador se escribe el nombre solo.
+    seen.add(nombre);top.push({txt:nombre,html:_nomHTMLMay(p,nombre)});
     if(top.length>=6)break;
   }
   if(!top.length){box.classList.remove('active');box.innerHTML='';return;}
-  box.innerHTML=top.map(n=>`<div class="search-suggestion-item" onmousedown="_pickSuggestion('${n.replace(/'/g,"\\'")}')"><span class="sug-icon">🔍</span>${n}</div>`).join('');
+  box.innerHTML=top.map(n=>`<div class="search-suggestion-item" onmousedown="_pickSuggestion('${n.txt.replace(/'/g,"\\'")}')"><span class="sug-icon">🔍</span>${n.html}</div>`).join('');
   box.classList.add('active');
 }
 window._updateSuggestions=_updateSuggestions;
@@ -4994,7 +5005,8 @@ function cargarMayorista() {
         prodsTemp.push([
           pid++, cat.id, nombreFinal, rubro, 'und', false, imgUrl,
           opts, infoText, sabores, false, false,
-          { bulto, bultoUnidad: inf.bultoUnidad || 'unidad', artId }
+          { bulto, bultoUnidad: inf.bultoUnidad || 'unidad', artId,
+            marca: inf.marca || '', envase: inf.envase || '' }
         ]);
 
         MAY_BULTO_MAP[artId] = { bulto, nombre: nombreFinal, sabores, imagen: imgUrl, precio };
@@ -5083,6 +5095,7 @@ function _cargarInfoMay() {
             ((/kg|kgr|kilo/i.test(bultoRaw) || (bulto % 1 !== 0)) ? 'kg' : 'unidad');
           const entry = {
             nombre: f.nombre || '', bulto, bultoUnidad,
+            marca: f.marca || '', envase: f.envase || '',
             sabores: f.sabores ? String(f.sabores).split('/').map(x => x.trim()).filter(Boolean) : null,
             imagen: f.imagen || ''
           };
@@ -5596,6 +5609,22 @@ function volverMayInicio() {
 }
 window.volverMayInicio = volverMayInicio;
 
+/* ── NOMBRE, CANTIDAD Y MARCA ─────────────────────────────────────────────────
+   Igual que en la tienda minorista: el nombre en negra, el contenido del envase
+   en gris al lado y la marca en mayúsculas finitas. Un producto que se vende por
+   peso no trae envase, así que muestra el nombre solo, como siempre. */
+function _envaseDeMay(p){ return (p[12] && p[12].envase) || ''; }
+function _marcaDeMay(p){ return (p[12] && p[12].marca) || ''; }
+
+function _nomHTMLMay(p, nombreYaPintado){
+  const base = nombreYaPintado || _tc(p[2]);
+  const env = _envaseDeMay(p), mar = _marcaDeMay(p);
+  if (!env && !mar) return `<b class="nom-p">${base}</b>`;
+  return `<b class="nom-p">${base}</b>`
+    + (env ? `<span class="nom-c">${env}</span>` : '')
+    + (mar ? `<em class="nom-m">${mar}</em>` : '');
+}
+
 function renderCardMay(p, suffix) {
   const opts      = Object.keys(p[7]);
   const precio    = opts.length ? p[7][opts[0]][0] : 0;
@@ -5626,7 +5655,7 @@ function renderCardMay(p, suffix) {
   h += `<div class="pcard-body">`;
 
   // Nombre
-  h += `<div class="pcard-head"><div class="pcard-name">${_tc(p[2])}</div>`;
+  h += `<div class="pcard-head"><div class="pcard-name">${_nomHTMLMay(p)}</div>`;
   if(infoText) h += `<button class="info-btn" onclick="showInfo(${p[0]})" title="Ver información" aria-label="Ver información">${MAY_INFO_ICON}</button>`;
   h += `</div>`;
 
