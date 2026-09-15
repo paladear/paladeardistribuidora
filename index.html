@@ -2120,7 +2120,8 @@ let cart=_loadCart();
 // rompía todo el script cuando había productos guardados → pantalla de carga
 // infinita. Actualizamos el badge a mano; updateCartCount() corre normal después.
 try{if(cart.length){var _badge0=document.getElementById('cartCount');if(_badge0)_badge0.textContent=cart.length;}}catch(e){}
-const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwpRm16QpdpCNTtRwtmoZsNPesqA3Vfli2LEubvunNiV0lFTH-rKPLNaIpsm531F3c9/exec';
+// La tienda minorista, de donde se sacan los precios de lista para comparar.
+const TIENDA_MIN = 'https://paladear.github.io/paladeartienda/';
 function fmt(n){return n.toLocaleString('es-AR')}
 let _loaderHidden=false;
 function hideLoader(){
@@ -3439,8 +3440,6 @@ function sendChat(){
 
 /* ── CARGA DESDE SHEETS ── */
 // URL pública de la hoja "Info" como CSV. Se completa cuando la publiques.
-// Va a ser algo tipo: https://docs.google.com/spreadsheets/d/e/XXXXXX/pub?gid=YYY&single=true&output=csv
-const INFO_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT2RlZaSdlV-aaVGUw7YI9MVE1MHjopNhbjTOfWBZwPNo_clhJUao2KNcNowEzsdBGpd2Bh5-2rt1aH/pub?gid=1603230501&single=true&output=csv';
 
 function _parseCSV(csv){
   const rows=[];
@@ -3558,11 +3557,29 @@ function _cargarInfo(){
       console.log(`📘 Info: ${Object.keys(mapa).length} entradas cargadas`);
       resolve(mapa);
     }
-    // Cargar directamente desde Sheet (GID estable, el usuario nunca reemplaza esta hoja)
-    if(!INFO_CSV_URL||INFO_CSV_URL.indexOf('REEMPLAZAR')>=0){console.warn('ℹ️ Hoja Info no configurada aún');resolve({});return;}
-    fetch(INFO_CSV_URL+'&t='+Date.now(),{cache:'no-store'})
-      .then(r=>r.text()).then(csv=>_procesar(csv))
-      .catch(err=>{console.warn('⚠️ Error cargando Info:',err);resolve({});});
+    // Las fichas minoristas salen del panel de la tienda minorista, no del Sheet.
+    fetch(TIENDA_MIN + 'catalogo-panel.json?t=' + Date.now(), {cache:'no-store'})
+      .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(j => {
+        const fichas = j.fichas || {}, mapa = {};
+        Object.keys(fichas).forEach(id => {
+          const f = fichas[id];
+          const entrada = {
+            nombre: f.nombre || '',
+            cantidades: _parseCantidades(f.cantidades),
+            info: f.desc || '',
+            sabores: _parseCantidades(f.sabores),
+            imagen: f.imagen || '',
+            mix: f.mix === true,
+            oferta: f.oferta || 0
+          };
+          mapa[id] = entrada;
+          if (entrada.nombre && _norm(entrada.nombre) !== id) mapa[_norm(entrada.nombre)] = entrada;
+        });
+        console.log('📘 Info: ' + Object.keys(mapa).length + ' entradas del panel');
+        resolve(mapa);
+      })
+      .catch(err => { console.warn('⚠️ Error cargando las fichas del panel:', err); resolve({}); });
   });
 }
 
@@ -3644,26 +3661,27 @@ function sincronizarDesdeSheets(){
       }
     }
 
-    // Cargar directamente desde Apps Script JSONP (referencia la hoja por nombre, no GID)
+    // Los precios minoristas salen de la lista que publica el panel en la tienda
+    // minorista. Antes venían del Apps Script del Google Sheet.
     window.recibirPrecios=function(csv){
       try { _procesarCSV(csv); }
       catch(e){ console.warn('⚠️ Error procesando CSV:',e); hideLoader(); }
     };
     let _retried=false;
     function _cargarScript(){
-      const s=document.createElement('script');
-      s.onerror=()=>{
-        if(!_retried){
-          _retried=true;
-          console.warn('⚠️ Error cargando Sheet, reintentando en 3s...');
-          setTimeout(_cargarScript,3000);
-        } else {
-          console.warn('⚠️ Error cargando Sheet tras reintento');
-          renderCatsUI();renderCarruseles();hideLoader();
-        }
-      };
-      s.src=APPS_SCRIPT_URL+'?callback=recibirPrecios&t='+Date.now()+'&v='+Math.random().toString(36).slice(2);
-      document.head.appendChild(s);
+      fetch(TIENDA_MIN + 'precios-min.csv?t=' + Date.now(), {cache:'no-store'})
+        .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+        .then(csv => window.recibirPrecios(csv))
+        .catch(e => {
+          if(!_retried){
+            _retried=true;
+            console.warn('⚠️ Error cargando precios minoristas, reintentando en 3s...',e);
+            setTimeout(_cargarScript,3000);
+          } else {
+            console.warn('⚠️ Error cargando precios minoristas tras reintento',e);
+            renderCatsUI();renderCarruseles();hideLoader();
+          }
+        });
     }
     _cargarScript();
   });
@@ -4708,9 +4726,6 @@ function _triggerMayoristaConfetti(){
 // ── LISTA MAYORISTA ──
 // ▼▼▼ CONFIGURACIÓN: reemplazá estos GIDs con los de tu Google Sheet ▼▼▼
 // Para obtenerlos: abrí el Sheet → hacé clic en la pestaña de cada hoja → fijate el gid=XXXXXXX en la URL
-const MAY_PRECIOS_GID = '545595949'; // Hoja 3 — Precios Mayorista (precio por unidad)
-const MAY_INFO_GID    = '896338689'; // Hoja 4 — Info Mayorista (col C = bultos)
-const SHEET_BASE_URL  = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT2RlZaSdlV-aaVGUw7YI9MVE1MHjopNhbjTOfWBZwPNo_clhJUao2KNcNowEzsdBGpd2Bh5-2rt1aH/pub';
 // ▲▲▲ FIN CONFIGURACIÓN ▲▲▲
 // Número WhatsApp mayorista
 const WA_MAYORISTA = '5492615652251';
@@ -4915,7 +4930,7 @@ function cargarMayorista() {
         const imgUrl       = (inf.imagen || _tieneFotoPropia(artId)) ? _prodImg(artId,500) : '';
         const nombreFinal  = inf.nombre  || nombre;
         const precioTotal  = precio * bulto;
-        // Texto de info: viene de la MISMA hoja "Info" que lee la minorista (INFO_CSV_URL),
+        // Texto de info: sale del panel de la tienda minorista,
         // cruzado por Artículo(ID) — así ambas páginas muestran la misma descripción.
         const artIdKey     = artId.replace(/\./g, '').replace(/,.*$/, '');
         const infoBase     = INFO[artIdKey] || INFO[_norm(nombreFinal)] || {};
@@ -4958,8 +4973,8 @@ function cargarMayorista() {
       if (mob)  mob.innerHTML  = '';
     }
 
-    // Cargar por nombre de hoja (sin GID — "Mayorista" nunca cambia aunque cambies el Excel)
-    const mayUrl = 'https://docs.google.com/spreadsheets/d/1aANKgaQFoiAixKQvPlRpZ0_PBQhES-iBWqOG1bsuLyg/gviz/tq?tqx=out:csv&sheet=Mayorista&t=' + Date.now();
+    // La lista mayorista sale del propio repo: la publica el panel desde el Excel.
+    const mayUrl = 'precios-may.csv?t=' + Date.now();
     fetch(mayUrl, { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
       .then(csv => _procesarCSVMayorista(csv))
@@ -5003,11 +5018,27 @@ function _cargarInfoMay() {
       });
       resolve(mapa);
     }
-    // Cargar directamente desde Sheet (GID estable, el usuario nunca reemplaza esta hoja)
-    if (MAY_INFO_GID.includes('REEMPLAZAR')) { console.warn('ℹ️ MAY_INFO_GID no configurado.'); resolve({}); return; }
-    const infoUrl = SHEET_BASE_URL + '?gid=' + MAY_INFO_GID + '&single=true&output=csv';
-    fetch(infoUrl + '&t=' + Date.now(), { cache: 'no-store' })
-      .then(r => r.text()).then(csv => _procesar(csv))
+    // Las fichas mayoristas salen del panel de esta misma distribuidora.
+    fetch('catalogo-panel.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(j => {
+        const fichas = j.fichas || {}, mapa = {};
+        Object.keys(fichas).forEach(artId => {
+          const f = fichas[artId];
+          const bultoRaw = String(f.bulto == null ? '' : f.bulto).trim();
+          const bulto = parseFloat(bultoRaw.replace(',', '.')) || 1;
+          const bultoUnidad = f.bultoUnidad ||
+            ((/kg|kgr|kilo/i.test(bultoRaw) || (bulto % 1 !== 0)) ? 'kg' : 'unidad');
+          const entry = {
+            nombre: f.nombre || '', bulto, bultoUnidad,
+            sabores: f.sabores ? String(f.sabores).split('/').map(x => x.trim()).filter(Boolean) : null,
+            imagen: f.imagen || ''
+          };
+          mapa[artId] = entry;
+          if (entry.nombre && _norm(entry.nombre) !== artId) mapa[_norm(entry.nombre)] = entry;
+        });
+        resolve(mapa);
+      })
       .catch(() => resolve({}));
   });
 }
@@ -6656,7 +6687,6 @@ var _recetasFiltroActivo = '';
 var _ultimaCatRecetas = '';
 
 // URL de la hoja "inspiracion" — usa gviz/tq para resolver por nombre
-const RECETAS_URL = 'https://docs.google.com/spreadsheets/d/1aANKgaQFoiAixKQvPlRpZ0_PBQhES-iBWqOG1bsuLyg/gviz/tq?tqx=out:csv&sheet=inspiracion';
 
 function _parseCSVRows(text) {
   // Parser CSV completo que respeta comillas (incluso saltos de línea dentro de campos)
@@ -6718,21 +6748,11 @@ function _parseRecetasCSV(text) {
 
 
 function cargarRecetas() {
-  if (_recetasCargadas) return Promise.resolve(RECETAS);
-  return fetch(RECETAS_URL + '&t=' + Date.now(), { cache: 'no-store' })
-    .then(r => r.text())
-    .then(text => {
-      RECETAS = _parseRecetasCSV(text);
-      _recetasCargadas = true;
-      console.log('🍴 Paladear: ' + RECETAS.length + ' recetas cargadas');
-      return RECETAS;
-    })
-    .catch(err => {
-      console.warn('No se pudieron cargar las recetas:', err);
-      RECETAS = [];
-      _recetasCargadas = true;
-      return RECETAS;
-    });
+  // La sección Inspiración no se muestra en la distribuidora y su hoja era la
+  // última atadura al Google Sheet: queda sin datos, sin pedir nada afuera.
+  _recetasCargadas = true;
+  RECETAS = [];
+  return Promise.resolve(RECETAS);
 }
 
 function _getInstagramPostId(url) {
