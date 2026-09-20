@@ -1449,20 +1449,10 @@ input[type=search]{-webkit-appearance:none;appearance:none}
 .search-suggestion-item.sug-marca .sug-icon{opacity:1;font-size:11px}
 .search-suggestion-item.sug-marca b{font-weight:800}
 
-/* ── La barra del filtro puesto ──
-   Queda pegada arriba mientras scrolleás, así el botón de categorías está siempre a
-   mano. Acá el buscador del celular es un botón que abre la búsqueda, no un campo,
-   así que el hamburguesa del header se queda: no le está robando lugar a nada. */
-.filtro-activo{display:flex;align-items:center;gap:10px;
-  margin:-18px -20px 14px;padding:9px 16px;
-  background:#456b89;color:#fff;border:0;border-radius:0;
-  border-bottom:1px solid rgba(255,255,255,.2)}
-@media(min-width:768px){
-  /* En escritorio no cruza toda la pantalla: una tira centrada, del mismo azul,
-     colgada del header. */
-  .filtro-activo{max-width:620px;margin:0 auto 16px;padding:9px 12px;
-    border-radius:0 0 14px 14px;border-bottom:0}
-}
+/* ── Indicador de categoría / marca ──
+   En celular acompaña al header durante el scroll. En escritorio es un encabezado
+   tipográfico sin tarjeta, compartido por los filtros actuales y futuros. */
+.filtro-activo{display:flex;align-items:center;gap:10px}
 .filtro-activo .fa-cats{flex:0 0 auto;width:38px;height:38px;border-radius:10px;border:0;
   background:var(--muted);color:var(--azul-dark);cursor:pointer;display:flex;
   align-items:center;justify-content:center;padding:0;transition:background .15s}
@@ -1490,6 +1480,32 @@ input[type=search]{-webkit-appearance:none;appearance:none}
 .filtro-activo .fa-txt i{color:rgba(255,255,255,.72)!important}
 .filtro-activo .fa-txt b{color:#fff!important}
 .filtro-activo .fa-n{background:rgba(255,255,255,.18)!important;color:#fff!important}
+@media(min-width:768px){
+  .filtro-activo{margin:0 0 22px;padding:4px 0 13px;background:transparent;color:var(--azul-dark);
+    border:0;border-bottom:1px solid rgba(69,107,137,.22);border-radius:0;align-items:flex-end}
+  .filtro-activo .fa-cats{display:none!important}
+  .filtro-activo .fa-volver{width:32px;height:32px;margin-bottom:1px;background:transparent!important;
+    color:var(--azul-dark)!important;border:1px solid rgba(69,107,137,.3)!important;border-radius:9px}
+  .filtro-activo .fa-volver:hover{background:var(--azul-light)!important}
+  .filtro-activo .fa-volver svg{width:17px;height:17px}
+  .filtro-activo .fa-txt{gap:2px}
+  .filtro-activo .fa-txt i{color:var(--azul-mid)!important;font-size:10px;letter-spacing:.14em}
+  .filtro-activo .fa-txt b{color:var(--azul-dark)!important;font-size:25px;line-height:1.08;
+    letter-spacing:-.025em;white-space:normal;text-wrap:balance}
+  .filtro-activo .fa-n{margin-bottom:2px;background:var(--azul-light)!important;
+    color:var(--azul-dark)!important;padding:4px 9px}
+}
+@media(max-width:767px){
+  /* El header de Productos mide 68 px. La franja se mantiene debajo sin tapar el
+     logo, el buscador ni el hamburguesa. */
+  body.may-redesign.may-products-view .filtro-activo{position:sticky;top:68px;z-index:10010;
+    margin:-18px -20px 14px;padding:7px 12px 8px;background:#456b89;color:#fff;
+    border:0;border-bottom:1px solid rgba(255,255,255,.2);border-radius:0;
+    box-shadow:0 7px 14px rgba(20,53,78,.14)}
+  body.may-redesign.may-products-view .filtro-activo .fa-volver{width:34px;height:34px;margin-top:3px;
+    border-radius:9px}
+  body.may-redesign.may-products-view .filtro-activo .fa-volver svg{width:17px;height:17px}
+}
 .search-suggestion-item:hover{background:var(--muted);color:var(--fg)}
 .search-suggestion-item .sug-icon{flex-shrink:0;opacity:.55;font-size:13px}
 .compact-search::placeholder{color:#90a0b0}
