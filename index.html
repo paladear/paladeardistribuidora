@@ -1499,7 +1499,7 @@ input[type=search]{-webkit-appearance:none;appearance:none}
   /* El header de Productos mide 68 px. La franja se mantiene debajo sin tapar el
      logo, el buscador ni el hamburguesa. */
   body.may-redesign.may-products-view .filtro-activo{position:sticky;top:68px;z-index:10010;
-    margin:-18px -20px 14px;padding:7px 12px 8px;background:#456b89;color:#fff;
+    margin:-28px -20px 14px;padding:7px 12px 8px;background:#456b89;color:#fff;
     border:0;border-bottom:1px solid rgba(255,255,255,.2);border-radius:0;
     box-shadow:0 7px 14px rgba(20,53,78,.14)}
   body.may-redesign.may-products-view .filtro-activo .fa-volver{width:34px;height:34px;margin-top:3px;
@@ -1680,12 +1680,12 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
     <a href="https://www.instagram.com/paladear.distribuidora" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
     </a>
-    <button type="button" onclick="compartirTienda()" aria-label="Compartir la tienda" title="Compartir la tienda" style="background:none;border:0;padding:0;cursor:pointer;color:inherit;display:inline-flex;align-items:center">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
-    </button>
     <a href="https://maps.app.goo.gl/MXySPy9mbBFm8oVaA" target="_blank" rel="noopener noreferrer" aria-label="Ubicación en Google Maps">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
     </a>
+    <button type="button" onclick="compartirTienda()" aria-label="Compartir la tienda" title="Compartir la tienda">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+    </button>
   </nav>
 
   <div class="hd-buscador">
@@ -9002,11 +9002,12 @@ window.addEventListener('online', function() {
   .may-redesign .header-inner{padding-right:10px}
   .may-redesign .hd-accesos{display:none!important}
   .may-mobile-socials{display:flex;align-items:center;gap:2px;margin-right:auto}
-  .may-mobile-socials a{
+  .may-mobile-socials a,.may-mobile-socials button{
     display:grid;width:34px;height:34px;place-items:center;border-radius:10px;color:#fff;
-    text-decoration:none;transition:background .18s ease,transform .16s ease
+    padding:0;border:0;background:transparent;text-decoration:none;
+    transition:background .18s ease,transform .16s ease
   }
-  .may-mobile-socials a:active{background:rgba(255,255,255,.16);transform:scale(.92)}
+  .may-mobile-socials a:active,.may-mobile-socials button:active{background:rgba(255,255,255,.16);transform:scale(.92)}
   .may-mobile-socials svg{width:22px;height:22px}
 
   .may-home-band-categories{padding:34px 0 29px}
@@ -9086,7 +9087,7 @@ window.addEventListener('online', function() {
 
 @media(max-width:350px){
   .may-mobile-socials{gap:1px}
-  .may-mobile-socials a{width:31px;height:31px}
+  .may-mobile-socials a,.may-mobile-socials button{width:31px;height:31px}
   .may-mobile-socials svg{width:20px;height:20px}
   .may-mobile-header-actions{gap:2px}
   .may-home-cat img{width:96px;height:96px}
