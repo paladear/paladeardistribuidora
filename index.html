@@ -1908,9 +1908,7 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
         <span class="may-home-section-kicker" id="mayHomeCatsTitle">Explorá por categoría</span>
       </div>
       <div class="may-home-cats-carousel">
-        <button type="button" class="may-cats-flecha izq" id="mayCatsIzq" aria-label="Ver categorías anteriores">&#8249;</button>
         <div class="may-home-cats-grid" id="mayHomeCatsTrack" aria-label="Todas las categorías"></div>
-        <button type="button" class="may-cats-flecha der" id="mayCatsDer" aria-label="Ver más categorías">&#8250;</button>
         <div class="may-home-cat-pagination" id="mayHomeCatsPagination" role="group" aria-label="Páginas de categorías"></div>
       </div>
     </div>
@@ -5549,31 +5547,13 @@ window.addEventListener('resize',function(){
 function scrollMayHomeCats(direction){
   const track=document.getElementById('mayHomeCatsTrack');
   if(!track)return;
-  if(window.innerWidth<=760){
-    const pages=Array.from(track.querySelectorAll('.may-home-cat-page'));
-    if(!pages.length)return;
-    let current=0;
-    pages.forEach((page,index)=>{if(Math.abs(page.offsetLeft-track.scrollLeft)<Math.abs(pages[current].offsetLeft-track.scrollLeft))current=index;});
-    goMayHomeCatPage(current+direction);
-    return;
-  }
-  const card=track.querySelector('.may-home-cat');
-  const gap=parseFloat(getComputedStyle(track).gap)||15;
-  const distance=(card?card.getBoundingClientRect().width:110)+gap;
-  const start=track.scrollLeft;
-  const max=Math.max(0,track.scrollWidth-track.clientWidth);
-  const target=Math.max(0,Math.min(max,start+direction*distance));
-  const duration=360;
-  const started=performance.now();
-  if(_mayCatScrollFrame)cancelAnimationFrame(_mayCatScrollFrame);
-  function step(now){
-    const t=Math.min(1,(now-started)/duration);
-    const eased=1-Math.pow(1-t,3);
-    track.scrollLeft=start+(target-start)*eased;
-    if(t<1)_mayCatScrollFrame=requestAnimationFrame(step);
-    else{_mayCatScrollFrame=0;_updateMayHomeCatControls();}
-  }
-  _mayCatScrollFrame=requestAnimationFrame(step);
+  const pages=Array.from(track.querySelectorAll('.may-home-cat-page'));
+  if(!pages.length)return;
+  let current=0;
+  pages.forEach((page,index)=>{
+    if(Math.abs(page.offsetLeft-track.scrollLeft)<Math.abs(pages[current].offsetLeft-track.scrollLeft))current=index;
+  });
+  goMayHomeCatPage(current+direction);
 }
 window.scrollMayHomeCats=scrollMayHomeCats;
 
@@ -9867,8 +9847,9 @@ body.may-redesign.checkout-open #cart-fab-may,body.may-redesign.checkout-open #b
   .may-redesign .header-inner{padding-left:calc(clamp(34px,5.2vw,86px) + var(--may-logo-size) + 86px)!important}
 }
 @media(min-width:761px){
-  .may-home-cats-carousel{overflow:visible!important}
-  .may-home-cats-grid{padding-inline:58px!important}
+  .may-home-cats-carousel{overflow:hidden!important}
+  .may-home-cats-grid{padding:4px 0 7px!important}
+  .may-home-cat-page{box-sizing:border-box;padding-inline:58px}
   .may-home-cat-arrow{
     display:grid!important;position:absolute!important;top:50%!important;width:46px!important;height:46px!important;
     transform:translateY(-50%)!important;place-items:center!important;padding:0!important;border:1px solid rgba(255,255,255,.55)!important;
