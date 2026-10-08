@@ -8,7 +8,7 @@ layout: null
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light only">
 <title>Lista Mayorista | Paladear Distribuidora</title>
-<meta name="description" content="Lista mayorista completa de Paladear Distribuidora, Mendoza. Venta únicamente por bulto cerrado. Mínimo de $250.000 solo en el primer pedido.">
+<meta name="description" content="Lista mayorista completa de Paladear Distribuidora, Mendoza. Venta únicamente por bulto cerrado. Mínimo de $150.000 solo en el primer pedido.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://paladear.github.io/paladeardistribuidora/catalogo.html">
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-may-p-48.png">
@@ -426,7 +426,7 @@ body{--catalog-safe-start:calc(clamp(25px,4.7vw,72px) + 110px + 64px);background
         <span class="descb-go">Solo bulto cerrado</span>
       </div>
       <div class="descb-note" id="descbNote"></div>
-      <div class="descb-mlabel" id="descbLabel"><span class="descb-cnt" id="descbCnt">$0</span><span class="descb-goal" id="descbGoal">Mínimo 1er pedido: $250.000</span></div>
+      <div class="descb-mlabel" id="descbLabel"><span class="descb-cnt" id="descbCnt">$0</span><span class="descb-goal" id="descbGoal">Mínimo 1er pedido: $150.000</span></div>
       <div class="descb-track" id="descbTrack"><div class="descb-fill" id="descbFill"></div></div>
       <div class="descb-reward" id="descbRw"></div>
       <div class="descb-bulto">Los precios expresados en este catálogo <b>NO INCLUYEN IVA</b>.</div>
@@ -462,7 +462,7 @@ body{--catalog-safe-start:calc(clamp(25px,4.7vw,72px) + 110px + 64px);background
 
 <script>
 const WA='5492615652251';   // WhatsApp mayorista
-const MIN_PRIMER_PEDIDO=250000;  // mínimo SOLO para el primer pedido; después se compra sin mínimo
+const MIN_PRIMER_PEDIDO=150000;  // mínimo SOLO para el primer pedido; después se compra sin mínimo
 const PEDIDOS_KEY='paladear_pedidos_may_v1';   // misma clave que la web: si ya pidió ahí, acá tampoco es su primer pedido
 /* El mínimo rige únicamente mientras no haya ningún pedido en el historial local (igual que la web) */
 function esPrimerPedido(){ try{ const a=JSON.parse(localStorage.getItem(PEDIDOS_KEY)||'[]'); return !Array.isArray(a)||a.length===0; }catch(e){ return true; } }
@@ -1292,7 +1292,7 @@ function _coMarkRequired(id) {
 
 /* ── El banner sigue el total real del pedido ── */
 /* El banner muestra la condición REAL del cliente:
-   - Primer pedido: barra de progreso hacia el mínimo de $250.000.
+   - Primer pedido: barra de progreso hacia el mínimo de $150.000.
    - Del segundo en adelante: no hay mínimo, así que no se muestra barra ni meta. */
 function pintarBanner(){
   var cnt=document.getElementById('descbCnt'), fill=document.getElementById('descbFill'),
