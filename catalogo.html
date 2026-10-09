@@ -675,7 +675,8 @@ function recuperar(){
 }
 
 /* Total del pedido. `minimo` es 0 cuando ya no es el primer pedido.
-   `alcanza` dice si se puede enviar (siempre true si no hay mínimo vigente). */
+   `alcanza` dice si se llego al minimo (siempre true si no hay minimo vigente).
+   Es solo para los carteles: el envio nunca se frena. */
 function totales(){
   let n=0, total=0, bultos=0;
   Object.keys(pedido).forEach(id=>{
@@ -797,12 +798,10 @@ function actualizarBarra(){
 function enviar(){
   const ids=idsDelPedido();
   if(!ids.length){ alert('Todavía no cargaste cantidades.\n\nEscribí cuántos bultos querés en el casillero de la derecha de cada producto.'); return; }
-  const t=totales();
-  // El mínimo rige SOLO en el primer pedido (igual que la web)
-  if(!t.alcanza){
-    alert('Tu primer pedido tiene un mínimo de compra de $'+fmt(t.minimo)+'.\n\nTotal actual: $'+fmt(t.total)+'\nFaltan: $'+fmt(t.minimo-t.total)+'\n\nA partir de tu segundo pedido comprás sin mínimo.');
-    return;
-  }
+  // El mínimo orienta, pero NO frena el envío: igual que en la web, el pedido se
+  // manda y se confirma por WhatsApp. Antes esta página lo frenaba con un cartel
+  // y la web no, así que el mismo cliente podía mandar el pedido desde una y
+  // desde la otra no.
   abrirCheckout();   // primero los datos del cliente, después WhatsApp
 }
 /* ── Buscador predictivo (mismo criterio que la tienda: empieza con > palabra > contiene) ── */
@@ -1231,10 +1230,7 @@ function coEnviar() {
   var ids = idsDelPedido();
   if (!ids.length) { alert('Todavía no cargaste cantidades.'); return; }
   var t = totales();
-  if (!t.alcanza) {   // red de seguridad: no se envía un primer pedido por debajo del mínimo
-    alert('Tu primer pedido tiene un mínimo de compra de $'+fmt(t.minimo)+'.\n\nFaltan: $'+fmt(t.minimo-t.total));
-    return;
-  }
+  // Sin freno por el mínimo: igual que en la web.
   // Mismo formato que el pedido mayorista de la web
   var msg = '📦 *Pedido Mayorista - Paladear Distribuidora*\n\n';
   ids.forEach(function(id){
