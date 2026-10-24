@@ -730,6 +730,12 @@ textarea.co-input{resize:vertical;min-height:60px;font-family:inherit}
 .oferta-badge{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#d4543c 0%,#b04020 100%);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;z-index:5;box-shadow:0 3px 8px rgba(180,60,30,.45);letter-spacing:.2px;transform:rotate(-6deg);transform-origin:center;transition:transform .25s ease}
 .oferta-badge:hover{transform:rotate(-3deg) scale(1.08)}
 .oferta-badge-lg{font-size:13px;padding:5px 11px;top:12px;left:12px}
+/* Sin stock: el producto se ve igual, pero sin precio y con la consulta. */
+.sin-stock-caja{background:#f3f4f6;border:1px solid #dfe3e8;border-radius:10px;padding:9px 11px;margin:8px 0 6px}
+.sin-stock-tit{font-weight:700;font-size:13.5px;color:#5a6472}
+.sin-stock-sub{font-size:12px;color:#7a838f;margin-top:2px;line-height:1.35}
+.sin-stock-btn{background:#1f9d55!important;display:block;text-align:center;text-decoration:none}
+.sin-stock-btn:hover{background:#17844b!important}
 .pcard{position:relative}
 .precio-tachado{text-decoration:line-through;color:var(--muted-fg);font-weight:600;font-size:13px;margin-right:5px}
 .precio-tachado-sm{text-decoration:line-through;color:var(--muted-fg);font-weight:600;font-size:13px;display:block;line-height:1}
@@ -5238,7 +5244,10 @@ function cargarMayorista() {
         const artId  = (cols[3] || '').replace(/^"|"$/g, '').trim();
         const nombre = (cols[4] || '').replace(/^"|"$/g, '').trim();
         const precio = _precio(cols[5] || '');
-        if (!nombre || !precio || !rubro) return;
+        // Precio 0 = sin stock. Antes el producto desaparecia del catalogo y el
+        // cliente no sabia que existia; ahora se muestra sin precio y con un boton
+        // para preguntar por WhatsApp.
+        if (!nombre || !rubro) return;
         const cat = RUBRO_MAP[rubro];
         if (!cat) return;
         if (RUBROS_OCULTOS[rubro]) return;              // rubro apagado desde el panel
@@ -5263,6 +5272,7 @@ function cargarMayorista() {
           pid++, cat.id, nombreFinal, rubro, 'und', false, imgUrl,
           opts, infoText, sabores, false, false,
           { bulto, bultoUnidad: inf.bultoUnidad || 'unidad', artId,
+            sinStock: !precio,
             marca: inf.marca || '', envase: inf.envase || '' }
         ]);
 
@@ -6027,6 +6037,15 @@ function _nomHTMLMay(p, nombreYaPintado){
     + `</span>`;
 }
 
+/* El mensaje con el que el cliente pregunta por un producto sin stock. */
+const WA_ICON_CHICO = '<svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true" style="vertical-align:-3px;margin-right:5px"><path d="M12.04 2a9.84 9.84 0 0 0-8.5 14.8L2 22l5.34-1.5A9.92 9.92 0 1 0 12.04 2Zm0 17.97a8 8 0 0 1-4.08-1.12l-.29-.17-3.17.89.9-3.09-.19-.31a7.88 7.88 0 1 1 6.83 3.8Z"/></svg>';
+function _waConsulta(p){
+  const art = (p[12] && p[12].artId) ? ' (art. ' + p[12].artId + ')' : '';
+  const txt = 'Hola! Vi en la web mayorista que *' + _tc(p[2]) + '*' + art +
+              ' está sin stock. ¿Me avisan cuándo vuelve?';
+  return 'https://wa.me/5492615652251?text=' + encodeURIComponent(txt);
+}
+
 function renderCardMay(p, suffix) {
   const opts      = Object.keys(p[7]);
   const precio    = opts.length ? p[7][opts[0]][0] : 0;
@@ -6074,6 +6093,17 @@ function renderCardMay(p, suffix) {
       <select class="sabor-select" id="${id}_sab"><option value="">Seleccionar...</option>`;
     sabores.forEach(s => { h += `<option value="${s.replace(/"/g, '&quot;')}">${s}</option>`; });
     h += `</select></div>`;
+  }
+
+  if (p[12] && p[12].sinStock) {
+    // Sin precio en la lista: no se puede pedir, pero si consultar.
+    h += `<div class="sin-stock-caja">
+      <div class="sin-stock-tit">Sin stock por ahora</div>
+      <div class="sin-stock-sub">Escribinos y te decimos cuándo vuelve.</div>
+    </div>`;
+    h += `<a class="add-btn sin-stock-btn" href="${_waConsulta(p)}" target="_blank" rel="noopener">${WA_ICON_CHICO} Consultar disponibilidad</a>`;
+    h += `</div></div>`;
+    return h;
   }
 
   // Precio
@@ -6227,14 +6257,19 @@ function openProductDetailMay(pid){
         '<div class="product-detail-buy" id="' + eid + '">' +
           '<div><span class="bulto-badge">' + MAY_CUBE_ICON + bultoLabel + '</span></div>' +
           saboresHTML +
-          '<div class="prices"><div><span class="price-label">Precio Mayorista</span>' +
+          ((p[12] && p[12].sinStock)
+            ? '<div class="sin-stock-caja"><div class="sin-stock-tit">Sin stock por ahora</div>' +
+              '<div class="sin-stock-sub">Escribinos y te decimos cuándo vuelve.</div></div>' +
+              '<a class="add-btn sin-stock-btn" href="' + _waConsulta(p) + '" target="_blank" rel="noopener">' +
+              WA_ICON_CHICO + ' Consultar disponibilidad</a>'
+            : '<div class="prices"><div><span class="price-label">Precio Mayorista</span>' +
             '<div class="price-min" style="color:var(--azul-dark)">$' + fmt(precio) + '</div>' + unitInfo +
           '</div></div>' +
           '<div class="qty-row"><button class="qty-btn" onclick="chgQtyMay(\'' + eid + '\',-1)" aria-label="Restar cantidad">−</button>' +
             '<span class="qty-val" id="' + eid + '_q">1</span>' +
             '<button class="qty-btn" onclick="chgQtyMay(\'' + eid + '\',1)" aria-label="Sumar cantidad">+</button></div>' +
           '<button class="add-btn" id="' + eid + '_ab" onclick="_fichaMayAgregar(' + p[0] + ')">' + ADD_CART_ICON + ' Agregar al pedido</button>' +
-          '<div class="product-detail-cart-state" id="mayDetailCartState">' + _textoPedidoMay(p[0]) + '</div>' +
+          '<div class="product-detail-cart-state" id="mayDetailCartState">' + _textoPedidoMay(p[0]) + '</div>') +
         '</div>' +
       '</div>' +
       '<div class="product-detail-rel" id="mayDetailRel"></div>' +
