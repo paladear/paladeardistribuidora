@@ -382,6 +382,11 @@ body{--catalog-safe-start:calc(clamp(25px,4.7vw,72px) + 110px + 64px);background
   .wrap{width:calc(100% - 18px);padding:20px 0 30px}
   .ayuda{font-size:12px}
 }
+.fila.sin-stock{opacity:.85}
+.pr.sinst{color:#8a8f96;font-weight:600;font-size:13px}
+.b-consultar{display:inline-block;background:#1f9d55;color:#fff;border-radius:8px;padding:6px 10px;
+  font-size:12.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+.b-consultar:hover{background:#17844b}
 </style>
 </head>
 <body>
@@ -467,6 +472,14 @@ const PEDIDOS_KEY='paladear_pedidos_may_v1';   // misma clave que la web: si ya 
 /* El mínimo rige únicamente mientras no haya ningún pedido en el historial local (igual que la web) */
 function esPrimerPedido(){ try{ const a=JSON.parse(localStorage.getItem(PEDIDOS_KEY)||'[]'); return !Array.isArray(a)||a.length===0; }catch(e){ return true; } }
 function minimoVigente(){ return esPrimerPedido()?MIN_PRIMER_PEDIDO:0; }
+/* Los precios y los bultos salen de los MISMOS archivos que lee la web mayorista:
+   precios-may.csv (lo que se publica al subir el Excel) y catalogo-panel.json
+   (las fichas). Antes esta pagina seguia leyendo el Google Sheet, que quedo
+   congelado: 95 de los 341 productos tenian ahi otro precio que el publicado, y
+   el cliente armaba el pedido con esos. */
+const ARCHIVO_PRECIOS='precios-may.csv';
+const ARCHIVO_PANEL='catalogo-panel.json';
+const WA_MAYORISTA='5492615652251';
 const SHEET='https://docs.google.com/spreadsheets/d/1aANKgaQFoiAixKQvPlRpZ0_PBQhES-iBWqOG1bsuLyg/gviz/tq?tqx=out:csv&sheet=';
 const INFO_MAY_CSV='https://docs.google.com/spreadsheets/d/1aANKgaQFoiAixKQvPlRpZ0_PBQhES-iBWqOG1bsuLyg/gviz/tq?tqx=out:csv&sheet=Info%20Mayorista';
 
@@ -494,24 +507,27 @@ let PRODS=[], CATS=[], pedido={}, filtro='';
 
 async function cargar(){
   try{
-    const [infoTxt,preTxt]=await Promise.all([
-      fetch(INFO_MAY_CSV+'&t='+Date.now(),{cache:'no-store'}).then(r=>r.text()),
-      fetch(SHEET+'Mayorista&t='+Date.now(),{cache:'no-store'}).then(r=>r.text())
+    const [panel,preTxt]=await Promise.all([
+      fetch(ARCHIVO_PANEL+'?t='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})),
+      fetch(ARCHIVO_PRECIOS+'?t='+Date.now(),{cache:'no-store'}).then(r=>{ if(!r.ok) throw new Error('lista'); return r.text(); })
     ]);
-    /* Hoja "Info Mayorista": A=Artículo, B=Nombre, C=Bulto ("12 unid." / "2,5 kg") */
-    const INFO={};
-    _parseCSV(infoTxt).forEach((c,i)=>{
-      if(i===0||c.length<3)return;
-      const artId=(c[0]||'').trim(); if(!artId)return;
-      const nombre=(c[1]||'').trim();
-      const bultoRaw=(c[2]||'').trim();
+    /* Las fichas del panel: nombre lindo, bulto cerrado y si está apagado. */
+    const INFO={}, OCULTOS={}, RUBROS_APAGADOS={};
+    const fichas=(panel&&panel.fichas)||{};
+    ((panel&&panel.rubrosOcultos)||[]).forEach(r=>{ RUBROS_APAGADOS[String(r).trim().toUpperCase()]=true; });
+    Object.keys(fichas).forEach((idFicha)=>{
+      const artId=String(idFicha).trim(); if(!artId)return;
+      const f=fichas[artId]||{};
+      if(f.oculto===true){ OCULTOS[artId]=true; return; }   // apagado desde el panel
+      const nombre=(f.nombre||'').trim();
+      const bultoRaw=String(f.bulto==null?'':f.bulto).trim();
       const bulto = parseFloat(bultoRaw.replace(',','.'))||1;   // misma lectura que la web
       const e={
         nombre,
         bulto,
         // Un bulto con decimales (ej. 11,34) nunca son unidades sueltas: es peso.
-        // Así, si en la planilla falta la palabra "kg", igual se muestra bien.
-        bultoUnidad: (/kg|kgr|kilo/i.test(bultoRaw) || bulto%1!==0) ? 'kg' : 'unidad'
+        // Así, si en la ficha falta la palabra "kg", igual se muestra bien.
+        bultoUnidad: f.bultoUnidad || ((/kg|kgr|kilo/i.test(bultoRaw) || bulto%1!==0) ? 'kg' : 'unidad')
       };
       INFO[artId]=e;
       if(nombre&&_norm(nombre)!==artId)INFO[_norm(nombre)]=e;
@@ -525,7 +541,10 @@ async function cargar(){
       const artId=(c[3]||'').trim();
       const nombre=(c[4]||'').trim();
       const pu=_precio(c[5]||'');                 // precio por unidad
-      if(!nombre||!pu||!rubro)return;
+      // Precio 0 = sin stock: se muestra igual, sin precio y con la consulta.
+      if(!nombre||!rubro)return;
+      if(artId&&OCULTOS[artId])return;            // producto apagado en el panel
+      if(RUBROS_APAGADOS[rubro])return;           // rubro apagado en el panel
       const cat=RUBRO_MAP[rubro]; if(!cat)return;
       catMap[cat.id]=cat;
       const inf=INFO[artId]||INFO[_norm(nombre)]||{};
@@ -536,6 +555,7 @@ async function cargar(){
         pu, bulto, bultoUnidad,
         pb:pu*bulto,                              // precio del bulto cerrado (se redondea recién al mostrar,
                                                   // igual que la web: si no, con varios bultos se acumula diferencia)
+        sinStock:!pu,
         bultoLabel:bultoTexto(bulto,bultoUnidad)
       });
     });
@@ -585,6 +605,17 @@ function render(){
     items.forEach(p=>{
       const it=pedido[p.id];
       const tiene=!!(it&&it.cant);
+      if(p.sinStock){
+        html+=`<div class="fila sin-stock" id="f_${p.id}">
+          <div class="nom">${p.nombre}<small class="bulto">Bulto: ${p.bultoLabel}</small></div>
+          <div class="pr menor sinst">Sin stock</div>
+          <div class="pr mayor sinst">—</div>
+          <div class="cant"><a class="b-consultar" target="_blank" rel="noopener"
+             href="https://wa.me/${WA_MAYORISTA}?text=${encodeURIComponent('Hola! Vi en la lista mayorista que *'+p.nombre+'* (art. '+p.id+') está sin stock. ¿Me avisan cuándo vuelve?')}">Consultar</a></div>
+          <div class="sub"></div>
+        </div>`;
+        return;
+      }
       html+=`<div class="fila${tiene?' tiene':''}" id="f_${p.id}">
         <div class="nom">${p.nombre}<small class="bulto">Bulto: ${p.bultoLabel}</small></div>
         <div class="pr menor">$${fmt(p.pu)}</div>
