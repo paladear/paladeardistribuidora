@@ -8791,6 +8791,11 @@ window.addEventListener('online', function() {
   .may-redesign .mayorista-section .qty-btn{width:32px;height:32px;font-size:18px}
   .may-redesign .mayorista-section .qty-val{min-width:22px;font-size:15px}
   .may-redesign .mayorista-section .add-btn{min-height:42px;padding:9px 5px;gap:5px;font-size:11.5px;white-space:nowrap}
+  /* El de sin stock es el unico con un texto largo: que pueda ir en dos renglones
+     en vez de salirse de la tarjeta. Va con la misma especificidad que el de
+     arriba, si no pierde y vuelve a quedar cortado. */
+  .may-redesign .mayorista-section a.sin-stock-btn{white-space:normal;font-size:11px;
+    padding:8px 6px;line-height:1.25;min-height:0;height:auto}
   .may-redesign .mayorista-section .allcat-sec{margin-bottom:30px}
   .may-redesign .mayorista-section .allcat-name{font-size:16px}
 }
