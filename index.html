@@ -3896,6 +3896,9 @@ function _cargarInfo(){
             sabores: _parseCantidades(f.sabores),
             imagen: f.imagen || '',
             mix: f.mix === true,
+            // Sin esto el armador de granola se quedaba sin productos: la ficha
+            // traia la casilla pero no se copiaba aca.
+            granola: f.granola === true,
             // Hacen falta para el mensaje de WhatsApp: sin la marca y el contenido
             // no se entiende qué producto es cuál.
             marca: f.marca || '',
@@ -4714,7 +4717,9 @@ function granolaPickSize(g){
   },120);
 }
 
-function granolaGranelProds(){return PRODS.filter(p=>p[4]==='kg'&&p[10]===true);}
+/* La casilla "Granola" de la ficha. Antes miraba la de mix, asi que en la
+   granola aparecian tambien los tes y las especias. */
+function granolaGranelProds(){return PRODS.filter(p=>p[4]==='kg'&&p[11]===true);}
 // Grupos fijos de granola: cereales | frutos secos | otros
 const GRANOLA_GROUPS=[
   {id:'cereales', lbl:'Cereales', cats:['cereales','granos','harinas','semillas']},
