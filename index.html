@@ -1709,6 +1709,7 @@ html.android-ui .tutb-rmay .tutb-pill{background:#b86f61}
   .may-redesign.may-mobile-search-open .compact-search-clear{right:52px!important}
 }
 </style>
+
 </head>
 <body class="may-redesign may-home-view">
 
@@ -10146,6 +10147,23 @@ body.may-redesign.checkout-open #cart-fab-may,body.may-redesign.checkout-open #b
   .cdds-tit{font-size:12.5px}
   .cdds-chip{font-size:14.5px}
   .cdds-chip b{font-size:13.5px}
+}
+</style>
+<style id="logo-proporcional">
+/* ── EL LOGO ESCALA CON LA PANTALLA ──────────────────────────────────────────
+   Mismo criterio que en la tienda minorista: el logo cuelga del encabezado y
+   estaba en pixeles fijos, asi que en pantallas angostas o con zoom quedaba
+   enorme y se montaba sobre lo de abajo. Ahora acompana al ancho. */
+@media (min-width:768px){
+  body.may-redesign .header{--may-logo-size:clamp(84px, 9.8vw, 126px)}
+}
+@media (min-width:1121px){
+  body.may-redesign .header{--may-logo-size:clamp(126px, 11.4vw, 146px)!important}
+}
+@media (max-width:767px){
+  body.may-redesign .header .logo-wrap{
+    width:clamp(52px, 22vw, 80px);height:clamp(52px, 22vw, 80px);
+  }
 }
 </style>
 </body>
