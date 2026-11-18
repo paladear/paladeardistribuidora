@@ -1,6 +1,3 @@
----
-layout: null
----
 <!DOCTYPE html>
 <html lang="es-AR" class="pal-first-paint">
 <head>
@@ -1125,6 +1122,27 @@ body.cart-open #cart-fab,body.cart-open #chat-fab{display:none!important}
 .product-detail-bar{position:sticky;top:0;z-index:3;min-height:68px;padding:10px 18px;display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:10px;background:rgba(207,222,236,.97);color:var(--azul-dark);
   box-shadow:0 5px 16px rgba(20,58,87,.08)}
 .product-detail-bar strong{text-align:center;font-size:15px;font-weight:800;letter-spacing:.02em}
+.product-detail-tit{display:flex;align-items:center;gap:7px;min-width:0}
+.product-detail-tit>strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Copiar el link de la pagina del producto (/p/...). Discreto a proposito:
+   lo usa el equipo para pasar un producto por WhatsApp, no el cliente. */
+.pd-copy{flex:none;width:26px;height:26px;padding:0;border:0;border-radius:7px;background:transparent;color:inherit;opacity:.34;cursor:pointer;display:grid;place-items:center;transition:opacity .15s,background .15s}
+.pd-copy:hover,.pd-copy:focus-visible{opacity:.9;background:rgba(255,255,255,.55)}
+.pd-copy svg{width:15px;height:15px;display:block}
+.pd-copy.pd-copy-ok{opacity:.95;color:#17724a}
+.pd-lines{margin-top:10px;text-align:left;border:1px solid rgba(20,58,87,.14);border-radius:12px;background:#fff;overflow:hidden;font-weight:400}
+.pd-lines-tit{padding:7px 12px;background:rgba(207,229,242,.55);font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:800;color:#2d5d80}
+.pdl-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-top:1px solid rgba(20,58,87,.09)}
+.pdl-info{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pdl-opt{font-size:12px;font-weight:600;color:#1a3050;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pdl-sub{font-size:14px;font-weight:800;color:#17406a}
+.pdl-acc{flex:none;display:flex;align-items:center;gap:4px}
+.product-detail-cart-state .pdl-q{width:26px;height:26px;font-size:15px}
+.pdl-c{font-size:12px;font-weight:700;min-width:46px;text-align:center;color:#1a3050}
+.product-detail-cart-state .pdl-del{height:30px;width:30px}
+.pd-lines-tot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border-top:1px solid rgba(20,58,87,.14);background:rgba(207,229,242,.35);font-size:13px;font-weight:800;color:#17406a}
+.pd-lines-edit{display:block;width:100%;padding:8px 12px;border:0;border-top:1px solid rgba(20,58,87,.09);background:transparent;color:#2d6ea0;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.pd-lines-edit:hover{background:rgba(207,229,242,.45)}
 .product-detail-back,.product-detail-close{width:42px;height:42px;border:1px solid rgba(20,58,87,.16);border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--azul-dark);cursor:pointer;font-family:inherit;box-shadow:0 2px 7px rgba(20,58,87,.1)}
 .product-detail-close{font-size:24px;line-height:1}
 .product-detail-shell{width:min(1100px,calc(100% - 40px));margin:0 auto;padding:34px 0 52px}
@@ -6194,21 +6212,89 @@ function _pintarRelacionadosMay(p){
 
 /* Lo que está en el pedido, dentro de la ficha abierta: el texto más el tacho y
    el botón de ver el pedido, los mismos que tiene la tarjeta chica. */
-function _textoPedidoMay(pid){
-  const it = cartMay.find(i => i.pid === pid);
-  if (!it) return '';
-  return 'En tu pedido: ' + it.c + (it.c === 1 ? ' bulto' : ' bultos') +
-    '<div class="card-cart-actions">' +
-      '<button class="card-del-btn" onclick="_fichaMayQuitar(' + pid + ')" title="Quitar del pedido">' + TRASH_SVG + '</button>' +
-      '<button class="card-edit-btn" onclick="openCartMay()">' + EDIT_SVG + ' Ver pedido</button>' +
-    '</div>';
+/* ── LINK DE LA PAGINA DEL PRODUCTO (/p/...) ─────────────────────────────────
+   La pagina /p/ es la unica que lleva la foto del producto en la
+   previsualizacion de WhatsApp, asi que el boton de copiar reparte ESA.
+   El slug se arma igual que en scripts/generate-product-pages.mjs: nombre y
+   numero de articulo pasados por la misma normalizacion. El nombre no se pasa
+   a formato titulo porque el slug lo lleva todo a minuscula igual. */
+function _slugPal(v){
+  return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').replace(/-{2,}/g,'-');
 }
+var _BASE_MAY = location.pathname.replace(/[^/]*$/,'');
+function _urlPaginaProductoMay(p){
+  try{
+    var art=String((p&&p[12]&&p[12].artId)||'').trim().replace(/\./g,'').replace(/,.*$/,'');
+    if(!art) return '';
+    var sl=_slugPal(p[2])+'-'+_slugPal(art);
+    if(!sl||sl.charAt(0)==='-') return '';
+    return location.origin+_BASE_MAY+'p/'+sl+'/';
+  }catch(e){ return ''; }
+}
+function _copiarLinkProductoMay(pid){
+  var p=(typeof PRODS_MAY!=='undefined'&&PRODS_MAY)?PRODS_MAY.find(function(x){return x[0]===pid;}):null;
+  var url=_urlPaginaProductoMay(p);
+  if(!url) return;
+  var btn=document.querySelector('#productDetailMay .pd-copy');
+  function listo(ok){
+    if(ok&&btn){ btn.classList.add('pd-copy-ok'); setTimeout(function(){ btn.classList.remove('pd-copy-ok'); },1400); }
+    try{ if(typeof _avisoCompartir==='function'){ _avisoCompartir(ok?'Link copiado':url); return; } }catch(e){}
+    if(!ok) window.prompt('Copiá el link:', url);
+  }
+  function aMano(){
+    try{
+      var ta=document.createElement('textarea');
+      ta.value=url; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      listo(true);
+    }catch(e){ listo(false); }
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(function(){ listo(true); }, aMano);
+  } else aMano();
+}
+window._copiarLinkProductoMay=_copiarLinkProductoMay;
 
-function _fichaMayQuitar(pid){
-  delFromCartMay(pid);
+/* Lo que esta en el pedido, renglon por renglon y con su subtotal. Antes decia
+   solo "En tu pedido: 2 bultos" y para cambiar la cantidad o sacar un sabor
+   habia que abrir el pedido. Ademas, con sabores hay MAS DE UN renglon por
+   producto y el texto viejo mostraba solo el primero. Los numeros son los
+   mismos que usa renderCartMay: precio del bulto por cantidad. */
+function _escKeyMay(k){ return String(k).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+function _textoPedidoMay(pid){
+  const lineas = cartMay.filter(i => i.pid === pid);
+  if (!lineas.length) return '';
+  let filas='', total=0;
+  lineas.forEach(function(it){
+    const sub = it.l1 * it.c;
+    total += sub;
+    const k = _escKeyMay(it.key);
+    const etiqueta = (it.bultoLabel || 'Bulto') + ' · $' + fmt(it.l1) + '/bulto' + (it.sabor ? ' · ' + it.sabor : '');
+    filas += '<div class="pdl-row"><div class="pdl-info">'
+      + '<span class="pdl-opt">' + etiqueta + '</span>'
+      + '<span class="pdl-sub">$' + fmt(sub) + '</span>'
+      + '</div><div class="pdl-acc">'
+      + '<button class="qty-btn pdl-q" onclick="_fichaMayQty(\'' + k + '\',' + pid + ',-1)" aria-label="Restar cantidad">\u2212</button>'
+      + '<span class="pdl-c">' + it.c + (it.c === 1 ? ' bulto' : ' bultos') + '</span>'
+      + '<button class="qty-btn pdl-q" onclick="_fichaMayQty(\'' + k + '\',' + pid + ',1)" aria-label="Sumar cantidad">+</button>'
+      + '<button class="card-del-btn pdl-del" onclick="_fichaMayDelLinea(\'' + k + '\',' + pid + ')" title="Quitar este renglon" aria-label="Quitar este renglon">' + TRASH_SVG + '</button>'
+      + '</div></div>';
+  });
+  const totalHTML = lineas.length > 1
+    ? '<div class="pd-lines-tot"><span>Subtotal del producto</span><span>$' + fmt(total) + '</span></div>'
+    : '';
+  return '<div class="pd-lines"><div class="pd-lines-tit">En tu pedido</div>' + filas + totalHTML
+    + '<button type="button" class="pd-lines-edit" onclick="openCartMay()">Ver el pedido</button></div>';
+}
+function _refrescarFichaMay(pid){
   const st = document.getElementById('mayDetailCartState');
   if (st) st.innerHTML = _textoPedidoMay(pid);
 }
+function _fichaMayQty(key,pid,d){ cartQtyMay(key,d); _refrescarFichaMay(pid); }
+function _fichaMayDelLinea(key,pid){ cartDelMay(key); _refrescarFichaMay(pid); }
+window._fichaMayQty=_fichaMayQty;
+window._fichaMayDelLinea=_fichaMayDelLinea;
 
 function openProductDetailMay(pid){
   const p = PRODS_MAY.find(x => x[0] === pid);
@@ -6257,7 +6343,8 @@ function openProductDetailMay(pid){
   modal.setAttribute('aria-label', 'Detalle de ' + _tc(p[2]));
   modal.innerHTML = '<div class="product-detail-bar">' +
       '<button class="product-detail-back" type="button" onclick="_fichaMayVolver()" aria-label="Volver"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>' +
-      '<strong>Detalle del producto</strong>' +
+      '<span class="product-detail-tit"><strong>Detalle del producto</strong>' +
+        '<button class="pd-copy" type="button" onclick="_copiarLinkProductoMay(' + p[0] + ')" title="Copiar el link de este producto" aria-label="Copiar el link de este producto"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7\"/><path d=\"M14 11a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.7-1.7\"/></svg></button></span>' +
       '<button class="product-detail-close" type="button" onclick="_fichaMayVolver()" aria-label="Cerrar">×</button>' +
     '</div><div class="product-detail-shell"><div class="product-detail-main">' +
       '<div class="product-detail-image" style="background:' + fondo + '">' +
@@ -6328,7 +6415,6 @@ function _fichaMayVerMarca(marca){
 
 window.openProductDetailMay = openProductDetailMay;
 window._fichaMayAgregar = _fichaMayAgregar;
-window._fichaMayQuitar = _fichaMayQuitar;
 window._fichaMayVolver = _fichaMayVolver;
 window._fichaMayVerMarca = _fichaMayVerMarca;
 window._cerrarFichaMayDirecto = _cerrarFichaMayDirecto;
