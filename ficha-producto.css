@@ -75,6 +75,14 @@ a.sin-stock-btn{background:#1f9d55!important;display:block;text-align:center;tex
 
 .product-detail-bar strong{text-align:center;font-size:15px;font-weight:800;letter-spacing:.02em}
 
+.product-detail-tit{display:flex;align-items:center;gap:7px;min-width:0}
+
+.product-detail-tit>strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.product-detail-cart-state .pdl-q{width:26px;height:26px;font-size:15px}
+
+.product-detail-cart-state .pdl-del{height:30px;width:30px}
+
 .product-detail-back,.product-detail-close{width:42px;height:42px;border:1px solid rgba(20,58,87,.16);border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--azul-dark);cursor:pointer;font-family:inherit;box-shadow:0 2px 7px rgba(20,58,87,.1)}
 
 .product-detail-close{font-size:24px;line-height:1}
