@@ -2,25 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://mayorista.paladear.com.ar/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/catalogo.html</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/c/especias/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/c/suplementos/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/aceites-y-vinagres/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/aceitunas/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/encurtidos/</loc></url>
-  <url><loc>https://mayorista.paladear.com.ar/c/especias/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/c/azucar-cacao-y-reposteria/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/deshidratados/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/frutos-secos/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/harinas/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/cereales/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/dulces-miel-y-chocolates/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/granos-y-legumbres/</loc></url>
-  <url><loc>https://mayorista.paladear.com.ar/c/azucar-cacao-y-reposteria/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/c/snacks/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/infusiones-y-hierbas/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/linea-gourmet/</loc></url>
-  <url><loc>https://mayorista.paladear.com.ar/c/suplementos/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/semillas/</loc></url>
-  <url><loc>https://mayorista.paladear.com.ar/c/snacks/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/c/bebidas/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/mantecas-y-pastas/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/sin-tacc/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/c/tomate/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/c/productos-de-frio/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/ablumina-de-huevo-x-kg-4475/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/aceite-de-chia-1956/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceite-de-coco-neutro-2141/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceite-de-coco-neutro-2265/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceite-de-coco-virgen-2142/</loc></url>
@@ -54,6 +58,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/aceitunas-rellenas-1036/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceitunas-rellenas-con-almendras-1033/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceitunas-rellenas-surtidas-1037/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/aceitunas-verdes-durang-n-00-x-5kg-3526/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceitunas-verdes-n-0-1038/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceitunas-verdes-n-0-1056/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceitunas-verdes-n-1-1058/</loc></url>
@@ -68,8 +73,10 @@
   <url><loc>https://mayorista.paladear.com.ar/p/aceto-balsamico-1064/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceto-balsamico-2416/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aceto-reduccion-1066/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/acido-ascorbico-chino-4455/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aderezo-de-pickles-1067/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/adobo-para-pizza-1068/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/agar-agar-2449/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/agridulce-de-vegetales-4451/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/aji-molido-fino-1079/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/ajies-dulces-1081/</loc></url>
@@ -77,6 +84,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/ajies-picantes-1083/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/ajies-picantes-1084/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/ajo-en-polvo-1085/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/ajo-en-polvo-a-granel-x-25kg-4473/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/ajo-granulado-1088/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/ajo-negro-4463/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/albahaca-en-hojas-1099/</loc></url>
@@ -95,6 +103,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/anis-en-grano-1123/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/anis-estrellado-1124/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/arandanos-deshidratados-1127/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/arandanos-x30-comprimidos-2214/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/arrope-de-chanar-1129/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/arrope-de-tuna-1130/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/arroz-integral-1131/</loc></url>
@@ -107,6 +116,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/azucar-impalpable-1140/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/azucar-mascabo-1141/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/azucar-negra-1142/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/barra-muecas-x45gr-2014/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/bastoncitos-de-salvado-de-trigo-y-avena-1147/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/berenjenas-condimentadas-1150/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/bicarbonato-de-sodio-2089/</loc></url>
@@ -114,13 +124,21 @@
   <url><loc>https://mayorista.paladear.com.ar/p/boldo-1154/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/bolitas-de-chocolate-1155/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cacao-amargo-de-brasil-1163/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/cafe-verde-x30-comprimidos-2216/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/calcio-vit-d-x-10-el-naturalista-2219/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/calendula-4461/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/canela-en-rama-1167/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/canela-molida-1168/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cardamomo-1176/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/cardomariano-2080/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/caroteno-2218/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/carqueja-4462/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cascarilla-de-cacao-1178/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/castanas-caju-1180/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cebolla-en-escamas-1182/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cebollitas-en-vinagre-1185/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/cedron-x-kg-2038/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/cereza-glaseada-x-kg-1186/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cerezas-al-marraschino-1188/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cerezas-al-marraschino-1193/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/chimichurri-1201/</loc></url>
@@ -129,10 +147,15 @@
   <url><loc>https://mayorista.paladear.com.ar/p/ciruela-presidente-sin-carozo-1206/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/ciruelas-d-agen-con-carozo-1207/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/ciruelas-tiernizadas-sin-carozo-1208/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/citrato-de-magnesio-x30-comprimidos-2076/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/citrato-de-potasio-x30-comprimidos-2077/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/citrato-magnesio-x-kg-4450/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/clavo-de-olor-entero-1209/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/cloruro-de-magnesio-x-kg-2432/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/coco-en-escamas-1211/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/coco-rallado-1212/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/colageno-hidrolizado-2031/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/colageno-x10-comprimidos-2222/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/comino-molido-1214/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/condimento-para-arroz-1219/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/copos-de-maiz-1229/</loc></url>
@@ -140,13 +163,16 @@
   <url><loc>https://mayorista.paladear.com.ar/p/corazones-de-alcaucil-condimentados-1101/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/corazones-de-alcaucil-en-vinagre-1230/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/coriandro-entero-x-kg-4465/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/coriandro-molido-1233/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/creatina-monohidrato-2238/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/curcuma-pimienta-x30-comprimidos-2169/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/curcuma-molida-1236/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/curry-1239/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/cuscus-1240/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/datiles-de-egipto-con-carozo-1242/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/diente-de-leon-2072/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/dulce-de-alcayota-1244/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/dulce-de-alcayota-x-kg-5000/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/dulce-de-membrillo-1253/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/dulce-de-membrillo-1254/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/dulce-de-membrillo-1255/</loc></url>
@@ -156,7 +182,9 @@
   <url><loc>https://mayorista.paladear.com.ar/p/esparragos-1264/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/eucalipto-en-hojas-2032/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/fecula-de-mandioca-1269/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/fecula-de-papa-4477/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/finas-hierbas-1270/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/flebotonico-x30-comprimidos-2217/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/fruta-escurrida-1271/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/fruta-glaseada-1272/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/fruta-multicolor-1954/</loc></url>
@@ -165,14 +193,23 @@
   <url><loc>https://mayorista.paladear.com.ar/p/garrapinada-de-mani-1276/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/gelatina-sin-sabor-1702/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/germen-de-trigo-natural-1281/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/ginkgo-biloba-forte-x10-comprimidos-2082/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/glicinato-de-magnesio-x-30-comprimidos-2078/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/gluten-de-trigo-1282/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/goma-xantica-4457/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/granola-con-chips-de-chocolate-1912/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/granola-con-miel-x-kg-1290/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/granola-fit-homemade-x-kg-4460/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/granola-mix-sin-endulzar-kos-x-kg-4471/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/granola-mix-berries-1286/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/granola-mix-cacaokos-xkg-4472/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/granola-mix-energetica-1287/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/granola-mix-tropical-1289/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/granola-original-crunch-homemade-x-kg-4459/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/granola-sin-pasas-1897/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/granola-tradicional-sin-frutos-secos-1911/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-algarroba-1291/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/harina-de-almendras-c-piel-2315/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-almendras-sin-piel-1293/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-arroz-1294/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-avena-1295/</loc></url>
@@ -183,6 +220,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-lino-1300/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-maiz-blanco-1303/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-nuez-x-1-kg-4466/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/harina-de-quinoa-x-kg-4476/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-soja-desgrasada-fina-1305/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-de-trigo-sarraceno-2041/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/harina-integral-fina-1306/</loc></url>
@@ -195,11 +233,14 @@
   <url><loc>https://mayorista.paladear.com.ar/p/hojas-de-parra-1312/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/hongos-secos-de-pino-1314/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/humo-natural-x250-ml-1854-1316/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/jazmin-flor-x-kg-2442/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/jengibre-glaseado-1319/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/jengibre-molido-1320/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/jugo-de-uva-4454/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/juliana-sin-papa-1333/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/laurel-en-hojas-1350/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/lavanda-2037/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/leche-de-almendras-x-1-l-1351/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/lentejas-1359/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/lentejas-turcas-1358/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/levadura-de-cerveza-nutricional-1360/</loc></url>
@@ -218,6 +259,16 @@
   <url><loc>https://mayorista.paladear.com.ar/p/manzanilla-flor-1384/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/manzanilla-importada-5044/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/medallones-de-durazno-1394/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/melisa-x-kg-2039/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/menta-hojas-x-kg-2040/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/merken-chileno-x-kg-2308/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mermelada-de-ciruela-1901/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mermelada-de-durazno-1907/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mermelada-frutilla-1902/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mermelada-manzana-1905/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mermelada-membrillo-1903/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mermelada-naranja-1904/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mermelada-zanahoria-y-naranja-x310-gr-1906/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/miel-de-abeja-1406/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/miel-de-abeja-1408/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/miel-de-abeja-1410/</loc></url>
@@ -234,27 +285,33 @@
   <url><loc>https://mayorista.paladear.com.ar/p/mix-tradicional-1429/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/mix-tropical-1430/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/mostaza-en-granos-1436/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/mostaza-molida-1437/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-con-cascara-1446/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-cuartillo-1441/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-cuartos-extra-light-1444/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/nuez-cuartos-light-1445/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-de-brasil-4453/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-mariposa-ambar-1448/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-mariposa-extra-light-1716/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-mariposa-light-1450/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-moscada-entera-1451/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/nuez-moscada-entera-x-250g-4479/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/nuez-moscada-molida-1452/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/nuez-negra-x-kg-1453/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/oregano-1455/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/panko-1670/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasas-de-uva-con-semillas-2440/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasas-morocha-flame-sin-semilla-1955/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasas-morochas-jumbo-origen-chile-4456/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasas-rubia-sin-semilla-1461/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/pasas-rubias-economicas-x-kg-1846/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasta-aceitunas-condimentadas-1462/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasta-aceitunas-negras-1463/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasta-aceitunas-verdes-1464/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasta-alcauciles-2330/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasta-de-aji-picante-1465/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pasta-de-ajo-1468/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/peperina-x-kg-2397/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pepinillos-en-vinagre-1483/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pepinillos-en-vinagre-1484/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pepinos-agridulces-1485/</loc></url>
@@ -262,6 +319,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/peras-williams-1488/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/perejil-en-hojas-1489/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pesto-1495/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/petalos-rosa-x-kg-2441/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pickles-en-garrafa-1498/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pickles-mixtos-1500/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pickles-mixtos-1501/</loc></url>
@@ -271,6 +329,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/pimienta-blanca-en-grano-1508/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pimienta-blanca-molida-1510/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pimienta-cayena-molida-1511/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/pimienta-jamaica-x-kg-2264/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pimienta-negra-en-grano-1512/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pimienta-negra-molida-1513/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/pimientos-enteros-1517/</loc></url>
@@ -288,15 +347,22 @@
   <url><loc>https://mayorista.paladear.com.ar/p/porotos-mung-1528/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/porotos-negros-1529/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/porotos-pallares-1533/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/potasio-magnesio-2211/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/premezcla-para-panificados-sin-tacc-1539/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/premezcla-para-panificados-sin-tacc-1540/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/propoleo-liquido-2085/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/propoleo-liquido-2221/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/proteina-aisalda-de-suero-1866/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/proteina-de-suero-lactea-4478/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/provenzal-1545/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/provenzal-a-granel-x-25kg-4474/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/psyllium-molido-2420/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/psyllium-semilla-2413/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/quinoa-inflada-1549/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/quinoa-nacional-1551/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/rebozador-sin-gluten-1553/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/reductor-x10-comprimidos-2168/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/resveratrol-x30-comprimidos-2212/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/romero-en-hojas-1555/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/rosa-mosqueta-2093/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/sal-del-himalaya-fina-1557/</loc></url>
@@ -307,6 +373,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/salsa-barbacoa-1564/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/salsa-cesar-1803/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/salsa-chimichurri-1566/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/salsa-de-ajo-x-250-gr-1567/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/salsa-de-soja-1571/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/salsa-inglesa-1572/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/salsa-jalapeno-ahumada-1720/</loc></url>
@@ -340,6 +407,7 @@
   <url><loc>https://mayorista.paladear.com.ar/p/tomate-secos-1632/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/tomate-triturado-12-1625/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/tomate-triturado-8-1626/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/tomate-triturado-x-8kg-4470/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/tomates-desecados-condimentados-4464/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/tomillo-1633/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/trigo-burgol-1634/</loc></url>
@@ -347,12 +415,23 @@
   <url><loc>https://mayorista.paladear.com.ar/p/trigo-sarraceno-pelado-2367/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/tutucas-con-azucar-1635/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/tutucas-sin-azucar-x-kg-1636/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/valeriana-x10-comprimidos-2175/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/vinagre-de-alcohol-1637/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/vinagre-de-manzana-1638/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/vinagre-de-vino-1639/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/vitamina-b12-x30-comprimidos-2213/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/vitamina-c-x60-comprimidos-2311/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/vitamina-e-x10-comprimidos-2083/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/yerba-del-platero-2033/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/yerba-mate-despalada-2043/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/yoghurt-anana-x-1-l-1879/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/yoghurt-c-frutas-x-160-2024/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/yoghurt-durazno-x-1-l-1812/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/yoghurt-frutilla-x-1-l-1811/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/yoghurt-natural-azucarado-x-1-l-1809/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/yoghurt-natural-sin-azucar-x-1-l-1810/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/zapallo-en-almibar-1655/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/zapallo-en-almibar-1656/</loc></url>
   <url><loc>https://mayorista.paladear.com.ar/p/zapallo-en-almibar-1657/</loc></url>
+  <url><loc>https://mayorista.paladear.com.ar/p/zinc-x-30-comprimidos-2079/</loc></url>
 </urlset>
