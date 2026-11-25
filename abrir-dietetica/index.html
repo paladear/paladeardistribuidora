@@ -11,13 +11,14 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon-may-p.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Paleta tomada de paladear.com.ar: banda #4c7192, titulo #123f67, cielo
-   #d5e5ee, crema #f5e8d6. Dos solapas, controles arriba y tabla abajo. */
+/* Paleta de paladear.com.ar: banda #4c7192, titulo #123f67, cielo #d5e5ee,
+   crema #f5e8d6. Sin imagenes decorativas: las unicas fotos son las de los
+   productos. */
 :root{
   --banda:#4c7192; --banda-h:#2f668e; --titulo:#123f67;
   --cielo:#d5e5ee; --suave:#e3edf2; --crema:#f5e8d6;
   --papel:#fbfaf7; --carta:#ffffff; --tinta:#1d2b38; --tenue:#5f7284;
-  --linea:#dbe3e9; --ok:#4a7a4e;
+  --linea:#dbe3e9; --ok:#39704a; --ok-suave:#e6f0e8;
   --t-tit:'Archivo','Segoe UI',system-ui,sans-serif;
   --t-txt:'Inter','Segoe UI',system-ui,sans-serif;
   color-scheme:light;
@@ -26,37 +27,37 @@
   --banda:#7fa9cb; --banda-h:#9cc0dd; --titulo:#cfe2f0;
   --cielo:#24323f; --suave:#1f2b36; --crema:#38332a;
   --papel:#121820; --carta:#1a222b; --tinta:#e7edf3; --tenue:#93a3b2;
-  --linea:#2b3744; --ok:#8fbf93;
+  --linea:#2b3744; --ok:#8fbf93; --ok-suave:#1e2e24;
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --banda:#7fa9cb; --banda-h:#9cc0dd; --titulo:#cfe2f0;
   --cielo:#24323f; --suave:#1f2b36; --crema:#38332a;
   --papel:#121820; --carta:#1a222b; --tinta:#e7edf3; --tenue:#93a3b2;
-  --linea:#2b3744; --ok:#8fbf93;
+  --linea:#2b3744; --ok:#8fbf93; --ok-suave:#1e2e24;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--papel);color:var(--tinta);
   font-family:var(--t-txt);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:var(--t-tit);text-wrap:balance;margin:0;color:var(--titulo)}
-.marco{max-width:980px;margin:0 auto;
+.marco{max-width:1020px;margin:0 auto;
   padding-left:max(16px,env(safe-area-inset-left,0px));
   padding-right:max(16px,env(safe-area-inset-right,0px));
-  padding-block:0 9rem}
+  padding-block:0 9.5rem}
 
 /* ── cabecera ───────────────────────────────── */
 .hero{background:var(--cielo);
   margin-top:calc(-1 * env(safe-area-inset-top,0px));
   padding-top:calc(env(safe-area-inset-top,0px) + 2.5rem);
   padding-bottom:1.9rem}
-.hero-in{max-width:980px;margin:0 auto;
+.hero-in{max-width:1020px;margin:0 auto;
   padding-left:max(16px,env(safe-area-inset-left,0px));
   padding-right:max(16px,env(safe-area-inset-right,0px))}
 .sello{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:var(--banda);margin-bottom:.5rem}
 h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;line-height:1.08}
-.bajada{margin:.8rem 0 0;max-width:64ch;color:var(--tinta);opacity:.85}
+.bajada{margin:.8rem 0 0;max-width:62ch;color:var(--tinta);opacity:.85}
 .solapas{display:flex;gap:.3rem;margin-top:1.6rem;flex-wrap:wrap}
 .solapas button{font-family:var(--t-tit);font-size:14px;font-weight:600;cursor:pointer;
   border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;
@@ -67,158 +68,159 @@ h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;li
 .solapas button:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
 
 /* ── explicacion ────────────────────────────── */
-.intro{margin:1.5rem 0 0;padding:1.1rem 1.2rem;background:var(--carta);
-  border:1px solid var(--linea);border-radius:8px}
-.intro h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem}
-.intro ol{margin:0;padding-left:1.2rem;font-size:14px}
-.intro li{margin-bottom:.35rem}
+.intro{margin:1.6rem 0 0;padding:1.2rem 1.3rem;background:var(--carta);
+  border:1px solid var(--linea);border-radius:9px}
+.intro h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.7rem}
+.intro ol,.intro ul{margin:0;padding-left:1.25rem;font-size:14px}
+.intro li{margin-bottom:.45rem}
 .intro li:last-child{margin-bottom:0}
 .intro b{color:var(--titulo)}
 
 /* ── kits sugeridos ─────────────────────────── */
-.kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.7rem;
-  margin:1.3rem 0 0;padding:0;list-style:none}
-.kit{border:1px solid var(--linea);border-radius:7px;background:var(--carta)}
+.kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(192px,1fr));gap:.7rem;
+  margin:1.4rem 0 0;padding:0;list-style:none}
+.kit{border:1px solid var(--linea);border-radius:8px;background:var(--carta)}
 .kit button{width:100%;text-align:left;background:none;border:none;cursor:pointer;
-  padding:.85rem .9rem;border-radius:7px;font:inherit;color:inherit}
+  padding:.9rem;border-radius:8px;font:inherit;color:inherit}
 .kit button:hover{background:var(--suave)}
 .kit button:focus-visible{outline:2px solid var(--banda);outline-offset:-2px}
 .kit[data-activo="si"]{border-color:var(--banda);box-shadow:inset 0 0 0 1px var(--banda)}
 .kit-nom{font-family:var(--t-tit);font-weight:700;font-size:14px;color:var(--titulo)}
-.kit-plata{font-family:var(--t-tit);font-weight:700;font-size:1.25rem;margin-top:.2rem;
+.kit-plata{font-family:var(--t-tit);font-weight:700;font-size:1.3rem;margin-top:.2rem;
   font-variant-numeric:tabular-nums}
-.kit-det{font-size:11.5px;color:var(--tenue);margin-top:.25rem}
+.kit-det{font-size:11.5px;color:var(--tenue);margin-top:.3rem}
 
 /* ── controles ──────────────────────────────── */
-.mandos{display:flex;flex-wrap:wrap;gap:1.5rem;padding:1.3rem 0;
+.mandos{display:flex;flex-wrap:wrap;gap:1.6rem;padding:1.4rem 0;
   border-bottom:1px solid var(--linea)}
 .grupo{min-width:0}
 .rotulo{font-size:12.5px;font-weight:600;color:var(--titulo);margin-bottom:.45rem}
 .pastillas{display:flex;gap:.3rem;flex-wrap:wrap}
-.pastillas button{font-size:12.5px;font-weight:500;padding:.4rem .8rem;border-radius:5px;
+.pastillas button{font-size:12.5px;font-weight:500;padding:.42rem .85rem;border-radius:5px;
   border:1px solid var(--linea);background:var(--carta);color:var(--tenue);cursor:pointer}
 .pastillas button:hover{border-color:var(--banda);color:var(--banda)}
 .pastillas button[aria-pressed="true"]{background:var(--banda);border-color:var(--banda);
   color:#fff;font-weight:600}
 .pastillas button:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
 .desliz{display:flex;align-items:center;gap:.7rem}
-.desliz input[type=range]{width:160px;accent-color:var(--banda)}
-.desliz output{font-family:var(--t-tit);font-weight:700;font-size:14px;min-width:6.5rem;
+.desliz input[type=range]{width:165px;accent-color:var(--banda)}
+.desliz output{font-family:var(--t-tit);font-weight:700;font-size:14px;min-width:6.8rem;
   font-variant-numeric:tabular-nums;color:var(--titulo)}
-.hint{font-size:11.5px;color:var(--tenue);margin:.35rem 0 0;max-width:32ch}
+.hint{font-size:11.5px;color:var(--tenue);margin:.4rem 0 0;max-width:34ch}
 
-/* ── resumen ────────────────────────────────── */
-.resumen{display:flex;flex-wrap:wrap;gap:1.6rem;align-items:flex-end;
-  background:var(--crema);border-radius:8px;padding:1rem 1.1rem;margin-top:1.3rem}
-.cifra{min-width:0}
-.cifra dt{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+/* ── resumen de plata ───────────────────────── */
+.resumen{display:flex;flex-wrap:wrap;gap:1.1rem;background:var(--crema);
+  border-radius:9px;padding:1.1rem 1.2rem;margin-top:1.4rem}
+.cifra{min-width:0;flex:0 0 auto}
+.cifra dt{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
   color:var(--tenue)}
-.cifra dd{margin:.15rem 0 0;font-family:var(--t-tit);font-weight:700;
-  font-variant-numeric:tabular-nums;color:var(--titulo);font-size:1.05rem}
-.cifra.grande dd{font-size:1.9rem;line-height:1.1}
-.nota-modo{flex:1 1 15rem;min-width:0;font-size:12px;color:var(--tenue);margin:0}
+.cifra dd{margin:.2rem 0 0;font-family:var(--t-tit);font-weight:700;
+  font-variant-numeric:tabular-nums;color:var(--titulo);font-size:1.1rem}
+.cifra.grande dd{font-size:2rem;line-height:1.05}
+.cifra small{display:block;font-family:var(--t-txt);font-weight:500;font-size:11px;
+  color:var(--tenue);margin-top:.15rem}
+.separa{width:1px;align-self:stretch;background:var(--linea)}
+.nota-modo{flex:1 1 15rem;min-width:0;font-size:12px;color:var(--tenue);margin:0;
+  align-self:center}
+.sacados{flex:1 1 100%;font-size:12.5px;color:var(--tenue);margin:0}
+.sacados button{font:inherit;font-weight:600;color:var(--banda);background:none;
+  border:none;padding:0;cursor:pointer;text-decoration:underline}
+@media (max-width:620px){
+  .resumen{gap:1rem 1.2rem}
+  .cifra{flex:1 1 42%}
+  .cifra.grande{flex:1 1 100%}
+  .separa{display:none}
+  .cifra dd{font-size:1.02rem}
+  .cifra.grande dd{font-size:1.8rem}
+}
 
-/* ── tabla ──────────────────────────────────── */
-.rubro{margin-top:2rem}
+/* ── tabla de productos ─────────────────────── */
+.rubro{margin-top:2.2rem}
 .rubro-tapa{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
   flex-wrap:wrap;padding-bottom:.5rem;border-bottom:2px solid var(--banda)}
 .rubro-tapa h2{font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
 .rubro-dato{font-size:12px;color:var(--tenue);font-variant-numeric:tabular-nums}
-.fila{display:grid;gap:.4rem .9rem;align-items:center;padding:.6rem .25rem;
-  border-bottom:1px solid var(--linea)}
-.fila.prod{grid-template-columns:1fr 6.5rem 6rem 7rem}
-.fila.vend{grid-template-columns:2rem 1fr 8rem 7rem}
+
+.fila{display:grid;gap:.5rem .9rem;align-items:center;
+  padding:.95rem .3rem;border-bottom:1px solid var(--linea)}
+.fila.prod{grid-template-columns:1.6rem 58px minmax(0,1fr) auto}
 .fila:hover{background:var(--carta)}
-.nom{font-weight:500;font-size:14px;line-height:1.3;min-width:0}
-.sub{font-size:11.5px;color:var(--tenue);margin-top:.15rem;font-variant-numeric:tabular-nums}
-.puesto{font-family:var(--t-tit);font-weight:700;font-size:.9rem;color:var(--tenue);
-  text-align:right;font-variant-numeric:tabular-nums}
-.cant{text-align:center;font-variant-numeric:tabular-nums}
-.cant b{font-family:var(--t-tit);font-weight:700;font-size:1rem;display:block;color:var(--titulo)}
-.cant i{font-style:normal;font-size:10.5px;color:var(--tenue);display:block}
-.chapa{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.05em;
-  text-transform:uppercase;border-radius:3px;padding:.1rem .35rem;
-  background:var(--suave);color:var(--banda);margin-left:.35rem;vertical-align:1px}
-.precio{text-align:right;font-variant-numeric:tabular-nums;font-size:12.5px;color:var(--tenue)}
-.monto{text-align:right;font-variant-numeric:tabular-nums}
-.monto b{font-family:var(--t-tit);font-weight:600;font-size:14px}
-.barra{height:6px;background:var(--linea);border-radius:3px;overflow:hidden}
-.barra span{display:block;height:100%;background:var(--banda);border-radius:3px}
-.rot{font-size:11px;color:var(--tenue);margin-top:.25rem;font-variant-numeric:tabular-nums}
-@media (max-width:680px){
-  .fila.prod{grid-template-columns:1fr 5.5rem}
-  .fila.prod .precio{grid-column:1}
-  .fila.prod .monto{grid-column:2;text-align:right}
-  .fila.vend{grid-template-columns:1.8rem 1fr}
-  .fila.vend .col-barra,.fila.vend .monto{grid-column:2}
-  .fila.vend .monto{text-align:left}
+.fila.fuera{opacity:.45}
+.tilde{width:1.15rem;height:1.15rem;accent-color:var(--banda);cursor:pointer;margin:0}
+.tilde:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
+.prod-foto{width:58px;height:58px;border-radius:7px;object-fit:cover;
+  background:var(--suave);display:block}
+.hueco{width:58px;height:58px;border-radius:7px;background:var(--suave)}
+.nom{font-family:var(--t-tit);font-weight:600;font-size:14.5px;line-height:1.25;
+  color:var(--titulo)}
+.porque{font-size:12px;color:var(--tenue);margin-top:.25rem;line-height:1.45}
+.chapa{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.05em;
+  text-transform:uppercase;border-radius:3px;padding:.12rem .38rem;
+  background:var(--suave);color:var(--banda);margin-left:.4rem;vertical-align:2px}
+.cifras{display:flex;gap:1.4rem;align-items:flex-start}
+.col{text-align:right;min-width:4.6rem;font-variant-numeric:tabular-nums}
+.col .et{display:block;font-size:9.5px;font-weight:600;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--tenue);margin-bottom:.15rem}
+.col b{font-family:var(--t-tit);font-weight:700;font-size:1rem;color:var(--titulo);
+  display:block;line-height:1.15}
+.col i{font-style:normal;font-size:10.5px;color:var(--tenue);display:block}
+.col.plata b{font-size:1.05rem}
+@media (max-width:760px){
+  .fila.prod{grid-template-columns:1.6rem 52px minmax(0,1fr)}
+  .prod-foto,.hueco{width:52px;height:52px}
+  .cifras{grid-column:2 / -1;justify-content:space-between;gap:.5rem;margin-top:.15rem}
+  .col{text-align:left;min-width:0}
+  .col:last-child{text-align:right}
 }
 
-/* ── pie y salida ───────────────────────────── */
-.acciones{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:1.5rem}
+/* ── mas vendidos ───────────────────────────── */
+.fila.vend{grid-template-columns:2rem 52px minmax(0,1fr) 8.5rem 6.5rem}
+.puesto{font-family:var(--t-tit);font-weight:700;font-size:.95rem;color:var(--tenue);
+  text-align:right;font-variant-numeric:tabular-nums}
+.barra{height:6px;background:var(--linea);border-radius:3px;overflow:hidden}
+.barra span{display:block;height:100%;background:var(--banda);border-radius:3px}
+.rot{font-size:11px;color:var(--tenue);margin-top:.3rem;font-variant-numeric:tabular-nums}
+@media (max-width:760px){
+  .fila.vend{grid-template-columns:2rem 52px minmax(0,1fr)}
+  .fila.vend .col-barra,.fila.vend .col{grid-column:3 / -1}
+  .fila.vend .col{text-align:left;margin-top:.1rem}
+}
+
+/* ── salida ─────────────────────────────────── */
+.acciones{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:1.6rem}
 .acciones button{font-family:var(--t-txt);font-size:13px;font-weight:600;cursor:pointer;
-  border-radius:5px;padding:.6rem 1rem;border:1px solid var(--linea);
+  border-radius:6px;padding:.6rem 1rem;border:1px solid var(--linea);
   background:var(--carta);color:var(--tinta)}
 .acciones button:hover{border-color:var(--banda);color:var(--banda)}
-.acciones button.primario{background:var(--banda);border-color:var(--banda);color:#fff}
-.acciones button.primario:hover{background:var(--banda-h);border-color:var(--banda-h);color:#fff}
 .acciones button:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
 .aviso{font-size:12px;color:var(--ok);font-weight:600}
-textarea{width:100%;min-height:8rem;margin-top:.9rem;
+textarea{width:100%;min-height:9rem;margin-top:.9rem;
   font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  font-size:12px;line-height:1.5;padding:.75rem;border:1px solid var(--linea);
-  border-radius:5px;background:var(--carta);color:var(--tinta);resize:vertical}
-.metodo{margin-top:2rem;padding:1rem 1.1rem;background:var(--suave);
-  border-left:3px solid var(--banda);border-radius:0 5px 5px 0;font-size:13px}
-.metodo h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
-.metodo p{margin:0 0 .5rem}
+  font-size:12px;line-height:1.5;padding:.8rem;border:1px solid var(--linea);
+  border-radius:6px;background:var(--carta);color:var(--tinta);resize:vertical}
+.metodo{margin-top:2.2rem;padding:1.1rem 1.2rem;background:var(--suave);
+  border-left:3px solid var(--banda);border-radius:0 6px 6px 0;font-size:13px}
+.metodo h3{font-size:13px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem}
+.metodo p{margin:0 0 .6rem}
 .metodo p:last-child{margin-bottom:0}
-.pie{margin-top:2rem;padding-top:1.2rem;border-top:1px solid var(--linea);
+.pie{margin-top:2.2rem;padding-top:1.2rem;border-top:1px solid var(--linea);
   font-size:12px;color:var(--tenue)}
 .pie a{color:var(--banda)}
 
-/* ── fotos ──────────────────────────────────── */
-.hero{position:relative;overflow:hidden}
-.hero-foto{position:absolute;inset:0;background-size:cover;background-position:center;
-  opacity:.15;pointer-events:none}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero-foto{opacity:.1}}
-:root[data-theme="dark"] .hero-foto{opacity:.1}
-.hero-in{position:relative}
-.rubro-tapa{align-items:center}
-.rubro-izq{display:flex;align-items:center;gap:.65rem;min-width:0}
-.rubro-foto{width:38px;height:38px;border-radius:7px;object-fit:cover;flex:0 0 auto;
-  background:var(--suave)}
-.celda-nom{display:flex;align-items:center;gap:.7rem;min-width:0}
-.prod-foto{width:46px;height:46px;border-radius:6px;object-fit:cover;flex:0 0 auto;
-  background:var(--suave)}
-.vitrina{display:grid;grid-template-columns:repeat(auto-fit,minmax(102px,1fr));
-  gap:.5rem;margin-top:1.4rem;padding:0;list-style:none}
-.vitrina li{margin:0;position:relative;border-radius:8px;overflow:hidden;
-  aspect-ratio:1/1;background:var(--suave)}
-.vitrina img{width:100%;height:100%;object-fit:cover;display:block}
-.vitrina span{position:absolute;left:0;right:0;bottom:0;padding:.3rem .45rem;
-  font-family:var(--t-tit);font-size:9.5px;font-weight:700;letter-spacing:.04em;
-  text-transform:uppercase;color:#fff;line-height:1.2;
-  background:linear-gradient(transparent,rgba(8,28,45,.85))}
-@media (max-width:560px){
-  .prod-foto{width:38px;height:38px}
-  .rubro-foto{width:30px;height:30px}
-}
-
-/* ── barra fija de acciones ─────────────────── */
+/* ── barra fija ─────────────────────────────── */
 .barra-fija{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--carta);
-  border-top:1px solid var(--linea);box-shadow:0 -2px 14px rgba(18,63,103,.1);
+  border-top:1px solid var(--linea);box-shadow:0 -2px 14px rgba(18,63,103,.11);
   padding-bottom:env(safe-area-inset-bottom,0px)}
-.barra-in{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:1rem;
+.barra-in{max-width:1020px;margin:0 auto;display:flex;align-items:center;gap:1rem;
   flex-wrap:wrap;
-  padding:.7rem max(16px,env(safe-area-inset-right,0px)) .7rem max(16px,env(safe-area-inset-left,0px))}
+  padding:.75rem max(16px,env(safe-area-inset-right,0px)) .75rem max(16px,env(safe-area-inset-left,0px))}
 .barra-txt{flex:1 1 11rem;min-width:0}
-.barra-kit{font-family:var(--t-tit);font-weight:700;font-size:1.2rem;color:var(--titulo);
+.barra-kit{font-family:var(--t-tit);font-weight:700;font-size:1.25rem;color:var(--titulo);
   font-variant-numeric:tabular-nums;line-height:1.15}
-.barra-det{font-size:11.5px;color:var(--tenue);margin-top:.12rem}
+.barra-det{font-size:11.5px;color:var(--tenue);margin-top:.14rem}
 .barra-bot{display:flex;gap:.5rem;flex-wrap:wrap}
 .barra-bot button,.barra-bot a{font-family:var(--t-txt);font-size:13px;font-weight:600;
-  cursor:pointer;border-radius:6px;padding:.62rem 1rem;border:1px solid var(--linea);
+  cursor:pointer;border-radius:6px;padding:.64rem 1rem;border:1px solid var(--linea);
   background:var(--carta);color:var(--tinta);text-decoration:none;white-space:nowrap}
 .barra-bot button:hover{border-color:var(--banda);color:var(--banda)}
 .barra-bot .wpp{background:#25d366;border-color:#1fb858;color:#06281a}
@@ -226,22 +228,21 @@ textarea{width:100%;min-height:8rem;margin-top:.9rem;
 .barra-bot button:focus-visible,.barra-bot a:focus-visible{outline:2px solid var(--banda);
   outline-offset:2px}
 @media (max-width:560px){
-  .barra-kit{font-size:1.05rem}
+  .barra-kit{font-size:1.1rem}
   .barra-bot{flex:1 1 100%}
-  .barra-bot button,.barra-bot a{flex:1 1 0;text-align:center;padding:.62rem .5rem}
+  .barra-bot button,.barra-bot a{flex:1 1 0;text-align:center;padding:.64rem .5rem}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <header class="hero">
-  <div class="hero-foto" id="hero-foto" aria-hidden="true"></div>
   <div class="hero-in">
     <div class="sello">Paladear Distribuidora &middot; Mendoza</div>
     <h1>Abrir una dietética</h1>
-    <p class="bajada">Esta página arma la lista de compra para abrir un negocio.
-      Las cantidades no son un cálculo teórico: salen de lo que realmente se vende
-      en el mostrador de Paladear, ajustado al tamaño del local que vas a abrir.
+    <p class="bajada">Esta página te arma la lista de compra para abrir el negocio:
+      qué productos llevar, cuántos kilos de cada uno y cuánto te sale. Las
+      cantidades salen de lo que de verdad se vende en el mostrador de Paladear.
       Todos los precios son mayoristas.</p>
     <div class="solapas" role="tablist" id="solapas"></div>
   </div>
@@ -250,20 +251,19 @@ textarea{width:100%;min-height:8rem;margin-top:.9rem;
 <div class="marco">
   <section id="panel-kits" role="tabpanel">
     <div class="intro">
-      <h2>Cómo usarla</h2>
+      <h2>Cómo se usa</h2>
       <ol>
-        <li>Elegí uno de los cuatro kits de abajo, o armá el tuyo con los controles.</li>
-        <li><b>Surtido:</b> cuántos productos querés tener. Lo básico es lo que más se
-          vende y no puede faltar; sumando niveles ganás variedad.</li>
-        <li><b>Cómo comprás:</b> fraccionado es sin mínimos, pedís la cantidad justa.
-          En bultos cerrados llevás el pack entero de cada producto, como viene del
-          proveedor.</li>
-        <li><b>Clientes por día:</b> cuánta gente esperás atender. De ahí sale cuánto
-          va a vender por semana cada producto en tu local.</li>
+        <li>Tocá uno de los cuatro kits de abajo. Cada uno es una lista completa
+          ya armada, con su precio.</li>
+        <li>Después ajustalo con los controles: cuántos productos querés
+          (<b>surtido</b>), si comprás suelto o por bulto (<b>cómo comprás</b>),
+          y de qué tamaño es tu local (<b>clientes por día</b>).</li>
+        <li>En la lista, <b>destildá lo que no quieras</b> y el total baja solo.
+          Poné «Ver: todo el catálogo» para sumar productos que no venían.</li>
+        <li>Cuando esté como querés, mandanos el pedido con el botón verde de
+          abajo, que queda siempre a la vista.</li>
       </ol>
     </div>
-
-    <ul class="vitrina" id="vitrina"></ul>
 
     <ul class="kits" id="kits"></ul>
 
@@ -296,54 +296,77 @@ textarea{width:100%;min-height:8rem;margin-top:.9rem;
         </div>
         <p class="hint">Cada cuánto pensás reponer.</p>
       </div>
+      <div class="grupo">
+        <div class="rotulo">Ver</div>
+        <div class="pastillas" id="c-ver" role="group" aria-label="Qué productos mostrar"></div>
+        <p class="hint" id="h-ver"></p>
+      </div>
     </div>
 
     <dl class="resumen">
-      <div class="cifra grande"><dt>Lo que cuesta el pedido</dt><dd id="r-total">—</dd></div>
-      <div class="cifra"><dt>Productos</dt><dd id="r-prod">—</dd></div>
-      <div class="cifra"><dt>Mercadería</dt><dd id="r-peso">—</dd></div>
-      <div class="cifra"><dt>Si lo vendés todo</dt><dd id="r-venta">—</dd></div>
+      <div class="cifra grande">
+        <dt>Lo que pagás</dt><dd id="r-total">—</dd>
+      </div>
+      <div class="separa"></div>
+      <div class="cifra">
+        <dt>Si lo vendés todo cobrás</dt>
+        <dd id="r-venta">—<small>a precio de mostrador de Paladear</small></dd>
+      </div>
+      <div class="cifra">
+        <dt>Te queda de ganancia</dt>
+        <dd id="r-gana">—<small id="r-margen"></small></dd>
+      </div>
+      <div class="cifra">
+        <dt>Llevás</dt>
+        <dd id="r-peso">—<small id="r-prod"></small></dd>
+      </div>
       <p class="nota-modo" id="r-nota"></p>
+      <p class="sacados" id="r-sacados" hidden></p>
     </dl>
 
     <div id="tabla-kit"></div>
 
     <div class="acciones">
       <span class="aviso" id="aviso" hidden>Copiado</span>
-      <button type="button" id="b-ver">Ver el pedido en texto</button>
+      <button type="button" id="b-ver">Ver el pedido escrito</button>
     </div>
     <textarea id="texto" readonly aria-label="Pedido en texto" hidden></textarea>
 
     <div class="metodo">
       <h3>De dónde salen estos números</h3>
-      <p><b>Las cantidades.</b> Paladear atiende 66 clientes por día en su local de
-        Mendoza, y sabemos cuánto se vende de cada producto por semana. Si esperás
-        atender menos gente, vendés proporcionalmente menos; eso multiplicado por las
-        semanas que quieras tener en góndola da la cantidad a comprar:
-        <i>venta semanal × (tus clientes ÷ 66) × semanas</i>.</p>
+      <p><b>Cuánto llevar de cada cosa.</b> Paladear atiende 66 clientes por día en
+        su local de Mendoza y sabe cuánto vende por semana de cada producto. Si vos
+        vas a atender menos gente, vendés en proporción: con 15 clientes por día
+        vendés más o menos la cuarta parte. Esa cantidad por semana, multiplicada
+        por las semanas que quieras tener guardadas, es lo que te conviene comprar.
+        En los granel la cantidad va en <b>kilos</b>; en lo envasado, en
+        <b>unidades</b> (frascos, botellas, paquetes).</p>
+      <p><b>«Si lo vendés todo cobrás»</b> es cuánta plata entra por caja si vendés
+        todo ese pedido al precio al que Paladear lo vende en su mostrador. La
+        diferencia con lo que pagás es la ganancia. Son números de referencia: vos
+        ponés tus propios precios, y la mercadería se vende a lo largo de varias
+        semanas, no de golpe.</p>
       <p><b>Los precios.</b> Son siempre mayoristas y se leen de la lista de la
         distribuidora cada vez que abrís esta página, así que no quedan viejos. Para
         lo que por ahora solo tenemos en la tienda va la lista 2, la de pedidos de
         más de $80.000.</p>
       <p><b>Los bultos.</b> Salen de la lista mayorista, tal cual figuran ahí. Hay
-        productos que todavía no se consiguen en bulto cerrado: aparecen marcados y
-        solo se pueden pedir fraccionados.</p>
-      <p><b>«Si lo vendés todo»</b> es ese mismo pedido valuado al precio de venta al
-        público de Paladear. Sirve para ver el margen; no es una promesa.</p>
+        productos que todavía no se consiguen en bulto cerrado: esos solo se pueden
+        pedir fraccionados.</p>
     </div>
   </section>
 
   <section id="panel-vendidos" role="tabpanel" hidden>
     <div class="intro">
       <h2>Qué estás viendo</h2>
-      <ol>
-        <li>Los productos de mayor rotación en el mostrador de Paladear, rubro por rubro.</li>
-        <li>La rotación se mide en <b>cuántas ventas distintas</b> apareció el producto,
-          no en kilos: así un granel que sale de a 100 g se compara de igual a igual
-          con un envasado.</li>
-        <li>Acá sí se repiten variedades del mismo producto, porque es el ranking real
-          del mostrador. En los kits entra una sola variedad de cada cosa.</li>
-      </ol>
+      <ul>
+        <li>Los productos que más salen en el mostrador de Paladear, rubro por rubro.</li>
+        <li>La barra mide <b>en cuántas ventas distintas apareció</b> el producto
+          durante el año, no los kilos. Así un granel que sale de a 100 gramos se
+          compara de igual a igual con un frasco.</li>
+        <li>Acá se repiten variedades del mismo producto, porque es el ranking real.
+          En los kits entra una sola variedad de cada cosa.</li>
+      </ul>
     </div>
     <div class="mandos">
       <div class="grupo">
@@ -385,35 +408,34 @@ textarea{width:100%;min-height:8rem;margin-top:.9rem;
 </div>
 
 <script>
-const KITS = [{"rubro":"FRUTOS SECOS","slug":"frutos","tickets":6066,"items":[{"cod":"1842","nom":"ALMENDRA NON PAREIL  X KG","niv":1,"un":"kg","tk":1330,"sem":4.837,"bul":10.0,"pat":"10 kilos.","p2":24000.0,"f":1,"p1":32727.273,"img":1},{"cod":"1441","nom":"NUEZ CUARTILLO X KG","niv":1,"un":"kg","tk":1195,"sem":5.076,"bul":5.0,"pat":"5 kg","p2":11170.0,"f":1,"p1":15239.669,"img":1},{"cod":"2228","nom":"MIX IMPERIAL X KG","niv":1,"un":"kg","tk":1062,"sem":5.411,"bul":5.0,"pat":"5 kg","p2":16310.0,"f":1,"p1":19950.413,"img":1},{"cod":"1180","nom":"CASTAÑAS CAJÚ VIETNAM  X KG","niv":1,"un":"kg","tk":968,"sem":3.405,"bul":5.0,"pat":"5 kg","p2":14430.0,"f":1,"p1":19685.95,"img":1},{"cod":"1381","nom":"MANI TOSTADO X KG.","niv":1,"un":"kg","tk":667,"sem":4.431,"bul":1.0,"pat":"1 kg","p2":4160.0,"f":1,"p1":5115.702,"img":1},{"cod":"1522","nom":"PISTACHOS CON CÁSCARA X KG","niv":1,"un":"kg","tk":412,"sem":1.508,"bul":10.0,"pat":"10 kg","p2":31700.0,"f":1,"p1":38867.769,"img":1},{"cod":"4453","nom":"NUEZ DE BRASIL","niv":2,"un":"kg","tk":242,"sem":0.714,"bul":5.0,"pat":"5 kg","p2":35440.0,"f":1,"p1":48256.198,"img":1},{"cod":"1365","nom":"MAIZ FRITO SALADO X KG","niv":2,"un":"kg","tk":114,"sem":0.34,"bul":1.0,"pat":"1 kg","p2":11760.0,"f":1,"p1":14471.074,"img":1},{"cod":"1134","nom":"AVELLANAS SIN CASCARA X KG","niv":3,"un":"kg","tk":76,"sem":0.199,"bul":10.0,"pat":"10 kg","p2":37850.0,"f":1,"p1":46404.959,"img":1}]},{"rubro":"DESHIDRATADOS","slug":"deshidratados","tickets":4175,"items":[{"cod":"1208","nom":"CIRUELAS TIERNIZADAS S/C X KG","niv":1,"un":"kg","tk":900,"sem":5.607,"bul":5.0,"pat":"5 kg","p2":9800.0,"f":1,"p1":12008.264,"img":1},{"cod":"1127","nom":"ARANDANOS DESHIDRATADOS X KG","niv":1,"un":"kg","tk":881,"sem":3.159,"bul":11.34,"pat":"11.34","p2":18130.0,"f":1,"p1":21867.769,"img":1},{"cod":"1955","nom":"PASAS MOROCHAS FLAME S/SEM X KG","niv":1,"un":"kg","tk":647,"sem":2.704,"bul":10.0,"pat":"10 kg","p2":3000.0,"f":1,"p1":4090.909,"img":1},{"cod":"1202","nom":"CHIPS DE BANANA X KG","niv":1,"un":"kg","tk":548,"sem":1.638,"bul":6.8,"pat":"6,8 kg","p2":10800.0,"f":1,"p1":14743.802,"img":1},{"cod":"1394","nom":"MEDALLONES DURAZ.  X KG","niv":1,"un":"kg","tk":291,"sem":1.197,"bul":5.0,"pat":"5 kg","p2":12940.0,"f":1,"p1":15892.562,"img":1},{"cod":"5028","nom":"DATILES  DORADOS DE EGIPTO","niv":2,"un":"un","tk":230,"sem":1.036,"bul":null,"pat":"","p2":6181.818,"f":0,"p1":7272.727,"img":0},{"cod":"1632","nom":"TOMATE SECOS X KG","niv":2,"un":"kg","tk":158,"sem":0.478,"bul":5.0,"pat":"5 kg","p2":13750.0,"f":1,"p1":16834.711,"img":1},{"cod":"1311","nom":"HIGOS TIERNIZADOS X KG","niv":2,"un":"kg","tk":155,"sem":0.627,"bul":5.0,"pat":"5 kg","p2":12150.0,"f":1,"p1":14851.24,"img":1},{"cod":"1319","nom":"JENGIBRE GLASEADO X KG","niv":2,"un":"kg","tk":144,"sem":0.412,"bul":1.0,"pat":"1 kg","p2":17720.0,"f":1,"p1":21735.537,"img":1},{"cod":"1488","nom":"PERAS WILLIAMS X KG","niv":2,"un":"kg","tk":111,"sem":0.488,"bul":5.0,"pat":"5 kg","p2":14250.0,"f":1,"p1":17429.752,"img":1},{"cod":"1954","nom":"FRUTA MULTICOLOR X KG","niv":2,"un":"kg","tk":110,"sem":0.364,"bul":10.0,"pat":"10 kg","p2":7440.0,"f":1,"p1":9148.76,"img":1}]},{"rubro":"ESPECIAS","slug":"especias","tickets":3790,"items":[{"cod":"1236","nom":"CURCUMA MOLIDA X KG","niv":1,"un":"kg","tk":346,"sem":0.729,"bul":1.0,"pat":"1 kg","p2":8730.0,"f":1,"p1":10685.95,"img":1},{"cod":"1209","nom":"CLAVO DE OLOR ENTERO X KG.","niv":1,"un":"kg","tk":289,"sem":0.235,"bul":1.0,"pat":"1 kg","p2":40880.0,"f":1,"p1":49966.942,"img":1},{"cod":"2089","nom":"BICARBONATO DE SODIO X KG","niv":1,"un":"kg","tk":263,"sem":1.823,"bul":1.0,"pat":"1 kg","p2":2780.0,"f":1,"p1":3404.959,"img":1},{"cod":"1167","nom":"CANELA EN RAMA X KG","niv":2,"un":"kg","tk":246,"sem":0.209,"bul":1.0,"pat":"1 kg","p2":57320.0,"f":1,"p1":70049.587,"img":1},{"cod":"1702","nom":"GELATINA SIN SABOR X KG","niv":2,"un":"kg","tk":246,"sem":0.967,"bul":1.0,"pat":"1 kg","p2":21350.0,"f":1,"p1":26115.702,"img":1},{"cod":"1455","nom":"OREGANO  KG.","niv":2,"un":"kg","tk":226,"sem":0.387,"bul":1.0,"pat":"1 kg","p2":7680.0,"f":1,"p1":9413.223,"img":1},{"cod":"1512","nom":"PIMIENTA NEGRA EN GRANO X KG.","niv":2,"un":"kg","tk":196,"sem":0.362,"bul":1.0,"pat":"1 kg","p2":22620.0,"f":1,"p1":27661.157,"img":1},{"cod":"1505","nom":"PIMENTON EXTRA X KG","niv":2,"un":"kg","tk":187,"sem":0.44,"bul":1.0,"pat":"1 kg","p2":8430.0,"f":1,"p1":10355.372,"img":1},{"cod":"1079","nom":"AJI MOLIDO FINO X KG.","niv":2,"un":"kg","tk":174,"sem":0.42,"bul":1.0,"pat":"1 kg","p2":7590.0,"f":1,"p1":9297.521,"img":1},{"cod":"1557","nom":"SAL DEL HIMALAYA FINA X 1 KG","niv":2,"un":"kg","tk":163,"sem":1.172,"bul":1.0,"pat":"1 kg","p2":3810.0,"f":1,"p1":4669.421,"img":1},{"cod":"1545","nom":"PROVENZAL X KG.","niv":2,"un":"kg","tk":144,"sem":0.279,"bul":1.0,"pat":"1 kg","p2":12360.0,"f":1,"p1":15123.967,"img":1},{"cod":"1314","nom":"HONGOS SECOS X KG","niv":2,"un":"kg","tk":143,"sem":0.241,"bul":1.0,"pat":"1 kg","p2":30980.0,"f":1,"p1":37884.298,"img":1},{"cod":"1085","nom":"AJO EN POLVO","niv":2,"un":"kg","tk":125,"sem":0.24,"bul":1.0,"pat":"1 kg","p2":5360.0,"f":1,"p1":6561.983,"img":1},{"cod":"1320","nom":"JENGIBRE MOLIDO X KG.","niv":2,"un":"kg","tk":117,"sem":0.164,"bul":1.0,"pat":"1 kg","p2":12090.0,"f":1,"p1":14785.124,"img":1},{"cod":"1350","nom":"LAUREL EN HOJAS X KG.","niv":2,"un":"kg","tk":107,"sem":0.041,"bul":1.0,"pat":"1 kg","p2":21360.0,"f":1,"p1":26157.025,"img":1},{"cod":"2308","nom":"MERKEN CHILENO X KG","niv":2,"un":"kg","tk":104,"sem":0.198,"bul":1.0,"pat":"1 kg","p2":11510.0,"f":1,"p1":14495.868,"img":0},{"cod":"1363","nom":"MACA EN POLVO X KG.","niv":3,"un":"kg","tk":93,"sem":0.26,"bul":1.0,"pat":"1 kg","p2":17250.0,"f":1,"p1":21148.76,"img":1},{"cod":"1555","nom":"ROMERO EN HOJAS X KG.","niv":3,"un":"kg","tk":87,"sem":0.247,"bul":1.0,"pat":"1 kg","p2":12080.0,"f":1,"p1":14768.595,"img":1},{"cod":"1124","nom":"ANIS ESTRELLADO X KG.","niv":3,"un":"kg","tk":83,"sem":0.057,"bul":1.0,"pat":"1 kg","p2":49240.0,"f":1,"p1":60181.818,"img":1},{"cod":"1418","nom":"MIX  4 PIMIENTAS","niv":3,"un":"kg","tk":83,"sem":0.141,"bul":1.0,"pat":"1 kg","p2":39680.0,"f":1,"p1":48512.397,"img":1},{"cod":"1182","nom":"CEBOLLA EN ESCAMAS X KG.","niv":3,"un":"kg","tk":71,"sem":0.139,"bul":1.0,"pat":"1 kg","p2":9310.0,"f":1,"p1":11462.81,"img":1},{"cod":"1333","nom":"JULIANA SIN PAPA X KG","niv":3,"un":"kg","tk":69,"sem":0.192,"bul":1.0,"pat":"1 kg","p2":13240.0,"f":1,"p1":16190.083,"img":1},{"cod":"1451","nom":"NUEZ MOSCADA ENTERA X KG","niv":3,"un":"kg","tk":61,"sem":0.018,"bul":1.0,"pat":"1 kg","p2":40880.0,"f":1,"p1":49958.678,"img":1},{"cod":"1239","nom":"CURRY X KG","niv":3,"un":"kg","tk":58,"sem":0.107,"bul":1.0,"pat":"1 kg","p2":11010.0,"f":1,"p1":13479.339,"img":1},{"cod":"1633","nom":"TOMILLO X KG","niv":3,"un":"kg","tk":58,"sem":0.09,"bul":1.0,"pat":"1 kg","p2":11800.0,"f":1,"p1":14454.545,"img":1},{"cod":"1214","nom":"COMINO MOLIDO X KG.","niv":0,"un":"kg","tk":51,"sem":0.084,"bul":1.0,"pat":"1 kg","p2":13790.0,"f":1,"p1":16842.975,"img":1}]},{"rubro":"CEREALES","slug":"cereales","tickets":3174,"items":[{"cod":"1635","nom":"TUTUCAS CON AZUCAR X KG","niv":1,"un":"kg","tk":963,"sem":4.887,"bul":1.0,"pat":"1 kg","p2":4040.0,"f":1,"p1":4983.471,"img":1},{"cod":"1549","nom":"QUINOA INFLADA X KG.","niv":1,"un":"kg","tk":445,"sem":1.541,"bul":1.0,"pat":"1 kg","p2":8990.0,"f":1,"p1":10991.736,"img":1},{"cod":"1136","nom":"AVENA INSTANTÁNEA X KG","niv":1,"un":"kg","tk":410,"sem":4.567,"bul":1.0,"pat":"1 kg","p2":2550.0,"f":1,"p1":3123.967,"img":1},{"cod":"1117","nom":"ALMOHADITAS FRUTILLA X KG.","niv":1,"un":"kg","tk":388,"sem":1.446,"bul":2.5,"pat":"2.5 kilos","p2":7930.0,"f":1,"p1":9743.802,"img":1},{"cod":"1229","nom":"COPOS DE MAIZ SIN AZÚCAR X KG","niv":1,"un":"kg","tk":357,"sem":2.058,"bul":3.0,"pat":"3 kg","p2":2910.0,"f":1,"p1":3561.983,"img":1},{"cod":"1911","nom":"GRANOLA TRADICIONAL X KG","niv":1,"un":"kg","tk":334,"sem":2.618,"bul":1.0,"pat":"1 kg","p2":5490.0,"f":1,"p1":6743.802,"img":1},{"cod":"1147","nom":"BASTONCITO SALVADO TRIGO Y AVENA X KG.","niv":2,"un":"kg","tk":154,"sem":0.714,"bul":2.5,"pat":"2,5 kg","p2":6380.0,"f":1,"p1":7801.653,"img":1},{"cod":"1121","nom":"ANILLOS DE AVENA Y MIEL X KG.","niv":2,"un":"kg","tk":123,"sem":0.346,"bul":2.5,"pat":"2.5 kilos.","p2":8170.0,"f":1,"p1":10008.264,"img":1}]},{"rubro":"SEMILLAS","slug":"semillas","tickets":2697,"items":[{"cod":"1583","nom":"SEMILLA DE CHIA NAC X KG.","niv":1,"un":"kg","tk":707,"sem":2.562,"bul":1.0,"pat":"1 kg","p2":4990.0,"f":1,"p1":6115.702,"img":1},{"cod":"1587","nom":"SEMILLA DE ZAPALLO PELADO X KG.","niv":1,"un":"kg","tk":670,"sem":1.948,"bul":1.0,"pat":"1 kg","p2":25880.0,"f":1,"p1":31652.893,"img":1},{"cod":"1585","nom":"SEMILLA DE GIRASOL X KG.","niv":1,"un":"kg","tk":401,"sem":1.575,"bul":1.0,"pat":"1 kg","p2":5540.0,"f":1,"p1":6785.124,"img":1},{"cod":"1586","nom":"SEMILLA DE LINO X KG","niv":1,"un":"kg","tk":302,"sem":1.593,"bul":1.0,"pat":"1 kg","p2":5250.0,"f":1,"p1":6454.545,"img":1},{"cod":"1421","nom":"MIX DE SLLAS  ADELGAZ X KG","niv":2,"un":"kg","tk":213,"sem":0.712,"bul":1.0,"pat":"1 kg","p2":5690.0,"f":1,"p1":6983.471,"img":1},{"cod":"1589","nom":"SESAMO BLANCO X KG.","niv":2,"un":"kg","tk":209,"sem":0.637,"bul":1.0,"pat":"1 kg","p2":8310.0,"f":1,"p1":10173.554,"img":1},{"cod":"1551","nom":"QUINOA X KG","niv":2,"un":"kg","tk":140,"sem":0.828,"bul":1.0,"pat":"1 kg","p2":8550.0,"f":1,"p1":10446.281,"img":1},{"cod":"1581","nom":"SEMILLA DE AMAPOLA X KG.","niv":3,"un":"kg","tk":55,"sem":0.108,"bul":1.0,"pat":"1 kg","p2":14090.0,"f":1,"p1":17239.669,"img":1}]},{"rubro":"DULCES, MIEL Y CHOCOLATES","slug":"dulces","tickets":2330,"items":[{"cod":"2007","nom":"GOTITAS DE CHOCO SEMIAMARGO X KG","niv":1,"un":"kg","tk":733,"sem":2.719,"bul":null,"pat":"","p2":11000.0,"f":0,"p1":12900.826,"img":0},{"cod":"2009","nom":"PASAS DE UVA C/CHOCO XKG","niv":2,"un":"kg","tk":217,"sem":0.672,"bul":null,"pat":"","p2":22008.264,"f":0,"p1":25793.388,"img":0},{"cod":"1410","nom":"MIEL DE ABEJA X 500 g MONTE NATURAL\" - JALEA\"","niv":2,"un":"un","tk":182,"sem":3.538,"bul":24.0,"pat":"24 unidades","p2":3360.0,"f":1,"p1":4123.967,"img":1},{"cod":"2008","nom":"MANI C/CHOCO SEMIAMARGO XKG","niv":2,"un":"kg","tk":172,"sem":0.448,"bul":null,"pat":"","p2":17338.843,"f":0,"p1":20322.314,"img":0},{"cod":"2316","nom":"LENTEJA DE CHOCOLATE XKG","niv":2,"un":"kg","tk":148,"sem":0.383,"bul":null,"pat":"","p2":30454.545,"f":0,"p1":35702.479,"img":0},{"cod":"2003","nom":"BARRA CHOCO 70% CON STEVIA x 100 g - COLONIAL","niv":2,"un":"un","tk":142,"sem":3.365,"bul":null,"pat":"","p2":3264.463,"f":0,"p1":3826.446,"img":0},{"cod":"2002","nom":"ARANDANOS CON CHOCO xKG","niv":2,"un":"kg","tk":136,"sem":0.37,"bul":null,"pat":"","p2":27016.529,"f":0,"p1":31677.686,"img":0},{"cod":"2010","nom":"AVELLANAS CON CHOCO XKG","niv":2,"un":"kg","tk":133,"sem":0.312,"bul":null,"pat":"","p2":30966.942,"f":0,"p1":36297.521,"img":0},{"cod":"2455","nom":"BANANITAS CON CHOCO","niv":2,"un":"un","tk":121,"sem":0.238,"bul":null,"pat":"","p2":34272.727,"f":0,"p1":40181.818,"img":0},{"cod":"2229","nom":"MEMBRILLITOS X30Gr \"PIZARRO\"","niv":3,"un":"un","tk":86,"sem":5.135,"bul":null,"pat":"","p2":537.19,"f":0,"p1":661.157,"img":0},{"cod":"2001","nom":"ALMENDRAS CON CHOCO xKG","niv":3,"un":"kg","tk":82,"sem":0.173,"bul":null,"pat":"","p2":36371.901,"f":0,"p1":42636.364,"img":0},{"cod":"1244","nom":"DULCE DE ALCAYOTA X 500 GR","niv":3,"un":"un","tk":65,"sem":1.346,"bul":12.0,"pat":"12 unidades","p2":2250.0,"f":1,"p1":2801.653,"img":1},{"cod":"1254","nom":"DULCE DE MEMBRILLO X 1 KG","niv":3,"un":"un","tk":59,"sem":1.173,"bul":1.0,"pat":"1 unidad","p2":4500.0,"f":1,"p1":5512.397,"img":1},{"cod":"2134","nom":"DULCE DE LECHE CON STEVIA DOÑA MAGDALENA \"SIN TACC\"","niv":3,"un":"un","tk":54,"sem":1.058,"bul":null,"pat":"","p2":8818.182,"f":0,"p1":10338.843,"img":0}]},{"rubro":"AZUCAR, CACAO Y REPOSTERIA","slug":"reposteria","tickets":1941,"items":[{"cod":"1212","nom":"COCO RALLADO X KG.","niv":1,"un":"kg","tk":533,"sem":2.136,"bul":1.0,"pat":"1 kg","p2":10820.0,"f":1,"p1":13239.669,"img":1},{"cod":"1163","nom":"CACAO AMARGO DE BRASIL X KG","niv":1,"un":"kg","tk":523,"sem":1.532,"bul":1.0,"pat":"1 kg","p2":26300.0,"f":1,"p1":32223.14,"img":1},{"cod":"1424","nom":"CHOCOLATE 80%  COBERTURA SEMIAMARGO x kg - COLONIAL","niv":2,"un":"kg","tk":210,"sem":0.497,"bul":null,"pat":"","p2":39090.909,"f":0,"p1":45834.711,"img":0},{"cod":"1141","nom":"AZUCAR MASCABO X KG","niv":2,"un":"kg","tk":207,"sem":1.559,"bul":1.0,"pat":"1 kg","p2":6540.0,"f":1,"p1":8008.264,"img":1},{"cod":"2348","nom":"POLVO PARA HORNEAR X KG","niv":2,"un":"kg","tk":124,"sem":0.393,"bul":1.0,"pat":"1 kg","p2":4310.0,"f":1,"p1":5305.785,"img":1},{"cod":"1140","nom":"AZUCAR IMPALPABLE X KG.","niv":2,"un":"kg","tk":114,"sem":0.727,"bul":1.0,"pat":"1 kg","p2":2760.0,"f":1,"p1":3388.43,"img":1},{"cod":"5048","nom":"PEPAS DE NUEZ","niv":3,"un":"un","tk":88,"sem":0.192,"bul":null,"pat":"","p2":17768.595,"f":0,"p1":18595.041,"img":0},{"cod":"1263","nom":"ESENCIA ARTIFICIAL DE VAINILLA X 100 CC INDIAS\" \"","niv":3,"un":"un","tk":72,"sem":1.442,"bul":12.0,"pat":"12 unidades","p2":850.0,"f":1,"p1":1537.19,"img":1},{"cod":"2099","nom":"STEVIA LIQUIDA X120 \"SIN TACC\"","niv":3,"un":"un","tk":70,"sem":1.462,"bul":null,"pat":"","p2":5793.388,"f":0,"p1":6793.388,"img":0}]},{"rubro":"INFUSIONES Y HIERBAS","slug":"infusiones","tickets":1361,"items":[{"cod":"1849","nom":"HIBISCUS FLOR X KG","niv":1,"un":"kg","tk":410,"sem":0.973,"bul":1.0,"pat":"1 kg","p2":15280.0,"f":1,"p1":18694.215,"img":1},{"cod":"2035","nom":"TE DE BURRO X KG","niv":2,"un":"kg","tk":139,"sem":0.206,"bul":1.0,"pat":"1 kg","p2":20190.0,"f":1,"p1":24685.95,"img":1},{"cod":"2326","nom":"BLEND DE TE X 30g","niv":2,"un":"un","tk":137,"sem":3.657,"bul":null,"pat":"","p2":2231.405,"f":0,"p1":2479.339,"img":0},{"cod":"5044","nom":"MANZANILLA FLOR PREMIUM","niv":2,"un":"kg","tk":128,"sem":0.178,"bul":1.0,"pat":"X KG","p2":48150.0,"f":1,"p1":58842.975,"img":1},{"cod":"2043","nom":"YERBA MATE DESPALADA KALENA X KG","niv":2,"un":"kg","tk":115,"sem":0.982,"bul":10.0,"pat":"10 kg","p2":8890.0,"f":1,"p1":10933.884,"img":1},{"cod":"2038","nom":"CEDRON X KG","niv":3,"un":"kg","tk":102,"sem":0.089,"bul":1.0,"pat":"1 kg","p2":32730.0,"f":1,"p1":40024.793,"img":0},{"cod":"2040","nom":"MENTA HOJAS X KG","niv":3,"un":"kg","tk":85,"sem":0.127,"bul":1.0,"pat":"1 kg","p2":18890.0,"f":1,"p1":23090.909,"img":0},{"cod":"2420","nom":"PSYLLIUM MOLIDO X KG","niv":3,"un":"kg","tk":72,"sem":0.134,"bul":1.0,"pat":"1 kg","p2":42570.0,"f":1,"p1":51743.802,"img":1},{"cod":"2039","nom":"MELISA X KG","niv":3,"un":"kg","tk":63,"sem":0.115,"bul":1.0,"pat":"1 kg","p2":12320.0,"f":1,"p1":15090.909,"img":0},{"cod":"2048","nom":"TE VERDE X KG","niv":3,"un":"kg","tk":58,"sem":0.15,"bul":1.0,"pat":"1 kg","p2":8070.0,"f":1,"p1":9884.298,"img":1},{"cod":"2322","nom":"SEN HOJAS X KG","niv":3,"un":"kg","tk":52,"sem":0.112,"bul":1.0,"pat":"1 kg","p2":9130.0,"f":1,"p1":11173.554,"img":1}]},{"rubro":"HARINAS","slug":"harinas","tickets":1257,"items":[{"cod":"1295","nom":"HARINA DE AVENA X KG","niv":2,"un":"kg","tk":198,"sem":2.221,"bul":1.0,"pat":"1 kg","p2":2610.0,"f":1,"p1":3272.727,"img":1},{"cod":"2315","nom":"HARINA DE ALMENDRAS C/PIEL","niv":2,"un":"kg","tk":182,"sem":1.04,"bul":10.0,"pat":"10 kg","p2":17930.0,"f":1,"p1":21504.132,"img":0},{"cod":"1269","nom":"FECULA DE MANDIOCA X KG","niv":2,"un":"kg","tk":155,"sem":2.114,"bul":1.0,"pat":"1 kg","p2":3280.0,"f":1,"p1":4041.322,"img":1},{"cod":"1621","nom":"TEXTURIZADO DE SOJA X KG","niv":2,"un":"kg","tk":144,"sem":1.319,"bul":1.0,"pat":"1 kg","p2":3030.0,"f":1,"p1":3727.273,"img":1},{"cod":"1306","nom":"HARINA INTEGRAL FINA X KG.","niv":3,"un":"kg","tk":89,"sem":1.241,"bul":1.0,"pat":"1 kg","p2":1920.0,"f":1,"p1":2347.107,"img":1},{"cod":"1113","nom":"ALMIDON DE MAIZ X KG","niv":3,"un":"kg","tk":87,"sem":0.807,"bul":1.0,"pat":"1 kg","p2":2050.0,"f":1,"p1":2528.926,"img":1},{"cod":"1576","nom":"SALVADO DE AVENA X KG","niv":3,"un":"kg","tk":78,"sem":0.699,"bul":1.0,"pat":"1 kg","p2":3050.0,"f":1,"p1":3752.066,"img":1},{"cod":"1670","nom":"PANKO X KG","niv":3,"un":"kg","tk":78,"sem":1.701,"bul":1.0,"pat":"1 kg","p2":3130.0,"f":1,"p1":3818.182,"img":1},{"cod":"1300","nom":"HARINA DE LINO X KG","niv":3,"un":"kg","tk":70,"sem":0.299,"bul":1.0,"pat":"1 kg","p2":3400.0,"f":1,"p1":4206.612,"img":1},{"cod":"1299","nom":"HARINA DE GARBANZO X KG","niv":3,"un":"kg","tk":62,"sem":0.657,"bul":1.0,"pat":"1 kg","p2":1740.0,"f":1,"p1":2528.926,"img":1},{"cod":"1298","nom":"HARINA DE COCO X KG","niv":3,"un":"kg","tk":60,"sem":0.269,"bul":1.0,"pat":"1 kg","p2":7580.0,"f":1,"p1":9289.256,"img":1},{"cod":"1294","nom":"HARINA DE ARROZ X KG","niv":3,"un":"kg","tk":54,"sem":0.641,"bul":1.0,"pat":"1 kg","p2":2100.0,"f":1,"p1":2578.512,"img":1}]},{"rubro":"PRODUCTOS SIN TACC","slug":"sintacc","tickets":1171,"items":[{"cod":"2280","nom":"GALLETAS SIN TACC X KG","niv":1,"un":"kg","tk":745,"sem":2.452,"bul":null,"pat":"","p2":11570.248,"f":0,"p1":12809.917,"img":0},{"cod":"2027","nom":"ALFAJORES MAICENA SIN TACC X 6 unidades","niv":2,"un":"un","tk":171,"sem":3.558,"bul":null,"pat":"","p2":4272.727,"f":0,"p1":4380.165,"img":0},{"cod":"2107","nom":"TOSTADAS RISKY  \"SIN TACC\"","niv":3,"un":"un","tk":88,"sem":2.269,"bul":null,"pat":"","p2":1438.017,"f":0,"p1":1685.95,"img":0},{"cod":"2513","nom":"ALFAJOR  SIN AZUCAR \"BANDA\"","niv":3,"un":"un","tk":72,"sem":2.155,"bul":null,"pat":"","p2":1041.322,"f":0,"p1":1239.669,"img":0},{"cod":"5013","nom":"CHIPS SALADOS X80 GR - NUESTROS SABORES","niv":3,"un":"un","tk":54,"sem":1.346,"bul":null,"pat":"","p2":1520.661,"f":0,"p1":1735.537,"img":0},{"cod":"1863","nom":"FIDEOS DE ARROZ \"PARTY BECK\" X 280GR","niv":0,"un":"un","tk":41,"sem":0.904,"bul":null,"pat":"","p2":3586.777,"f":0,"p1":4355.372,"img":0}]},{"rubro":"PRODUCTOS CONGELADOS","slug":"congelados","tickets":476,"items":[{"cod":"2057","nom":"MEDALLONES VEGETARIANOS \"KISLEV\"","niv":2,"un":"un","tk":178,"sem":4.712,"bul":null,"pat":"","p2":3966.942,"f":0,"p1":4628.099,"img":0},{"cod":"2176","nom":"MIX FRUTOS ROJOS CONGELADOS X KILO","niv":2,"un":"kg","tk":124,"sem":2.519,"bul":null,"pat":"","p2":13198.347,"f":0,"p1":15454.545,"img":0},{"cod":"1126","nom":"ARANDANOS CONGELADOS X KG","niv":2,"un":"kg","tk":122,"sem":2.34,"bul":null,"pat":"","p2":12958.678,"f":0,"p1":15173.554,"img":0},{"cod":"2278","nom":"CALDO DE HUESO \" MEDICINA ANCESTRAL\"","niv":3,"un":"un","tk":52,"sem":1.231,"bul":null,"pat":"","p2":5793.388,"f":0,"p1":6214.876,"img":0}]},{"rubro":"BEBIDAS","slug":"bebidas","tickets":475,"items":[{"cod":"2233","nom":"KEFIR DE AGUA \"KE.LIVE\" SABORIZADO X 950 ML","niv":1,"un":"un","tk":269,"sem":5.904,"bul":null,"pat":"","p2":3595.041,"f":0,"p1":4214.876,"img":0},{"cod":"2459","nom":"KOMBUCHA  EYWA 354 ml","niv":3,"un":"un","tk":79,"sem":2.308,"bul":null,"pat":"","p2":3925.62,"f":0,"p1":4504.132,"img":0},{"cod":"1324","nom":"JUGO DE ARANDANOS X 1,5 LTS.","niv":3,"un":"un","tk":65,"sem":1.365,"bul":6.0,"pat":"6 unidades","p2":2920.0,"f":1,"p1":2933.884,"img":1},{"cod":"1727","nom":"LECHE DE COCO EN POLVO X KG","niv":3,"un":"kg","tk":62,"sem":0.203,"bul":1.0,"pat":"1 kg","p2":26080.0,"f":1,"p1":31933.884,"img":1}]},{"rubro":"SUPLEMENTOS","slug":"suplementos","tickets":428,"items":[{"cod":"2238","nom":"CREATINA MONOHIDRATO","niv":2,"un":"kg","tk":118,"sem":0.505,"bul":1.0,"pat":"1 kg","p2":16420.0,"f":1,"p1":20074.38,"img":1},{"cod":"2364","nom":"VINAGRE  DE SIDRA DE MANZANA \"VERDE VIDA\" X 500 ML","niv":3,"un":"un","tk":78,"sem":1.731,"bul":null,"pat":"","p2":8983.471,"f":0,"p1":9834.711,"img":0},{"cod":"2031","nom":"COLAGENO HIDROLIZADO X KG PEPTAN B 2000 LD\"\"","niv":3,"un":"kg","tk":70,"sem":0.182,"bul":1.0,"pat":"1 kg","p2":29470.0,"f":1,"p1":36041.322,"img":1},{"cod":"2483","nom":"CITRATO DE MAGNESIO  XKG","niv":3,"un":"kg","tk":56,"sem":0.184,"bul":null,"pat":"","p2":17347.107,"f":0,"p1":19082.645,"img":0},{"cod":"2078","nom":"GLICINATO DE MAGNESIO EL NATURALISA\"\"","niv":3,"un":"un","tk":53,"sem":1.115,"bul":null,"pat":"","p2":5740.0,"f":1,"p1":9066.116,"img":0},{"cod":"2185","nom":"ACEITE DE OREGANO X30CC \"SOMOS SETA\"","niv":3,"un":"un","tk":53,"sem":1.019,"bul":null,"pat":"","p2":10198.347,"f":0,"p1":11570.248,"img":0}]},{"rubro":"ACEITES Y VINAGRES","slug":"aceites","tickets":427,"items":[{"cod":"1894","nom":"ACEITE DE OLIVA X 900ML VERDE OLIVA","niv":1,"un":"un","tk":339,"sem":7.269,"bul":10.0,"pat":"10 unid.","p2":4510.0,"f":1,"p1":5528.926,"img":1},{"cod":"2265","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 200\"","niv":3,"un":"un","tk":88,"sem":1.698,"bul":12.0,"pat":"12 unid.","p2":4070.0,"f":1,"p1":4966.942,"img":1}]},{"rubro":"PRODUCTOS DE FRIO","slug":"frio","tickets":294,"items":[{"cod":"1810","nom":"YOGHURT NATURAL SIN AZUCAR X 1 L","niv":1,"un":"un","tk":294,"sem":6.038,"bul":null,"pat":"","p2":3920.0,"f":1,"p1":5677.686,"img":0}]},{"rubro":"PALADEAR HOME","slug":"home","tickets":281,"items":[{"cod":"2066","nom":"SAHUMERIO TIBETANO X8 \"AROMANZA\"","niv":2,"un":"un","tk":229,"sem":6.558,"bul":null,"pat":"","p2":2628.099,"f":0,"p1":3057.851,"img":0},{"cod":"2400","nom":"DIFUSOR \"ILUMINARTE\" X 125 ml","niv":3,"un":"un","tk":52,"sem":1.25,"bul":null,"pat":"","p2":4256.198,"f":0,"p1":4669.421,"img":0}]},{"rubro":"SNACK","slug":"snack","tickets":274,"items":[{"cod":"2074","nom":"BARRAS CRUDDA\"  X40Gr - SIN TACC\"","niv":2,"un":"un","tk":200,"sem":7.367,"bul":null,"pat":"","p2":1810.0,"f":1,"p1":2247.934,"img":1},{"cod":"5010","nom":"PIPAS TOSTADAS CON SAL X 50 gr","niv":3,"un":"un","tk":74,"sem":1.712,"bul":null,"pat":"","p2":1157.025,"f":0,"p1":1239.669,"img":0}]},{"rubro":"GRANOS Y LEGUMBRES","slug":"granos","tickets":266,"items":[{"cod":"1358","nom":"LENTEJAS TURCAS X KG","niv":3,"un":"kg","tk":77,"sem":0.774,"bul":1.0,"pat":"1 kg","p2":4680.0,"f":1,"p1":5743.802,"img":1},{"cod":"1133","nom":"ARROZ YAMANI X KG.","niv":3,"un":"kg","tk":69,"sem":0.815,"bul":1.0,"pat":"1 kg","p2":3350.0,"f":1,"p1":4123.967,"img":1},{"cod":"1240","nom":"CUSCUS X KG","niv":3,"un":"kg","tk":60,"sem":0.37,"bul":1.0,"pat":"1 kg","p2":10720.0,"f":1,"p1":13148.76,"img":1},{"cod":"2335","nom":"GARBANZOS X KG","niv":3,"un":"kg","tk":60,"sem":0.533,"bul":1.0,"pat":"1 kg","p2":2480.0,"f":1,"p1":3041.322,"img":1}]},{"rubro":"MANTECAS Y PASTAS","slug":"mantecas","tickets":178,"items":[{"cod":"1383","nom":"MANTEQUILLA DE MANI ENTRENUTS\" X 370 g\"","niv":2,"un":"un","tk":178,"sem":3.485,"bul":12.0,"pat":"12 unidades","p2":3250.0,"f":1,"p1":3644.628,"img":1}]}];
-const VEND = [{"rubro":"FRUTOS SECOS","slug":"frutos","tickets":12065,"items":[{"cod":"1842","nom":"ALMENDRA NON PAREIL  X KG","tk":1330,"p2":24000.0,"f":1,"img":1},{"cod":"1441","nom":"NUEZ CUARTILLO X KG","tk":1195,"p2":11170.0,"f":1,"img":1},{"cod":"1716","nom":"NUEZ MARIPOSA EXTRA LIGHT X KG","tk":1063,"p2":13130.0,"f":1,"img":1},{"cod":"2228","nom":"MIX IMPERIAL X KG","tk":1062,"p2":16310.0,"f":1,"img":1},{"cod":"1180","nom":"CASTAÑAS CAJÚ VIETNAM  X KG","tk":968,"p2":14430.0,"f":1,"img":1}]},{"rubro":"DESHIDRATADOS","slug":"deshidratados","tickets":5727,"items":[{"cod":"1208","nom":"CIRUELAS TIERNIZADAS S/C X KG","tk":900,"p2":9800.0,"f":1,"img":1},{"cod":"1127","nom":"ARANDANOS DESHIDRATADOS X KG","tk":881,"p2":18130.0,"f":1,"img":1},{"cod":"1955","nom":"PASAS MOROCHAS FLAME S/SEM X KG","tk":647,"p2":3000.0,"f":1,"img":1},{"cod":"4456","nom":"PASAS MOROCHAS JUMBO - ORIGEN CHILE","tk":597,"p2":4955.0,"f":1,"img":1},{"cod":"1202","nom":"CHIPS DE BANANA X KG","tk":548,"p2":10800.0,"f":1,"img":1}]},{"rubro":"CEREALES","slug":"cereales","tickets":5523,"items":[{"cod":"1635","nom":"TUTUCAS CON AZUCAR X KG","tk":963,"p2":4040.0,"f":1,"img":1},{"cod":"1549","nom":"QUINOA INFLADA X KG.","tk":445,"p2":8990.0,"f":1,"img":1},{"cod":"1136","nom":"AVENA INSTANTÁNEA X KG","tk":410,"p2":2550.0,"f":1,"img":1},{"cod":"1117","nom":"ALMOHADITAS FRUTILLA X KG.","tk":388,"p2":7930.0,"f":1,"img":1},{"cod":"1229","nom":"COPOS DE MAIZ SIN AZÚCAR X KG","tk":357,"p2":2910.0,"f":1,"img":1}]},{"rubro":"ESPECIAS","slug":"especias","tickets":5236,"items":[{"cod":"1236","nom":"CURCUMA MOLIDA X KG","tk":346,"p2":8730.0,"f":1,"img":1},{"cod":"1209","nom":"CLAVO DE OLOR ENTERO X KG.","tk":289,"p2":40880.0,"f":1,"img":1},{"cod":"2089","nom":"BICARBONATO DE SODIO X KG","tk":263,"p2":2780.0,"f":1,"img":1},{"cod":"1167","nom":"CANELA EN RAMA X KG","tk":246,"p2":57320.0,"f":1,"img":1},{"cod":"1702","nom":"GELATINA SIN SABOR X KG","tk":246,"p2":21350.0,"f":1,"img":1}]},{"rubro":"DULCES, MIEL Y CHOCOLATES","slug":"dulces","tickets":3593,"items":[{"cod":"2007","nom":"GOTITAS DE CHOCO SEMIAMARGO X KG","tk":733,"p2":11000.0,"f":0,"img":0},{"cod":"2009","nom":"PASAS DE UVA C/CHOCO XKG","tk":217,"p2":22008.264,"f":0,"img":0},{"cod":"1410","nom":"MIEL DE ABEJA X 500 g MONTE NATURAL\" - JALEA\"","tk":182,"p2":3360.0,"f":1,"img":1},{"cod":"2008","nom":"MANI C/CHOCO SEMIAMARGO XKG","tk":172,"p2":17338.843,"f":0,"img":0},{"cod":"2316","nom":"LENTEJA DE CHOCOLATE XKG","tk":148,"p2":30454.545,"f":0,"img":0}]},{"rubro":"SEMILLAS","slug":"semillas","tickets":3139,"items":[{"cod":"1583","nom":"SEMILLA DE CHIA NAC X KG.","tk":707,"p2":4990.0,"f":1,"img":1},{"cod":"1587","nom":"SEMILLA DE ZAPALLO PELADO X KG.","tk":670,"p2":25880.0,"f":1,"img":1},{"cod":"1585","nom":"SEMILLA DE GIRASOL X KG.","tk":401,"p2":5540.0,"f":1,"img":1},{"cod":"1586","nom":"SEMILLA DE LINO X KG","tk":302,"p2":5250.0,"f":1,"img":1},{"cod":"1421","nom":"MIX DE SLLAS  ADELGAZ X KG","tk":213,"p2":5690.0,"f":1,"img":1}]},{"rubro":"AZUCAR, CACAO Y REPOSTERIA","slug":"reposteria","tickets":2611,"items":[{"cod":"1212","nom":"COCO RALLADO X KG.","tk":533,"p2":10820.0,"f":1,"img":1},{"cod":"1163","nom":"CACAO AMARGO DE BRASIL X KG","tk":523,"p2":26300.0,"f":1,"img":1},{"cod":"1211","nom":"COCO EN ESCAMAS X KG","tk":302,"p2":18310.0,"f":1,"img":1},{"cod":"1424","nom":"CHOCOLATE 80%  COBERTURA SEMIAMARGO x kg - COLONIAL","tk":210,"p2":39090.909,"f":0,"img":0},{"cod":"1141","nom":"AZUCAR MASCABO X KG","tk":207,"p2":6540.0,"f":1,"img":1}]},{"rubro":"INFUSIONES Y HIERBAS","slug":"infusiones","tickets":1942,"items":[{"cod":"1849","nom":"HIBISCUS FLOR X KG","tk":410,"p2":15280.0,"f":1,"img":1},{"cod":"2035","nom":"TE DE BURRO X KG","tk":139,"p2":20190.0,"f":1,"img":1},{"cod":"2326","nom":"BLEND DE TE X 30g","tk":137,"p2":2231.405,"f":0,"img":0},{"cod":"5044","nom":"MANZANILLA FLOR PREMIUM","tk":128,"p2":48150.0,"f":1,"img":1},{"cod":"2043","nom":"YERBA MATE DESPALADA KALENA X KG","tk":115,"p2":8890.0,"f":1,"img":1}]},{"rubro":"HARINAS","slug":"harinas","tickets":1666,"items":[{"cod":"1295","nom":"HARINA DE AVENA X KG","tk":198,"p2":2610.0,"f":1,"img":1},{"cod":"2315","nom":"HARINA DE ALMENDRAS C/PIEL","tk":182,"p2":17930.0,"f":1,"img":0},{"cod":"1269","nom":"FECULA DE MANDIOCA X KG","tk":155,"p2":3280.0,"f":1,"img":1},{"cod":"1621","nom":"TEXTURIZADO DE SOJA X KG","tk":144,"p2":3030.0,"f":1,"img":1},{"cod":"1293","nom":"HARINA ALMENDRAS S/ PIEL X KG","tk":125,"p2":23440.0,"f":1,"img":1}]},{"rubro":"PRODUCTOS SIN TACC","slug":"sintacc","tickets":1474,"items":[{"cod":"2280","nom":"GALLETAS SIN TACC X KG","tk":745,"p2":11570.248,"f":0,"img":0},{"cod":"2027","nom":"ALFAJORES MAICENA SIN TACC X 6 unidades","tk":171,"p2":4272.727,"f":0,"img":0},{"cod":"2111","nom":"GALLETAS SLIM DOS HERMANO \"SIN TACC\"","tk":93,"p2":1628.099,"f":0,"img":0},{"cod":"2107","nom":"TOSTADAS RISKY  \"SIN TACC\"","tk":88,"p2":1438.017,"f":0,"img":0},{"cod":"2513","nom":"ALFAJOR  SIN AZUCAR \"BANDA\"","tk":72,"p2":1041.322,"f":0,"img":0}]},{"rubro":"SUPLEMENTOS","slug":"suplementos","tickets":1447,"items":[{"cod":"2238","nom":"CREATINA MONOHIDRATO","tk":118,"p2":16420.0,"f":1,"img":1},{"cod":"2364","nom":"VINAGRE  DE SIDRA DE MANZANA \"VERDE VIDA\" X 500 ML","tk":78,"p2":8983.471,"f":0,"img":0},{"cod":"2031","nom":"COLAGENO HIDROLIZADO X KG PEPTAN B 2000 LD\"\"","tk":70,"p2":29470.0,"f":1,"img":1},{"cod":"2483","nom":"CITRATO DE MAGNESIO  XKG","tk":56,"p2":17347.107,"f":0,"img":0},{"cod":"2078","nom":"GLICINATO DE MAGNESIO EL NATURALISA\"\"","tk":53,"p2":5740.0,"f":1,"img":0}]},{"rubro":"ACEITES Y VINAGRES","slug":"aceites","tickets":1010,"items":[{"cod":"1894","nom":"ACEITE DE OLIVA X 900ML VERDE OLIVA","tk":339,"p2":4510.0,"f":1,"img":1},{"cod":"2265","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 200\"","tk":88,"p2":4070.0,"f":1,"img":1},{"cod":"2141","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 360 G\"","tk":82,"p2":6180.0,"f":1,"img":1},{"cod":"2119","nom":"ACEITE OLIVA X 500 PET VERDE OLIVA","tk":72,"p2":3140.0,"f":1,"img":1},{"cod":"1002","nom":"ACEITE DE OLIVA  X 500 CC LAUR","tk":60,"p2":11230.0,"f":1,"img":1}]},{"rubro":"PALADEAR HOME","slug":"home","tickets":854,"items":[{"cod":"2066","nom":"SAHUMERIO TIBETANO X8 \"AROMANZA\"","tk":229,"p2":2628.099,"f":0,"img":0},{"cod":"2065","nom":"SAHUMERIO MOMENTOS X5 \"AROMANZA\"","tk":197,"p2":1801.653,"f":0,"img":0},{"cod":"2400","nom":"DIFUSOR \"ILUMINARTE\" X 125 ml","tk":52,"p2":4256.198,"f":0,"img":0},{"cod":"2419","nom":"SALERO/PIMENTERO","tk":51,"p2":3636.364,"f":0,"img":0},{"cod":"2421","nom":"PALO SANTO X30GR","tk":40,"p2":1913.463,"f":0,"img":0}]},{"rubro":"PRODUCTOS DE FRIO","slug":"frio","tickets":659,"items":[{"cod":"1810","nom":"YOGHURT NATURAL SIN AZUCAR X 1 L","tk":294,"p2":3920.0,"f":1,"img":0},{"cod":"1809","nom":"YOGHURT NATURAL AZUCARADO X 1 L","tk":116,"p2":3920.0,"f":1,"img":0},{"cod":"1811","nom":"YOGHURT FRUTILLA X 1 L","tk":95,"p2":4350.0,"f":1,"img":0},{"cod":"2024","nom":"YOGHURT C/FRUTAS X 160","tk":62,"p2":1420.0,"f":1,"img":0},{"cod":"1795","nom":"YOGURT PROTEICO \"YOGURLAC\" X 1L","tk":40,"p2":7553.719,"f":0,"img":0}]},{"rubro":"PRODUCTOS CONGELADOS","slug":"congelados","tickets":544,"items":[{"cod":"2057","nom":"MEDALLONES VEGETARIANOS \"KISLEV\"","tk":178,"p2":3966.942,"f":0,"img":0},{"cod":"2176","nom":"MIX FRUTOS ROJOS CONGELADOS X KILO","tk":124,"p2":13198.347,"f":0,"img":0},{"cod":"1126","nom":"ARANDANOS CONGELADOS X KG","tk":122,"p2":12958.678,"f":0,"img":0},{"cod":"2278","nom":"CALDO DE HUESO \" MEDICINA ANCESTRAL\"","tk":52,"p2":5793.388,"f":0,"img":0},{"cod":"2317","nom":"MANGO EN TROZOS CONGELADOS  XKG","tk":25,"p2":9000.0,"f":0,"img":0}]},{"rubro":"GRANOS Y LEGUMBRES","slug":"granos","tickets":542,"items":[{"cod":"1358","nom":"LENTEJAS TURCAS X KG","tk":77,"p2":4680.0,"f":1,"img":1},{"cod":"1133","nom":"ARROZ YAMANI X KG.","tk":69,"p2":3350.0,"f":1,"img":1},{"cod":"1359","nom":"LENTEJAS X KG.","tk":63,"p2":3690.0,"f":1,"img":1},{"cod":"1240","nom":"CUSCUS X KG","tk":60,"p2":10720.0,"f":1,"img":1},{"cod":"2335","nom":"GARBANZOS X KG","tk":60,"p2":2480.0,"f":1,"img":1}]},{"rubro":"BEBIDAS","slug":"bebidas","tickets":541,"items":[{"cod":"2233","nom":"KEFIR DE AGUA \"KE.LIVE\" SABORIZADO X 950 ML","tk":269,"p2":3595.041,"f":0,"img":0},{"cod":"2459","nom":"KOMBUCHA  EYWA 354 ml","tk":79,"p2":3925.62,"f":0,"img":0},{"cod":"1324","nom":"JUGO DE ARANDANOS X 1,5 LTS.","tk":65,"p2":2920.0,"f":1,"img":1},{"cod":"1727","nom":"LECHE DE COCO EN POLVO X KG","tk":62,"p2":26080.0,"f":1,"img":1},{"cod":"4454","nom":"JUGO DE UVA","tk":49,"p2":21890.0,"f":1,"img":0}]},{"rubro":"SNACK","slug":"snack","tickets":515,"items":[{"cod":"2074","nom":"BARRAS CRUDDA\"  X40Gr - SIN TACC\"","tk":200,"p2":1810.0,"f":1,"img":1},{"cod":"2014","nom":"BARRA MUECAS X45GR","tk":112,"p2":1670.0,"f":1,"img":0},{"cod":"5010","nom":"PIPAS TOSTADAS CON SAL X 50 gr","tk":74,"p2":1157.025,"f":0,"img":0},{"cod":"2115","nom":"GALLETAS CACHAFAZ INTEGRALES","tk":45,"p2":3000.0,"f":0,"img":0},{"cod":"2506","nom":"BARRA PROTEICA  \"INTEGRA\"","tk":33,"p2":2479.339,"f":0,"img":0}]},{"rubro":"LINEA GOURMET","slug":"gourmet","tickets":298,"items":[{"cod":"1571","nom":"SALSA DE SOJA X 180 CC","tk":42,"p2":3480.0,"f":1,"img":1},{"cod":"2144","nom":"SALSA TAHINE","tk":37,"p2":9033.058,"f":0,"img":0},{"cod":"1687","nom":"SALSA AJI PICANTE X 180 cc CRISTO DE LOS CERROS\"\"","tk":27,"p2":4750.0,"f":1,"img":1},{"cod":"1464","nom":"PASTA ACEITUNAS VERDES X 200 g AGROIANNI\"\"","tk":21,"p2":3250.0,"f":1,"img":1},{"cod":"1575","nom":"SALSA TERIYAKI X 250 CC","tk":20,"p2":4290.0,"f":1,"img":1}]},{"rubro":"MANTECAS Y PASTAS","slug":"mantecas","tickets":235,"items":[{"cod":"1383","nom":"MANTEQUILLA DE MANI ENTRENUTS\" X 370 g\"","tk":178,"p2":3250.0,"f":1,"img":1},{"cod":"2269","nom":"MANTECA CLARIFICADA GHEE \"ENTRENUTS\" X370","tk":27,"p2":10280.992,"f":0,"img":0},{"cod":"5012","nom":"MANTEQUILLA DE MANI PROTEICA X370 GR - ENTRENUTS","tk":13,"p2":4537.19,"f":0,"img":0},{"cod":"5021","nom":"MANTECA CLARIFICADA  X150 GR - ENTRENUTS","tk":10,"p2":5743.802,"f":0,"img":0},{"cod":"5030","nom":"MANTEQUILLA DE MANI CON STEVIA X370 CC - ENTRENUTS","tk":7,"p2":3115.702,"f":0,"img":0}]},{"rubro":"ENCURTIDOS","slug":"encurtidos","tickets":223,"items":[{"cod":"1486","nom":"PEPINOS AGRID X 200 g DURANG\"\"","tk":45,"p2":3640.0,"f":1,"img":1},{"cod":"1483","nom":"PEPINILLOS EN VIN. X 200 g DURANG\"\"","tk":39,"p2":4000.0,"f":1,"img":1},{"cod":"1204","nom":"CHUCRUT X 600 GR","tk":32,"p2":7560.0,"f":1,"img":1},{"cod":"1230","nom":"CORAZONES DE ALCAUCIL X 300 GR","tk":15,"p2":6750.0,"f":1,"img":1},{"cod":"1084","nom":"AJIES PICANTES DURANG X 110 GR","tk":14,"p2":3840.0,"f":1,"img":1}]},{"rubro":"ACEITUNAS","slug":"aceitunas","tickets":158,"items":[{"cod":"1050","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº 1","tk":27,"p2":4250.0,"f":1,"img":1},{"cod":"1049","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº 00","tk":26,"p2":6250.0,"f":1,"img":1},{"cod":"1051","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº0","tk":24,"p2":5000.0,"f":1,"img":1},{"cod":"1044","nom":"ACEITUNAS VERDES R.V X 1 KG Nº0","tk":21,"p2":8630.0,"f":1,"img":1},{"cod":"1025","nom":"ACEITUNAS GRIEGAS R.V X 1/2 KG","tk":19,"p2":7500.0,"f":1,"img":1}]},{"rubro":"TOMATE TRITURADO","slug":"tomate","tickets":38,"items":[{"cod":"1627","nom":"TOMATE TRITURADO X 1 KG","tk":20,"p2":1239.669,"f":0,"img":0},{"cod":"1630","nom":"TOMATE CONDIMENTADO X 1 KG","tk":14,"p2":3250.0,"f":1,"img":1},{"cod":"1628","nom":"TOMATE TRITURADO X 500 GR","tk":4,"p2":1016.529,"f":0,"img":0}]}];
+const KITS = [{"rubro":"FRUTOS SECOS","tickets":6066,"items":[{"cod":"1842","nom":"ALMENDRA NON PAREIL  X KG","niv":1,"un":"kg","tk":1330,"sem":4.837,"bul":10.0,"pat":"10 kilos.","p2":24000.0,"f":1,"p1":32727.273,"img":"m.webp"},{"cod":"1441","nom":"NUEZ CUARTILLO X KG","niv":1,"un":"kg","tk":1195,"sem":5.076,"bul":5.0,"pat":"5 kg","p2":11170.0,"f":1,"p1":15239.669,"img":"m.webp"},{"cod":"2228","nom":"MIX IMPERIAL X KG","niv":1,"un":"kg","tk":1062,"sem":5.411,"bul":5.0,"pat":"5 kg","p2":16310.0,"f":1,"p1":19950.413,"img":"m.webp"},{"cod":"1180","nom":"CASTAÑAS CAJÚ VIETNAM  X KG","niv":1,"un":"kg","tk":968,"sem":3.405,"bul":5.0,"pat":"5 kg","p2":14430.0,"f":1,"p1":19685.95,"img":"m.webp"},{"cod":"1381","nom":"MANI TOSTADO X KG.","niv":1,"un":"kg","tk":667,"sem":4.431,"bul":1.0,"pat":"1 kg","p2":4160.0,"f":1,"p1":5115.702,"img":"m.webp"},{"cod":"1522","nom":"PISTACHOS CON CÁSCARA X KG","niv":1,"un":"kg","tk":412,"sem":1.508,"bul":10.0,"pat":"10 kg","p2":31700.0,"f":1,"p1":38867.769,"img":"m.webp"},{"cod":"4453","nom":"NUEZ DE BRASIL","niv":2,"un":"kg","tk":242,"sem":0.714,"bul":5.0,"pat":"5 kg","p2":35440.0,"f":1,"p1":48256.198,"img":"m.webp"},{"cod":"1365","nom":"MAIZ FRITO SALADO X KG","niv":2,"un":"kg","tk":114,"sem":0.34,"bul":1.0,"pat":"1 kg","p2":11760.0,"f":1,"p1":14471.074,"img":"m.webp"},{"cod":"1134","nom":"AVELLANAS SIN CASCARA X KG","niv":3,"un":"kg","tk":76,"sem":0.199,"bul":10.0,"pat":"10 kg","p2":37850.0,"f":1,"p1":46404.959,"img":"m.webp"}]},{"rubro":"DESHIDRATADOS","tickets":4175,"items":[{"cod":"1208","nom":"CIRUELAS TIERNIZADAS S/C X KG","niv":1,"un":"kg","tk":900,"sem":5.607,"bul":5.0,"pat":"5 kg","p2":9800.0,"f":1,"p1":12008.264,"img":"m.webp"},{"cod":"1127","nom":"ARANDANOS DESHIDRATADOS X KG","niv":1,"un":"kg","tk":881,"sem":3.159,"bul":11.34,"pat":"11.34","p2":18130.0,"f":1,"p1":21867.769,"img":"m.webp"},{"cod":"1955","nom":"PASAS MOROCHAS FLAME S/SEM X KG","niv":1,"un":"kg","tk":647,"sem":2.704,"bul":10.0,"pat":"10 kg","p2":3000.0,"f":1,"p1":4090.909,"img":"m.webp"},{"cod":"1202","nom":"CHIPS DE BANANA X KG","niv":1,"un":"kg","tk":548,"sem":1.638,"bul":6.8,"pat":"6,8 kg","p2":10800.0,"f":1,"p1":14743.802,"img":"m.webp"},{"cod":"1394","nom":"MEDALLONES DURAZ.  X KG","niv":1,"un":"kg","tk":291,"sem":1.197,"bul":5.0,"pat":"5 kg","p2":12940.0,"f":1,"p1":15892.562,"img":"m.webp"},{"cod":"5028","nom":"DATILES  DORADOS DE EGIPTO","niv":2,"un":"un","tk":230,"sem":1.036,"bul":null,"pat":"","p2":6181.818,"f":0,"p1":7272.727,"img":"m.webp"},{"cod":"1632","nom":"TOMATE SECOS X KG","niv":2,"un":"kg","tk":158,"sem":0.478,"bul":5.0,"pat":"5 kg","p2":13750.0,"f":1,"p1":16834.711,"img":"m.webp"},{"cod":"1311","nom":"HIGOS TIERNIZADOS X KG","niv":2,"un":"kg","tk":155,"sem":0.627,"bul":5.0,"pat":"5 kg","p2":12150.0,"f":1,"p1":14851.24,"img":"m.webp"},{"cod":"1319","nom":"JENGIBRE GLASEADO X KG","niv":2,"un":"kg","tk":144,"sem":0.412,"bul":1.0,"pat":"1 kg","p2":17720.0,"f":1,"p1":21735.537,"img":"m.webp"},{"cod":"1488","nom":"PERAS WILLIAMS X KG","niv":2,"un":"kg","tk":111,"sem":0.488,"bul":5.0,"pat":"5 kg","p2":14250.0,"f":1,"p1":17429.752,"img":"m.webp"},{"cod":"1954","nom":"FRUTA MULTICOLOR X KG","niv":2,"un":"kg","tk":110,"sem":0.364,"bul":10.0,"pat":"10 kg","p2":7440.0,"f":1,"p1":9148.76,"img":"m.webp"}]},{"rubro":"ESPECIAS","tickets":3790,"items":[{"cod":"1236","nom":"CURCUMA MOLIDA X KG","niv":1,"un":"kg","tk":346,"sem":0.729,"bul":1.0,"pat":"1 kg","p2":8730.0,"f":1,"p1":10685.95,"img":"m.webp"},{"cod":"1209","nom":"CLAVO DE OLOR ENTERO X KG.","niv":1,"un":"kg","tk":289,"sem":0.235,"bul":1.0,"pat":"1 kg","p2":40880.0,"f":1,"p1":49966.942,"img":"m.webp"},{"cod":"2089","nom":"BICARBONATO DE SODIO X KG","niv":1,"un":"kg","tk":263,"sem":1.823,"bul":1.0,"pat":"1 kg","p2":2780.0,"f":1,"p1":3404.959,"img":"m.webp"},{"cod":"1167","nom":"CANELA EN RAMA X KG","niv":2,"un":"kg","tk":246,"sem":0.209,"bul":1.0,"pat":"1 kg","p2":57320.0,"f":1,"p1":70049.587,"img":"m.webp"},{"cod":"1702","nom":"GELATINA SIN SABOR X KG","niv":2,"un":"kg","tk":246,"sem":0.967,"bul":1.0,"pat":"1 kg","p2":21350.0,"f":1,"p1":26115.702,"img":"m.webp"},{"cod":"1455","nom":"OREGANO  KG.","niv":2,"un":"kg","tk":226,"sem":0.387,"bul":1.0,"pat":"1 kg","p2":7680.0,"f":1,"p1":9413.223,"img":"m.webp"},{"cod":"1512","nom":"PIMIENTA NEGRA EN GRANO X KG.","niv":2,"un":"kg","tk":196,"sem":0.362,"bul":1.0,"pat":"1 kg","p2":22620.0,"f":1,"p1":27661.157,"img":"m.webp"},{"cod":"1505","nom":"PIMENTON EXTRA X KG","niv":2,"un":"kg","tk":187,"sem":0.44,"bul":1.0,"pat":"1 kg","p2":8430.0,"f":1,"p1":10355.372,"img":"m.webp"},{"cod":"1079","nom":"AJI MOLIDO FINO X KG.","niv":2,"un":"kg","tk":174,"sem":0.42,"bul":1.0,"pat":"1 kg","p2":7590.0,"f":1,"p1":9297.521,"img":"m.webp"},{"cod":"1557","nom":"SAL DEL HIMALAYA FINA X 1 KG","niv":2,"un":"kg","tk":163,"sem":1.172,"bul":1.0,"pat":"1 kg","p2":3810.0,"f":1,"p1":4669.421,"img":"m.webp"},{"cod":"1545","nom":"PROVENZAL X KG.","niv":2,"un":"kg","tk":144,"sem":0.279,"bul":1.0,"pat":"1 kg","p2":12360.0,"f":1,"p1":15123.967,"img":"m.webp"},{"cod":"1314","nom":"HONGOS SECOS X KG","niv":2,"un":"kg","tk":143,"sem":0.241,"bul":1.0,"pat":"1 kg","p2":30980.0,"f":1,"p1":37884.298,"img":"m.webp"},{"cod":"1085","nom":"AJO EN POLVO","niv":2,"un":"kg","tk":125,"sem":0.24,"bul":1.0,"pat":"1 kg","p2":5360.0,"f":1,"p1":6561.983,"img":"m.webp"},{"cod":"1320","nom":"JENGIBRE MOLIDO X KG.","niv":2,"un":"kg","tk":117,"sem":0.164,"bul":1.0,"pat":"1 kg","p2":12090.0,"f":1,"p1":14785.124,"img":"m.webp"},{"cod":"1350","nom":"LAUREL EN HOJAS X KG.","niv":2,"un":"kg","tk":107,"sem":0.041,"bul":1.0,"pat":"1 kg","p2":21360.0,"f":1,"p1":26157.025,"img":"m.webp"},{"cod":"2308","nom":"MERKEN CHILENO X KG","niv":2,"un":"kg","tk":104,"sem":0.198,"bul":1.0,"pat":"1 kg","p2":11510.0,"f":1,"p1":14495.868,"img":"m.webp"},{"cod":"1363","nom":"MACA EN POLVO X KG.","niv":3,"un":"kg","tk":93,"sem":0.26,"bul":1.0,"pat":"1 kg","p2":17250.0,"f":1,"p1":21148.76,"img":"m.webp"},{"cod":"1555","nom":"ROMERO EN HOJAS X KG.","niv":3,"un":"kg","tk":87,"sem":0.247,"bul":1.0,"pat":"1 kg","p2":12080.0,"f":1,"p1":14768.595,"img":"m.webp"},{"cod":"1124","nom":"ANIS ESTRELLADO X KG.","niv":3,"un":"kg","tk":83,"sem":0.057,"bul":1.0,"pat":"1 kg","p2":49240.0,"f":1,"p1":60181.818,"img":"m.webp"},{"cod":"1418","nom":"MIX  4 PIMIENTAS","niv":3,"un":"kg","tk":83,"sem":0.141,"bul":1.0,"pat":"1 kg","p2":39680.0,"f":1,"p1":48512.397,"img":"m.webp"},{"cod":"1182","nom":"CEBOLLA EN ESCAMAS X KG.","niv":3,"un":"kg","tk":71,"sem":0.139,"bul":1.0,"pat":"1 kg","p2":9310.0,"f":1,"p1":11462.81,"img":"m.webp"},{"cod":"1333","nom":"JULIANA SIN PAPA X KG","niv":3,"un":"kg","tk":69,"sem":0.192,"bul":1.0,"pat":"1 kg","p2":13240.0,"f":1,"p1":16190.083,"img":"m.webp"},{"cod":"1451","nom":"NUEZ MOSCADA ENTERA X KG","niv":3,"un":"kg","tk":61,"sem":0.018,"bul":1.0,"pat":"1 kg","p2":40880.0,"f":1,"p1":49958.678,"img":"m.webp"},{"cod":"1239","nom":"CURRY X KG","niv":3,"un":"kg","tk":58,"sem":0.107,"bul":1.0,"pat":"1 kg","p2":11010.0,"f":1,"p1":13479.339,"img":"m.webp"},{"cod":"1633","nom":"TOMILLO X KG","niv":3,"un":"kg","tk":58,"sem":0.09,"bul":1.0,"pat":"1 kg","p2":11800.0,"f":1,"p1":14454.545,"img":"m.webp"},{"cod":"1214","nom":"COMINO MOLIDO X KG.","niv":0,"un":"kg","tk":51,"sem":0.084,"bul":1.0,"pat":"1 kg","p2":13790.0,"f":1,"p1":16842.975,"img":"m.webp"}]},{"rubro":"CEREALES","tickets":3174,"items":[{"cod":"1635","nom":"TUTUCAS CON AZUCAR X KG","niv":1,"un":"kg","tk":963,"sem":4.887,"bul":1.0,"pat":"1 kg","p2":4040.0,"f":1,"p1":4983.471,"img":"m.webp"},{"cod":"1549","nom":"QUINOA INFLADA X KG.","niv":1,"un":"kg","tk":445,"sem":1.541,"bul":1.0,"pat":"1 kg","p2":8990.0,"f":1,"p1":10991.736,"img":"m.webp"},{"cod":"1136","nom":"AVENA INSTANTÁNEA X KG","niv":1,"un":"kg","tk":410,"sem":4.567,"bul":1.0,"pat":"1 kg","p2":2550.0,"f":1,"p1":3123.967,"img":"m.webp"},{"cod":"1117","nom":"ALMOHADITAS FRUTILLA X KG.","niv":1,"un":"kg","tk":388,"sem":1.446,"bul":2.5,"pat":"2.5 kilos","p2":7930.0,"f":1,"p1":9743.802,"img":"m.webp"},{"cod":"1229","nom":"COPOS DE MAIZ SIN AZÚCAR X KG","niv":1,"un":"kg","tk":357,"sem":2.058,"bul":3.0,"pat":"3 kg","p2":2910.0,"f":1,"p1":3561.983,"img":"m.webp"},{"cod":"1911","nom":"GRANOLA TRADICIONAL X KG","niv":1,"un":"kg","tk":334,"sem":2.618,"bul":1.0,"pat":"1 kg","p2":5490.0,"f":1,"p1":6743.802,"img":"m.webp"},{"cod":"1147","nom":"BASTONCITO SALVADO TRIGO Y AVENA X KG.","niv":2,"un":"kg","tk":154,"sem":0.714,"bul":2.5,"pat":"2,5 kg","p2":6380.0,"f":1,"p1":7801.653,"img":"m.webp"},{"cod":"1121","nom":"ANILLOS DE AVENA Y MIEL X KG.","niv":2,"un":"kg","tk":123,"sem":0.346,"bul":2.5,"pat":"2.5 kilos.","p2":8170.0,"f":1,"p1":10008.264,"img":"m.webp"}]},{"rubro":"SEMILLAS","tickets":2697,"items":[{"cod":"1583","nom":"SEMILLA DE CHIA NAC X KG.","niv":1,"un":"kg","tk":707,"sem":2.562,"bul":1.0,"pat":"1 kg","p2":4990.0,"f":1,"p1":6115.702,"img":"m.webp"},{"cod":"1587","nom":"SEMILLA DE ZAPALLO PELADO X KG.","niv":1,"un":"kg","tk":670,"sem":1.948,"bul":1.0,"pat":"1 kg","p2":25880.0,"f":1,"p1":31652.893,"img":"m.webp"},{"cod":"1585","nom":"SEMILLA DE GIRASOL X KG.","niv":1,"un":"kg","tk":401,"sem":1.575,"bul":1.0,"pat":"1 kg","p2":5540.0,"f":1,"p1":6785.124,"img":"m.webp"},{"cod":"1586","nom":"SEMILLA DE LINO X KG","niv":1,"un":"kg","tk":302,"sem":1.593,"bul":1.0,"pat":"1 kg","p2":5250.0,"f":1,"p1":6454.545,"img":"m.webp"},{"cod":"1421","nom":"MIX DE SLLAS  ADELGAZ X KG","niv":2,"un":"kg","tk":213,"sem":0.712,"bul":1.0,"pat":"1 kg","p2":5690.0,"f":1,"p1":6983.471,"img":"m.webp"},{"cod":"1589","nom":"SESAMO BLANCO X KG.","niv":2,"un":"kg","tk":209,"sem":0.637,"bul":1.0,"pat":"1 kg","p2":8310.0,"f":1,"p1":10173.554,"img":"m.webp"},{"cod":"1551","nom":"QUINOA X KG","niv":2,"un":"kg","tk":140,"sem":0.828,"bul":1.0,"pat":"1 kg","p2":8550.0,"f":1,"p1":10446.281,"img":"m.webp"},{"cod":"1581","nom":"SEMILLA DE AMAPOLA X KG.","niv":3,"un":"kg","tk":55,"sem":0.108,"bul":1.0,"pat":"1 kg","p2":14090.0,"f":1,"p1":17239.669,"img":"m.webp"}]},{"rubro":"DULCES, MIEL Y CHOCOLATES","tickets":2330,"items":[{"cod":"2007","nom":"GOTITAS DE CHOCO SEMIAMARGO X KG","niv":1,"un":"kg","tk":733,"sem":2.719,"bul":null,"pat":"","p2":11000.0,"f":0,"p1":12900.826,"img":"m.webp"},{"cod":"2009","nom":"PASAS DE UVA C/CHOCO XKG","niv":2,"un":"kg","tk":217,"sem":0.672,"bul":null,"pat":"","p2":22008.264,"f":0,"p1":25793.388,"img":"m.webp"},{"cod":"1410","nom":"MIEL DE ABEJA X 500 g MONTE NATURAL\" - JALEA\"","niv":2,"un":"un","tk":182,"sem":3.538,"bul":24.0,"pat":"24 unidades","p2":3360.0,"f":1,"p1":4123.967,"img":"m.webp"},{"cod":"2008","nom":"MANI C/CHOCO SEMIAMARGO XKG","niv":2,"un":"kg","tk":172,"sem":0.448,"bul":null,"pat":"","p2":17338.843,"f":0,"p1":20322.314,"img":"m.webp"},{"cod":"2316","nom":"LENTEJA DE CHOCOLATE XKG","niv":2,"un":"kg","tk":148,"sem":0.383,"bul":null,"pat":"","p2":30454.545,"f":0,"p1":35702.479,"img":"m.webp"},{"cod":"2003","nom":"BARRA CHOCO 70% CON STEVIA x 100 g - COLONIAL","niv":2,"un":"un","tk":142,"sem":3.365,"bul":null,"pat":"","p2":3264.463,"f":0,"p1":3826.446,"img":"m.webp"},{"cod":"2002","nom":"ARANDANOS CON CHOCO xKG","niv":2,"un":"kg","tk":136,"sem":0.37,"bul":null,"pat":"","p2":27016.529,"f":0,"p1":31677.686,"img":"m.webp"},{"cod":"2010","nom":"AVELLANAS CON CHOCO XKG","niv":2,"un":"kg","tk":133,"sem":0.312,"bul":null,"pat":"","p2":30966.942,"f":0,"p1":36297.521,"img":"m.webp"},{"cod":"2455","nom":"BANANITAS CON CHOCO","niv":2,"un":"un","tk":121,"sem":0.238,"bul":null,"pat":"","p2":34272.727,"f":0,"p1":40181.818,"img":"m.webp"},{"cod":"2229","nom":"MEMBRILLITOS X30Gr \"PIZARRO\"","niv":3,"un":"un","tk":86,"sem":5.135,"bul":null,"pat":"","p2":537.19,"f":0,"p1":661.157,"img":"m.webp"},{"cod":"2001","nom":"ALMENDRAS CON CHOCO xKG","niv":3,"un":"kg","tk":82,"sem":0.173,"bul":null,"pat":"","p2":36371.901,"f":0,"p1":42636.364,"img":"m.webp"},{"cod":"1244","nom":"DULCE DE ALCAYOTA X 500 GR","niv":3,"un":"un","tk":65,"sem":1.346,"bul":12.0,"pat":"12 unidades","p2":2250.0,"f":1,"p1":2801.653,"img":"m.webp"},{"cod":"1254","nom":"DULCE DE MEMBRILLO X 1 KG","niv":3,"un":"un","tk":59,"sem":1.173,"bul":1.0,"pat":"1 unidad","p2":4500.0,"f":1,"p1":5512.397,"img":"m.webp"},{"cod":"2134","nom":"DULCE DE LECHE CON STEVIA DOÑA MAGDALENA \"SIN TACC\"","niv":3,"un":"un","tk":54,"sem":1.058,"bul":null,"pat":"","p2":8818.182,"f":0,"p1":10338.843,"img":"m.webp"}]},{"rubro":"AZUCAR, CACAO Y REPOSTERIA","tickets":1941,"items":[{"cod":"1212","nom":"COCO RALLADO X KG.","niv":1,"un":"kg","tk":533,"sem":2.136,"bul":1.0,"pat":"1 kg","p2":10820.0,"f":1,"p1":13239.669,"img":"m.webp"},{"cod":"1163","nom":"CACAO AMARGO DE BRASIL X KG","niv":1,"un":"kg","tk":523,"sem":1.532,"bul":1.0,"pat":"1 kg","p2":26300.0,"f":1,"p1":32223.14,"img":"m.webp"},{"cod":"1424","nom":"CHOCOLATE 80%  COBERTURA SEMIAMARGO x kg - COLONIAL","niv":2,"un":"kg","tk":210,"sem":0.497,"bul":null,"pat":"","p2":39090.909,"f":0,"p1":45834.711,"img":"m.webp"},{"cod":"1141","nom":"AZUCAR MASCABO X KG","niv":2,"un":"kg","tk":207,"sem":1.559,"bul":1.0,"pat":"1 kg","p2":6540.0,"f":1,"p1":8008.264,"img":"m.webp"},{"cod":"2348","nom":"POLVO PARA HORNEAR X KG","niv":2,"un":"kg","tk":124,"sem":0.393,"bul":1.0,"pat":"1 kg","p2":4310.0,"f":1,"p1":5305.785,"img":"m.webp"},{"cod":"1140","nom":"AZUCAR IMPALPABLE X KG.","niv":2,"un":"kg","tk":114,"sem":0.727,"bul":1.0,"pat":"1 kg","p2":2760.0,"f":1,"p1":3388.43,"img":"m.webp"},{"cod":"5048","nom":"PEPAS DE NUEZ","niv":3,"un":"un","tk":88,"sem":0.192,"bul":null,"pat":"","p2":17768.595,"f":0,"p1":18595.041,"img":"m.webp"},{"cod":"1263","nom":"ESENCIA ARTIFICIAL DE VAINILLA X 100 CC INDIAS\" \"","niv":3,"un":"un","tk":72,"sem":1.442,"bul":12.0,"pat":"12 unidades","p2":850.0,"f":1,"p1":1537.19,"img":"m.webp"},{"cod":"2099","nom":"STEVIA LIQUIDA X120 \"SIN TACC\"","niv":3,"un":"un","tk":70,"sem":1.462,"bul":null,"pat":"","p2":5793.388,"f":0,"p1":6793.388,"img":"m.webp"}]},{"rubro":"INFUSIONES Y HIERBAS","tickets":1361,"items":[{"cod":"1849","nom":"HIBISCUS FLOR X KG","niv":1,"un":"kg","tk":410,"sem":0.973,"bul":1.0,"pat":"1 kg","p2":15280.0,"f":1,"p1":18694.215,"img":"m.webp"},{"cod":"2035","nom":"TE DE BURRO X KG","niv":2,"un":"kg","tk":139,"sem":0.206,"bul":1.0,"pat":"1 kg","p2":20190.0,"f":1,"p1":24685.95,"img":"m.webp"},{"cod":"2326","nom":"BLEND DE TE X 30g","niv":2,"un":"un","tk":137,"sem":3.657,"bul":null,"pat":"","p2":2231.405,"f":0,"p1":2479.339,"img":"m.webp"},{"cod":"5044","nom":"MANZANILLA FLOR PREMIUM","niv":2,"un":"kg","tk":128,"sem":0.178,"bul":1.0,"pat":"X KG","p2":48150.0,"f":1,"p1":58842.975,"img":"m.webp"},{"cod":"2043","nom":"YERBA MATE DESPALADA KALENA X KG","niv":2,"un":"kg","tk":115,"sem":0.982,"bul":10.0,"pat":"10 kg","p2":8890.0,"f":1,"p1":10933.884,"img":"m.webp"},{"cod":"2038","nom":"CEDRON X KG","niv":3,"un":"kg","tk":102,"sem":0.089,"bul":1.0,"pat":"1 kg","p2":32730.0,"f":1,"p1":40024.793,"img":"m.webp"},{"cod":"2040","nom":"MENTA HOJAS X KG","niv":3,"un":"kg","tk":85,"sem":0.127,"bul":1.0,"pat":"1 kg","p2":18890.0,"f":1,"p1":23090.909,"img":"m.webp"},{"cod":"2420","nom":"PSYLLIUM MOLIDO X KG","niv":3,"un":"kg","tk":72,"sem":0.134,"bul":1.0,"pat":"1 kg","p2":42570.0,"f":1,"p1":51743.802,"img":"m.webp"},{"cod":"2039","nom":"MELISA X KG","niv":3,"un":"kg","tk":63,"sem":0.115,"bul":1.0,"pat":"1 kg","p2":12320.0,"f":1,"p1":15090.909,"img":"m.webp"},{"cod":"2048","nom":"TE VERDE X KG","niv":3,"un":"kg","tk":58,"sem":0.15,"bul":1.0,"pat":"1 kg","p2":8070.0,"f":1,"p1":9884.298,"img":"m.webp"},{"cod":"2322","nom":"SEN HOJAS X KG","niv":3,"un":"kg","tk":52,"sem":0.112,"bul":1.0,"pat":"1 kg","p2":9130.0,"f":1,"p1":11173.554,"img":"m.webp"}]},{"rubro":"HARINAS","tickets":1257,"items":[{"cod":"1295","nom":"HARINA DE AVENA X KG","niv":2,"un":"kg","tk":198,"sem":2.221,"bul":1.0,"pat":"1 kg","p2":2610.0,"f":1,"p1":3272.727,"img":"m.webp"},{"cod":"2315","nom":"HARINA DE ALMENDRAS C/PIEL","niv":2,"un":"kg","tk":182,"sem":1.04,"bul":10.0,"pat":"10 kg","p2":17930.0,"f":1,"p1":21504.132,"img":"m.webp"},{"cod":"1269","nom":"FECULA DE MANDIOCA X KG","niv":2,"un":"kg","tk":155,"sem":2.114,"bul":1.0,"pat":"1 kg","p2":3280.0,"f":1,"p1":4041.322,"img":"m.webp"},{"cod":"1621","nom":"TEXTURIZADO DE SOJA X KG","niv":2,"un":"kg","tk":144,"sem":1.319,"bul":1.0,"pat":"1 kg","p2":3030.0,"f":1,"p1":3727.273,"img":"m.webp"},{"cod":"1306","nom":"HARINA INTEGRAL FINA X KG.","niv":3,"un":"kg","tk":89,"sem":1.241,"bul":1.0,"pat":"1 kg","p2":1920.0,"f":1,"p1":2347.107,"img":"m.webp"},{"cod":"1113","nom":"ALMIDON DE MAIZ X KG","niv":3,"un":"kg","tk":87,"sem":0.807,"bul":1.0,"pat":"1 kg","p2":2050.0,"f":1,"p1":2528.926,"img":"m.webp"},{"cod":"1576","nom":"SALVADO DE AVENA X KG","niv":3,"un":"kg","tk":78,"sem":0.699,"bul":1.0,"pat":"1 kg","p2":3050.0,"f":1,"p1":3752.066,"img":"m.webp"},{"cod":"1670","nom":"PANKO X KG","niv":3,"un":"kg","tk":78,"sem":1.701,"bul":1.0,"pat":"1 kg","p2":3130.0,"f":1,"p1":3818.182,"img":"m.webp"},{"cod":"1300","nom":"HARINA DE LINO X KG","niv":3,"un":"kg","tk":70,"sem":0.299,"bul":1.0,"pat":"1 kg","p2":3400.0,"f":1,"p1":4206.612,"img":"m.webp"},{"cod":"1299","nom":"HARINA DE GARBANZO X KG","niv":3,"un":"kg","tk":62,"sem":0.657,"bul":1.0,"pat":"1 kg","p2":1740.0,"f":1,"p1":2528.926,"img":"m.webp"},{"cod":"1298","nom":"HARINA DE COCO X KG","niv":3,"un":"kg","tk":60,"sem":0.269,"bul":1.0,"pat":"1 kg","p2":7580.0,"f":1,"p1":9289.256,"img":"m.webp"},{"cod":"1294","nom":"HARINA DE ARROZ X KG","niv":3,"un":"kg","tk":54,"sem":0.641,"bul":1.0,"pat":"1 kg","p2":2100.0,"f":1,"p1":2578.512,"img":"m.webp"}]},{"rubro":"PRODUCTOS SIN TACC","tickets":1171,"items":[{"cod":"2280","nom":"GALLETAS SIN TACC X KG","niv":1,"un":"kg","tk":745,"sem":2.452,"bul":null,"pat":"","p2":11570.248,"f":0,"p1":12809.917,"img":"m.webp"},{"cod":"2027","nom":"ALFAJORES MAICENA SIN TACC X 6 unidades","niv":2,"un":"un","tk":171,"sem":3.558,"bul":null,"pat":"","p2":4272.727,"f":0,"p1":4380.165,"img":"m.webp"},{"cod":"2107","nom":"TOSTADAS RISKY  \"SIN TACC\"","niv":3,"un":"un","tk":88,"sem":2.269,"bul":null,"pat":"","p2":1438.017,"f":0,"p1":1685.95,"img":"m.webp"},{"cod":"2513","nom":"ALFAJOR  SIN AZUCAR \"BANDA\"","niv":3,"un":"un","tk":72,"sem":2.155,"bul":null,"pat":"","p2":1041.322,"f":0,"p1":1239.669,"img":"m.webp"},{"cod":"5013","nom":"CHIPS SALADOS X80 GR - NUESTROS SABORES","niv":3,"un":"un","tk":54,"sem":1.346,"bul":null,"pat":"","p2":1520.661,"f":0,"p1":1735.537,"img":"m.webp"},{"cod":"1863","nom":"FIDEOS DE ARROZ \"PARTY BECK\" X 280GR","niv":0,"un":"un","tk":41,"sem":0.904,"bul":null,"pat":"","p2":3586.777,"f":0,"p1":4355.372,"img":"m.webp"}]},{"rubro":"PRODUCTOS CONGELADOS","tickets":476,"items":[{"cod":"2057","nom":"MEDALLONES VEGETARIANOS \"KISLEV\"","niv":2,"un":"un","tk":178,"sem":4.712,"bul":null,"pat":"","p2":3966.942,"f":0,"p1":4628.099,"img":"m.webp"},{"cod":"2176","nom":"MIX FRUTOS ROJOS CONGELADOS X KILO","niv":2,"un":"kg","tk":124,"sem":2.519,"bul":null,"pat":"","p2":13198.347,"f":0,"p1":15454.545,"img":"m.webp"},{"cod":"1126","nom":"ARANDANOS CONGELADOS X KG","niv":2,"un":"kg","tk":122,"sem":2.34,"bul":null,"pat":"","p2":12958.678,"f":0,"p1":15173.554,"img":"m.webp"},{"cod":"2278","nom":"CALDO DE HUESO \" MEDICINA ANCESTRAL\"","niv":3,"un":"un","tk":52,"sem":1.231,"bul":null,"pat":"","p2":5793.388,"f":0,"p1":6214.876,"img":"m.webp"}]},{"rubro":"BEBIDAS","tickets":475,"items":[{"cod":"2233","nom":"KEFIR DE AGUA \"KE.LIVE\" SABORIZADO X 950 ML","niv":1,"un":"un","tk":269,"sem":5.904,"bul":null,"pat":"","p2":3595.041,"f":0,"p1":4214.876,"img":"m.webp"},{"cod":"2459","nom":"KOMBUCHA  EYWA 354 ml","niv":3,"un":"un","tk":79,"sem":2.308,"bul":null,"pat":"","p2":3925.62,"f":0,"p1":4504.132,"img":"m.webp"},{"cod":"1324","nom":"JUGO DE ARANDANOS X 1,5 LTS.","niv":3,"un":"un","tk":65,"sem":1.365,"bul":6.0,"pat":"6 unidades","p2":2920.0,"f":1,"p1":2933.884,"img":"m.webp"},{"cod":"1727","nom":"LECHE DE COCO EN POLVO X KG","niv":3,"un":"kg","tk":62,"sem":0.203,"bul":1.0,"pat":"1 kg","p2":26080.0,"f":1,"p1":31933.884,"img":"m.webp"}]},{"rubro":"SUPLEMENTOS","tickets":428,"items":[{"cod":"2238","nom":"CREATINA MONOHIDRATO","niv":2,"un":"kg","tk":118,"sem":0.505,"bul":1.0,"pat":"1 kg","p2":16420.0,"f":1,"p1":20074.38,"img":"m.webp"},{"cod":"2364","nom":"VINAGRE  DE SIDRA DE MANZANA \"VERDE VIDA\" X 500 ML","niv":3,"un":"un","tk":78,"sem":1.731,"bul":null,"pat":"","p2":8983.471,"f":0,"p1":9834.711,"img":"m.webp"},{"cod":"2031","nom":"COLAGENO HIDROLIZADO X KG PEPTAN B 2000 LD\"\"","niv":3,"un":"kg","tk":70,"sem":0.182,"bul":1.0,"pat":"1 kg","p2":29470.0,"f":1,"p1":36041.322,"img":"m.webp"},{"cod":"2483","nom":"CITRATO DE MAGNESIO  XKG","niv":3,"un":"kg","tk":56,"sem":0.184,"bul":null,"pat":"","p2":17347.107,"f":0,"p1":19082.645,"img":"m.webp"},{"cod":"2078","nom":"GLICINATO DE MAGNESIO EL NATURALISA\"\"","niv":3,"un":"un","tk":53,"sem":1.115,"bul":null,"pat":"","p2":5740.0,"f":1,"p1":9066.116,"img":"m.webp"},{"cod":"2185","nom":"ACEITE DE OREGANO X30CC \"SOMOS SETA\"","niv":3,"un":"un","tk":53,"sem":1.019,"bul":null,"pat":"","p2":10198.347,"f":0,"p1":11570.248,"img":"m.webp"}]},{"rubro":"ACEITES Y VINAGRES","tickets":427,"items":[{"cod":"1894","nom":"ACEITE DE OLIVA X 900ML VERDE OLIVA","niv":1,"un":"un","tk":339,"sem":7.269,"bul":10.0,"pat":"10 unid.","p2":4510.0,"f":1,"p1":5528.926,"img":"m.webp"},{"cod":"2265","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 200\"","niv":3,"un":"un","tk":88,"sem":1.698,"bul":12.0,"pat":"12 unid.","p2":4070.0,"f":1,"p1":4966.942,"img":"m.webp"}]},{"rubro":"PRODUCTOS DE FRIO","tickets":294,"items":[{"cod":"1810","nom":"YOGHURT NATURAL SIN AZUCAR X 1 L","niv":1,"un":"un","tk":294,"sem":6.038,"bul":null,"pat":"","p2":3920.0,"f":1,"p1":5677.686,"img":"m.webp"}]},{"rubro":"PALADEAR HOME","tickets":281,"items":[{"cod":"2066","nom":"SAHUMERIO TIBETANO X8 \"AROMANZA\"","niv":2,"un":"un","tk":229,"sem":6.558,"bul":null,"pat":"","p2":2628.099,"f":0,"p1":3057.851,"img":"m.webp"},{"cod":"2400","nom":"DIFUSOR \"ILUMINARTE\" X 125 ml","niv":3,"un":"un","tk":52,"sem":1.25,"bul":null,"pat":"","p2":4256.198,"f":0,"p1":4669.421,"img":"m.webp"}]},{"rubro":"SNACK","tickets":274,"items":[{"cod":"2074","nom":"BARRAS CRUDDA\"  X40Gr - SIN TACC\"","niv":2,"un":"un","tk":200,"sem":7.367,"bul":null,"pat":"","p2":1810.0,"f":1,"p1":2247.934,"img":"m.webp"},{"cod":"5010","nom":"PIPAS TOSTADAS CON SAL X 50 gr","niv":3,"un":"un","tk":74,"sem":1.712,"bul":null,"pat":"","p2":1157.025,"f":0,"p1":1239.669,"img":"m.webp"}]},{"rubro":"GRANOS Y LEGUMBRES","tickets":266,"items":[{"cod":"1358","nom":"LENTEJAS TURCAS X KG","niv":3,"un":"kg","tk":77,"sem":0.774,"bul":1.0,"pat":"1 kg","p2":4680.0,"f":1,"p1":5743.802,"img":"m.webp"},{"cod":"1133","nom":"ARROZ YAMANI X KG.","niv":3,"un":"kg","tk":69,"sem":0.815,"bul":1.0,"pat":"1 kg","p2":3350.0,"f":1,"p1":4123.967,"img":"m.webp"},{"cod":"1240","nom":"CUSCUS X KG","niv":3,"un":"kg","tk":60,"sem":0.37,"bul":1.0,"pat":"1 kg","p2":10720.0,"f":1,"p1":13148.76,"img":"m.webp"},{"cod":"2335","nom":"GARBANZOS X KG","niv":3,"un":"kg","tk":60,"sem":0.533,"bul":1.0,"pat":"1 kg","p2":2480.0,"f":1,"p1":3041.322,"img":"m.webp"}]},{"rubro":"MANTECAS Y PASTAS","tickets":178,"items":[{"cod":"1383","nom":"MANTEQUILLA DE MANI ENTRENUTS\" X 370 g\"","niv":2,"un":"un","tk":178,"sem":3.485,"bul":12.0,"pat":"12 unidades","p2":3250.0,"f":1,"p1":3644.628,"img":"m.webp"}]}];
+const VEND = [{"rubro":"FRUTOS SECOS","tickets":12065,"items":[{"cod":"1842","nom":"ALMENDRA NON PAREIL  X KG","tk":1330,"p2":24000.0,"f":1,"img":"m.webp"},{"cod":"1441","nom":"NUEZ CUARTILLO X KG","tk":1195,"p2":11170.0,"f":1,"img":"m.webp"},{"cod":"1716","nom":"NUEZ MARIPOSA EXTRA LIGHT X KG","tk":1063,"p2":13130.0,"f":1,"img":"m.webp"},{"cod":"2228","nom":"MIX IMPERIAL X KG","tk":1062,"p2":16310.0,"f":1,"img":"m.webp"},{"cod":"1180","nom":"CASTAÑAS CAJÚ VIETNAM  X KG","tk":968,"p2":14430.0,"f":1,"img":"m.webp"}]},{"rubro":"DESHIDRATADOS","tickets":5727,"items":[{"cod":"1208","nom":"CIRUELAS TIERNIZADAS S/C X KG","tk":900,"p2":9800.0,"f":1,"img":"m.webp"},{"cod":"1127","nom":"ARANDANOS DESHIDRATADOS X KG","tk":881,"p2":18130.0,"f":1,"img":"m.webp"},{"cod":"1955","nom":"PASAS MOROCHAS FLAME S/SEM X KG","tk":647,"p2":3000.0,"f":1,"img":"m.webp"},{"cod":"4456","nom":"PASAS MOROCHAS JUMBO - ORIGEN CHILE","tk":597,"p2":4955.0,"f":1,"img":"m.webp"},{"cod":"1202","nom":"CHIPS DE BANANA X KG","tk":548,"p2":10800.0,"f":1,"img":"m.webp"}]},{"rubro":"CEREALES","tickets":5523,"items":[{"cod":"1635","nom":"TUTUCAS CON AZUCAR X KG","tk":963,"p2":4040.0,"f":1,"img":"m.webp"},{"cod":"1549","nom":"QUINOA INFLADA X KG.","tk":445,"p2":8990.0,"f":1,"img":"m.webp"},{"cod":"1136","nom":"AVENA INSTANTÁNEA X KG","tk":410,"p2":2550.0,"f":1,"img":"m.webp"},{"cod":"1117","nom":"ALMOHADITAS FRUTILLA X KG.","tk":388,"p2":7930.0,"f":1,"img":"m.webp"},{"cod":"1229","nom":"COPOS DE MAIZ SIN AZÚCAR X KG","tk":357,"p2":2910.0,"f":1,"img":"m.webp"}]},{"rubro":"ESPECIAS","tickets":5236,"items":[{"cod":"1236","nom":"CURCUMA MOLIDA X KG","tk":346,"p2":8730.0,"f":1,"img":"m.webp"},{"cod":"1209","nom":"CLAVO DE OLOR ENTERO X KG.","tk":289,"p2":40880.0,"f":1,"img":"m.webp"},{"cod":"2089","nom":"BICARBONATO DE SODIO X KG","tk":263,"p2":2780.0,"f":1,"img":"m.webp"},{"cod":"1167","nom":"CANELA EN RAMA X KG","tk":246,"p2":57320.0,"f":1,"img":"m.webp"},{"cod":"1702","nom":"GELATINA SIN SABOR X KG","tk":246,"p2":21350.0,"f":1,"img":"m.webp"}]},{"rubro":"DULCES, MIEL Y CHOCOLATES","tickets":3593,"items":[{"cod":"2007","nom":"GOTITAS DE CHOCO SEMIAMARGO X KG","tk":733,"p2":11000.0,"f":0,"img":"m.webp"},{"cod":"2009","nom":"PASAS DE UVA C/CHOCO XKG","tk":217,"p2":22008.264,"f":0,"img":"m.webp"},{"cod":"1410","nom":"MIEL DE ABEJA X 500 g MONTE NATURAL\" - JALEA\"","tk":182,"p2":3360.0,"f":1,"img":"m.webp"},{"cod":"2008","nom":"MANI C/CHOCO SEMIAMARGO XKG","tk":172,"p2":17338.843,"f":0,"img":"m.webp"},{"cod":"2316","nom":"LENTEJA DE CHOCOLATE XKG","tk":148,"p2":30454.545,"f":0,"img":"m.webp"}]},{"rubro":"SEMILLAS","tickets":3139,"items":[{"cod":"1583","nom":"SEMILLA DE CHIA NAC X KG.","tk":707,"p2":4990.0,"f":1,"img":"m.webp"},{"cod":"1587","nom":"SEMILLA DE ZAPALLO PELADO X KG.","tk":670,"p2":25880.0,"f":1,"img":"m.webp"},{"cod":"1585","nom":"SEMILLA DE GIRASOL X KG.","tk":401,"p2":5540.0,"f":1,"img":"m.webp"},{"cod":"1586","nom":"SEMILLA DE LINO X KG","tk":302,"p2":5250.0,"f":1,"img":"m.webp"},{"cod":"1421","nom":"MIX DE SLLAS  ADELGAZ X KG","tk":213,"p2":5690.0,"f":1,"img":"m.webp"}]},{"rubro":"AZUCAR, CACAO Y REPOSTERIA","tickets":2611,"items":[{"cod":"1212","nom":"COCO RALLADO X KG.","tk":533,"p2":10820.0,"f":1,"img":"m.webp"},{"cod":"1163","nom":"CACAO AMARGO DE BRASIL X KG","tk":523,"p2":26300.0,"f":1,"img":"m.webp"},{"cod":"1211","nom":"COCO EN ESCAMAS X KG","tk":302,"p2":18310.0,"f":1,"img":"m.webp"},{"cod":"1424","nom":"CHOCOLATE 80%  COBERTURA SEMIAMARGO x kg - COLONIAL","tk":210,"p2":39090.909,"f":0,"img":"m.webp"},{"cod":"1141","nom":"AZUCAR MASCABO X KG","tk":207,"p2":6540.0,"f":1,"img":"m.webp"}]},{"rubro":"INFUSIONES Y HIERBAS","tickets":1942,"items":[{"cod":"1849","nom":"HIBISCUS FLOR X KG","tk":410,"p2":15280.0,"f":1,"img":"m.webp"},{"cod":"2035","nom":"TE DE BURRO X KG","tk":139,"p2":20190.0,"f":1,"img":"m.webp"},{"cod":"2326","nom":"BLEND DE TE X 30g","tk":137,"p2":2231.405,"f":0,"img":"m.webp"},{"cod":"5044","nom":"MANZANILLA FLOR PREMIUM","tk":128,"p2":48150.0,"f":1,"img":"m.webp"},{"cod":"2043","nom":"YERBA MATE DESPALADA KALENA X KG","tk":115,"p2":8890.0,"f":1,"img":"m.webp"}]},{"rubro":"HARINAS","tickets":1666,"items":[{"cod":"1295","nom":"HARINA DE AVENA X KG","tk":198,"p2":2610.0,"f":1,"img":"m.webp"},{"cod":"2315","nom":"HARINA DE ALMENDRAS C/PIEL","tk":182,"p2":17930.0,"f":1,"img":"m.webp"},{"cod":"1269","nom":"FECULA DE MANDIOCA X KG","tk":155,"p2":3280.0,"f":1,"img":"m.webp"},{"cod":"1621","nom":"TEXTURIZADO DE SOJA X KG","tk":144,"p2":3030.0,"f":1,"img":"m.webp"},{"cod":"1293","nom":"HARINA ALMENDRAS S/ PIEL X KG","tk":125,"p2":23440.0,"f":1,"img":"m.webp"}]},{"rubro":"PRODUCTOS SIN TACC","tickets":1474,"items":[{"cod":"2280","nom":"GALLETAS SIN TACC X KG","tk":745,"p2":11570.248,"f":0,"img":"m.webp"},{"cod":"2027","nom":"ALFAJORES MAICENA SIN TACC X 6 unidades","tk":171,"p2":4272.727,"f":0,"img":"m.webp"},{"cod":"2111","nom":"GALLETAS SLIM DOS HERMANO \"SIN TACC\"","tk":93,"p2":1628.099,"f":0,"img":"m.webp"},{"cod":"2107","nom":"TOSTADAS RISKY  \"SIN TACC\"","tk":88,"p2":1438.017,"f":0,"img":"m.webp"},{"cod":"2513","nom":"ALFAJOR  SIN AZUCAR \"BANDA\"","tk":72,"p2":1041.322,"f":0,"img":"m.webp"}]},{"rubro":"SUPLEMENTOS","tickets":1447,"items":[{"cod":"2238","nom":"CREATINA MONOHIDRATO","tk":118,"p2":16420.0,"f":1,"img":"m.webp"},{"cod":"2364","nom":"VINAGRE  DE SIDRA DE MANZANA \"VERDE VIDA\" X 500 ML","tk":78,"p2":8983.471,"f":0,"img":"m.webp"},{"cod":"2031","nom":"COLAGENO HIDROLIZADO X KG PEPTAN B 2000 LD\"\"","tk":70,"p2":29470.0,"f":1,"img":"m.webp"},{"cod":"2483","nom":"CITRATO DE MAGNESIO  XKG","tk":56,"p2":17347.107,"f":0,"img":"m.webp"},{"cod":"2078","nom":"GLICINATO DE MAGNESIO EL NATURALISA\"\"","tk":53,"p2":5740.0,"f":1,"img":"m.webp"}]},{"rubro":"ACEITES Y VINAGRES","tickets":1010,"items":[{"cod":"1894","nom":"ACEITE DE OLIVA X 900ML VERDE OLIVA","tk":339,"p2":4510.0,"f":1,"img":"m.webp"},{"cod":"2265","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 200\"","tk":88,"p2":4070.0,"f":1,"img":"m.webp"},{"cod":"2141","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 360 G\"","tk":82,"p2":6180.0,"f":1,"img":"m.webp"},{"cod":"2119","nom":"ACEITE OLIVA X 500 PET VERDE OLIVA","tk":72,"p2":3140.0,"f":1,"img":"m.webp"},{"cod":"1002","nom":"ACEITE DE OLIVA  X 500 CC LAUR","tk":60,"p2":11230.0,"f":1,"img":"m.webp"}]},{"rubro":"PALADEAR HOME","tickets":854,"items":[{"cod":"2066","nom":"SAHUMERIO TIBETANO X8 \"AROMANZA\"","tk":229,"p2":2628.099,"f":0,"img":"m.webp"},{"cod":"2065","nom":"SAHUMERIO MOMENTOS X5 \"AROMANZA\"","tk":197,"p2":1801.653,"f":0,"img":"m.webp"},{"cod":"2400","nom":"DIFUSOR \"ILUMINARTE\" X 125 ml","tk":52,"p2":4256.198,"f":0,"img":"m.webp"},{"cod":"2419","nom":"SALERO/PIMENTERO","tk":51,"p2":3636.364,"f":0,"img":"m.webp"},{"cod":"2421","nom":"PALO SANTO X30GR","tk":40,"p2":1913.463,"f":0,"img":"m.webp"}]},{"rubro":"PRODUCTOS DE FRIO","tickets":659,"items":[{"cod":"1810","nom":"YOGHURT NATURAL SIN AZUCAR X 1 L","tk":294,"p2":3920.0,"f":1,"img":"m.webp"},{"cod":"1809","nom":"YOGHURT NATURAL AZUCARADO X 1 L","tk":116,"p2":3920.0,"f":1,"img":"m.webp"},{"cod":"1811","nom":"YOGHURT FRUTILLA X 1 L","tk":95,"p2":4350.0,"f":1,"img":"m.webp"},{"cod":"2024","nom":"YOGHURT C/FRUTAS X 160","tk":62,"p2":1420.0,"f":1,"img":0},{"cod":"1795","nom":"YOGURT PROTEICO \"YOGURLAC\" X 1L","tk":40,"p2":7553.719,"f":0,"img":"m.webp"}]},{"rubro":"PRODUCTOS CONGELADOS","tickets":544,"items":[{"cod":"2057","nom":"MEDALLONES VEGETARIANOS \"KISLEV\"","tk":178,"p2":3966.942,"f":0,"img":"m.webp"},{"cod":"2176","nom":"MIX FRUTOS ROJOS CONGELADOS X KILO","tk":124,"p2":13198.347,"f":0,"img":"m.webp"},{"cod":"1126","nom":"ARANDANOS CONGELADOS X KG","tk":122,"p2":12958.678,"f":0,"img":"m.webp"},{"cod":"2278","nom":"CALDO DE HUESO \" MEDICINA ANCESTRAL\"","tk":52,"p2":5793.388,"f":0,"img":"m.webp"},{"cod":"2317","nom":"MANGO EN TROZOS CONGELADOS  XKG","tk":25,"p2":9000.0,"f":0,"img":"m.webp"}]},{"rubro":"GRANOS Y LEGUMBRES","tickets":542,"items":[{"cod":"1358","nom":"LENTEJAS TURCAS X KG","tk":77,"p2":4680.0,"f":1,"img":"m.webp"},{"cod":"1133","nom":"ARROZ YAMANI X KG.","tk":69,"p2":3350.0,"f":1,"img":"m.webp"},{"cod":"1359","nom":"LENTEJAS X KG.","tk":63,"p2":3690.0,"f":1,"img":"m.webp"},{"cod":"1240","nom":"CUSCUS X KG","tk":60,"p2":10720.0,"f":1,"img":"m.webp"},{"cod":"2335","nom":"GARBANZOS X KG","tk":60,"p2":2480.0,"f":1,"img":"m.webp"}]},{"rubro":"BEBIDAS","tickets":541,"items":[{"cod":"2233","nom":"KEFIR DE AGUA \"KE.LIVE\" SABORIZADO X 950 ML","tk":269,"p2":3595.041,"f":0,"img":"m.webp"},{"cod":"2459","nom":"KOMBUCHA  EYWA 354 ml","tk":79,"p2":3925.62,"f":0,"img":"m.webp"},{"cod":"1324","nom":"JUGO DE ARANDANOS X 1,5 LTS.","tk":65,"p2":2920.0,"f":1,"img":"m.webp"},{"cod":"1727","nom":"LECHE DE COCO EN POLVO X KG","tk":62,"p2":26080.0,"f":1,"img":"m.webp"},{"cod":"4454","nom":"JUGO DE UVA","tk":49,"p2":21890.0,"f":1,"img":"m.webp"}]},{"rubro":"SNACK","tickets":515,"items":[{"cod":"2074","nom":"BARRAS CRUDDA\"  X40Gr - SIN TACC\"","tk":200,"p2":1810.0,"f":1,"img":"m.webp"},{"cod":"2014","nom":"BARRA MUECAS X45GR","tk":112,"p2":1670.0,"f":1,"img":"m.webp"},{"cod":"5010","nom":"PIPAS TOSTADAS CON SAL X 50 gr","tk":74,"p2":1157.025,"f":0,"img":"m.webp"},{"cod":"2115","nom":"GALLETAS CACHAFAZ INTEGRALES","tk":45,"p2":3000.0,"f":0,"img":"m.webp"},{"cod":"2506","nom":"BARRA PROTEICA  \"INTEGRA\"","tk":33,"p2":2479.339,"f":0,"img":"m.webp"}]},{"rubro":"LINEA GOURMET","tickets":298,"items":[{"cod":"1571","nom":"SALSA DE SOJA X 180 CC","tk":42,"p2":3480.0,"f":1,"img":"d.webp"},{"cod":"2144","nom":"SALSA TAHINE","tk":37,"p2":9033.058,"f":0,"img":"m.webp"},{"cod":"1687","nom":"SALSA AJI PICANTE X 180 cc CRISTO DE LOS CERROS\"\"","tk":27,"p2":4750.0,"f":1,"img":"m.webp"},{"cod":"1464","nom":"PASTA ACEITUNAS VERDES X 200 g AGROIANNI\"\"","tk":21,"p2":3250.0,"f":1,"img":"m.webp"},{"cod":"1575","nom":"SALSA TERIYAKI X 250 CC","tk":20,"p2":4290.0,"f":1,"img":"m.webp"}]},{"rubro":"MANTECAS Y PASTAS","tickets":235,"items":[{"cod":"1383","nom":"MANTEQUILLA DE MANI ENTRENUTS\" X 370 g\"","tk":178,"p2":3250.0,"f":1,"img":"m.webp"},{"cod":"2269","nom":"MANTECA CLARIFICADA GHEE \"ENTRENUTS\" X370","tk":27,"p2":10280.992,"f":0,"img":"m.webp"},{"cod":"5012","nom":"MANTEQUILLA DE MANI PROTEICA X370 GR - ENTRENUTS","tk":13,"p2":4537.19,"f":0,"img":"m.webp"},{"cod":"5021","nom":"MANTECA CLARIFICADA  X150 GR - ENTRENUTS","tk":10,"p2":5743.802,"f":0,"img":"m.webp"},{"cod":"5030","nom":"MANTEQUILLA DE MANI CON STEVIA X370 CC - ENTRENUTS","tk":7,"p2":3115.702,"f":0,"img":"m.webp"}]},{"rubro":"ENCURTIDOS","tickets":223,"items":[{"cod":"1486","nom":"PEPINOS AGRID X 200 g DURANG\"\"","tk":45,"p2":3640.0,"f":1,"img":"m.webp"},{"cod":"1483","nom":"PEPINILLOS EN VIN. X 200 g DURANG\"\"","tk":39,"p2":4000.0,"f":1,"img":"m.webp"},{"cod":"1204","nom":"CHUCRUT X 600 GR","tk":32,"p2":7560.0,"f":1,"img":"m.webp"},{"cod":"1230","nom":"CORAZONES DE ALCAUCIL X 300 GR","tk":15,"p2":6750.0,"f":1,"img":"m.webp"},{"cod":"1084","nom":"AJIES PICANTES DURANG X 110 GR","tk":14,"p2":3840.0,"f":1,"img":"m.webp"}]},{"rubro":"ACEITUNAS","tickets":158,"items":[{"cod":"1050","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº 1","tk":27,"p2":4250.0,"f":1,"img":"m.webp"},{"cod":"1049","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº 00","tk":26,"p2":6250.0,"f":1,"img":"m.webp"},{"cod":"1051","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº0","tk":24,"p2":5000.0,"f":1,"img":"d.webp"},{"cod":"1044","nom":"ACEITUNAS VERDES R.V X 1 KG Nº0","tk":21,"p2":8630.0,"f":1,"img":"m.webp"},{"cod":"1025","nom":"ACEITUNAS GRIEGAS R.V X 1/2 KG","tk":19,"p2":7500.0,"f":1,"img":"m.webp"}]},{"rubro":"TOMATE TRITURADO","tickets":38,"items":[{"cod":"1627","nom":"TOMATE TRITURADO X 1 KG","tk":20,"p2":1239.669,"f":0,"img":"m.webp"},{"cod":"1630","nom":"TOMATE CONDIMENTADO X 1 KG","tk":14,"p2":3250.0,"f":1,"img":"m.webp"},{"cod":"1628","nom":"TOMATE TRITURADO X 500 GR","tk":4,"p2":1016.529,"f":0,"img":"m.webp"}]}];
 const CLIENTES_PALADEAR = 66;
-
-// Las fotos y la lista de precios se sirven desde el sitio de la mayorista, asi
-// que la pagina anda igual publicada ahi o abierta desde cualquier otro lado.
-const BASE = "https://mayorista.paladear.com.ar/";
 const WPP = "5492615652251";
 
-const SLUG = {};
-KITS.concat(VEND).forEach(r => { if (r.slug) SLUG[r.rubro] = r.slug; });
-const fotoRubro = ru => BASE + "cat-home-" + (SLUG[ru] || "home") + ".webp";
-// 7 de cada 10 productos tienen foto propia; el resto muestra la del rubro
-const fotoDe = x => x.img ? BASE + "fotos/" + x.cod + ".webp" : fotoRubro(x.rubro);
-function ponerFoto(im, x) {
-  im.src = fotoDe(x);
-  im.alt = "";
-  im.loading = "lazy";
-  im.decoding = "async";
-  im.addEventListener("error", () => { im.src = fotoRubro(x.rubro); }, {once: true});
+// Las fotos son siempre del producto, nunca genericas: la marca del campo img
+// dice de que sitio sale ("m" la tienda minorista, "d" la distribuidora) y con
+// que extension. Si un producto no tiene foto, va un hueco liso.
+const SITIO = {m: "https://paladear.com.ar/", d: "https://mayorista.paladear.com.ar/"};
+const LISTA = "https://mayorista.paladear.com.ar/precios-may.csv";
+function fotoDe(x) {
+  if (!x.img) return null;
+  const p = String(x.img).split(".");
+  return (SITIO[p[0]] || SITIO.m) + "fotos/" + x.cod + "." + p[1];
 }
 
 const pl = n => "$" + Math.round(n).toLocaleString("es-AR");
 const num = (n, d) => n.toLocaleString("es-AR", {minimumFractionDigits: d || 0,
                                                  maximumFractionDigits: d || 0});
 const plural = (n, s, p) => num(n) + " " + (n === 1 ? s : p);
+// "3,5 kg" / "6 unidades", escrito como lo diria una persona
+function enUnidades(q, un) {
+  const t = num(q, q % 1 ? (Math.round(q * 100) % 10 ? 2 : 1) : 0);
+  return un === "kg" ? t + " kg" : t + (q === 1 ? " unidad" : " unidades");
+}
 
-// PLANO guarda los MISMOS objetos que KITS, no copias: cuando llegan los
-// precios frescos se actualiza un solo lugar y la tabla los toma sola.
+// PLANO guarda los MISMOS objetos que KITS, no copias, para que los precios
+// frescos entren en un solo lugar.
 const PLANO = [];
 KITS.forEach(r => r.items.forEach(i => { i.rubro = r.rubro; PLANO.push(i); }));
 
@@ -422,7 +444,8 @@ const SURTIDOS = [
   {v: "n12", et: "Surtido completo", niv: [1, 2, 0]},
   {v: "todo", et: "Todo", niv: [1, 2, 3, 0]}
 ];
-const MODOS = [{v: "frac", et: "Fraccionado"}, {v: "bulto", et: "Bultos cerrados"}];
+const MODOS = [{v: "frac", et: "Suelto, sin mínimos"}, {v: "bulto", et: "Bultos cerrados"}];
+const VISTAS = [{v: "elegido", et: "Solo lo elegido"}, {v: "todo", et: "Todo el catálogo"}];
 const PRESETS = [
   {et: "Mínimo", s: "n1", m: "frac", c: 15, w: 3, det: "Lo justo para abrir"},
   {et: "Intermedio", s: "n12", m: "frac", c: 15, w: 3, det: "Todos los rubros cubiertos"},
@@ -430,14 +453,24 @@ const PRESETS = [
   {et: "Full", s: "todo", m: "frac", c: 25, w: 4, det: "Surtido de local grande"}
 ];
 
-let surtido = "n12", modo = "frac", clientes = 15, semanas = 3, vista = "rubro";
+let surtido = "n12", modo = "frac", clientes = 15, semanas = 3;
+let verTodo = false, vista = "rubro";
+let incluidos = new Set();
 
-// ── cantidades
+// ── que entra y cuanto
 const nivelesDe = v => (SURTIDOS.find(s => s.v === v) || SURTIDOS[1]).niv;
-function filtrar(items, surt, m) {
+// en bulto cerrado solo se puede pedir lo que tiene bulto publicado
+const sePuede = (x, m) => m !== "bulto" || !!x.bul;
+const porDefecto = (items, surt, m) => {
   const ns = nivelesDe(surt);
-  return items.filter(x => ns.indexOf(x.niv) >= 0 && (m !== "bulto" || x.bul));
+  return items.filter(x => ns.indexOf(x.niv) >= 0 && sePuede(x, m));
+};
+function resetElegidos() {
+  incluidos = new Set(porDefecto(PLANO, surtido, modo).map(x => x.cod));
 }
+const estaDentro = x => incluidos.has(x.cod) && sePuede(x, modo);
+const elegidos = () => PLANO.filter(estaDentro);
+
 function cantidad(x, m, c, w) {
   const bruto = x.sem * (c / CLIENTES_PALADEAR) * w;
   if (m === "bulto") return Math.max(1, Math.ceil(bruto / x.bul)) * x.bul;
@@ -455,32 +488,24 @@ PRESETS.forEach((p, i) => {
   li.dataset.i = i;
   const b = document.createElement("button");
   b.type = "button";
-  const items = filtrar(PLANO, p.s, p.m);
-  const nom = document.createElement("div");
-  nom.className = "kit-nom";
-  nom.textContent = p.et;
-  const pla = document.createElement("div");
-  pla.className = "kit-plata";
-  pla.textContent = pl(costoDe(items, p.m, p.c, p.w));
-  const det = document.createElement("div");
-  det.className = "kit-det";
-  det.textContent = items.length + " productos · " + p.det;
-  b.append(nom, pla, det);
+  b.append(Object.assign(document.createElement("div"),
+    {className: "kit-nom", textContent: p.et}));
+  b.append(Object.assign(document.createElement("div"), {className: "kit-plata"}));
+  b.append(Object.assign(document.createElement("div"), {className: "kit-det"}));
   b.addEventListener("click", () => {
     surtido = p.s; modo = p.m; clientes = p.c; semanas = p.w;
     document.getElementById("c-clientes").value = clientes;
     document.getElementById("c-semanas").value = semanas;
+    resetElegidos();
     pintarKits();
   });
   li.appendChild(b);
   cajaKits.appendChild(li);
 });
-
-// se vuelve a llamar cuando llegan los precios frescos
 function pintarPresetPrecios() {
   document.querySelectorAll("#kits .kit").forEach(li => {
     const p = PRESETS[Number(li.dataset.i)];
-    const items = filtrar(PLANO, p.s, p.m);
+    const items = porDefecto(PLANO, p.s, p.m);
     li.querySelector(".kit-plata").textContent = pl(costoDe(items, p.m, p.c, p.w));
     li.querySelector(".kit-det").textContent = items.length + " productos · " + p.det;
   });
@@ -498,9 +523,11 @@ function hacerPastillas(caja, ops, escribir) {
   });
 }
 hacerPastillas(document.getElementById("c-surtido"), SURTIDOS,
-  v => { surtido = v; pintarKits(); });
+  v => { surtido = v; resetElegidos(); pintarKits(); });
 hacerPastillas(document.getElementById("c-modo"), MODOS,
-  v => { modo = v; pintarKits(); });
+  v => { modo = v; resetElegidos(); pintarKits(); });
+hacerPastillas(document.getElementById("c-ver"), VISTAS,
+  v => { verTodo = (v === "todo"); pintarKits(); });
 hacerPastillas(document.getElementById("c-vista"),
   [{v: "rubro", et: "5 por rubro"}, {v: "ranking", et: "Ranking general"}],
   v => { vista = v; pintarVendidos(); });
@@ -511,153 +538,200 @@ document.getElementById("c-semanas").addEventListener("input", e => {
   semanas = Number(e.target.value); pintarKits();
 });
 
-// ── tabla de kit
+// ── una fila de producto
+function filaProd(x) {
+  const dentro = estaDentro(x);
+  const q = cantidad(x, modo, clientes, semanas);
+  const fila = document.createElement("div");
+  fila.className = "fila prod" + (dentro ? "" : " fuera");
+
+  const tic = document.createElement("input");
+  tic.type = "checkbox";
+  tic.className = "tilde";
+  tic.checked = dentro;
+  tic.setAttribute("aria-label", (dentro ? "Sacar " : "Agregar ") + x.nom);
+  tic.addEventListener("change", () => {
+    if (tic.checked) incluidos.add(x.cod); else incluidos.delete(x.cod);
+    pintarKits();
+  });
+
+  const url = fotoDe(x);
+  let im;
+  if (url) {
+    im = document.createElement("img");
+    im.className = "prod-foto";
+    im.src = url; im.alt = x.nom; im.loading = "lazy"; im.decoding = "async";
+    im.addEventListener("error", () => {
+      const h = document.createElement("div");
+      h.className = "hueco";
+      im.replaceWith(h);
+    }, {once: true});
+  } else {
+    im = document.createElement("div");
+    im.className = "hueco";
+  }
+
+  const datos = document.createElement("div");
+  const nom = document.createElement("div");
+  nom.className = "nom";
+  nom.textContent = x.nom;
+  if (modo === "bulto" && q > x.bul) {
+    const ch = document.createElement("span");
+    ch.className = "chapa";
+    ch.textContent = num(q / x.bul) + " bultos";
+    nom.appendChild(ch);
+  } else if (modo === "frac" && !x.bul) {
+    const ch = document.createElement("span");
+    ch.className = "chapa";
+    ch.textContent = "no hay en bulto";
+    nom.appendChild(ch);
+  }
+  const porSem = x.sem * clientes / CLIENTES_PALADEAR;
+  const porque = document.createElement("div");
+  porque.className = "porque";
+  porque.textContent = "Con " + clientes + " clientes por día se venden unos " +
+    enUnidades(Math.round(porSem * 100) / 100, x.un) + " por semana. " +
+    (modo === "bulto"
+      ? "El bulto cerrado es de " + x.pat + ", así que llevás " + enUnidades(q, x.un) + "."
+      : "Para " + plural(semanas, "semana", "semanas") + ", " + enUnidades(q, x.un) + ".");
+  datos.append(nom, porque);
+
+  const cifras = document.createElement("div");
+  cifras.className = "cifras";
+  const mk = (et, grande, chico, clase) => {
+    const d = document.createElement("div");
+    d.className = "col" + (clase ? " " + clase : "");
+    d.append(Object.assign(document.createElement("span"),
+      {className: "et", textContent: et}));
+    d.append(Object.assign(document.createElement("b"), {textContent: grande}));
+    if (chico) d.append(Object.assign(document.createElement("i"), {textContent: chico}));
+    return d;
+  };
+  cifras.append(
+    mk("Llevás", enUnidades(q, x.un), ""),
+    mk("Precio", pl(x.p2), x.un === "kg" ? "el kilo" : "cada uno"),
+    mk("Te sale", pl(q * x.p2), "", "plata"));
+
+  fila.append(tic, im, datos, cifras);
+  return fila;
+}
+
+// ── tabla completa
 function pintarKits() {
   document.querySelectorAll("#c-surtido button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.v === surtido)));
   document.querySelectorAll("#c-modo button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.v === modo)));
+  document.querySelectorAll("#c-ver button").forEach(b =>
+    b.setAttribute("aria-pressed", String((b.dataset.v === "todo") === verTodo)));
   document.getElementById("o-clientes").textContent = plural(clientes, "cliente", "clientes");
   document.getElementById("o-semanas").textContent = plural(semanas, "semana", "semanas");
 
-  const items = filtrar(PLANO, surtido, modo);
-  const total = costoDe(items, modo, clientes, semanas);
+  const dentro = elegidos();
+  const total = costoDe(dentro, modo, clientes, semanas);
   let kg = 0, un = 0, venta = 0;
-  items.forEach(x => {
+  dentro.forEach(x => {
     const q = cantidad(x, modo, clientes, semanas);
     if (x.un === "kg") kg += q; else un += q;
     venta += q * x.p1;
   });
+  const gana = venta - total;
 
   document.getElementById("r-total").textContent = pl(total);
   document.getElementById("b-plata").textContent = pl(total);
+  document.getElementById("r-venta").firstChild.nodeValue = pl(venta);
+  document.getElementById("r-gana").firstChild.nodeValue = pl(gana);
+  document.getElementById("r-margen").textContent = total
+    ? "un " + Math.round(gana / total * 100) + "% sobre lo que pagás" : "";
+  document.getElementById("r-peso").firstChild.nodeValue =
+    (kg ? num(kg, 1) + " kg" : "") + (kg && un ? " y " : "") + (un ? num(un) + " un." : "");
+  document.getElementById("r-prod").textContent = dentro.length + " productos distintos";
   document.getElementById("b-det").textContent =
     (SURTIDOS.find(s => s.v === surtido) || {}).et + " · " +
-    (modo === "bulto" ? "bultos cerrados" : "fraccionado") + " · " +
+    (modo === "bulto" ? "bultos cerrados" : "suelto") + " · " +
     plural(clientes, "cliente", "clientes") + " por día · " +
-    plural(semanas, "semana", "semanas") + " · " + items.length + " productos";
-  document.getElementById("r-prod").textContent = items.length;
-  document.getElementById("r-peso").textContent = num(kg, 1) + " kg + " + num(un) + " un.";
-  document.getElementById("r-venta").textContent = pl(venta);
+    plural(semanas, "semana", "semanas") + " · " + dentro.length + " productos";
 
-  const sinBulto = filtrar(PLANO, surtido, "frac").filter(x => !x.bul).length;
+  const base = porDefecto(PLANO, surtido, modo);
+  const sinBulto = PLANO.filter(x => nivelesDe(surtido).indexOf(x.niv) >= 0 && !x.bul).length;
   document.getElementById("h-surtido").textContent =
-    items.length + " productos de " + new Set(items.map(x => x.rubro)).size + " rubros.";
+    base.length + " productos de " + new Set(base.map(x => x.rubro)).size + " rubros.";
   document.getElementById("h-modo").textContent = modo === "bulto"
     ? "Quedan afuera " + sinBulto + " productos que todavía no hay en bulto cerrado."
-    : "Sin mínimos: entra todo el catálogo.";
+    : "Pedís la cantidad exacta que quieras de cada cosa.";
   document.getElementById("h-clientes").textContent =
     clientes >= CLIENTES_PALADEAR
       ? "El mismo movimiento que el local de Paladear."
-      : "Paladear atiende 66 por día. Vos vendés " +
+      : "El local de Paladear atiende 66 por día; vos vendés alrededor del " +
         Math.round(clientes / CLIENTES_PALADEAR * 100) + "% de eso.";
+  const posibles = PLANO.filter(x => sePuede(x, modo)).length;
+  document.getElementById("h-ver").textContent = verTodo
+    ? "Se ven los " + posibles + " productos; tildá los que quieras sumar."
+    : "Se ven solo los " + dentro.length + " que vas a llevar.";
+
+  const sacados = base.filter(x => !incluidos.has(x.cod)).length;
+  const avisoSac = document.getElementById("r-sacados");
+  avisoSac.textContent = "";
+  avisoSac.hidden = !sacados;
+  if (sacados) {
+    avisoSac.append(document.createTextNode(
+      "Sacaste " + sacados + (sacados === 1 ? " producto del kit. " : " productos del kit. ")));
+    const bt = document.createElement("button");
+    bt.type = "button";
+    bt.textContent = "Volver a ponerlos";
+    bt.addEventListener("click", () => { resetElegidos(); pintarKits(); });
+    avisoSac.appendChild(bt);
+  }
 
   const otro = modo === "bulto" ? "frac" : "bulto";
-  const alt = costoDe(filtrar(PLANO, surtido, otro), otro, clientes, semanas);
+  const alt = costoDe(porDefecto(PLANO, surtido, otro), otro, clientes, semanas);
   document.getElementById("r-nota").textContent = modo === "bulto"
-    ? "Llevás el bulto entero de cada producto, así que te sobra en lo que rota poco. El mismo surtido fraccionado sale " + pl(alt) + "."
-    : "Pedís la cantidad justa de cada cosa. En bultos cerrados el mismo surtido sale " + pl(alt) + ".";
+    ? "Llevás el bulto entero de cada producto, así que te sobra en lo que rota poco. El mismo kit suelto sale " + pl(alt) + "."
+    : "Pedís la cantidad justa de cada cosa. El mismo kit en bultos cerrados sale " + pl(alt) + ".";
 
   document.querySelectorAll("#kits .kit").forEach(li => {
     const p = PRESETS[Number(li.dataset.i)];
     li.dataset.activo = (p.s === surtido && p.m === modo && p.c === clientes &&
-                         p.w === semanas) ? "si" : "no";
+                         p.w === semanas && !sacados) ? "si" : "no";
   });
 
   const caja = document.getElementById("tabla-kit");
   caja.textContent = "";
   KITS.forEach(r => {
-    const sub = filtrar(r.items, surtido, modo);
+    const posibles = r.items.filter(x => sePuede(x, modo));
+    const sub = verTodo ? posibles : posibles.filter(estaDentro);
     if (!sub.length) return;
+    const puestos = posibles.filter(estaDentro);
     const sec = document.createElement("section");
     sec.className = "rubro";
     const tapa = document.createElement("div");
     tapa.className = "rubro-tapa";
-    const izq = document.createElement("div");
-    izq.className = "rubro-izq";
-    const ri = document.createElement("img");
-    ri.className = "rubro-foto";
-    ri.src = fotoRubro(r.rubro); ri.alt = ""; ri.loading = "lazy";
-    const h2 = document.createElement("h2");
-    h2.textContent = r.rubro;
-    izq.append(ri, h2);
+    tapa.append(Object.assign(document.createElement("h2"), {textContent: r.rubro}));
     const dato = document.createElement("span");
     dato.className = "rubro-dato";
-    dato.textContent = sub.length + (sub.length === 1 ? " producto · " : " productos · ") +
-      pl(costoDe(sub, modo, clientes, semanas));
-    tapa.append(izq, dato);
+    dato.textContent = puestos.length +
+      (puestos.length === 1 ? " producto · " : " productos · ") +
+      pl(costoDe(puestos, modo, clientes, semanas));
+    tapa.appendChild(dato);
     sec.appendChild(tapa);
-
-    sub.forEach(x => {
-      const q = cantidad(x, modo, clientes, semanas);
-      const fila = document.createElement("div");
-      fila.className = "fila prod";
-
-      const cu = document.createElement("div");
-      cu.className = "celda-nom";
-      const im = document.createElement("img");
-      im.className = "prod-foto";
-      ponerFoto(im, x);
-      const txt = document.createElement("div");
-      const nom = document.createElement("div");
-      nom.className = "nom";
-      nom.textContent = x.nom;
-      if (modo === "bulto" && q > x.bul) {
-        const ch = document.createElement("span");
-        ch.className = "chapa";
-        ch.textContent = num(q / x.bul) + " bultos";
-        nom.appendChild(ch);
-      } else if (modo === "frac" && !x.bul) {
-        const ch = document.createElement("span");
-        ch.className = "chapa";
-        ch.textContent = "solo fraccionado";
-        nom.appendChild(ch);
-      }
-      const sb = document.createElement("div");
-      sb.className = "sub";
-      sb.textContent = "vende " + num(x.sem * clientes / CLIENTES_PALADEAR, 2) + " " +
-        x.un + " por semana" + (x.bul ? " · bulto de " + x.pat : "");
-      txt.append(nom, sb);
-      cu.append(im, txt);
-
-      const cant = document.createElement("div");
-      cant.className = "cant";
-      const cb = document.createElement("b");
-      cb.textContent = num(q, q % 1 ? (Math.round(q * 100) % 10 ? 2 : 1) : 0);
-      const ci = document.createElement("i");
-      ci.textContent = x.un;
-      cant.append(cb, ci);
-
-      const pre = document.createElement("div");
-      pre.className = "precio";
-      pre.textContent = pl(x.p2) + " / " + x.un;
-
-      const mon = document.createElement("div");
-      mon.className = "monto";
-      const mb = document.createElement("b");
-      mb.textContent = pl(q * x.p2);
-      mon.appendChild(mb);
-
-      fila.append(cu, cant, pre, mon);
-      sec.appendChild(fila);
-    });
+    sub.forEach(x => sec.appendChild(filaProd(x)));
     caja.appendChild(sec);
   });
   armarTexto();
 }
 
-// ── texto para mandar
+// ── pedido escrito
 let TEXTO = "";
 function armarTexto() {
   const cab = ["*Pedido para abrir una dietética*",
                (SURTIDOS.find(s => s.v === surtido) || {}).et + " · " +
-               (modo === "bulto" ? "bultos cerrados" : "fraccionado"),
+               (modo === "bulto" ? "bultos cerrados" : "suelto"),
                plural(clientes, "cliente", "clientes") + " por día · " +
                plural(semanas, "semana", "semanas") + " de mercadería", ""];
   const L = cab.slice(), resumen = [];
   let total = 0, cuenta = 0;
   KITS.forEach(r => {
-    const sub = filtrar(r.items, surtido, modo);
+    const sub = r.items.filter(estaDentro);
     if (!sub.length) return;
     let st = 0;
     L.push("*" + r.rubro + "*");
@@ -665,8 +739,7 @@ function armarTexto() {
       const q = cantidad(x, modo, clientes, semanas);
       st += q * x.p2;
       cuenta++;
-      L.push("• " + x.nom + " — " + num(q, q % 1 ? 2 : 0) + " " + x.un +
-             " — " + pl(q * x.p2));
+      L.push("• " + x.nom + " — " + enUnidades(q, x.un) + " — " + pl(q * x.p2));
     });
     L.push("");
     total += st;
@@ -688,7 +761,8 @@ function armarTexto() {
 document.getElementById("b-ver").addEventListener("click", () => {
   const t = document.getElementById("texto");
   t.hidden = !t.hidden;
-  document.getElementById("b-ver").textContent = t.hidden ? "Ver el texto" : "Ocultar el texto";
+  document.getElementById("b-ver").textContent =
+    t.hidden ? "Ver el pedido escrito" : "Ocultar el pedido escrito";
 });
 document.getElementById("b-copiar").addEventListener("click", async () => {
   const aviso = document.getElementById("aviso");
@@ -720,20 +794,30 @@ function filaVend(x, conPuesto) {
   const p = document.createElement("div");
   p.className = "puesto";
   p.textContent = conPuesto ? x.puesto : "";
-  const cu = document.createElement("div");
-  cu.className = "celda-nom";
-  const im = document.createElement("img");
-  im.className = "prod-foto";
-  ponerFoto(im, x);
-  const txt = document.createElement("div");
-  const nom = document.createElement("div");
-  nom.className = "nom";
-  nom.textContent = x.nom;
-  const sb = document.createElement("div");
-  sb.className = "sub";
-  sb.textContent = conPuesto ? x.rubro.toLowerCase() : ("cód. " + x.cod);
-  txt.append(nom, sb);
-  cu.append(im, txt);
+
+  const url = fotoDe(x);
+  let im;
+  if (url) {
+    im = document.createElement("img");
+    im.className = "prod-foto";
+    im.src = url; im.alt = x.nom; im.loading = "lazy"; im.decoding = "async";
+    im.addEventListener("error", () => {
+      const h = document.createElement("div");
+      h.className = "hueco";
+      im.replaceWith(h);
+    }, {once: true});
+  } else {
+    im = document.createElement("div");
+    im.className = "hueco";
+  }
+
+  const datos = document.createElement("div");
+  datos.append(Object.assign(document.createElement("div"),
+    {className: "nom", textContent: x.nom}));
+  datos.append(Object.assign(document.createElement("div"),
+    {className: "porque",
+     textContent: conPuesto ? x.rubro.toLowerCase() : "cód. " + x.cod}));
+
   const cb = document.createElement("div");
   cb.className = "col-barra";
   const ba = document.createElement("div");
@@ -743,18 +827,16 @@ function filaVend(x, conPuesto) {
   ba.appendChild(re);
   const ro = document.createElement("div");
   ro.className = "rot";
-  ro.textContent = num(x.tk) + " ventas · " + (x.tk / 52 >= 10
+  ro.textContent = num(x.tk) + " ventas en el año · " + (x.tk / 52 >= 10
     ? Math.round(x.tk / 52) : (x.tk / 52).toFixed(1).replace(".", ",")) + " por semana";
   cb.append(ba, ro);
+
   const mo = document.createElement("div");
-  mo.className = "monto";
-  const mb = document.createElement("b");
-  mb.textContent = pl(x.p2);
-  const mi = document.createElement("div");
-  mi.className = "sub";
-  mi.textContent = "mayorista";
-  mo.append(mb, mi);
-  fila.append(p, cu, cb, mo);
+  mo.className = "col plata";
+  mo.append(Object.assign(document.createElement("span"),
+    {className: "et", textContent: "Mayorista"}));
+  mo.append(Object.assign(document.createElement("b"), {textContent: pl(x.p2)}));
+  fila.append(p, im, datos, cb, mo);
   return fila;
 }
 
@@ -768,41 +850,27 @@ function pintarVendidos() {
 
   const caja = document.getElementById("tabla-vend");
   caja.textContent = "";
-  if (vista === "ranking") {
+  const seccion = (titulo, dato) => {
     const sec = document.createElement("section");
     sec.className = "rubro";
     const tapa = document.createElement("div");
     tapa.className = "rubro-tapa";
-    const h2 = document.createElement("h2");
-    h2.textContent = "Del que más se vende al que menos";
+    tapa.append(Object.assign(document.createElement("h2"), {textContent: titulo}));
     const d = document.createElement("span");
     d.className = "rubro-dato";
-    d.textContent = VPLANO.length + " productos";
-    tapa.append(h2, d);
+    d.textContent = dato;
+    tapa.appendChild(d);
     sec.appendChild(tapa);
-    VPLANO.forEach(x => sec.appendChild(filaVend(x, true)));
     caja.appendChild(sec);
+    return sec;
+  };
+  if (vista === "ranking") {
+    const sec = seccion("Del que más se vende al que menos", VPLANO.length + " productos");
+    VPLANO.forEach(x => sec.appendChild(filaVend(x, true)));
   } else {
     VEND.forEach(r => {
-      const sec = document.createElement("section");
-      sec.className = "rubro";
-      const tapa = document.createElement("div");
-      tapa.className = "rubro-tapa";
-      const izq = document.createElement("div");
-      izq.className = "rubro-izq";
-      const ri = document.createElement("img");
-      ri.className = "rubro-foto";
-      ri.src = fotoRubro(r.rubro); ri.alt = ""; ri.loading = "lazy";
-      const h2 = document.createElement("h2");
-      h2.textContent = r.rubro;
-      izq.append(ri, h2);
-      const d = document.createElement("span");
-      d.className = "rubro-dato";
-      d.textContent = num(r.tickets) + " ventas en el año";
-      tapa.append(izq, d);
-      sec.appendChild(tapa);
+      const sec = seccion(r.rubro, num(r.tickets) + " ventas en el año");
       r.items.forEach(i => sec.appendChild(filaVend(i, false)));
-      caja.appendChild(sec);
     });
   }
 }
@@ -829,20 +897,6 @@ function pintarSolapas() {
   SOLAPAS.forEach(s => { document.getElementById(s.panel).hidden = (s.v !== solapa); });
   document.getElementById("barra").hidden = (solapa !== "kits");
 }
-
-// ── fotos de portada y vitrina de rubros
-document.getElementById("hero-foto").style.backgroundImage =
-  "url('" + BASE + "HEROMAYORISTA1.webp')";
-const cajaVit = document.getElementById("vitrina");
-KITS.slice(0, 8).forEach(r => {
-  const li = document.createElement("li");
-  const im = document.createElement("img");
-  im.src = fotoRubro(r.rubro); im.alt = ""; im.loading = "lazy"; im.decoding = "async";
-  const sp = document.createElement("span");
-  sp.textContent = r.rubro;
-  li.append(im, sp);
-  cajaVit.appendChild(li);
-});
 
 // ── precios en vivo desde la lista de la mayorista
 function filasCSV(txt) {
@@ -880,7 +934,7 @@ function patenteCSV(txt, nombre) {
 async function refrescarPrecios() {
   const est = document.getElementById("estado-precios");
   try {
-    const r = await fetch(BASE + "precios-may.csv", {cache: "no-cache"});
+    const r = await fetch(LISTA, {cache: "no-cache"});
     if (!r.ok) throw new Error(r.status);
     const filas = filasCSV(await r.text());
     const idx = {};
@@ -908,7 +962,9 @@ async function refrescarPrecios() {
   }
 }
 
+resetElegidos();
 pintarSolapas();
+pintarPresetPrecios();
 pintarKits();
 pintarVendidos();
 refrescarPrecios();
