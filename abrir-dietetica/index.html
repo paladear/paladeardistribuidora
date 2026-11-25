@@ -11,14 +11,12 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon-may-p.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* Paleta de paladear.com.ar: banda #4c7192, titulo #123f67, cielo #d5e5ee,
-   crema #f5e8d6. Sin imagenes decorativas: las unicas fotos son las de los
-   productos. */
+/* Paleta de paladear.com.ar. Las unicas imagenes son fotos de producto. */
 :root{
   --banda:#4c7192; --banda-h:#2f668e; --titulo:#123f67;
   --cielo:#d5e5ee; --suave:#e3edf2; --crema:#f5e8d6;
   --papel:#fbfaf7; --carta:#ffffff; --tinta:#1d2b38; --tenue:#5f7284;
-  --linea:#dbe3e9; --ok:#39704a; --ok-suave:#e6f0e8;
+  --linea:#dbe3e9; --ok:#39704a;
   --t-tit:'Archivo','Segoe UI',system-ui,sans-serif;
   --t-txt:'Inter','Segoe UI',system-ui,sans-serif;
   color-scheme:light;
@@ -27,14 +25,14 @@
   --banda:#7fa9cb; --banda-h:#9cc0dd; --titulo:#cfe2f0;
   --cielo:#24323f; --suave:#1f2b36; --crema:#38332a;
   --papel:#121820; --carta:#1a222b; --tinta:#e7edf3; --tenue:#93a3b2;
-  --linea:#2b3744; --ok:#8fbf93; --ok-suave:#1e2e24;
+  --linea:#2b3744; --ok:#8fbf93;
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --banda:#7fa9cb; --banda-h:#9cc0dd; --titulo:#cfe2f0;
   --cielo:#24323f; --suave:#1f2b36; --crema:#38332a;
   --papel:#121820; --carta:#1a222b; --tinta:#e7edf3; --tenue:#93a3b2;
-  --linea:#2b3744; --ok:#8fbf93; --ok-suave:#1e2e24;
+  --linea:#2b3744; --ok:#8fbf93;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -44,21 +42,21 @@ h1,h2,h3{font-family:var(--t-tit);text-wrap:balance;margin:0;color:var(--titulo)
 .marco{max-width:1020px;margin:0 auto;
   padding-left:max(16px,env(safe-area-inset-left,0px));
   padding-right:max(16px,env(safe-area-inset-right,0px));
-  padding-block:0 9.5rem}
+  padding-block:0 10rem}
 
 /* ── cabecera ───────────────────────────────── */
 .hero{background:var(--cielo);
   margin-top:calc(-1 * env(safe-area-inset-top,0px));
-  padding-top:calc(env(safe-area-inset-top,0px) + 2.5rem);
-  padding-bottom:1.9rem}
+  padding-top:calc(env(safe-area-inset-top,0px) + 2.3rem);
+  padding-bottom:1.7rem}
 .hero-in{max-width:1020px;margin:0 auto;
   padding-left:max(16px,env(safe-area-inset-left,0px));
   padding-right:max(16px,env(safe-area-inset-right,0px))}
 .sello{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   color:var(--banda);margin-bottom:.5rem}
-h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;line-height:1.08}
-.bajada{margin:.8rem 0 0;max-width:62ch;color:var(--tinta);opacity:.85}
-.solapas{display:flex;gap:.3rem;margin-top:1.6rem;flex-wrap:wrap}
+h1{font-size:clamp(1.8rem,5.2vw,2.6rem);font-weight:700;letter-spacing:-.02em;line-height:1.08}
+.bajada{margin:.75rem 0 0;max-width:62ch;color:var(--tinta);opacity:.85}
+.solapas{display:flex;gap:.3rem;margin-top:1.5rem;flex-wrap:wrap}
 .solapas button{font-family:var(--t-tit);font-size:14px;font-weight:600;cursor:pointer;
   border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;
   padding:.6rem 1.1rem;background:transparent;color:var(--banda)}
@@ -67,50 +65,81 @@ h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;li
   border-color:var(--linea)}
 .solapas button:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
 
-/* ── explicacion ────────────────────────────── */
-.intro{margin:1.6rem 0 0;padding:1.2rem 1.3rem;background:var(--carta);
-  border:1px solid var(--linea);border-radius:9px}
-.intro h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.7rem}
-.intro ol,.intro ul{margin:0;padding-left:1.25rem;font-size:14px}
-.intro li{margin-bottom:.45rem}
-.intro li:last-child{margin-bottom:0}
-.intro b{color:var(--titulo)}
+/* ── pasos ──────────────────────────────────── */
+.camino{display:flex;gap:.3rem;list-style:none;margin:1.5rem 0 0;padding:0;flex-wrap:wrap}
+.camino li{flex:1 1 7rem;min-width:0}
+.camino button{width:100%;text-align:left;cursor:pointer;font:inherit;
+  background:none;border:none;border-top:3px solid var(--linea);
+  padding:.5rem .1rem 0;color:var(--tenue)}
+.camino button:hover:not(:disabled){color:var(--banda);border-top-color:var(--banda)}
+.camino button:disabled{cursor:default;opacity:.65}
+.camino button:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
+.camino [aria-current="step"]{border-top-color:var(--banda);color:var(--titulo)}
+.paso-n{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase}
+.paso-t{display:block;font-family:var(--t-tit);font-weight:700;font-size:13px;
+  line-height:1.2;margin-top:.1rem}
+.camino [aria-current="step"] .paso-t{color:var(--titulo)}
+.camino .listo .paso-n::after{content:" ✓";color:var(--ok)}
 
-/* ── kits sugeridos ─────────────────────────── */
-.kits{display:grid;grid-template-columns:repeat(auto-fit,minmax(192px,1fr));gap:.7rem;
-  margin:1.4rem 0 0;padding:0;list-style:none}
-.kit{border:1px solid var(--linea);border-radius:8px;background:var(--carta)}
-.kit button{width:100%;text-align:left;background:none;border:none;cursor:pointer;
-  padding:.9rem;border-radius:8px;font:inherit;color:inherit}
-.kit button:hover{background:var(--suave)}
-.kit button:focus-visible{outline:2px solid var(--banda);outline-offset:-2px}
-.kit[data-activo="si"]{border-color:var(--banda);box-shadow:inset 0 0 0 1px var(--banda)}
-.kit-nom{font-family:var(--t-tit);font-weight:700;font-size:14px;color:var(--titulo)}
-.kit-plata{font-family:var(--t-tit);font-weight:700;font-size:1.3rem;margin-top:.2rem;
-  font-variant-numeric:tabular-nums}
-.kit-det{font-size:11.5px;color:var(--tenue);margin-top:.3rem}
+.paso{padding-top:1.8rem}
+.paso > h2{font-size:clamp(1.3rem,3.6vw,1.75rem);font-weight:700;letter-spacing:-.01em}
+.paso > .sub{margin:.5rem 0 0;color:var(--tenue);max-width:60ch;font-size:14.5px}
+.campo{margin-top:1.8rem}
+.campo > label,.campo > .rotulo{display:block;font-family:var(--t-tit);font-weight:700;
+  font-size:15px;color:var(--titulo);margin-bottom:.15rem}
+.campo .ayuda{font-size:13px;color:var(--tenue);margin:0 0 .7rem}
+.lectura{font-family:var(--t-tit);font-weight:700;font-size:1.5rem;color:var(--titulo);
+  font-variant-numeric:tabular-nums;line-height:1.1}
+.lectura small{display:block;font-family:var(--t-txt);font-weight:500;font-size:12.5px;
+  color:var(--tenue);margin-top:.2rem}
+input[type=range]{width:100%;max-width:30rem;accent-color:var(--banda);margin:.6rem 0 0}
+.tope{display:flex;justify-content:space-between;max-width:30rem;font-size:11px;
+  color:var(--tenue);margin-top:.15rem}
 
-/* ── controles ──────────────────────────────── */
-.mandos{display:flex;flex-wrap:wrap;gap:1.6rem;padding:1.4rem 0;
-  border-bottom:1px solid var(--linea)}
-.grupo{min-width:0}
-.rotulo{font-size:12.5px;font-weight:600;color:var(--titulo);margin-bottom:.45rem}
-.pastillas{display:flex;gap:.3rem;flex-wrap:wrap}
-.pastillas button{font-size:12.5px;font-weight:500;padding:.42rem .85rem;border-radius:5px;
+.pastillas{display:flex;gap:.4rem;flex-wrap:wrap}
+.pastillas button{font-size:13px;font-weight:500;padding:.5rem .95rem;border-radius:6px;
   border:1px solid var(--linea);background:var(--carta);color:var(--tenue);cursor:pointer}
 .pastillas button:hover{border-color:var(--banda);color:var(--banda)}
 .pastillas button[aria-pressed="true"]{background:var(--banda);border-color:var(--banda);
   color:#fff;font-weight:600}
 .pastillas button:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
-.desliz{display:flex;align-items:center;gap:.7rem}
-.desliz input[type=range]{width:165px;accent-color:var(--banda)}
-.desliz output{font-family:var(--t-tit);font-weight:700;font-size:14px;min-width:6.8rem;
-  font-variant-numeric:tabular-nums;color:var(--titulo)}
-.hint{font-size:11.5px;color:var(--tenue);margin:.4rem 0 0;max-width:34ch}
+
+/* tarjetas de opcion grandes (como comprás) */
+.opciones{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:.7rem;list-style:none;margin:0;padding:0}
+.opciones button{width:100%;height:100%;text-align:left;cursor:pointer;font:inherit;
+  color:inherit;background:var(--carta);border:1px solid var(--linea);
+  border-radius:9px;padding:.95rem 1rem}
+.opciones button:hover{border-color:var(--banda)}
+.opciones button[aria-pressed="true"]{border-color:var(--banda);
+  box-shadow:inset 0 0 0 1px var(--banda);background:var(--suave)}
+.opciones button:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
+.op-t{font-family:var(--t-tit);font-weight:700;font-size:14.5px;color:var(--titulo)}
+.op-p{font-family:var(--t-tit);font-weight:700;font-size:1.15rem;margin-top:.2rem;
+  font-variant-numeric:tabular-nums}
+.op-n{font-size:11.5px;color:var(--banda);font-weight:600;margin-top:.15rem;
+  font-variant-numeric:tabular-nums}
+.op-d{font-size:12px;color:var(--tenue);margin-top:.3rem;line-height:1.4}
+
+/* rubros */
+.rubros{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:.45rem;list-style:none;margin:0;padding:0}
+.rubros label{display:flex;align-items:center;gap:.6rem;cursor:pointer;
+  border:1px solid var(--linea);border-radius:7px;padding:.6rem .7rem;
+  background:var(--carta);font-size:13.5px}
+.rubros label:hover{border-color:var(--banda)}
+.rubros input{accent-color:var(--banda);width:1.1rem;height:1.1rem;flex:0 0 auto;margin:0}
+.rubros input:focus-visible{outline:2px solid var(--banda);outline-offset:2px}
+.rubros .rn{font-weight:600;color:var(--titulo);line-height:1.2}
+.rubros .rc{font-size:11.5px;color:var(--tenue)}
+.atajos{display:flex;gap:.8rem;margin-bottom:.7rem;font-size:13px}
+.atajos button{font:inherit;font-weight:600;color:var(--banda);background:none;border:none;
+  padding:0;cursor:pointer;text-decoration:underline}
 
 /* ── resumen de plata ───────────────────────── */
 .resumen{display:flex;flex-wrap:wrap;gap:1.1rem;background:var(--crema);
-  border-radius:9px;padding:1.1rem 1.2rem;margin-top:1.4rem}
+  border-radius:9px;padding:1.1rem 1.2rem;margin-top:1.5rem}
 .cifra{min-width:0;flex:0 0 auto}
 .cifra dt{font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
   color:var(--tenue)}
@@ -134,13 +163,12 @@ h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;li
   .cifra.grande dd{font-size:1.8rem}
 }
 
-/* ── tabla de productos ─────────────────────── */
-.rubro{margin-top:2.2rem}
+/* ── lista de productos ─────────────────────── */
+.rubro{margin-top:2.1rem}
 .rubro-tapa{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
   flex-wrap:wrap;padding-bottom:.5rem;border-bottom:2px solid var(--banda)}
 .rubro-tapa h2{font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em}
 .rubro-dato{font-size:12px;color:var(--tenue);font-variant-numeric:tabular-nums}
-
 .fila{display:grid;gap:.5rem .9rem;align-items:center;
   padding:.95rem .3rem;border-bottom:1px solid var(--linea)}
 .fila.prod{grid-template-columns:1.6rem 58px minmax(0,1fr) auto}
@@ -165,6 +193,8 @@ h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;li
   display:block;line-height:1.15}
 .col i{font-style:normal;font-size:10.5px;color:var(--tenue);display:block}
 .col.plata b{font-size:1.05rem}
+.vacio{padding:2.5rem 1rem;text-align:center;color:var(--tenue);font-size:14px;
+  border:1px dashed var(--linea);border-radius:9px;margin-top:1.5rem}
 @media (max-width:760px){
   .fila.prod{grid-template-columns:1.6rem 52px minmax(0,1fr)}
   .prod-foto,.hueco{width:52px;height:52px}
@@ -206,6 +236,15 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
 .pie{margin-top:2.2rem;padding-top:1.2rem;border-top:1px solid var(--linea);
   font-size:12px;color:var(--tenue)}
 .pie a{color:var(--banda)}
+.intro{margin:1.5rem 0 0;padding:1.1rem 1.2rem;background:var(--carta);
+  border:1px solid var(--linea);border-radius:9px}
+.intro h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem}
+.intro ul{margin:0;padding-left:1.25rem;font-size:14px}
+.intro li{margin-bottom:.4rem}
+.intro li:last-child{margin-bottom:0}
+.mandos{display:flex;flex-wrap:wrap;gap:1.6rem;padding:1.3rem 0;
+  border-bottom:1px solid var(--linea)}
+.rotulo{font-size:12.5px;font-weight:600;color:var(--titulo);margin-bottom:.45rem}
 
 /* ── barra fija ─────────────────────────────── */
 .barra-fija{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--carta);
@@ -220,9 +259,11 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
 .barra-det{font-size:11.5px;color:var(--tenue);margin-top:.14rem}
 .barra-bot{display:flex;gap:.5rem;flex-wrap:wrap}
 .barra-bot button,.barra-bot a{font-family:var(--t-txt);font-size:13px;font-weight:600;
-  cursor:pointer;border-radius:6px;padding:.64rem 1rem;border:1px solid var(--linea);
+  cursor:pointer;border-radius:6px;padding:.64rem 1.05rem;border:1px solid var(--linea);
   background:var(--carta);color:var(--tinta);text-decoration:none;white-space:nowrap}
 .barra-bot button:hover{border-color:var(--banda);color:var(--banda)}
+.barra-bot .sigue{background:var(--banda);border-color:var(--banda);color:#fff}
+.barra-bot .sigue:hover{background:var(--banda-h);border-color:var(--banda-h);color:#fff}
 .barra-bot .wpp{background:#25d366;border-color:#1fb858;color:#06281a}
 .barra-bot .wpp:hover{background:#1fb858}
 .barra-bot button:focus-visible,.barra-bot a:focus-visible{outline:2px solid var(--banda);
@@ -230,7 +271,7 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
 @media (max-width:560px){
   .barra-kit{font-size:1.1rem}
   .barra-bot{flex:1 1 100%}
-  .barra-bot button,.barra-bot a{flex:1 1 0;text-align:center;padding:.64rem .5rem}
+  .barra-bot button,.barra-bot a{flex:1 1 0;text-align:center;padding:.64rem .4rem}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -240,8 +281,8 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
   <div class="hero-in">
     <div class="sello">Paladear Distribuidora &middot; Mendoza</div>
     <h1>Abrir una dietética</h1>
-    <p class="bajada">Esta página te arma la lista de compra para abrir el negocio:
-      qué productos llevar, cuántos kilos de cada uno y cuánto te sale. Las
+    <p class="bajada">Contestá cuatro cosas sobre tu local y te armamos la lista de
+      compra: qué productos llevar, cuánto de cada uno y cuánto te sale. Las
       cantidades salen de lo que de verdad se vende en el mostrador de Paladear.
       Todos los precios son mayoristas.</p>
     <div class="solapas" role="tablist" id="solapas"></div>
@@ -250,110 +291,156 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
 
 <div class="marco">
   <section id="panel-kits" role="tabpanel">
-    <div class="intro">
-      <h2>Cómo se usa</h2>
-      <ol>
-        <li>Tocá uno de los cuatro kits de abajo. Cada uno es una lista completa
-          ya armada, con su precio.</li>
-        <li>Después ajustalo con los controles: cuántos productos querés
-          (<b>surtido</b>), si comprás suelto o por bulto (<b>cómo comprás</b>),
-          y de qué tamaño es tu local (<b>clientes por día</b>).</li>
-        <li>En la lista, <b>destildá lo que no quieras</b> y el total baja solo.
-          Poné «Ver: todo el catálogo» para sumar productos que no venían.</li>
-        <li>Cuando esté como querés, mandanos el pedido con el botón verde de
-          abajo, que queda siempre a la vista.</li>
-      </ol>
-    </div>
+    <ol class="camino" id="camino"></ol>
 
-    <ul class="kits" id="kits"></ul>
+    <!-- 1 ─ tu local -->
+    <section class="paso" id="paso-1" hidden>
+      <h2>¿Qué tamaño va a tener tu local?</h2>
+      <p class="sub">Con esto calculamos cuánto se vende por semana de cada producto.
+        Si no sabés, dejá los valores que vienen: son los de un local que recién abre.</p>
 
-    <div class="mandos">
-      <div class="grupo">
-        <div class="rotulo">Surtido</div>
-        <div class="pastillas" id="c-surtido" role="group" aria-label="Surtido"></div>
-        <p class="hint" id="h-surtido"></p>
+      <div class="campo">
+        <span class="rotulo">Clientes por día</span>
+        <p class="ayuda">Cuánta gente esperás que compre en un día normal.</p>
+        <div class="lectura" id="l-clientes"></div>
+        <input type="range" id="c-clientes" min="8" max="66" step="1" value="15"
+               aria-label="Clientes por día">
+        <div class="tope"><span>8, muy chico</span><span>66, como Paladear</span></div>
       </div>
-      <div class="grupo">
-        <div class="rotulo">Cómo comprás</div>
-        <div class="pastillas" id="c-modo" role="group" aria-label="Modo de compra"></div>
-        <p class="hint" id="h-modo"></p>
+
+      <div class="campo">
+        <span class="rotulo">Cada cuánto reponés</span>
+        <p class="ayuda">Semanas de venta que querés tener guardadas. Cuantas más,
+          más grande el pedido, pero menos viajes.</p>
+        <div class="lectura" id="l-semanas"></div>
+        <input type="range" id="c-semanas" min="2" max="8" step="1" value="3"
+               aria-label="Semanas de mercadería">
+        <div class="tope"><span>2 semanas</span><span>2 meses</span></div>
       </div>
-      <div class="grupo">
-        <div class="rotulo">¿Cuántos clientes por día?</div>
-        <div class="desliz">
-          <input type="range" id="c-clientes" min="8" max="66" step="1" value="15"
-                 aria-label="Clientes por día que esperás atender">
-          <output id="o-clientes"></output>
+    </section>
+
+    <!-- 2 ─ presupuesto -->
+    <section class="paso" id="paso-2" hidden>
+      <h2>¿Cuánto podés invertir en mercadería?</h2>
+      <p class="sub">Con tu presupuesto armamos el surtido más vendido que entre:
+        primero el producto que más sale de cada rubro, después el segundo de cada
+        uno, y así hasta donde alcance.</p>
+
+      <div class="campo">
+        <div class="lectura" id="l-plata"></div>
+        <input type="range" id="c-plata" min="300000" max="5000000" step="50000"
+               value="1600000" aria-label="Presupuesto para mercadería">
+        <div class="tope"><span>$300.000</span><span>$5.000.000</span></div>
+      </div>
+
+      <div class="campo">
+        <span class="rotulo">O tomá uno de referencia</span>
+        <p class="ayuda">Cuatro presupuestos típicos con lo que alcanza a comprar cada uno.</p>
+        <ul class="opciones" id="kits"></ul>
+      </div>
+    </section>
+
+    <!-- 3 ─ rubros -->
+    <section class="paso" id="paso-3" hidden>
+      <h2>¿Qué vas a vender?</h2>
+      <p class="sub">Destildá lo que no va con tu negocio. Lo que saques no entra en
+        el pedido y la plata se reparte entre los rubros que dejes.</p>
+      <div class="campo">
+        <div class="atajos">
+          <button type="button" id="b-todos">Marcar todos</button>
+          <button type="button" id="b-ninguno">Desmarcar todos</button>
         </div>
-        <p class="hint" id="h-clientes"></p>
+        <ul class="rubros" id="rubros"></ul>
       </div>
-      <div class="grupo">
-        <div class="rotulo">¿Mercadería para cuántas semanas?</div>
-        <div class="desliz">
-          <input type="range" id="c-semanas" min="2" max="8" step="1" value="3"
-                 aria-label="Semanas de venta que querés tener en stock">
-          <output id="o-semanas"></output>
+    </section>
+
+    <!-- 4 ─ como comprás -->
+    <section class="paso" id="paso-4" hidden>
+      <h2>¿Cómo querés comprar?</h2>
+      <p class="sub">El precio por kilo es el mismo en los tres casos. Lo que cambia
+        es cuánto te llevás de cada producto.</p>
+
+      <div class="campo">
+        <ul class="opciones" id="c-modo"></ul>
+      </div>
+
+      <div class="campo">
+        <span class="rotulo">Precio por kilo o por unidad</span>
+        <p class="ayuda">Si no querés manejar productos muy caros o muy baratos,
+          acotá acá. Se filtra por el precio mayorista de cada producto, no por lo
+          que gastás en él.</p>
+        <div class="lectura" id="l-precio"></div>
+        <input type="range" id="c-pmin" min="0" max="20000" step="500" value="0"
+               aria-label="Precio mínimo por kilo o unidad">
+        <div class="tope"><span>Mínimo: sin piso</span><span>$20.000</span></div>
+        <input type="range" id="c-pmax" min="5000" max="60000" step="1000" value="60000"
+               aria-label="Precio máximo por kilo o unidad">
+        <div class="tope"><span>Máximo: $5.000</span><span>sin tope</span></div>
+      </div>
+    </section>
+
+    <!-- 5 ─ el pedido -->
+    <section class="paso" id="paso-5" hidden>
+      <h2>Tu pedido</h2>
+      <p class="sub">Esto es lo que te armamos con tus respuestas. Destildá lo que no
+        quieras y el total baja solo; con «Ver todo» aparecen los productos que no
+        entraron, para sumarlos.</p>
+
+      <dl class="resumen">
+        <div class="cifra grande"><dt>Lo que pagás</dt><dd id="r-total">—</dd></div>
+        <div class="separa"></div>
+        <div class="cifra">
+          <dt>Si lo vendés todo cobrás</dt>
+          <dd id="r-venta">—<small>a precio de mostrador de Paladear</small></dd>
         </div>
-        <p class="hint">Cada cuánto pensás reponer.</p>
-      </div>
-      <div class="grupo">
-        <div class="rotulo">Ver</div>
-        <div class="pastillas" id="c-ver" role="group" aria-label="Qué productos mostrar"></div>
-        <p class="hint" id="h-ver"></p>
-      </div>
-    </div>
+        <div class="cifra">
+          <dt>Te queda de ganancia</dt>
+          <dd id="r-gana">—<small id="r-margen"></small></dd>
+        </div>
+        <div class="cifra">
+          <dt>Llevás</dt>
+          <dd id="r-peso">—<small id="r-prod"></small></dd>
+        </div>
+        <p class="nota-modo" id="r-nota"></p>
+        <p class="sacados" id="r-sacados" hidden></p>
+      </dl>
 
-    <dl class="resumen">
-      <div class="cifra grande">
-        <dt>Lo que pagás</dt><dd id="r-total">—</dd>
+      <div class="mandos">
+        <div>
+          <div class="rotulo">Ver</div>
+          <div class="pastillas" id="c-ver" role="group" aria-label="Qué mostrar"></div>
+        </div>
       </div>
-      <div class="separa"></div>
-      <div class="cifra">
-        <dt>Si lo vendés todo cobrás</dt>
-        <dd id="r-venta">—<small>a precio de mostrador de Paladear</small></dd>
-      </div>
-      <div class="cifra">
-        <dt>Te queda de ganancia</dt>
-        <dd id="r-gana">—<small id="r-margen"></small></dd>
-      </div>
-      <div class="cifra">
-        <dt>Llevás</dt>
-        <dd id="r-peso">—<small id="r-prod"></small></dd>
-      </div>
-      <p class="nota-modo" id="r-nota"></p>
-      <p class="sacados" id="r-sacados" hidden></p>
-    </dl>
 
-    <div id="tabla-kit"></div>
+      <div id="tabla-kit"></div>
 
-    <div class="acciones">
-      <span class="aviso" id="aviso" hidden>Copiado</span>
-      <button type="button" id="b-ver">Ver el pedido escrito</button>
-    </div>
-    <textarea id="texto" readonly aria-label="Pedido en texto" hidden></textarea>
+      <div class="acciones">
+        <span class="aviso" id="aviso" hidden>Copiado</span>
+        <button type="button" id="b-ver">Ver el pedido escrito</button>
+      </div>
+      <textarea id="texto" readonly aria-label="Pedido en texto" hidden></textarea>
 
-    <div class="metodo">
-      <h3>De dónde salen estos números</h3>
-      <p><b>Cuánto llevar de cada cosa.</b> Paladear atiende 66 clientes por día en
-        su local de Mendoza y sabe cuánto vende por semana de cada producto. Si vos
-        vas a atender menos gente, vendés en proporción: con 15 clientes por día
-        vendés más o menos la cuarta parte. Esa cantidad por semana, multiplicada
-        por las semanas que quieras tener guardadas, es lo que te conviene comprar.
-        En los granel la cantidad va en <b>kilos</b>; en lo envasado, en
-        <b>unidades</b> (frascos, botellas, paquetes).</p>
-      <p><b>«Si lo vendés todo cobrás»</b> es cuánta plata entra por caja si vendés
-        todo ese pedido al precio al que Paladear lo vende en su mostrador. La
-        diferencia con lo que pagás es la ganancia. Son números de referencia: vos
-        ponés tus propios precios, y la mercadería se vende a lo largo de varias
-        semanas, no de golpe.</p>
-      <p><b>Los precios.</b> Son siempre mayoristas y se leen de la lista de la
-        distribuidora cada vez que abrís esta página, así que no quedan viejos. Para
-        lo que por ahora solo tenemos en la tienda va la lista 2, la de pedidos de
-        más de $80.000.</p>
-      <p><b>Los bultos.</b> Salen de la lista mayorista, tal cual figuran ahí. Hay
-        productos que todavía no se consiguen en bulto cerrado: esos solo se pueden
-        pedir fraccionados.</p>
-    </div>
+      <div class="metodo">
+        <h3>De dónde salen estos números</h3>
+        <p><b>Cuánto llevar de cada cosa.</b> Paladear atiende 66 clientes por día en
+          su local de Mendoza y sabe cuánto vende por semana de cada producto. Si vos
+          vas a atender menos gente, vendés en proporción. Esa cantidad por semana,
+          multiplicada por las semanas que quieras tener guardadas, es lo que te
+          conviene comprar. En los granel va en <b>kilos</b>; en lo envasado, en
+          <b>unidades</b> (frascos, botellas, paquetes).</p>
+        <p><b>«Si lo vendés todo cobrás»</b> es cuánta plata entra por caja si vendés
+          todo ese pedido al precio al que Paladear lo vende en su mostrador. La
+          diferencia con lo que pagás es la ganancia. Son números de referencia: vos
+          ponés tus precios, y la mercadería se vende a lo largo de varias semanas.</p>
+        <p><b>Los precios.</b> Son siempre mayoristas y se leen de la lista de la
+          distribuidora cada vez que abrís esta página, así que no quedan viejos. Para
+          lo que por ahora solo tenemos en la tienda va la lista 2, la de pedidos de
+          más de $80.000.</p>
+        <p><b>Los bultos.</b> Salen de la lista mayorista, tal cual figuran ahí. Hay
+          productos que todavía no se consiguen en bulto cerrado: esos solo se pueden
+          pedir sueltos.</p>
+      </div>
+    </section>
   </section>
 
   <section id="panel-vendidos" role="tabpanel" hidden>
@@ -365,11 +452,11 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
           durante el año, no los kilos. Así un granel que sale de a 100 gramos se
           compara de igual a igual con un frasco.</li>
         <li>Acá se repiten variedades del mismo producto, porque es el ranking real.
-          En los kits entra una sola variedad de cada cosa.</li>
+          En el pedido entra una sola variedad de cada cosa.</li>
       </ul>
     </div>
     <div class="mandos">
-      <div class="grupo">
+      <div>
         <div class="rotulo">Cómo ordenar</div>
         <div class="pastillas" id="c-vista" role="group" aria-label="Vista"></div>
       </div>
@@ -399,11 +486,7 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
       <div class="barra-kit" id="b-plata">—</div>
       <div class="barra-det" id="b-det"></div>
     </div>
-    <div class="barra-bot">
-      <button type="button" id="b-copiar">Copiar pedido</button>
-      <a class="wpp" id="b-wpp" target="_blank" rel="noopener"
-         href="https://wa.me/5492615652251">Pedir por WhatsApp</a>
-    </div>
+    <div class="barra-bot" id="barra-bot"></div>
   </div>
 </div>
 
@@ -412,10 +495,13 @@ const KITS = [{"rubro":"FRUTOS SECOS","tickets":6066,"items":[{"cod":"1842","nom
 const VEND = [{"rubro":"FRUTOS SECOS","tickets":12065,"items":[{"cod":"1842","nom":"ALMENDRA NON PAREIL  X KG","tk":1330,"p2":24000.0,"f":1,"img":"m.webp"},{"cod":"1441","nom":"NUEZ CUARTILLO X KG","tk":1195,"p2":11170.0,"f":1,"img":"m.webp"},{"cod":"1716","nom":"NUEZ MARIPOSA EXTRA LIGHT X KG","tk":1063,"p2":13130.0,"f":1,"img":"m.webp"},{"cod":"2228","nom":"MIX IMPERIAL X KG","tk":1062,"p2":16310.0,"f":1,"img":"m.webp"},{"cod":"1180","nom":"CASTAÑAS CAJÚ VIETNAM  X KG","tk":968,"p2":14430.0,"f":1,"img":"m.webp"}]},{"rubro":"DESHIDRATADOS","tickets":5727,"items":[{"cod":"1208","nom":"CIRUELAS TIERNIZADAS S/C X KG","tk":900,"p2":9800.0,"f":1,"img":"m.webp"},{"cod":"1127","nom":"ARANDANOS DESHIDRATADOS X KG","tk":881,"p2":18130.0,"f":1,"img":"m.webp"},{"cod":"1955","nom":"PASAS MOROCHAS FLAME S/SEM X KG","tk":647,"p2":3000.0,"f":1,"img":"m.webp"},{"cod":"4456","nom":"PASAS MOROCHAS JUMBO - ORIGEN CHILE","tk":597,"p2":4955.0,"f":1,"img":"m.webp"},{"cod":"1202","nom":"CHIPS DE BANANA X KG","tk":548,"p2":10800.0,"f":1,"img":"m.webp"}]},{"rubro":"CEREALES","tickets":5523,"items":[{"cod":"1635","nom":"TUTUCAS CON AZUCAR X KG","tk":963,"p2":4040.0,"f":1,"img":"m.webp"},{"cod":"1549","nom":"QUINOA INFLADA X KG.","tk":445,"p2":8990.0,"f":1,"img":"m.webp"},{"cod":"1136","nom":"AVENA INSTANTÁNEA X KG","tk":410,"p2":2550.0,"f":1,"img":"m.webp"},{"cod":"1117","nom":"ALMOHADITAS FRUTILLA X KG.","tk":388,"p2":7930.0,"f":1,"img":"m.webp"},{"cod":"1229","nom":"COPOS DE MAIZ SIN AZÚCAR X KG","tk":357,"p2":2910.0,"f":1,"img":"m.webp"}]},{"rubro":"ESPECIAS","tickets":5236,"items":[{"cod":"1236","nom":"CURCUMA MOLIDA X KG","tk":346,"p2":8730.0,"f":1,"img":"m.webp"},{"cod":"1209","nom":"CLAVO DE OLOR ENTERO X KG.","tk":289,"p2":40880.0,"f":1,"img":"m.webp"},{"cod":"2089","nom":"BICARBONATO DE SODIO X KG","tk":263,"p2":2780.0,"f":1,"img":"m.webp"},{"cod":"1167","nom":"CANELA EN RAMA X KG","tk":246,"p2":57320.0,"f":1,"img":"m.webp"},{"cod":"1702","nom":"GELATINA SIN SABOR X KG","tk":246,"p2":21350.0,"f":1,"img":"m.webp"}]},{"rubro":"DULCES, MIEL Y CHOCOLATES","tickets":3593,"items":[{"cod":"2007","nom":"GOTITAS DE CHOCO SEMIAMARGO X KG","tk":733,"p2":11000.0,"f":0,"img":"m.webp"},{"cod":"2009","nom":"PASAS DE UVA C/CHOCO XKG","tk":217,"p2":22008.264,"f":0,"img":"m.webp"},{"cod":"1410","nom":"MIEL DE ABEJA X 500 g MONTE NATURAL\" - JALEA\"","tk":182,"p2":3360.0,"f":1,"img":"m.webp"},{"cod":"2008","nom":"MANI C/CHOCO SEMIAMARGO XKG","tk":172,"p2":17338.843,"f":0,"img":"m.webp"},{"cod":"2316","nom":"LENTEJA DE CHOCOLATE XKG","tk":148,"p2":30454.545,"f":0,"img":"m.webp"}]},{"rubro":"SEMILLAS","tickets":3139,"items":[{"cod":"1583","nom":"SEMILLA DE CHIA NAC X KG.","tk":707,"p2":4990.0,"f":1,"img":"m.webp"},{"cod":"1587","nom":"SEMILLA DE ZAPALLO PELADO X KG.","tk":670,"p2":25880.0,"f":1,"img":"m.webp"},{"cod":"1585","nom":"SEMILLA DE GIRASOL X KG.","tk":401,"p2":5540.0,"f":1,"img":"m.webp"},{"cod":"1586","nom":"SEMILLA DE LINO X KG","tk":302,"p2":5250.0,"f":1,"img":"m.webp"},{"cod":"1421","nom":"MIX DE SLLAS  ADELGAZ X KG","tk":213,"p2":5690.0,"f":1,"img":"m.webp"}]},{"rubro":"AZUCAR, CACAO Y REPOSTERIA","tickets":2611,"items":[{"cod":"1212","nom":"COCO RALLADO X KG.","tk":533,"p2":10820.0,"f":1,"img":"m.webp"},{"cod":"1163","nom":"CACAO AMARGO DE BRASIL X KG","tk":523,"p2":26300.0,"f":1,"img":"m.webp"},{"cod":"1211","nom":"COCO EN ESCAMAS X KG","tk":302,"p2":18310.0,"f":1,"img":"m.webp"},{"cod":"1424","nom":"CHOCOLATE 80%  COBERTURA SEMIAMARGO x kg - COLONIAL","tk":210,"p2":39090.909,"f":0,"img":"m.webp"},{"cod":"1141","nom":"AZUCAR MASCABO X KG","tk":207,"p2":6540.0,"f":1,"img":"m.webp"}]},{"rubro":"INFUSIONES Y HIERBAS","tickets":1942,"items":[{"cod":"1849","nom":"HIBISCUS FLOR X KG","tk":410,"p2":15280.0,"f":1,"img":"m.webp"},{"cod":"2035","nom":"TE DE BURRO X KG","tk":139,"p2":20190.0,"f":1,"img":"m.webp"},{"cod":"2326","nom":"BLEND DE TE X 30g","tk":137,"p2":2231.405,"f":0,"img":"m.webp"},{"cod":"5044","nom":"MANZANILLA FLOR PREMIUM","tk":128,"p2":48150.0,"f":1,"img":"m.webp"},{"cod":"2043","nom":"YERBA MATE DESPALADA KALENA X KG","tk":115,"p2":8890.0,"f":1,"img":"m.webp"}]},{"rubro":"HARINAS","tickets":1666,"items":[{"cod":"1295","nom":"HARINA DE AVENA X KG","tk":198,"p2":2610.0,"f":1,"img":"m.webp"},{"cod":"2315","nom":"HARINA DE ALMENDRAS C/PIEL","tk":182,"p2":17930.0,"f":1,"img":"m.webp"},{"cod":"1269","nom":"FECULA DE MANDIOCA X KG","tk":155,"p2":3280.0,"f":1,"img":"m.webp"},{"cod":"1621","nom":"TEXTURIZADO DE SOJA X KG","tk":144,"p2":3030.0,"f":1,"img":"m.webp"},{"cod":"1293","nom":"HARINA ALMENDRAS S/ PIEL X KG","tk":125,"p2":23440.0,"f":1,"img":"m.webp"}]},{"rubro":"PRODUCTOS SIN TACC","tickets":1474,"items":[{"cod":"2280","nom":"GALLETAS SIN TACC X KG","tk":745,"p2":11570.248,"f":0,"img":"m.webp"},{"cod":"2027","nom":"ALFAJORES MAICENA SIN TACC X 6 unidades","tk":171,"p2":4272.727,"f":0,"img":"m.webp"},{"cod":"2111","nom":"GALLETAS SLIM DOS HERMANO \"SIN TACC\"","tk":93,"p2":1628.099,"f":0,"img":"m.webp"},{"cod":"2107","nom":"TOSTADAS RISKY  \"SIN TACC\"","tk":88,"p2":1438.017,"f":0,"img":"m.webp"},{"cod":"2513","nom":"ALFAJOR  SIN AZUCAR \"BANDA\"","tk":72,"p2":1041.322,"f":0,"img":"m.webp"}]},{"rubro":"SUPLEMENTOS","tickets":1447,"items":[{"cod":"2238","nom":"CREATINA MONOHIDRATO","tk":118,"p2":16420.0,"f":1,"img":"m.webp"},{"cod":"2364","nom":"VINAGRE  DE SIDRA DE MANZANA \"VERDE VIDA\" X 500 ML","tk":78,"p2":8983.471,"f":0,"img":"m.webp"},{"cod":"2031","nom":"COLAGENO HIDROLIZADO X KG PEPTAN B 2000 LD\"\"","tk":70,"p2":29470.0,"f":1,"img":"m.webp"},{"cod":"2483","nom":"CITRATO DE MAGNESIO  XKG","tk":56,"p2":17347.107,"f":0,"img":"m.webp"},{"cod":"2078","nom":"GLICINATO DE MAGNESIO EL NATURALISA\"\"","tk":53,"p2":5740.0,"f":1,"img":"m.webp"}]},{"rubro":"ACEITES Y VINAGRES","tickets":1010,"items":[{"cod":"1894","nom":"ACEITE DE OLIVA X 900ML VERDE OLIVA","tk":339,"p2":4510.0,"f":1,"img":"m.webp"},{"cod":"2265","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 200\"","tk":88,"p2":4070.0,"f":1,"img":"m.webp"},{"cod":"2141","nom":"ACEITE COCO NEUTRO ENTRENUTS SIN TACC\" x 360 G\"","tk":82,"p2":6180.0,"f":1,"img":"m.webp"},{"cod":"2119","nom":"ACEITE OLIVA X 500 PET VERDE OLIVA","tk":72,"p2":3140.0,"f":1,"img":"m.webp"},{"cod":"1002","nom":"ACEITE DE OLIVA  X 500 CC LAUR","tk":60,"p2":11230.0,"f":1,"img":"m.webp"}]},{"rubro":"PALADEAR HOME","tickets":854,"items":[{"cod":"2066","nom":"SAHUMERIO TIBETANO X8 \"AROMANZA\"","tk":229,"p2":2628.099,"f":0,"img":"m.webp"},{"cod":"2065","nom":"SAHUMERIO MOMENTOS X5 \"AROMANZA\"","tk":197,"p2":1801.653,"f":0,"img":"m.webp"},{"cod":"2400","nom":"DIFUSOR \"ILUMINARTE\" X 125 ml","tk":52,"p2":4256.198,"f":0,"img":"m.webp"},{"cod":"2419","nom":"SALERO/PIMENTERO","tk":51,"p2":3636.364,"f":0,"img":"m.webp"},{"cod":"2421","nom":"PALO SANTO X30GR","tk":40,"p2":1913.463,"f":0,"img":"m.webp"}]},{"rubro":"PRODUCTOS DE FRIO","tickets":659,"items":[{"cod":"1810","nom":"YOGHURT NATURAL SIN AZUCAR X 1 L","tk":294,"p2":3920.0,"f":1,"img":"m.webp"},{"cod":"1809","nom":"YOGHURT NATURAL AZUCARADO X 1 L","tk":116,"p2":3920.0,"f":1,"img":"m.webp"},{"cod":"1811","nom":"YOGHURT FRUTILLA X 1 L","tk":95,"p2":4350.0,"f":1,"img":"m.webp"},{"cod":"2024","nom":"YOGHURT C/FRUTAS X 160","tk":62,"p2":1420.0,"f":1,"img":0},{"cod":"1795","nom":"YOGURT PROTEICO \"YOGURLAC\" X 1L","tk":40,"p2":7553.719,"f":0,"img":"m.webp"}]},{"rubro":"PRODUCTOS CONGELADOS","tickets":544,"items":[{"cod":"2057","nom":"MEDALLONES VEGETARIANOS \"KISLEV\"","tk":178,"p2":3966.942,"f":0,"img":"m.webp"},{"cod":"2176","nom":"MIX FRUTOS ROJOS CONGELADOS X KILO","tk":124,"p2":13198.347,"f":0,"img":"m.webp"},{"cod":"1126","nom":"ARANDANOS CONGELADOS X KG","tk":122,"p2":12958.678,"f":0,"img":"m.webp"},{"cod":"2278","nom":"CALDO DE HUESO \" MEDICINA ANCESTRAL\"","tk":52,"p2":5793.388,"f":0,"img":"m.webp"},{"cod":"2317","nom":"MANGO EN TROZOS CONGELADOS  XKG","tk":25,"p2":9000.0,"f":0,"img":"m.webp"}]},{"rubro":"GRANOS Y LEGUMBRES","tickets":542,"items":[{"cod":"1358","nom":"LENTEJAS TURCAS X KG","tk":77,"p2":4680.0,"f":1,"img":"m.webp"},{"cod":"1133","nom":"ARROZ YAMANI X KG.","tk":69,"p2":3350.0,"f":1,"img":"m.webp"},{"cod":"1359","nom":"LENTEJAS X KG.","tk":63,"p2":3690.0,"f":1,"img":"m.webp"},{"cod":"1240","nom":"CUSCUS X KG","tk":60,"p2":10720.0,"f":1,"img":"m.webp"},{"cod":"2335","nom":"GARBANZOS X KG","tk":60,"p2":2480.0,"f":1,"img":"m.webp"}]},{"rubro":"BEBIDAS","tickets":541,"items":[{"cod":"2233","nom":"KEFIR DE AGUA \"KE.LIVE\" SABORIZADO X 950 ML","tk":269,"p2":3595.041,"f":0,"img":"m.webp"},{"cod":"2459","nom":"KOMBUCHA  EYWA 354 ml","tk":79,"p2":3925.62,"f":0,"img":"m.webp"},{"cod":"1324","nom":"JUGO DE ARANDANOS X 1,5 LTS.","tk":65,"p2":2920.0,"f":1,"img":"m.webp"},{"cod":"1727","nom":"LECHE DE COCO EN POLVO X KG","tk":62,"p2":26080.0,"f":1,"img":"m.webp"},{"cod":"4454","nom":"JUGO DE UVA","tk":49,"p2":21890.0,"f":1,"img":"m.webp"}]},{"rubro":"SNACK","tickets":515,"items":[{"cod":"2074","nom":"BARRAS CRUDDA\"  X40Gr - SIN TACC\"","tk":200,"p2":1810.0,"f":1,"img":"m.webp"},{"cod":"2014","nom":"BARRA MUECAS X45GR","tk":112,"p2":1670.0,"f":1,"img":"m.webp"},{"cod":"5010","nom":"PIPAS TOSTADAS CON SAL X 50 gr","tk":74,"p2":1157.025,"f":0,"img":"m.webp"},{"cod":"2115","nom":"GALLETAS CACHAFAZ INTEGRALES","tk":45,"p2":3000.0,"f":0,"img":"m.webp"},{"cod":"2506","nom":"BARRA PROTEICA  \"INTEGRA\"","tk":33,"p2":2479.339,"f":0,"img":"m.webp"}]},{"rubro":"LINEA GOURMET","tickets":298,"items":[{"cod":"1571","nom":"SALSA DE SOJA X 180 CC","tk":42,"p2":3480.0,"f":1,"img":"d.webp"},{"cod":"2144","nom":"SALSA TAHINE","tk":37,"p2":9033.058,"f":0,"img":"m.webp"},{"cod":"1687","nom":"SALSA AJI PICANTE X 180 cc CRISTO DE LOS CERROS\"\"","tk":27,"p2":4750.0,"f":1,"img":"m.webp"},{"cod":"1464","nom":"PASTA ACEITUNAS VERDES X 200 g AGROIANNI\"\"","tk":21,"p2":3250.0,"f":1,"img":"m.webp"},{"cod":"1575","nom":"SALSA TERIYAKI X 250 CC","tk":20,"p2":4290.0,"f":1,"img":"m.webp"}]},{"rubro":"MANTECAS Y PASTAS","tickets":235,"items":[{"cod":"1383","nom":"MANTEQUILLA DE MANI ENTRENUTS\" X 370 g\"","tk":178,"p2":3250.0,"f":1,"img":"m.webp"},{"cod":"2269","nom":"MANTECA CLARIFICADA GHEE \"ENTRENUTS\" X370","tk":27,"p2":10280.992,"f":0,"img":"m.webp"},{"cod":"5012","nom":"MANTEQUILLA DE MANI PROTEICA X370 GR - ENTRENUTS","tk":13,"p2":4537.19,"f":0,"img":"m.webp"},{"cod":"5021","nom":"MANTECA CLARIFICADA  X150 GR - ENTRENUTS","tk":10,"p2":5743.802,"f":0,"img":"m.webp"},{"cod":"5030","nom":"MANTEQUILLA DE MANI CON STEVIA X370 CC - ENTRENUTS","tk":7,"p2":3115.702,"f":0,"img":"m.webp"}]},{"rubro":"ENCURTIDOS","tickets":223,"items":[{"cod":"1486","nom":"PEPINOS AGRID X 200 g DURANG\"\"","tk":45,"p2":3640.0,"f":1,"img":"m.webp"},{"cod":"1483","nom":"PEPINILLOS EN VIN. X 200 g DURANG\"\"","tk":39,"p2":4000.0,"f":1,"img":"m.webp"},{"cod":"1204","nom":"CHUCRUT X 600 GR","tk":32,"p2":7560.0,"f":1,"img":"m.webp"},{"cod":"1230","nom":"CORAZONES DE ALCAUCIL X 300 GR","tk":15,"p2":6750.0,"f":1,"img":"m.webp"},{"cod":"1084","nom":"AJIES PICANTES DURANG X 110 GR","tk":14,"p2":3840.0,"f":1,"img":"m.webp"}]},{"rubro":"ACEITUNAS","tickets":158,"items":[{"cod":"1050","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº 1","tk":27,"p2":4250.0,"f":1,"img":"m.webp"},{"cod":"1049","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº 00","tk":26,"p2":6250.0,"f":1,"img":"m.webp"},{"cod":"1051","nom":"ACEITUNAS VERDES R.V X 1/2 KG Nº0","tk":24,"p2":5000.0,"f":1,"img":"d.webp"},{"cod":"1044","nom":"ACEITUNAS VERDES R.V X 1 KG Nº0","tk":21,"p2":8630.0,"f":1,"img":"m.webp"},{"cod":"1025","nom":"ACEITUNAS GRIEGAS R.V X 1/2 KG","tk":19,"p2":7500.0,"f":1,"img":"m.webp"}]},{"rubro":"TOMATE TRITURADO","tickets":38,"items":[{"cod":"1627","nom":"TOMATE TRITURADO X 1 KG","tk":20,"p2":1239.669,"f":0,"img":"m.webp"},{"cod":"1630","nom":"TOMATE CONDIMENTADO X 1 KG","tk":14,"p2":3250.0,"f":1,"img":"m.webp"},{"cod":"1628","nom":"TOMATE TRITURADO X 500 GR","tk":4,"p2":1016.529,"f":0,"img":"m.webp"}]}];
 const CLIENTES_PALADEAR = 66;
 const WPP = "5492615652251";
+const SIN_TOPE = 60000;          // el maximo del slider vale "sin tope"
+// en modo mixto se lleva el bulto cerrado cuando la cantidad que hace falta
+// llena al menos esta parte de un bulto; si no, se pide suelto
+const UMBRAL_MIXTO = 0.7;
 
-// Las fotos son siempre del producto, nunca genericas: la marca del campo img
-// dice de que sitio sale ("m" la tienda minorista, "d" la distribuidora) y con
-// que extension. Si un producto no tiene foto, va un hueco liso.
+// Las fotos son siempre del producto. La marca del campo img dice de que sitio
+// sale ("m" la tienda minorista, "d" la distribuidora) y con que extension.
 const SITIO = {m: "https://paladear.com.ar/", d: "https://mayorista.paladear.com.ar/"};
 const LISTA = "https://mayorista.paladear.com.ar/precios-may.csv";
 function fotoDe(x) {
@@ -428,90 +514,214 @@ const pl = n => "$" + Math.round(n).toLocaleString("es-AR");
 const num = (n, d) => n.toLocaleString("es-AR", {minimumFractionDigits: d || 0,
                                                  maximumFractionDigits: d || 0});
 const plural = (n, s, p) => num(n) + " " + (n === 1 ? s : p);
-// "3,5 kg" / "6 unidades", escrito como lo diria una persona
 function enUnidades(q, un) {
   const t = num(q, q % 1 ? (Math.round(q * 100) % 10 ? 2 : 1) : 0);
   return un === "kg" ? t + " kg" : t + (q === 1 ? " unidad" : " unidades");
 }
 
-// PLANO guarda los MISMOS objetos que KITS, no copias, para que los precios
-// frescos entren en un solo lugar.
+// PLANO guarda los MISMOS objetos que KITS para que los precios frescos
+// entren en un solo lugar.
 const PLANO = [];
 KITS.forEach(r => r.items.forEach(i => { i.rubro = r.rubro; PLANO.push(i); }));
+const RUBROS = KITS.map(r => r.rubro);          // ya vienen por rotacion
+const sinBulto = PLANO.filter(x => !x.bul).length;
 
-const SURTIDOS = [
-  {v: "n1", et: "Lo básico", niv: [1, 0]},
-  {v: "n12", et: "Surtido completo", niv: [1, 2, 0]},
-  {v: "todo", et: "Todo", niv: [1, 2, 3, 0]}
+const MODOS = [
+  {v: "frac", et: "Suelto", d: "Pedís la cantidad exacta que necesitás. Sin mínimos, " +
+    "nada de sobrante. Entra todo el catálogo."},
+  {v: "mixto", et: "Mixto (recomendado)", d: "Bulto cerrado solo donde casi llenás " +
+    "uno igual; el resto suelto. Menos bultos abiertos sin comprar de más."},
+  {v: "bulto", et: "Bultos cerrados", d: "El pack entero de cada producto, como viene " +
+    "del proveedor. Te sobra en lo que rota poco y hay productos que no se consiguen así."}
 ];
-const MODOS = [{v: "frac", et: "Suelto, sin mínimos"}, {v: "bulto", et: "Bultos cerrados"}];
-const VISTAS = [{v: "elegido", et: "Solo lo elegido"}, {v: "todo", et: "Todo el catálogo"}];
 const PRESETS = [
-  {et: "Mínimo", s: "n1", m: "frac", c: 15, w: 3, det: "Lo justo para abrir"},
-  {et: "Intermedio", s: "n12", m: "frac", c: 15, w: 3, det: "Todos los rubros cubiertos"},
-  {et: "Completo", s: "n12", m: "frac", c: 25, w: 4, det: "Góndola con respaldo"},
-  {et: "Full", s: "todo", m: "frac", c: 25, w: 4, det: "Surtido de local grande"}
+  {et: "Mínimo", plata: 700000, d: "Para arrancar con lo que no puede faltar"},
+  {et: "Intermedio", plata: 1600000, d: "Todos los rubros cubiertos"},
+  {et: "Completo", plata: 2600000, d: "Góndola con respaldo"},
+  {et: "Full", plata: 3400000, d: "Surtido de local grande"}
+];
+const PASOS = [
+  {n: 1, t: "Tu local"}, {n: 2, t: "Presupuesto"}, {n: 3, t: "Qué vendés"},
+  {n: 4, t: "Cómo comprás"}, {n: 5, t: "Tu pedido"}
 ];
 
-let surtido = "n12", modo = "frac", clientes = 15, semanas = 3;
-let verTodo = false, vista = "rubro";
-let incluidos = new Set();
+let clientes = 15, semanas = 3, plata = 1600000, modo = "mixto";
+let pmin = 0, pmax = SIN_TOPE;
+let rubrosOn = new Set(RUBROS);
+let paso = 1, verTodo = false, vista = "rubro";
+let incluidos = new Set(), tocado = false;
 
-// ── que entra y cuanto
-const nivelesDe = v => (SURTIDOS.find(s => s.v === v) || SURTIDOS[1]).niv;
-// en bulto cerrado solo se puede pedir lo que tiene bulto publicado
-const sePuede = (x, m) => m !== "bulto" || !!x.bul;
-const porDefecto = (items, surt, m) => {
-  const ns = nivelesDe(surt);
-  return items.filter(x => ns.indexOf(x.niv) >= 0 && sePuede(x, m));
-};
-function resetElegidos() {
-  incluidos = new Set(porDefecto(PLANO, surtido, modo).map(x => x.cod));
+// ── cantidades y filtros
+function sePuede(x, m) { return m !== "bulto" || !!x.bul; }
+function pasaFiltro(x) {
+  return rubrosOn.has(x.rubro) && sePuede(x, modo) &&
+         x.p2 >= pmin && (pmax >= SIN_TOPE || x.p2 <= pmax);
 }
-const estaDentro = x => incluidos.has(x.cod) && sePuede(x, modo);
-const elegidos = () => PLANO.filter(estaDentro);
-
 function cantidad(x, m, c, w) {
   const bruto = x.sem * (c / CLIENTES_PALADEAR) * w;
-  if (m === "bulto") return Math.max(1, Math.ceil(bruto / x.bul)) * x.bul;
+  const porBulto = m === "bulto" || (m === "mixto" && x.bul && bruto >= x.bul * UMBRAL_MIXTO);
+  if (porBulto) return Math.max(1, Math.ceil(bruto / x.bul)) * x.bul;
   if (x.un === "kg") return Math.max(1, Math.round(bruto * 2) / 2);
   return Math.max(3, Math.round(bruto));
 }
-const costoDe = (items, m, c, w) =>
-  items.reduce((s, x) => s + cantidad(x, m, c, w) * x.p2, 0);
+const precioDe = x => cantidad(x, modo, clientes, semanas) * x.p2;
+const costoDe = items => items.reduce((s, x) => s + precioDe(x), 0);
 
-// ── kits sugeridos
+// Arma el surtido con la plata disponible: va tomando el mas vendido de cada
+// rubro, despues el segundo de cada uno, y asi, mientras entre en el
+// presupuesto. Queda repartido entre rubros en vez de gastarse todo en uno.
+function armarMix(tope, m) {
+  const guarda = modo;
+  modo = m || modo;
+  const porRubro = {};
+  PLANO.filter(pasaFiltro).forEach(x => {
+    (porRubro[x.rubro] = porRubro[x.rubro] || []).push(x);
+  });
+  Object.keys(porRubro).forEach(k => porRubro[k].sort((a, b) => b.tk - a.tk));
+  const orden = [];
+  for (let i = 0, hay = true; hay; i++) {
+    hay = false;
+    RUBROS.forEach(ru => {
+      const l = porRubro[ru];
+      if (l && l[i]) { orden.push(l[i]); hay = true; }
+    });
+  }
+  const sel = new Set();
+  let acum = 0;
+  orden.forEach(x => {
+    const c = precioDe(x);
+    if (acum + c <= tope) { sel.add(x.cod); acum += c; }
+  });
+  modo = guarda;
+  return sel;
+}
+function recalcular() {
+  incluidos = armarMix(plata);
+  tocado = false;
+}
+const estaDentro = x => incluidos.has(x.cod) && pasaFiltro(x);
+const elegidos = () => PLANO.filter(estaDentro);
+
+// ── camino de pasos
+const cajaCamino = document.getElementById("camino");
+PASOS.forEach(p => {
+  const li = document.createElement("li");
+  const b = document.createElement("button");
+  b.type = "button";
+  b.dataset.n = p.n;
+  b.append(Object.assign(document.createElement("span"),
+    {className: "paso-n", textContent: "Paso " + p.n}));
+  b.append(Object.assign(document.createElement("span"),
+    {className: "paso-t", textContent: p.t}));
+  b.addEventListener("click", () => irA(p.n));
+  li.appendChild(b);
+  cajaCamino.appendChild(li);
+});
+function irA(n) {
+  paso = Math.min(5, Math.max(1, n));
+  if (paso === 5 && !tocado) recalcular();
+  PASOS.forEach(p => {
+    document.getElementById("paso-" + p.n).hidden = (p.n !== paso);
+  });
+  cajaCamino.querySelectorAll("button").forEach(b => {
+    const n2 = Number(b.dataset.n);
+    if (n2 === paso) b.setAttribute("aria-current", "step");
+    else b.removeAttribute("aria-current");
+    b.classList.toggle("listo", n2 < paso);
+    b.disabled = false;
+  });
+  pintar();
+  window.scrollTo({top: 0, behavior: "instant"});
+}
+
+// ── paso 1 y 2: deslizadores
+function enganchar(id, set) {
+  document.getElementById(id).addEventListener("input", e => {
+    set(Number(e.target.value));
+    tocado = false;
+    pintar();
+  });
+}
+enganchar("c-clientes", v => { clientes = v; });
+enganchar("c-semanas", v => { semanas = v; });
+enganchar("c-plata", v => { plata = v; });
+enganchar("c-pmin", v => { pmin = v; if (pmax < pmin + 5000) { pmax = Math.min(SIN_TOPE, pmin + 5000); document.getElementById("c-pmax").value = pmax; } });
+enganchar("c-pmax", v => { pmax = v; if (pmin > pmax - 5000) { pmin = Math.max(0, pmax - 5000); document.getElementById("c-pmin").value = pmin; } });
+
+// presupuestos de referencia
 const cajaKits = document.getElementById("kits");
 PRESETS.forEach((p, i) => {
   const li = document.createElement("li");
-  li.className = "kit";
-  li.dataset.i = i;
   const b = document.createElement("button");
   b.type = "button";
+  b.dataset.i = i;
   b.append(Object.assign(document.createElement("div"),
-    {className: "kit-nom", textContent: p.et}));
-  b.append(Object.assign(document.createElement("div"), {className: "kit-plata"}));
-  b.append(Object.assign(document.createElement("div"), {className: "kit-det"}));
+    {className: "op-t", textContent: p.et}));
+  b.append(Object.assign(document.createElement("div"),
+    {className: "op-p", textContent: pl(p.plata)}));
+  b.append(Object.assign(document.createElement("div"), {className: "op-d"}));
   b.addEventListener("click", () => {
-    surtido = p.s; modo = p.m; clientes = p.c; semanas = p.w;
-    document.getElementById("c-clientes").value = clientes;
-    document.getElementById("c-semanas").value = semanas;
-    resetElegidos();
-    pintarKits();
+    plata = p.plata;
+    document.getElementById("c-plata").value = plata;
+    tocado = false;
+    pintar();
   });
   li.appendChild(b);
   cajaKits.appendChild(li);
 });
-function pintarPresetPrecios() {
-  document.querySelectorAll("#kits .kit").forEach(li => {
-    const p = PRESETS[Number(li.dataset.i)];
-    const items = porDefecto(PLANO, p.s, p.m);
-    li.querySelector(".kit-plata").textContent = pl(costoDe(items, p.m, p.c, p.w));
-    li.querySelector(".kit-det").textContent = items.length + " productos · " + p.det;
-  });
-}
 
-// ── controles
+// ── paso 3: rubros
+const cajaRubros = document.getElementById("rubros");
+KITS.forEach(r => {
+  const li = document.createElement("li");
+  const lb = document.createElement("label");
+  const ip = document.createElement("input");
+  ip.type = "checkbox";
+  ip.checked = true;
+  ip.dataset.r = r.rubro;
+  ip.addEventListener("change", () => {
+    if (ip.checked) rubrosOn.add(r.rubro); else rubrosOn.delete(r.rubro);
+    tocado = false;
+    pintar();
+  });
+  const tx = document.createElement("span");
+  tx.append(Object.assign(document.createElement("span"),
+    {className: "rn", textContent: r.rubro}));
+  tx.append(document.createElement("br"));
+  tx.append(Object.assign(document.createElement("span"),
+    {className: "rc", textContent: r.items.length + " productos"}));
+  lb.append(ip, tx);
+  li.appendChild(lb);
+  cajaRubros.appendChild(li);
+});
+function marcarRubros(on) {
+  rubrosOn = on ? new Set(RUBROS) : new Set();
+  cajaRubros.querySelectorAll("input").forEach(i => { i.checked = on; });
+  tocado = false;
+  pintar();
+}
+document.getElementById("b-todos").addEventListener("click", () => marcarRubros(true));
+document.getElementById("b-ninguno").addEventListener("click", () => marcarRubros(false));
+
+// ── paso 4: modo
+const cajaModo = document.getElementById("c-modo");
+MODOS.forEach(m => {
+  const li = document.createElement("li");
+  const b = document.createElement("button");
+  b.type = "button";
+  b.dataset.v = m.v;
+  b.append(Object.assign(document.createElement("div"),
+    {className: "op-t", textContent: m.et}));
+  b.append(Object.assign(document.createElement("div"), {className: "op-p"}));
+  b.append(Object.assign(document.createElement("div"), {className: "op-n"}));
+  b.append(Object.assign(document.createElement("div"),
+    {className: "op-d", textContent: m.d}));
+  b.addEventListener("click", () => { modo = m.v; tocado = false; pintar(); });
+  li.appendChild(b);
+  cajaModo.appendChild(li);
+});
+
+// ── paso 5: ver
 function hacerPastillas(caja, ops, escribir) {
   ops.forEach(o => {
     const b = document.createElement("button");
@@ -522,21 +732,12 @@ function hacerPastillas(caja, ops, escribir) {
     caja.appendChild(b);
   });
 }
-hacerPastillas(document.getElementById("c-surtido"), SURTIDOS,
-  v => { surtido = v; resetElegidos(); pintarKits(); });
-hacerPastillas(document.getElementById("c-modo"), MODOS,
-  v => { modo = v; resetElegidos(); pintarKits(); });
-hacerPastillas(document.getElementById("c-ver"), VISTAS,
-  v => { verTodo = (v === "todo"); pintarKits(); });
+hacerPastillas(document.getElementById("c-ver"),
+  [{v: "elegido", et: "Solo lo que llevo"}, {v: "todo", et: "Ver todo"}],
+  v => { verTodo = (v === "todo"); pintar(); });
 hacerPastillas(document.getElementById("c-vista"),
   [{v: "rubro", et: "5 por rubro"}, {v: "ranking", et: "Ranking general"}],
   v => { vista = v; pintarVendidos(); });
-document.getElementById("c-clientes").addEventListener("input", e => {
-  clientes = Number(e.target.value); pintarKits();
-});
-document.getElementById("c-semanas").addEventListener("input", e => {
-  semanas = Number(e.target.value); pintarKits();
-});
 
 // ── una fila de producto
 function filaProd(x) {
@@ -552,7 +753,8 @@ function filaProd(x) {
   tic.setAttribute("aria-label", (dentro ? "Sacar " : "Agregar ") + x.nom);
   tic.addEventListener("change", () => {
     if (tic.checked) incluidos.add(x.cod); else incluidos.delete(x.cod);
-    pintarKits();
+    tocado = true;
+    pintar();
   });
 
   const url = fotoDe(x);
@@ -575,12 +777,15 @@ function filaProd(x) {
   const nom = document.createElement("div");
   nom.className = "nom";
   nom.textContent = x.nom;
-  if (modo === "bulto" && q > x.bul) {
+  // Si el bulto es de 1 kg o 1 unidad no condiciona nada: no vale la pena nombrarlo.
+  const porBulto = x.bul > 1 && q >= x.bul &&
+                   Math.abs(q / x.bul - Math.round(q / x.bul)) < 1e-9;
+  if (porBulto && modo !== "frac") {
     const ch = document.createElement("span");
     ch.className = "chapa";
-    ch.textContent = num(q / x.bul) + " bultos";
+    ch.textContent = q / x.bul === 1 ? "1 bulto" : num(q / x.bul) + " bultos";
     nom.appendChild(ch);
-  } else if (modo === "frac" && !x.bul) {
+  } else if (modo === "bulto" && !x.bul) {
     const ch = document.createElement("span");
     ch.className = "chapa";
     ch.textContent = "no hay en bulto";
@@ -591,7 +796,7 @@ function filaProd(x) {
   porque.className = "porque";
   porque.textContent = "Con " + clientes + " clientes por día se venden unos " +
     enUnidades(Math.round(porSem * 100) / 100, x.un) + " por semana. " +
-    (modo === "bulto"
+    (porBulto && modo !== "frac"
       ? "El bulto cerrado es de " + x.pat + ", así que llevás " + enUnidades(q, x.un) + "."
       : "Para " + plural(semanas, "semana", "semanas") + ", " + enUnidades(q, x.un) + ".");
   datos.append(nom, porque);
@@ -616,19 +821,59 @@ function filaProd(x) {
   return fila;
 }
 
-// ── tabla completa
-function pintarKits() {
-  document.querySelectorAll("#c-surtido button").forEach(b =>
-    b.setAttribute("aria-pressed", String(b.dataset.v === surtido)));
-  document.querySelectorAll("#c-modo button").forEach(b =>
-    b.setAttribute("aria-pressed", String(b.dataset.v === modo)));
+// ── dibujar todo
+function pintar() {
+  // lecturas de los deslizadores
+  document.getElementById("l-clientes").textContent = plural(clientes, "cliente por día", "clientes por día");
+  document.getElementById("l-semanas").textContent = plural(semanas, "semana", "semanas");
+  const lp = document.getElementById("l-plata");
+  lp.textContent = pl(plata);
+  const porc = Math.round(clientes / CLIENTES_PALADEAR * 100);
+  const chico = document.createElement("small");
+  chico.textContent = clientes >= CLIENTES_PALADEAR
+    ? "El mismo movimiento que el local de Paladear."
+    : "Paladear atiende 66 por día; vos vendés alrededor del " + porc + "% de eso.";
+  const lc = document.getElementById("l-clientes");
+  lc.appendChild(chico);
+  const ls = document.createElement("small");
+  ls.textContent = "Reponés más o menos cada " + plural(semanas, "semana", "semanas") + ".";
+  document.getElementById("l-semanas").appendChild(ls);
+
+  document.getElementById("l-precio").textContent =
+    (pmin ? "Desde " + pl(pmin) : "Sin piso") + " · " +
+    (pmax >= SIN_TOPE ? "sin tope" : "hasta " + pl(pmax));
+  const caben = PLANO.filter(pasaFiltro).length;
+  const lpr = document.createElement("small");
+  lpr.textContent = caben + " de " + PLANO.length + " productos quedan disponibles" +
+    (rubrosOn.size < RUBROS.length ? " con los rubros que elegiste." : ".");
+  document.getElementById("l-precio").appendChild(lpr);
+
+  // presupuestos de referencia: cuanto compra cada uno
+  document.querySelectorAll("#kits button").forEach(b => {
+    const p = PRESETS[Number(b.dataset.i)];
+    const s = armarMix(p.plata);
+    b.querySelector(".op-d").textContent = s.size + " productos · " + p.d;
+    b.setAttribute("aria-pressed", String(plata === p.plata));
+  });
+  // modos: cuanto sale el mismo surtido en cada uno
+  document.querySelectorAll("#c-modo button").forEach(b => {
+    const m = b.dataset.v;
+    const s = armarMix(plata, m);
+    const guarda = modo; modo = m;
+    const t = costoDe(PLANO.filter(x => s.has(x.cod)));
+    modo = guarda;
+    b.querySelector(".op-p").textContent = s.size + " productos";
+    b.querySelector(".op-n").textContent = "con tus " + pl(plata) + " comprás " +
+      pl(t) + (m === "bulto" && sinBulto
+        ? " · " + sinBulto + " productos no se consiguen en bulto" : "");
+    b.setAttribute("aria-pressed", String(modo === m));
+  });
   document.querySelectorAll("#c-ver button").forEach(b =>
     b.setAttribute("aria-pressed", String((b.dataset.v === "todo") === verTodo)));
-  document.getElementById("o-clientes").textContent = plural(clientes, "cliente", "clientes");
-  document.getElementById("o-semanas").textContent = plural(semanas, "semana", "semanas");
 
+  // cuentas del pedido
   const dentro = elegidos();
-  const total = costoDe(dentro, modo, clientes, semanas);
+  const total = costoDe(dentro);
   let kg = 0, un = 0, venta = 0;
   dentro.forEach(x => {
     const q = cantidad(x, modo, clientes, semanas);
@@ -638,67 +883,45 @@ function pintarKits() {
   const gana = venta - total;
 
   document.getElementById("r-total").textContent = pl(total);
-  document.getElementById("b-plata").textContent = pl(total);
   document.getElementById("r-venta").firstChild.nodeValue = pl(venta);
   document.getElementById("r-gana").firstChild.nodeValue = pl(gana);
   document.getElementById("r-margen").textContent = total
     ? "un " + Math.round(gana / total * 100) + "% sobre lo que pagás" : "";
   document.getElementById("r-peso").firstChild.nodeValue =
-    (kg ? num(kg, 1) + " kg" : "") + (kg && un ? " y " : "") + (un ? num(un) + " un." : "");
+    (kg ? num(kg, 1) + " kg" : "") + (kg && un ? " y " : "") + (un ? num(un) + " un." : "") ||
+    "nada todavía";
   document.getElementById("r-prod").textContent = dentro.length + " productos distintos";
-  document.getElementById("b-det").textContent =
-    (SURTIDOS.find(s => s.v === surtido) || {}).et + " · " +
-    (modo === "bulto" ? "bultos cerrados" : "suelto") + " · " +
-    plural(clientes, "cliente", "clientes") + " por día · " +
-    plural(semanas, "semana", "semanas") + " · " + dentro.length + " productos";
+  document.getElementById("r-nota").textContent = total > plata
+    ? "Te pasaste " + pl(total - plata) + " del presupuesto porque agregaste productos a mano."
+    : (modo === "bulto"
+        ? "Llevás el bulto entero de cada producto, así que te sobra en lo que rota poco."
+        : modo === "mixto"
+          ? "Bulto cerrado donde casi llenabas uno igual, suelto en el resto."
+          : "Pedís la cantidad justa de cada cosa, sin mínimos.") +
+      " Te quedan " + pl(Math.max(0, plata - total)) + " del presupuesto.";
 
-  const base = porDefecto(PLANO, surtido, modo);
-  const sinBulto = PLANO.filter(x => nivelesDe(surtido).indexOf(x.niv) >= 0 && !x.bul).length;
-  document.getElementById("h-surtido").textContent =
-    base.length + " productos de " + new Set(base.map(x => x.rubro)).size + " rubros.";
-  document.getElementById("h-modo").textContent = modo === "bulto"
-    ? "Quedan afuera " + sinBulto + " productos que todavía no hay en bulto cerrado."
-    : "Pedís la cantidad exacta que quieras de cada cosa.";
-  document.getElementById("h-clientes").textContent =
-    clientes >= CLIENTES_PALADEAR
-      ? "El mismo movimiento que el local de Paladear."
-      : "El local de Paladear atiende 66 por día; vos vendés alrededor del " +
-        Math.round(clientes / CLIENTES_PALADEAR * 100) + "% de eso.";
-  const posibles = PLANO.filter(x => sePuede(x, modo)).length;
-  document.getElementById("h-ver").textContent = verTodo
-    ? "Se ven los " + posibles + " productos; tildá los que quieras sumar."
-    : "Se ven solo los " + dentro.length + " que vas a llevar.";
-
-  const sacados = base.filter(x => !incluidos.has(x.cod)).length;
+  const auto = armarMix(plata);
+  const sacados = [...auto].filter(c => !incluidos.has(c)).length;
   const avisoSac = document.getElementById("r-sacados");
   avisoSac.textContent = "";
-  avisoSac.hidden = !sacados;
-  if (sacados) {
+  avisoSac.hidden = !tocado;
+  if (tocado) {
     avisoSac.append(document.createTextNode(
-      "Sacaste " + sacados + (sacados === 1 ? " producto del kit. " : " productos del kit. ")));
+      sacados ? "Sacaste " + sacados + (sacados === 1 ? " producto" : " productos") +
+                " de los que te armamos. " : "Cambiaste el pedido a mano. "));
     const bt = document.createElement("button");
     bt.type = "button";
-    bt.textContent = "Volver a ponerlos";
-    bt.addEventListener("click", () => { resetElegidos(); pintarKits(); });
+    bt.textContent = "Volver al armado automático";
+    bt.addEventListener("click", () => { recalcular(); pintar(); });
     avisoSac.appendChild(bt);
   }
 
-  const otro = modo === "bulto" ? "frac" : "bulto";
-  const alt = costoDe(porDefecto(PLANO, surtido, otro), otro, clientes, semanas);
-  document.getElementById("r-nota").textContent = modo === "bulto"
-    ? "Llevás el bulto entero de cada producto, así que te sobra en lo que rota poco. El mismo kit suelto sale " + pl(alt) + "."
-    : "Pedís la cantidad justa de cada cosa. El mismo kit en bultos cerrados sale " + pl(alt) + ".";
-
-  document.querySelectorAll("#kits .kit").forEach(li => {
-    const p = PRESETS[Number(li.dataset.i)];
-    li.dataset.activo = (p.s === surtido && p.m === modo && p.c === clientes &&
-                         p.w === semanas && !sacados) ? "si" : "no";
-  });
-
+  // la lista
   const caja = document.getElementById("tabla-kit");
   caja.textContent = "";
+  let filas = 0;
   KITS.forEach(r => {
-    const posibles = r.items.filter(x => sePuede(x, modo));
+    const posibles = r.items.filter(pasaFiltro);
     const sub = verTodo ? posibles : posibles.filter(estaDentro);
     if (!sub.length) return;
     const puestos = posibles.filter(estaDentro);
@@ -710,26 +933,88 @@ function pintarKits() {
     const dato = document.createElement("span");
     dato.className = "rubro-dato";
     dato.textContent = puestos.length +
-      (puestos.length === 1 ? " producto · " : " productos · ") +
-      pl(costoDe(puestos, modo, clientes, semanas));
+      (puestos.length === 1 ? " producto · " : " productos · ") + pl(costoDe(puestos));
     tapa.appendChild(dato);
     sec.appendChild(tapa);
-    sub.forEach(x => sec.appendChild(filaProd(x)));
+    sub.forEach(x => { sec.appendChild(filaProd(x)); filas++; });
     caja.appendChild(sec);
   });
-  armarTexto();
+  if (!filas) {
+    const v = document.createElement("p");
+    v.className = "vacio";
+    v.textContent = rubrosOn.size === 0
+      ? "No elegiste ningún rubro. Volvé al paso 3 y marcá al menos uno."
+      : "Con este presupuesto y estos filtros no entra ningún producto. Subí el presupuesto en el paso 2 o aflojá el precio máximo en el paso 4.";
+    caja.appendChild(v);
+  }
+
+  armarTexto(total);
+  pintarBarra(total, dentro.length);
+}
+
+// ── barra de abajo: navega en los pasos 1 a 4 y cierra el pedido en el 5
+function pintarBarra(total, cuantos) {
+  const bot = document.getElementById("barra-bot");
+  bot.textContent = "";
+  const txt = document.getElementById("b-plata");
+  const det = document.getElementById("b-det");
+
+  if (paso < 5) {
+    txt.textContent = "Paso " + paso + " de 5";
+    det.textContent = PASOS[paso - 1].t + " · " +
+      (paso === 1 ? plural(clientes, "cliente por día", "clientes por día") +
+                    ", " + plural(semanas, "semana", "semanas")
+       : paso === 2 ? "presupuesto " + pl(plata)
+       : paso === 3 ? rubrosOn.size + " de " + RUBROS.length + " rubros"
+       : (MODOS.find(m => m.v === modo) || {}).et);
+  } else {
+    txt.textContent = pl(total);
+    det.textContent = cuantos + " productos · " +
+      (MODOS.find(m => m.v === modo) || {}).et.replace(" (recomendado)", "") + " · " +
+      plural(clientes, "cliente por día", "clientes por día") + " · " +
+      plural(semanas, "semana", "semanas");
+  }
+
+  if (paso > 1) {
+    const atras = document.createElement("button");
+    atras.type = "button";
+    atras.textContent = "Atrás";
+    atras.addEventListener("click", () => irA(paso - 1));
+    bot.appendChild(atras);
+  }
+  if (paso < 5) {
+    const sig = document.createElement("button");
+    sig.type = "button";
+    sig.className = "sigue";
+    sig.textContent = paso === 4 ? "Ver mi pedido" : "Continuar";
+    sig.addEventListener("click", () => irA(paso + 1));
+    bot.appendChild(sig);
+  } else {
+    const cop = document.createElement("button");
+    cop.type = "button";
+    cop.textContent = "Copiar pedido";
+    cop.addEventListener("click", copiar);
+    const wp = document.createElement("a");
+    wp.className = "wpp";
+    wp.id = "b-wpp";
+    wp.target = "_blank";
+    wp.rel = "noopener";
+    wp.href = HREF_WPP;
+    wp.textContent = "Pedir por WhatsApp";
+    bot.append(cop, wp);
+  }
 }
 
 // ── pedido escrito
-let TEXTO = "";
-function armarTexto() {
+let TEXTO = "", HREF_WPP = "https://wa.me/" + WPP;
+function armarTexto(total) {
   const cab = ["*Pedido para abrir una dietética*",
-               (SURTIDOS.find(s => s.v === surtido) || {}).et + " · " +
-               (modo === "bulto" ? "bultos cerrados" : "suelto"),
-               plural(clientes, "cliente", "clientes") + " por día · " +
+               (MODOS.find(m => m.v === modo) || {}).et.replace(" (recomendado)", "") +
+               " · presupuesto " + pl(plata),
+               plural(clientes, "cliente por día", "clientes por día") + " · " +
                plural(semanas, "semana", "semanas") + " de mercadería", ""];
   const L = cab.slice(), resumen = [];
-  let total = 0, cuenta = 0;
+  let cuenta = 0;
   KITS.forEach(r => {
     const sub = r.items.filter(estaDentro);
     if (!sub.length) return;
@@ -742,7 +1027,6 @@ function armarTexto() {
       L.push("• " + x.nom + " — " + enUnidades(q, x.un) + " — " + pl(q * x.p2));
     });
     L.push("");
-    total += st;
     resumen.push("• " + r.rubro + " — " + sub.length + " prod. — " + pl(st));
   });
   L.push("TOTAL: " + pl(total));
@@ -754,17 +1038,11 @@ function armarTexto() {
   const W = cab.concat([cuenta + " productos · TOTAL " + pl(total), "",
                         "*Por rubro*"], resumen,
                        ["", "¿Me confirman precios y disponibilidad?"]);
-  document.getElementById("b-wpp").href =
-    "https://wa.me/" + WPP + "?text=" + encodeURIComponent(W.join("\n"));
+  HREF_WPP = "https://wa.me/" + WPP + "?text=" + encodeURIComponent(W.join("\n"));
+  const a = document.getElementById("b-wpp");
+  if (a) a.href = HREF_WPP;
 }
-
-document.getElementById("b-ver").addEventListener("click", () => {
-  const t = document.getElementById("texto");
-  t.hidden = !t.hidden;
-  document.getElementById("b-ver").textContent =
-    t.hidden ? "Ver el pedido escrito" : "Ocultar el pedido escrito";
-});
-document.getElementById("b-copiar").addEventListener("click", async () => {
+async function copiar() {
   const aviso = document.getElementById("aviso");
   try {
     await navigator.clipboard.writeText(TEXTO);
@@ -779,6 +1057,12 @@ document.getElementById("b-copiar").addEventListener("click", async () => {
   }
   aviso.hidden = false;
   setTimeout(() => { aviso.hidden = true; }, 2600);
+}
+document.getElementById("b-ver").addEventListener("click", () => {
+  const t = document.getElementById("texto");
+  t.hidden = !t.hidden;
+  document.getElementById("b-ver").textContent =
+    t.hidden ? "Ver el pedido escrito" : "Ocultar el pedido escrito";
 });
 
 // ── mas vendidos
@@ -794,7 +1078,6 @@ function filaVend(x, conPuesto) {
   const p = document.createElement("div");
   p.className = "puesto";
   p.textContent = conPuesto ? x.puesto : "";
-
   const url = fotoDe(x);
   let im;
   if (url) {
@@ -810,14 +1093,12 @@ function filaVend(x, conPuesto) {
     im = document.createElement("div");
     im.className = "hueco";
   }
-
   const datos = document.createElement("div");
   datos.append(Object.assign(document.createElement("div"),
     {className: "nom", textContent: x.nom}));
   datos.append(Object.assign(document.createElement("div"),
     {className: "porque",
      textContent: conPuesto ? x.rubro.toLowerCase() : "cód. " + x.cod}));
-
   const cb = document.createElement("div");
   cb.className = "col-barra";
   const ba = document.createElement("div");
@@ -830,7 +1111,6 @@ function filaVend(x, conPuesto) {
   ro.textContent = num(x.tk) + " ventas en el año · " + (x.tk / 52 >= 10
     ? Math.round(x.tk / 52) : (x.tk / 52).toFixed(1).replace(".", ",")) + " por semana";
   cb.append(ba, ro);
-
   const mo = document.createElement("div");
   mo.className = "col plata";
   mo.append(Object.assign(document.createElement("span"),
@@ -839,7 +1119,6 @@ function filaVend(x, conPuesto) {
   fila.append(p, im, datos, cb, mo);
   return fila;
 }
-
 function pintarVendidos() {
   document.querySelectorAll("#c-vista button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.v === vista)));
@@ -847,7 +1126,6 @@ function pintarVendidos() {
     num(VPLANO.reduce((s, x) => s + x.tk, 0));
   document.getElementById("v-prod").textContent = VPLANO.length;
   document.getElementById("v-rub").textContent = VEND.length;
-
   const caja = document.getElementById("tabla-vend");
   caja.textContent = "";
   const seccion = (titulo, dato) => {
@@ -877,7 +1155,7 @@ function pintarVendidos() {
 
 // ── solapas
 const SOLAPAS = [
-  {v: "kits", et: "Kits de apertura", panel: "panel-kits"},
+  {v: "kits", et: "Armá tu pedido", panel: "panel-kits"},
   {v: "vend", et: "Los más vendidos", panel: "panel-vendidos"}
 ];
 let solapa = "kits";
@@ -919,7 +1197,6 @@ function plataCSV(s) {
   const n = parseFloat(String(s).trim().replace(/\./g, "").replace(",", "."));
   return isFinite(n) && n > 0 ? n : null;
 }
-// "6 unid." -> [6, "un"];  "2,5 kg" -> [2.5, "kg"]
 function patenteCSV(txt, nombre) {
   const t = (txt || "").trim().toLowerCase();
   if (!t) return [null, null];
@@ -954,7 +1231,9 @@ async function refrescarPrecios() {
       n++;
     });
     if (!n) throw new Error("sin coincidencias");
-    pintarPresetPrecios(); pintarKits(); pintarVendidos();
+    if (!tocado) recalcular();
+    pintar();
+    pintarVendidos();
     est.textContent = "Precios y bultos leídos recién de la lista mayorista: " + n +
       " productos actualizados al abrir esta página.";
   } catch (e) {
@@ -962,10 +1241,9 @@ async function refrescarPrecios() {
   }
 }
 
-resetElegidos();
+recalcular();
 pintarSolapas();
-pintarPresetPrecios();
-pintarKits();
+irA(1);
 pintarVendidos();
 refrescarPrecios();
 </script>
