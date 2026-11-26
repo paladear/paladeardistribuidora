@@ -425,6 +425,9 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
         <ul>
           <li>El presupuesto <b>no cambia los precios</b>: cambia hasta dónde llega la
             lista.</li>
+          <li>Si en el paso 3 sacás rubros, entran productos de los otros rubros en su
+            lugar, y si te sobra plata con todo adentro, lo que más se vende pasa a bulto
+            cerrado: el pedido siempre se acerca a lo que pusiste.</li>
           <li>Entran primero los productos que más se venden, de cualquier rubro, y se
             siguen sumando de mayor a menor venta hasta que se acaba la plata. Lo que
             queda afuera es siempre lo que menos sale.</li>
@@ -438,7 +441,7 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
       <div class="campo">
         <div class="lectura" id="l-plata"></div>
         <input type="range" id="c-plata" min="200000" max="5000000" step="50000"
-               value="750000" aria-label="Presupuesto para mercadería">
+               value="900000" aria-label="Presupuesto para mercadería">
         <div class="tope"><span>$200.000</span><span>$5.000.000</span></div>
       </div>
 
@@ -543,21 +546,23 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
           la tienda y la distribuidora, así que todos se pueden pedir. Se ordenan por
           cuánto se venden en el mostrador de Paladear: entran primero los que más salen,
           y lo que queda afuera es lo que menos se vende.</p>
-        <p><b>Cuánto de cada uno.</b> Partimos de lo que vende Paladear por semana, en
-          proporción a los clientes que vas a atender, por las semanas que elegiste.
-          Encima van tres ajustes pensados para una primera compra:</p>
+        <p><b>Cuánto de cada uno.</b> Lo que vende Paladear por semana, en proporción a
+          los clientes que vas a atender, por las semanas que elegiste. Si ponés 2 semanas,
+          llevás lo que Paladear vendería en 2 semanas a tu escala, también en lo que más
+          sale. Solo dos ajustes:</p>
         <ul>
-          <li><b>Mínimo de góndola:</b> <span id="m-piso"></span>, para que nada se vea
-            vacío aunque se venda poco.</li>
-          <li><b>Freno a los más vendidos:</b> <span id="m-freno"></span>. Al principio no
-            sabés todavía qué va a salir más en tu local, y conviene reponer seguido antes
-            que inmovilizar plata.</li>
+          <li><b>Mínimo de góndola:</b> <span id="m-piso"></span>. Hay productos que en
+            2 semanas venden 80 g, pero para tenerlos en el local hace falta un mínimo.</li>
           <li><b>Redondeo:</b> de a medio kilo en granel, de a 100 g en especias e
             infusiones, de a unidad en envasados.</li>
         </ul>
-        <p><b>Todo se puede cambiar.</b> Son cantidades sugeridas para arrancar. Si de algo
-          querés más, subilo, o llevá el bulto cerrado tal como lo trae la lista de la
-          distribuidora (la nuez viene en bultos de 5 kg). El precio por kilo es el mismo.</p>
+        <p><b>Cómo se usa tu presupuesto.</b> Entran los productos del más vendido al
+          menos vendido hasta que se acaba la plata. Si sacás rubros, entran los que
+          siguen de los otros rubros. Si con tu plata ya entra todo y sobra, los más
+          vendidos pasan a bulto cerrado, en el mismo orden.</p>
+        <p><b>Todo se puede cambiar.</b> Con − y + subís o bajás cualquier cantidad, o
+          llevás el bulto cerrado tal como lo trae la lista de la distribuidora. El precio
+          por kilo es el mismo.</p>
         <p><b>«Si lo vendés todo cobrás»</b> es cuánta plata entra por caja si vendés todo
           ese pedido al precio al que Paladear lo vende en su mostrador. La diferencia con
           lo que pagás es la ganancia. Son números de referencia: vos ponés tus precios.</p>
@@ -622,33 +627,25 @@ const SIN_TOPE = 60000;            // el maximo del slider de precio vale "sin t
 const ULTIMO = 4;                  // el paso del pedido
 
 /* ── CUANTO LLEVAR DE CADA PRODUCTO ────────────────────────────────────────────
-   Base: lo que vende Paladear por semana x (clientes del local / 66) x semanas.
-   Encima, tres ajustes para una PRIMERA compra, distintos segun el tipo:
-     piso   lo minimo para que el producto se vea en la gondola
-     freno  pasado este valor se cuenta solo la parte "medio" de lo que sobra:
-            de lo que mas sale no conviene llenarse antes de saber como vende
-     tope   nunca mas que esto
-     paso   de a cuanto se redondea
-   freno y tope estan pensados para el local de referencia (15 clientes, 3
-   semanas) y crecen en proporcion si el local es mas grande o se repone menos
-   seguido. El piso no cambia: la gondola es la misma. */
+   Lo que vende Paladear por semana x (clientes del local / 66) x semanas. Con 2
+   semanas llevas lo que Paladear venderia en 2 semanas a la escala de tu local,
+   tambien en lo que mas sale: sin frenos. Solo dos ajustes por tipo:
+     piso  lo minimo para tener el producto en la gondola
+     paso  de a cuanto se redondea
+   Si sobra plata despues de tener todo, los mas vendidos pasan a bulto cerrado
+   (eso lo hace armarPedido, no esta cuenta). */
 const PARAM = {
   ref: {clientes: 15, semanas: 3},
-  kg:  {piso: 0.5, freno: 1,    medio: 0.5, tope: 3,   paso: 0.5},   // granel
-  esp: {piso: 0.1, freno: 0.25, medio: 0.5, tope: 0.5, paso: 0.1},   // especias e infusiones
-  un:  {piso: 2,   freno: 4,    medio: 0.5, tope: 8,   paso: 1}      // envasados
+  kg:  {piso: 0.5, paso: 0.5},   // granel
+  esp: {piso: 0.1, paso: 0.1},   // especias e infusiones
+  un:  {piso: 2,   paso: 1}      // envasados
 };
 function calculo(x, c, w) {
   const t = PARAM[x.tp] || PARAM.kg;
-  const escala = (c / PARAM.ref.clientes) * (w / PARAM.ref.semanas);
   const bruto = x.sem * (c / CLIENTES_PALADEAR) * w;
-  const freno = t.freno * escala, tope = t.tope * escala;
-  let q = bruto, regla = "normal";
-  if (q > freno) { q = freno + (q - freno) * t.medio; regla = "freno"; }
-  if (q > tope) q = tope;
-  q = Math.round(q / t.paso) * t.paso;
+  let q = Math.round(bruto / t.paso) * t.paso, regla = "normal";
   if (q < t.piso) { q = t.piso; if (bruto < t.piso) regla = "piso"; }
-  return {q: Math.round(q * 100) / 100, bruto, regla};
+  return {q: Math.round(q * 1000) / 1000, bruto, regla};
 }
 
 const SITIO = {m: "https://paladear.com.ar/", d: "https://mayorista.paladear.com.ar/"};
@@ -674,13 +671,16 @@ const PLANO = [];
 KITS.forEach(r => r.items.forEach(i => { i.rubro = r.rubro; PLANO.push(i); }));
 const RUBROS = KITS.map(r => r.rubro);          // ya vienen ordenados por venta
 
-let clientes = 15, semanas = 3, plata = 750000, pmin = 0, pmax = SIN_TOPE;
+let clientes = 15, semanas = 3, plata = 900000, pmin = 0, pmax = SIN_TOPE;
 let rubrosOn = new Set(RUBROS);
 let paso = 0, via = "test", verTodo = false, vista = "rubro";
-let incluidos = new Set(), tocado = false;
+let incluidos = new Set();
+// profundo: cantidad que el armado subio a bulto cerrado porque sobraba plata.
 // ajustes: cantidad que el cliente cambio a mano, por codigo.
 // sacadosMano: lo que destildo; sigue a la vista, gris y fuera del total.
-let ajustes = {}, sacadosMano = new Set();
+// forzados: lo que tildo a mano y tiene que entrar aunque no este en el ranking.
+let profundo = {}, ajustes = {}, sacadosMano = new Set(), forzados = new Set();
+let cambios = {entraron: [], salieron: []};
 
 const estado = () => ({plata, c: clientes, w: semanas, rub: rubrosOn, pmin, pmax});
 const deReferencia = p => ({plata: p, c: PARAM.ref.clientes, w: PARAM.ref.semanas,
@@ -689,7 +689,8 @@ const pasa = (x, k) => k.rub.has(x.rubro) && x.p2 >= k.pmin &&
                        (k.pmax >= SIN_TOPE || x.p2 <= k.pmax);
 const pasaFiltro = x => pasa(x, estado());
 const sugerida = x => calculo(x, clientes, semanas).q;
-const cantidad = x => (x.cod in ajustes) ? ajustes[x.cod] : sugerida(x);
+const cantidad = x => (x.cod in ajustes) ? ajustes[x.cod]
+                    : (x.cod in profundo) ? profundo[x.cod] : sugerida(x);
 const redondo = v => Math.round(v * 1000) / 1000;
 const conBulto = x => x.bul > 1.001;      // el bulto de 1 kg o 1 unidad no se nombra
 const esBulto = (x, q) => conBulto(x) && q >= x.bul - 1e-9 &&
@@ -697,37 +698,67 @@ const esBulto = (x, q) => conBulto(x) && q >= x.bul - 1e-9 &&
 const costoDe = (items, k) => items.reduce((s, x) =>
   s + (k ? calculo(x, k.c, k.w).q : cantidad(x)) * x.p2, 0);
 
-/* Arma el pedido con la plata disponible: del producto que mas se vende al que
-   menos, de cualquier rubro, mientras entre. Si uno no entra se sigue con el
-   proximo, que puede ser mas barato. */
-function armarMix(k) {
-  const sel = new Set();
-  let acum = 0;
-  PLANO.filter(x => pasa(x, k))
-       .sort((a, b) => b.sc - a.sc || b.tk - a.tk)
-       .forEach(x => {
-         const v = calculo(x, k.c, k.w).q * x.p2;
-         if (acum + v <= k.plata) { sel.add(x.cod); acum += v; }
-       });
-  return sel;
+/* Arma el pedido para usar el presupuesto que puso el cliente:
+   1. Primero lo que tildo a mano, con la cantidad que haya elegido.
+   2. Despues, del producto que mas se vende al que menos, de cualquier rubro,
+      mientras entre. Lo que destildo a mano no vuelve. Si saca productos o
+      rubros, entran los que siguen en el ranking en su lugar.
+   3. Si ya entro todo y sobra plata, los mas vendidos pasan a bulto cerrado,
+      en el mismo orden, mientras alcance. */
+const SIN_MANO = {aj: {}, fuera: new Set(), dentro: new Set()};
+function armarPedido(k, m) {
+  m = m || SIN_MANO;
+  const q0 = x => (x.cod in m.aj) ? m.aj[x.cod] : calculo(x, k.c, k.w).q;
+  const orden = PLANO.filter(x => pasa(x, k) && !m.fuera.has(x.cod))
+                     .sort((a, b) => b.sc - a.sc || b.tk - a.tk);
+  const sel = new Set(), prof = {};
+  let acum = 0, todo = true;
+  orden.forEach(x => {
+    if (m.dentro.has(x.cod)) { sel.add(x.cod); acum += q0(x) * x.p2; }
+  });
+  orden.forEach(x => {
+    if (sel.has(x.cod)) return;
+    const v = q0(x) * x.p2;
+    if (acum + v <= k.plata) { sel.add(x.cod); acum += v; } else todo = false;
+  });
+  if (todo) orden.forEach(x => {
+    if (!sel.has(x.cod) || (x.cod in m.aj) || !conBulto(x)) return;
+    const q = q0(x), qb = Math.ceil(q / x.bul - 1e-9) * x.bul;
+    if (qb <= q + 1e-9) return;
+    const extra = (qb - q) * x.p2;
+    if (acum + extra <= k.plata) { prof[x.cod] = redondo(qb); acum += extra; }
+  });
+  return {sel, prof, todo};
 }
-function recalcular() { incluidos = armarMix(estado()); sacadosMano = new Set(); tocado = false; }
-function volverAuto() { ajustes = {}; recalcular(); pintar(); }
+const manoActual = () => ({aj: ajustes, fuera: sacadosMano, dentro: forzados});
+let completo = false;
+function recalcular() {
+  const r = armarPedido(estado(), manoActual());
+  incluidos = r.sel; profundo = r.prof; completo = r.todo;
+}
+function volverAuto() {
+  ajustes = {}; sacadosMano = new Set(); forzados = new Set();
+  cambios = {entraron: [], salieron: []};
+  recalcular(); pintar();
+}
+const hayMano = () => sacadosMano.size || forzados.size || Object.keys(ajustes).length;
 function fijarCantidad(x, q) {
   q = redondo(q);
   if (Math.abs(q - sugerida(x)) < 1e-9) delete ajustes[x.cod]; else ajustes[x.cod] = q;
-  tocado = true;
+  delete profundo[x.cod];       // la cantidad la eligio el cliente
   pintar();
 }
+// cualquier cambio de los pasos 1 a 3: se rearma sin aviso de entradas y salidas
+function rearmar() { cambios = {entraron: [], salieron: []}; recalcular(); pintar(); }
 const estaDentro = x => incluidos.has(x.cod) && pasaFiltro(x);
 const elegidos = () => PLANO.filter(estaDentro);
 
 // Kits de referencia. El ultimo es "todo el catalogo" y su precio sale de la
 // lista del dia, por eso se calcula y no esta escrito.
 const PRESETS = [
-  {et: "Mínimo", plata: 500000, d: "Lo que más sale, para arrancar"},
-  {et: "Intermedio", plata: 750000, d: "Lo más vendido de casi todos los rubros"},
-  {et: "Completo", plata: 950000, d: "Góndola llena"},
+  {et: "Mínimo", plata: 700000, d: "Lo que más sale, para arrancar"},
+  {et: "Intermedio", plata: 900000, d: "Lo más vendido de casi todos los rubros"},
+  {et: "Completo", plata: 1100000, d: "Góndola llena"},
   {et: "Full", plata: 0, d: "Todo el catálogo"}
 ];
 function actualizarFull() {
@@ -760,7 +791,7 @@ PASOS.forEach(p => {
 });
 function irA(n) {
   paso = Math.min(ULTIMO, Math.max(0, n));
-  if (paso === ULTIMO && !tocado) recalcular();
+  if (paso === ULTIMO) recalcular();
   for (let i = 0; i <= ULTIMO; i++)
     document.getElementById("paso-" + i).hidden = (i !== paso);
   cajaCamino.hidden = (paso === 0);
@@ -779,8 +810,7 @@ function irA(n) {
 function enganchar(id, set) {
   document.getElementById(id).addEventListener("input", e => {
     set(Number(e.target.value));
-    tocado = false;
-    pintar();
+    rearmar();
   });
 }
 const fijar = (id, v) => { document.getElementById(id).value = v; };
@@ -809,7 +839,7 @@ function tarjetaKit(p, i, alTocar) {
   b.append(Object.assign(document.createElement("div"),
     {className: "op-d", textContent: p.d}));
   b.addEventListener("click", () => alTocar ? alTocar(p) : (() => {
-    plata = p.plata; fijar("c-plata", plata); tocado = false; pintar();
+    plata = p.plata; fijar("c-plata", plata); rearmar();
   })());
   li.appendChild(b);
   return li;
@@ -824,6 +854,8 @@ PRESETS.forEach((p, i) => {
      ["c-pmin", pmin], ["c-pmax", pmax]].forEach(a => fijar(a[0], a[1]));
     marcarRubros(true);
     via = "kit";
+    ajustes = {}; sacadosMano = new Set(); forzados = new Set();
+    cambios = {entraron: [], salieron: []};
     recalcular();
     irA(ULTIMO);
   }));
@@ -842,8 +874,7 @@ KITS.forEach(r => {
   ip.checked = true;
   ip.addEventListener("change", () => {
     if (ip.checked) rubrosOn.add(r.rubro); else rubrosOn.delete(r.rubro);
-    tocado = false;
-    pintar();
+    rearmar();
   });
   const tx = document.createElement("span");
   tx.append(Object.assign(document.createElement("span"),
@@ -858,8 +889,7 @@ KITS.forEach(r => {
 function marcarRubros(on) {
   rubrosOn = on ? new Set(RUBROS) : new Set();
   cajaRubros.querySelectorAll("input").forEach(i => { i.checked = on; });
-  tocado = false;
-  pintar();
+  rearmar();
 }
 document.getElementById("b-todos").addEventListener("click", () => marcarRubros(true));
 document.getElementById("b-ninguno").addEventListener("click", () => marcarRubros(false));
@@ -911,10 +941,9 @@ function porQue(x, r) {
   if (r.regla === "piso")
     return base + "Llevás " + enUnidades(r.q, x.un) +
       ", lo mínimo para que se vea en la góndola.";
-  if (r.regla === "freno")
-    return base + "En " + plural(semanas, "semana", "semanas") + " serían " +
-      enUnidades(Math.round(r.bruto * 10) / 10, x.un) + "; para arrancar llevás " +
-      enUnidades(r.q, x.un) + " y reponés cuando veas cómo sale en tu local.";
+  if (x.cod in profundo)
+    return base + "Para " + plural(semanas, "semana", "semanas") + " serían " +
+      enUnidades(r.q, x.un) + "; como te alcanza el presupuesto, va el bulto cerrado.";
   return base + "Para " + plural(semanas, "semana", "semanas") + ", " +
     enUnidades(r.q, x.un) + ".";
 }
@@ -932,9 +961,10 @@ function filaProd(x) {
   tic.checked = dentro;
   tic.setAttribute("aria-label", (dentro ? "Sacar " : "Agregar ") + x.nom);
   tic.addEventListener("change", () => {
-    if (tic.checked) { incluidos.add(x.cod); sacadosMano.delete(x.cod); }
-    else { incluidos.delete(x.cod); sacadosMano.add(x.cod); }
-    tocado = true;
+    // Queda como esta: no entra ni sale nada mas. Se anota igual, para que si
+    // despues cambia una respuesta del test se respete lo que eligio a mano.
+    if (tic.checked) { sacadosMano.delete(x.cod); forzados.add(x.cod); incluidos.add(x.cod); }
+    else { forzados.delete(x.cod); sacadosMano.add(x.cod); incluidos.delete(x.cod); }
     pintar();
   });
 
@@ -1020,14 +1050,14 @@ function pintar() {
   // kits: en la portada, para el local de referencia; en el paso 2, para el tuyo
   document.querySelectorAll("#kits-ya button").forEach(b => {
     const p = PRESETS[Number(b.dataset.i)];
-    const s = armarMix(deReferencia(p.plata));
+    const s = armarPedido(deReferencia(p.plata)).sel;
     b.querySelector(".op-p").textContent = pl(p.plata);
     b.querySelector(".op-n").textContent = s.size + " productos de " +
       new Set(PLANO.filter(x => s.has(x.cod)).map(x => x.rubro)).size + " rubros";
   });
   document.querySelectorAll("#kits button").forEach(b => {
     const p = PRESETS[Number(b.dataset.i)];
-    const s = armarMix(Object.assign({}, k, {plata: p.plata}));
+    const s = armarPedido(Object.assign({}, k, {plata: p.plata})).sel;
     b.querySelector(".op-p").textContent = pl(p.plata);
     b.querySelector(".op-n").textContent = s.size + " productos";
     b.setAttribute("aria-pressed", String(plata === p.plata));
@@ -1035,19 +1065,8 @@ function pintar() {
   document.querySelectorAll("#c-ver button").forEach(b =>
     b.setAttribute("aria-pressed", String((b.dataset.v === "todo") === verTodo)));
 
-  // explicacion de los ajustes, con los numeros de tu local
-  const esc = (clientes / PARAM.ref.clientes) * (semanas / PARAM.ref.semanas);
-  const redo = v => Math.round(v * 100) / 100;      // el valor tal cual, sin redondeo de compra
   document.getElementById("m-piso").textContent = "medio kilo de granel, 100 g de " +
     "especias e infusiones y 2 unidades de cada envasado";
-  document.getElementById("m-freno").textContent = "con tu local, pasado " +
-    enUnidades(redo(PARAM.kg.freno * esc, PARAM.kg), "kg") + " de granel (" +
-    enUnidades(redo(PARAM.esp.freno * esc, PARAM.esp), "kg") + " en especias, " +
-    plural(Math.round(PARAM.un.freno * esc), "unidad", "unidades") +
-    " en envasados) se cuenta solo la mitad de lo que sigue, y nunca más de " +
-    enUnidades(redo(PARAM.kg.tope * esc, PARAM.kg), "kg") + " (" +
-    enUnidades(redo(PARAM.esp.tope * esc, PARAM.esp), "kg") + ", " +
-    plural(Math.round(PARAM.un.tope * esc), "unidad", "unidades") + ")";
 
   // cuentas del pedido
   const dentro = elegidos();
@@ -1068,11 +1087,19 @@ function pintar() {
     ((kg ? num(kg, 1) + " kg" : "") + (kg && un ? " y " : "") + (un ? num(un) + " un." : "")) ||
     "nada todavía";
   document.getElementById("r-prod").textContent = dentro.length + " productos distintos";
+  const nBultos = dentro.filter(x => x.cod in profundo).length;
   document.getElementById("r-nota").textContent = total > plata
     ? "Te pasaste " + pl(total - plata) + " del presupuesto por los cambios que hiciste a mano."
-    : "Te quedan " + pl(plata - total) + " del presupuesto. " +
-      (dentro.length < PLANO.filter(pasaFiltro).length
-        ? "Con «Ver todo» aparecen los que no entraron." : "Entró todo lo disponible.");
+    : !completo
+      ? "Usás " + pl(total) + " de tus " + pl(plata) + "." + (hayMano() ? "" :
+        " Con «Ver todo» aparecen los productos que no entraron.")
+      : "Entra todo lo disponible" + (nBultos ? ", y " + nBultos + (nBultos === 1
+          ? " de los más vendidos va" : " de los más vendidos van") + " en bulto cerrado" : "") +
+        ". " + (plata - total > 1000 ? "Te sobran " + pl(plata - total) +
+        ": podés sumar semanas en el paso 1 o rubros en el paso 3." : "");
+  if (hayMano() && total <= plata)
+    document.getElementById("r-nota").textContent = "Usás " + pl(total) + " de tus " +
+      pl(plata) + ", con los cambios que hiciste a mano.";
 
   const ak = document.getElementById("aviso-kit");
   ak.hidden = (via !== "kit");
@@ -1084,23 +1111,25 @@ function pintar() {
       "los números cambian.";
   }
 
-  const sacados = [...armarMix(k)].filter(c => !incluidos.has(c)).length;
   const avisoSac = document.getElementById("r-sacados");
   avisoSac.textContent = "";
-  const hayCambios = tocado || Object.keys(ajustes).length > 0;
-  avisoSac.hidden = !hayCambios;
-  if (hayCambios) {
-    const nAj = Object.keys(ajustes).length;
-    const partes = [];
-    if (sacados) partes.push("sacaste " + sacados + (sacados === 1 ? " producto" : " productos"));
-    if (nAj) partes.push("cambiaste la cantidad de " + nAj + (nAj === 1 ? " producto" : " productos"));
-    const fr = partes.length ? partes.join(" y ") + ". " : "cambiaste el pedido a mano. ";
-    avisoSac.append(document.createTextNode(fr.charAt(0).toUpperCase() + fr.slice(1)));
-    const bt = document.createElement("button");
-    bt.type = "button";
-    bt.textContent = "Volver al armado automático";
-    bt.addEventListener("click", volverAuto);
-    avisoSac.appendChild(bt);
+  const lista = l => l.length <= 3 ? l.join(", ")
+    : l.slice(0, 3).join(", ") + " y " + (l.length - 3) + " más";
+  const frases = [];
+  if (cambios.entraron.length)
+    frases.push("Para usar tu presupuesto entraron: " + lista(cambios.entraron) + ".");
+  if (cambios.salieron.length)
+    frases.push("Para no pasarte del presupuesto salieron: " + lista(cambios.salieron) + ".");
+  avisoSac.hidden = !(hayMano() || frases.length);
+  if (!avisoSac.hidden) {
+    avisoSac.append(document.createTextNode(frases.join(" ") + (frases.length ? " " : "")));
+    if (hayMano()) {
+      const bt = document.createElement("button");
+      bt.type = "button";
+      bt.textContent = "Volver al armado automático";
+      bt.addEventListener("click", volverAuto);
+      avisoSac.appendChild(bt);
+    }
   }
 
   // la lista, por rubro; dentro de cada rubro, de lo que mas vende a lo que menos
@@ -1388,7 +1417,7 @@ async function refrescarPrecios() {
     });
     if (!n) throw new Error("sin coincidencias");
     actualizarFull();
-    if (!tocado) recalcular();
+    recalcular();
     pintar();
     pintarVendidos();
     est.textContent = "Precios leídos recién de la lista mayorista: " + n +
