@@ -444,7 +444,7 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
       <div class="campo">
         <div class="lectura" id="l-plata"></div>
         <input type="range" id="c-plata" min="200000" max="5000000" step="50000"
-               value="900000" aria-label="Presupuesto para mercadería">
+               value="1200000" aria-label="Presupuesto para mercadería">
         <div class="tope"><span>$200.000</span><span>$5.000.000</span></div>
       </div>
 
@@ -554,12 +554,15 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
         <p><b>Cuánto de cada uno.</b> Lo que vende Paladear por semana, en proporción a
           los clientes que vas a atender, por las semanas que elegiste. Si ponés 2 semanas,
           llevás lo que Paladear vendería en 2 semanas a tu escala, también en lo que más
-          sale. Solo dos ajustes:</p>
+          sale. Encima, tres reglas para abrir:</p>
         <ul>
-          <li><b>Mínimo de góndola:</b> <span id="m-piso"></span>. Hay productos que en
-            2 semanas venden 80 g, pero para tenerlos en el local hace falta un mínimo.</li>
-          <li><b>Redondeo:</b> de a medio kilo en granel, de a 100 g en especias e
-            infusiones, de a unidad en envasados.</li>
+          <li><b>Mínimo para abrir:</b> <span id="m-piso"></span>. Hay productos que en
+            2 semanas venden 80 g, pero para abrir con un producto hace falta tenerlo en
+            serio. Por eso, con poca plata, conviene tener menos productos y no poquito de
+            cada uno.</li>
+          <li><b>Bulto cerrado:</b> si lo que necesitás llega al 80% de un bulto, va el
+            bulto entero. Con la nuez, que viene de a 5 kg: desde 4 kg se lleva el bulto.</li>
+          <li><b>Redondeo:</b> de a medio kilo en granel, de a unidad en envasados.</li>
         </ul>
         <p><b>Cómo se usa tu presupuesto.</b> Entran los productos del más vendido al
           menos vendido hasta que se acaba la plata. Si sacás rubros, entran los que
@@ -634,22 +637,32 @@ const ULTIMO = 4;                  // el paso del pedido
 /* ── CUANTO LLEVAR DE CADA PRODUCTO ────────────────────────────────────────────
    Lo que vende Paladear por semana x (clientes del local / 66) x semanas. Con 2
    semanas llevas lo que Paladear venderia en 2 semanas a la escala de tu local,
-   tambien en lo que mas sale: sin frenos. Solo dos ajustes por tipo:
-     piso  lo minimo para tener el producto en la gondola
-     paso  de a cuanto se redondea
+   tambien en lo que mas sale: sin frenos. Encima, tres reglas:
+     piso   lo minimo para abrir con el producto: 1 kg de todo lo que va a granel
+            (especias incluidas) y 2 unidades de los envasados. Para abrir una
+            dietetica no sirve tener 100 g de algo.
+     paso   de a cuanto se redondea
+     CERCA  si lo que hace falta llega a esta parte de un bulto cerrado, se
+            lleva el bulto entero (tambien para 2, 3... bultos)
    Si sobra plata despues de tener todo, los mas vendidos pasan a bulto cerrado
    (eso lo hace armarPedido, no esta cuenta). */
 const PARAM = {
   ref: {clientes: 15, semanas: 3},
-  kg:  {piso: 0.5, paso: 0.5},   // granel
-  esp: {piso: 0.1, paso: 0.1},   // especias e infusiones
-  un:  {piso: 2,   paso: 1}      // envasados
+  kg:  {piso: 1, paso: 0.5},     // granel
+  esp: {piso: 1, paso: 0.5},     // especias e infusiones
+  un:  {piso: 2, paso: 1}        // envasados
 };
+const CERCA = 0.8;
 function calculo(x, c, w) {
   const t = PARAM[x.tp] || PARAM.kg;
   const bruto = x.sem * (c / CLIENTES_PALADEAR) * w;
   let q = Math.round(bruto / t.paso) * t.paso, regla = "normal";
   if (q < t.piso) { q = t.piso; if (bruto < t.piso) regla = "piso"; }
+  // cerca de un bulto cerrado (los de 1 kg o 1 unidad no cuentan)
+  if (x.bul > 1.001) {
+    const nb = q / x.bul, entero = Math.floor(nb + 1e-9);
+    if (nb - entero >= CERCA - 1e-9) { q = (entero + 1) * x.bul; regla = "bulto"; }
+  }
   return {q: Math.round(q * 1000) / 1000, bruto, regla};
 }
 
@@ -676,7 +689,7 @@ const PLANO = [];
 KITS.forEach(r => r.items.forEach(i => { i.rubro = r.rubro; PLANO.push(i); }));
 const RUBROS = KITS.map(r => r.rubro);          // ya vienen ordenados por venta
 
-let clientes = 15, semanas = 3, plata = 900000, pmin = 0, pmax = SIN_TOPE;
+let clientes = 15, semanas = 3, plata = 1200000, pmin = 0, pmax = SIN_TOPE;
 let rubrosOn = new Set(RUBROS);
 let paso = 0, via = "test", verTodo = false, vista = "rubro";
 let incluidos = new Set();
@@ -761,9 +774,9 @@ const elegidos = () => PLANO.filter(estaDentro);
 // Kits de referencia. El ultimo es "todo el catalogo" y su precio sale de la
 // lista del dia, por eso se calcula y no esta escrito.
 const PRESETS = [
-  {et: "Mínimo", plata: 700000, d: "Lo que más sale, para arrancar"},
-  {et: "Intermedio", plata: 900000, d: "Lo más vendido de casi todos los rubros"},
-  {et: "Completo", plata: 1100000, d: "Góndola llena"},
+  {et: "Mínimo", plata: 800000, d: "Lo que más sale, para arrancar"},
+  {et: "Intermedio", plata: 1200000, d: "Lo más vendido de casi todos los rubros"},
+  {et: "Completo", plata: 1600000, d: "Góndola llena"},
   {et: "Full", plata: 0, d: "Todo el catálogo"}
 ];
 function actualizarFull() {
@@ -944,8 +957,11 @@ function porQue(x, r) {
     : "se vende muy de vez en cuando";
   const base = "Con " + clientes + " clientes por día " + venta + ". ";
   if (r.regla === "piso")
-    return base + "Llevás " + enUnidades(r.q, x.un) +
-      ", lo mínimo para que se vea en la góndola.";
+    return base + "Llevás " + enUnidades(r.q, x.un) + ", lo mínimo para abrir con el producto.";
+  if (r.regla === "bulto")
+    return base + "Para " + plural(semanas, "semana", "semanas") + " serían " +
+      enUnidades(Math.round(r.bruto * 10) / 10, x.un) + "; como está cerca del bulto " +
+      "cerrado, va el bulto entero.";
   if (x.cod in profundo)
     return base + "Para " + plural(semanas, "semana", "semanas") + " serían " +
       enUnidades(r.q, x.un) + "; como te alcanza el presupuesto, va el bulto cerrado.";
@@ -990,7 +1006,7 @@ function filaProd(x) {
     return d;
   };
   const q = cantidad(x);
-  const paso = (PARAM[x.tp] || PARAM.kg).paso;
+  const paso = (PARAM[x.tp] || PARAM.kg).paso, piso = (PARAM[x.tp] || PARAM.kg).piso;
 
   // Llevas: menos / cantidad / mas, y debajo el atajo al bulto cerrado
   const cc = document.createElement("div");
@@ -1001,8 +1017,8 @@ function filaProd(x) {
   const boton = (txt, et, d) => {
     const b = Object.assign(document.createElement("button"), {type: "button", textContent: txt});
     b.setAttribute("aria-label", et + " " + x.nom);
-    b.disabled = !dentro || (d < 0 && q - paso < paso - 1e-9);
-    b.addEventListener("click", () => fijarCantidad(x, Math.max(paso, q + d * paso)));
+    b.disabled = !dentro || (d < 0 && q - paso < piso - 1e-9);
+    b.addEventListener("click", () => fijarCantidad(x, Math.max(piso, q + d * paso)));
     return b;
   };
   sel.append(boton("−", "Menos", -1),
@@ -1070,8 +1086,8 @@ function pintar() {
   document.querySelectorAll("#c-ver button").forEach(b =>
     b.setAttribute("aria-pressed", String((b.dataset.v === "todo") === verTodo)));
 
-  document.getElementById("m-piso").textContent = "medio kilo de granel, 100 g de " +
-    "especias e infusiones y 2 unidades de cada envasado";
+  document.getElementById("m-piso").textContent = "1 kg de todo lo que va a granel, " +
+    "especias incluidas, y 2 unidades de cada envasado";
 
   // cuentas del pedido
   const dentro = elegidos();
