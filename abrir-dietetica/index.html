@@ -562,7 +562,8 @@ textarea{width:100%;min-height:9rem;margin-top:.9rem;
             cada uno.</li>
           <li><b>Bulto cerrado:</b> si lo que necesitás llega al 80% de un bulto, va el
             bulto entero. Con la nuez, que viene de a 5 kg: desde 4 kg se lleva el bulto.</li>
-          <li><b>Redondeo:</b> de a medio kilo en granel, de a unidad en envasados.</li>
+          <li><b>Redondeo:</b> kilos enteros en granel y especias, unidades enteras en
+            envasados.</li>
         </ul>
         <p><b>Cómo se usa tu presupuesto.</b> Entran los productos del más vendido al
           menos vendido hasta que se acaba la plata. Si sacás rubros, entran los que
@@ -641,25 +642,30 @@ const ULTIMO = 4;                  // el paso del pedido
      piso   lo minimo para abrir con el producto: 1 kg de todo lo que va a granel
             (especias incluidas) y 2 unidades de los envasados. Para abrir una
             dietetica no sirve tener 100 g de algo.
-     paso   de a cuanto se redondea
+     paso   de a cuanto se redondea: kilos enteros, nada de 3,5 kg
      CERCA  si lo que hace falta llega a esta parte de un bulto cerrado, se
-            lleva el bulto entero (tambien para 2, 3... bultos)
+            lleva el bulto entero (tambien para 2, 3... bultos). Solo con bultos de
+            kilos o unidades enteros: uno de 2,5 kg romperia los kilos redondos, y
+            ese se elige a mano.
    Si sobra plata despues de tener todo, los mas vendidos pasan a bulto cerrado
    (eso lo hace armarPedido, no esta cuenta). */
 const PARAM = {
   ref: {clientes: 15, semanas: 3},
-  kg:  {piso: 1, paso: 0.5},     // granel
-  esp: {piso: 1, paso: 0.5},     // especias e infusiones
+  kg:  {piso: 1, paso: 1},       // granel
+  esp: {piso: 1, paso: 1},       // especias e infusiones
   un:  {piso: 2, paso: 1}        // envasados
 };
 const CERCA = 0.8;
+function bultoEntero(x) {
+  return x.bul > 1.001 && Math.abs(x.bul - Math.round(x.bul)) < 1e-9;
+}
 function calculo(x, c, w) {
   const t = PARAM[x.tp] || PARAM.kg;
   const bruto = x.sem * (c / CLIENTES_PALADEAR) * w;
   let q = Math.round(bruto / t.paso) * t.paso, regla = "normal";
   if (q < t.piso) { q = t.piso; if (bruto < t.piso) regla = "piso"; }
   // cerca de un bulto cerrado (los de 1 kg o 1 unidad no cuentan)
-  if (x.bul > 1.001) {
+  if (bultoEntero(x)) {
     const nb = q / x.bul, entero = Math.floor(nb + 1e-9);
     if (nb - entero >= CERCA - 1e-9) { q = (entero + 1) * x.bul; regla = "bulto"; }
   }
@@ -688,6 +694,9 @@ function enUnidades(q, un) {
 const PLANO = [];
 KITS.forEach(r => r.items.forEach(i => { i.rubro = r.rubro; PLANO.push(i); }));
 const RUBROS = KITS.map(r => r.rubro);          // ya vienen ordenados por venta
+// Rubros principales: los que tienen 5 productos o mas. El kit economico deja
+// afuera los chicos (aceites, frio, snack, bebidas...).
+const RUBROS_GRANDES = KITS.filter(r => r.items.length >= 5).map(r => r.rubro);
 
 let clientes = 15, semanas = 3, plata = 1200000, pmin = 0, pmax = SIN_TOPE;
 let rubrosOn = new Set(RUBROS);
@@ -701,8 +710,8 @@ let profundo = {}, ajustes = {}, sacadosMano = new Set(), forzados = new Set();
 let cambios = {entraron: [], salieron: []};
 
 const estado = () => ({plata, c: clientes, w: semanas, rub: rubrosOn, pmin, pmax});
-const deReferencia = p => ({plata: p, c: PARAM.ref.clientes, w: PARAM.ref.semanas,
-                            rub: new Set(RUBROS), pmin: 0, pmax: SIN_TOPE});
+const deReferencia = (p, rub) => ({plata: p, c: PARAM.ref.clientes, w: PARAM.ref.semanas,
+                                   rub: new Set(rub || RUBROS), pmin: 0, pmax: SIN_TOPE});
 const pasa = (x, k) => k.rub.has(x.rubro) && x.p2 >= k.pmin &&
                        (k.pmax >= SIN_TOPE || x.p2 <= k.pmax);
 const pasaFiltro = x => pasa(x, estado());
@@ -740,7 +749,7 @@ function armarPedido(k, m) {
     if (acum + v <= k.plata) { sel.add(x.cod); acum += v; } else todo = false;
   });
   if (todo) orden.forEach(x => {
-    if (!sel.has(x.cod) || (x.cod in m.aj) || !conBulto(x)) return;
+    if (!sel.has(x.cod) || (x.cod in m.aj) || !bultoEntero(x)) return;
     const q = q0(x), qb = Math.ceil(q / x.bul - 1e-9) * x.bul;
     if (qb <= q + 1e-9) return;
     const extra = (qb - q) * x.p2;
@@ -774,16 +783,18 @@ const elegidos = () => PLANO.filter(estaDentro);
 // Kits de referencia. El ultimo es "todo el catalogo" y su precio sale de la
 // lista del dia, por eso se calcula y no esta escrito.
 const PRESETS = [
+  {et: "Económico", plata: 500000, d: "Solo los rubros principales", chicos: true},
   {et: "Mínimo", plata: 800000, d: "Lo que más sale, para arrancar"},
   {et: "Intermedio", plata: 1200000, d: "Lo más vendido de casi todos los rubros"},
   {et: "Completo", plata: 1600000, d: "Góndola llena"},
-  {et: "Full", plata: 0, d: "Todo el catálogo"}
+  {et: "Full", plata: 0, d: "Todo el catálogo", todo: true}
 ];
+const FULL = PRESETS.find(p => p.todo);
 function actualizarFull() {
-  const antes = PRESETS[3].plata;
-  PRESETS[3].plata = Math.ceil(costoDe(PLANO, deReferencia(0)) / 50000) * 50000;
+  const antes = FULL.plata;
+  FULL.plata = Math.ceil(costoDe(PLANO, deReferencia(0)) / 50000) * 50000;
   if (antes && plata === antes) {
-    plata = PRESETS[3].plata;
+    plata = FULL.plata;
     document.getElementById("c-plata").value = plata;
   }
 }
@@ -863,14 +874,15 @@ function tarjetaKit(p, i, alTocar) {
   return li;
 }
 PRESETS.forEach((p, i) => {
-  document.getElementById("kits").appendChild(tarjetaKit(p, i));
+  // en el paso 2 solo van presupuestos: los rubros se eligen en el paso 3
+  if (!p.chicos) document.getElementById("kits").appendChild(tarjetaKit(p, i));
   document.getElementById("kits-ya").appendChild(tarjetaKit(p, i, pr => {
     // el kit usa el local de referencia: chico y recien abierto
     clientes = PARAM.ref.clientes; semanas = PARAM.ref.semanas;
     pmin = 0; pmax = SIN_TOPE; plata = pr.plata;
     [["c-clientes", clientes], ["c-semanas", semanas], ["c-plata", plata],
      ["c-pmin", pmin], ["c-pmax", pmax]].forEach(a => fijar(a[0], a[1]));
-    marcarRubros(true);
+    fijarRubros(pr.chicos ? RUBROS_GRANDES : RUBROS);
     via = "kit";
     ajustes = {}; sacadosMano = new Set(); forzados = new Set();
     cambios = {entraron: [], salieron: []};
@@ -890,6 +902,7 @@ KITS.forEach(r => {
   const ip = document.createElement("input");
   ip.type = "checkbox";
   ip.checked = true;
+  ip.dataset.r = r.rubro;
   ip.addEventListener("change", () => {
     if (ip.checked) rubrosOn.add(r.rubro); else rubrosOn.delete(r.rubro);
     rearmar();
@@ -904,6 +917,10 @@ KITS.forEach(r => {
   li.appendChild(lb);
   cajaRubros.appendChild(li);
 });
+function fijarRubros(lista) {
+  rubrosOn = new Set(lista);
+  cajaRubros.querySelectorAll("input").forEach(i => { i.checked = rubrosOn.has(i.dataset.r); });
+}
 function marcarRubros(on) {
   rubrosOn = on ? new Set(RUBROS) : new Set();
   cajaRubros.querySelectorAll("input").forEach(i => { i.checked = on; });
@@ -1071,7 +1088,7 @@ function pintar() {
   // kits: en la portada, para el local de referencia; en el paso 2, para el tuyo
   document.querySelectorAll("#kits-ya button").forEach(b => {
     const p = PRESETS[Number(b.dataset.i)];
-    const s = armarPedido(deReferencia(p.plata)).sel;
+    const s = armarPedido(deReferencia(p.plata, p.chicos ? RUBROS_GRANDES : null)).sel;
     b.querySelector(".op-p").textContent = pl(p.plata);
     b.querySelector(".op-n").textContent = s.size + " productos de " +
       new Set(PLANO.filter(x => s.has(x.cod)).map(x => x.rubro)).size + " rubros";
@@ -1128,8 +1145,10 @@ function pintar() {
     const pr = PRESETS.find(p => p.plata === plata);
     document.getElementById("aviso-kit-txt").textContent = "Estás viendo el kit " +
       (pr ? pr.et.toLowerCase() : "armado") + ", calculado para un local de 15 clientes " +
-      "por día con 3 semanas de mercadería. Si tu local es más grande o más chico, " +
-      "los números cambian.";
+      "por día con 3 semanas de mercadería" +
+      (pr && pr.chicos ? ", solo con los rubros principales (los que tienen 5 productos " +
+        "o más; los otros los sumás en el paso 3)" : "") +
+      ". Si tu local es más grande o más chico, los números cambian.";
   }
 
   const avisoSac = document.getElementById("r-sacados");
